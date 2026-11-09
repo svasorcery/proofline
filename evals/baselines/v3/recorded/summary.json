@@ -1,0 +1,118 @@
+{
+  "date": "2026-11-08",
+  "measured_calls": 9,
+  "input_hashes_verified": true,
+  "scores": {
+    "full": {
+      "n": 6,
+      "pack_pass": 4,
+      "runtime_valid": 6,
+      "facts_exact": 6,
+      "evidence_complete": 6,
+      "timeline_complete": 4,
+      "followup_complete": 5,
+      "readiness_ok": 6,
+      "fact_values_correct": 9
+    },
+    "ablation": {
+      "n": 3,
+      "pack_pass": 3,
+      "runtime_valid": 3,
+      "facts_exact": 3,
+      "evidence_complete": 3,
+      "timeline_complete": 3,
+      "followup_complete": 3,
+      "readiness_ok": 3,
+      "fact_values_correct": 4
+    }
+  },
+  "literal_fragments": 72,
+  "input_tokens": 148973,
+  "cached_input_tokens": 23808,
+  "output_tokens": 6114,
+  "reasoning_output_tokens_reported": 1645,
+  "sum_call_seconds": 221.105,
+  "model_own_tool_events": 0,
+  "monetary_cost_usd": null,
+  "offline_guard": {
+    "blocked": 1,
+    "needs_operator_review": 8,
+    "generation_rerun": false,
+    "results": [
+      {
+        "mode": "full",
+        "case_id": "V01",
+        "state": "needs_operator_review",
+        "issues": [],
+        "note": "No automatic approval; current prototype reads immutable snapshots and has no refresh action."
+      },
+      {
+        "mode": "full",
+        "case_id": "V02",
+        "state": "needs_operator_review",
+        "issues": [],
+        "note": "No automatic approval; current prototype reads immutable snapshots and has no refresh action."
+      },
+      {
+        "mode": "full",
+        "case_id": "V03",
+        "state": "needs_operator_review",
+        "issues": [],
+        "note": "No automatic approval; current prototype reads immutable snapshots and has no refresh action."
+      },
+      {
+        "mode": "full",
+        "case_id": "V04",
+        "state": "blocked_for_approval",
+        "issues": [
+          "acceptance_fact_event_conflict",
+          "repeated_snapshot_lookup"
+        ],
+        "note": "No automatic approval; current prototype reads immutable snapshots and has no refresh action."
+      },
+      {
+        "mode": "full",
+        "case_id": "V05",
+        "state": "needs_operator_review",
+        "issues": [],
+        "note": "No automatic approval; current prototype reads immutable snapshots and has no refresh action."
+      },
+      {
+        "mode": "full",
+        "case_id": "V06",
+        "state": "needs_operator_review",
+        "issues": [],
+        "note": "No automatic approval; current prototype reads immutable snapshots and has no refresh action."
+      },
+      {
+        "mode": "ablation",
+        "case_id": "V01",
+        "state": "needs_operator_review",
+        "issues": [],
+        "note": "No automatic approval; current prototype reads immutable snapshots and has no refresh action."
+      },
+      {
+        "mode": "ablation",
+        "case_id": "V03",
+        "state": "needs_operator_review",
+        "issues": [],
+        "note": "No automatic approval; current prototype reads immutable snapshots and has no refresh action."
+      },
+      {
+        "mode": "ablation",
+        "case_id": "V05",
+        "state": "needs_operator_review",
+        "issues": [],
+        "note": "No automatic approval; current prototype reads immutable snapshots and has no refresh action."
+      }
+    ],
+    "artifact_sha256": {
+      "approval_gate.py": "d98265a9cd155f40e6097cab9768646b322b6666d390918c020a2f7a97aa1fe3",
+      "test_approval_gate.py": "951494ce2da8052ef72a9a3e91ff38a98c2407a0abe73f061c40a0f6d3c46b05",
+      "policy_v3_1_unmeasured.json": "d0a2a0fc7b2ecfc8e0fc4add1cc0350c968970b81025b26fcdb3823fb2c3aff3"
+    }
+  },
+  "financial_actions": 0,
+  "external_customer_messages": 0,
+  "human_validated": false
+}

@@ -1,0 +1,15 @@
+# Local import archives, handoff records and working notes
+/notes/
+
+# Reproducible caches and local environments
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.env
+.env.*
+!.env.example
+node_modules/
+dist/

@@ -1,0 +1,44 @@
+import json
+import copy
+from pathlib import Path
+import unittest
+from approval_gate import check_for_operator
+from contract import validate_runtime, instant
+
+ROOT = Path(__file__).resolve().parent
+
+class ApprovalGateRegressionTests(unittest.TestCase):
+    def test_observed_conditional_acceptance_cannot_be_approved(self):
+        case = next(c for c in json.loads((ROOT/'cases.json').read_text(encoding='utf-8')) if c['id']=='V04')
+        pack = json.loads((ROOT/'runs/initial/full/V04/pack.json').read_text(encoding='utf-8'))
+        sources = case['initial_sources'] + case['sources']
+        self.assertTrue(validate_runtime(pack, case, sources)['valid'])
+        result = check_for_operator(pack, case, sources)
+        self.assertEqual(result['state'], 'blocked_for_approval')
+        self.assertIn('acceptance_fact_event_conflict', result['issues'])
+        self.assertIn('repeated_snapshot_lookup', result['issues'])
+
+    def test_request_for_missing_document_still_reaches_operator(self):
+        case = next(c for c in json.loads((ROOT/'cases.json').read_text(encoding='utf-8')) if c['id']=='V03')
+        ref = next(r for r in json.loads((ROOT/'reference_v3.json').read_text(encoding='utf-8'))['cases'] if r['case_id']=='V03')
+        pack = json.loads((ROOT/'runs/initial/ablation/V03/pack.json').read_text(encoding='utf-8'))
+        sources = [s for s in case['initial_sources'] + case['sources'] if s['id'] != ref['ablation']['removed_source_id']]
+        result = check_for_operator(pack, case, sources)
+        self.assertEqual(result['state'], 'needs_operator_review')
+        self.assertEqual(result['issues'], [])
+
+    def test_acceptance_event_requires_an_explicit_confirmed_fact(self):
+        case = next(c for c in json.loads((ROOT/'cases.json').read_text(encoding='utf-8')) if c['id']=='V03')
+        pack = json.loads((ROOT/'runs/initial/full/V03/pack.json').read_text(encoding='utf-8'))
+        extra = copy.deepcopy(pack['timeline'][0])
+        extra['event_type'] = 'alternative_accepted'
+        extra['time']['role'] = 'received'
+        pack['timeline'].append(extra)
+        pack['timeline'].sort(key=lambda e: instant(e['time']['value']))
+        sources = case['initial_sources'] + case['sources']
+        self.assertTrue(validate_runtime(pack, case, sources)['valid'])
+        result = check_for_operator(pack, case, sources)
+        self.assertIn('acceptance_fact_event_conflict', result['issues'])
+
+if __name__ == '__main__':
+    unittest.main()

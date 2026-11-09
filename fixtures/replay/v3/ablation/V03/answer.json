@@ -1,0 +1,62 @@
+{
+  "results": [
+    {
+      "case_id": "V03",
+      "facts": [
+        {
+          "key": "payment_outcome",
+          "value": "refund_pending",
+          "evidence": [
+            {
+              "source_id": "a62eb31f18014f2e",
+              "fragments": [
+                "2026-07-03T14:02:00+03:00 | capture | ответ эквайера 00; списание принято",
+                "2026-07-05T10:15:00+03:00 | return.submit | запрос передан банку; трасса 189a5d15e84a4adb"
+              ]
+            }
+          ]
+        }
+      ],
+      "timeline": [
+        {
+          "event_type": "payment_captured",
+          "time": {
+            "value": "2026-07-03T14:02:00+03:00",
+            "role": "occurred"
+          },
+          "evidence": [
+            {
+              "source_id": "a62eb31f18014f2e",
+              "fragments": [
+                "2026-07-03T14:02:00+03:00 | capture | ответ эквайера 00; списание принято"
+              ]
+            }
+          ]
+        },
+        {
+          "event_type": "refund_initiated",
+          "time": {
+            "value": "2026-07-05T10:15:00+03:00",
+            "role": "occurred"
+          },
+          "evidence": [
+            {
+              "source_id": "a62eb31f18014f2e",
+              "fragments": [
+                "2026-07-05T10:15:00+03:00 | return.submit | запрос передан банку; трасса 189a5d15e84a4adb"
+              ]
+            }
+          ]
+        }
+      ],
+      "readiness": "request_evidence",
+      "follow_up": {
+        "action": "read_source",
+        "locator": "3088e5c39f854cf6",
+        "requirements": [
+          "bank_settlement_document"
+        ]
+      }
+    }
+  ]
+}

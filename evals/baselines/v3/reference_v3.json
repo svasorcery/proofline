@@ -1,0 +1,732 @@
+{
+  "schema_version": "assembly-v3",
+  "synthetic": true,
+  "human_validated": false,
+  "cases": [
+    {
+      "case_id": "V01",
+      "full": {
+        "facts": {
+          "alternative_acceptance": {
+            "value": "confirmed",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "f9a88d5b726a4d4b",
+                  "anchor": "Подтверждаю перенос на выезд в 18:20. Этот вариант мне подходит, оформляйте."
+                }
+              ]
+            ]
+          }
+        },
+        "timeline": [
+          {
+            "event_type": "alternative_offered",
+            "at": "2026-08-14T09:10:00+03:00",
+            "role": "sent",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "5b910f89ca134035",
+                  "anchor": "Отправлено: 2026-08-14T09:10:00+03:00"
+                },
+                {
+                  "source_id": "5b910f89ca134035",
+                  "anchor": "Можем предложить выезд в 18:20 вместо 16:00"
+                }
+              ]
+            ]
+          },
+          {
+            "event_type": "alternative_accepted",
+            "at": "2026-08-14T09:36:00+03:00",
+            "role": "received",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "f9a88d5b726a4d4b",
+                  "anchor": "Received by supplier: 2026-08-14T09:36:00+03:00"
+                },
+                {
+                  "source_id": "f9a88d5b726a4d4b",
+                  "anchor": "Подтверждаю перенос на выезд в 18:20. Этот вариант мне подходит, оформляйте."
+                }
+              ],
+              [
+                {
+                  "source_id": "b8821b7c6a2d432a",
+                  "anchor": "2026-08-14T09:36:00+03:00 — почтовый шлюз принял ответ клиента в этой переписке."
+                },
+                {
+                  "source_id": "f9a88d5b726a4d4b",
+                  "anchor": "Подтверждаю перенос на выезд в 18:20. Этот вариант мне подходит, оформляйте."
+                }
+              ]
+            ]
+          }
+        ],
+        "optional_timeline": [
+          {
+            "event_type": "customer_replied",
+            "at": "2026-08-14T09:34:00+03:00",
+            "role": "sent",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "f9a88d5b726a4d4b",
+                  "anchor": "Date: 2026-08-14T09:34:00+03:00"
+                }
+              ]
+            ]
+          },
+          {
+            "event_type": "customer_message_received",
+            "at": "2026-08-14T09:36:00+03:00",
+            "role": "received",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "b8821b7c6a2d432a",
+                  "anchor": "2026-08-14T09:36:00+03:00 — почтовый шлюз принял ответ клиента в этой переписке."
+                }
+              ],
+              [
+                {
+                  "source_id": "f9a88d5b726a4d4b",
+                  "anchor": "Received by supplier: 2026-08-14T09:36:00+03:00"
+                }
+              ]
+            ]
+          }
+        ],
+        "readiness": "ready_for_rules",
+        "follow_up": {
+          "action": "none",
+          "locator": null,
+          "requirements": []
+        }
+      },
+      "ablation": {
+        "removed_source_id": "f9a88d5b726a4d4b",
+        "reference": {
+          "facts": {
+            "alternative_acceptance": {
+              "value": "unconfirmed",
+              "evidence_sets": []
+            }
+          },
+          "timeline": [
+            {
+              "event_type": "alternative_offered",
+              "at": "2026-08-14T09:10:00+03:00",
+              "role": "sent",
+              "evidence_sets": [
+                [
+                  {
+                    "source_id": "5b910f89ca134035",
+                    "anchor": "Отправлено: 2026-08-14T09:10:00+03:00"
+                  },
+                  {
+                    "source_id": "5b910f89ca134035",
+                    "anchor": "Можем предложить выезд в 18:20 вместо 16:00"
+                  }
+                ]
+              ]
+            }
+          ],
+          "optional_timeline": [
+            {
+              "event_type": "customer_message_received",
+              "at": "2026-08-14T09:36:00+03:00",
+              "role": "received",
+              "evidence_sets": [
+                [
+                  {
+                    "source_id": "b8821b7c6a2d432a",
+                    "anchor": "2026-08-14T09:36:00+03:00 — почтовый шлюз принял ответ клиента в этой переписке."
+                  }
+                ]
+              ]
+            }
+          ],
+          "readiness": "request_evidence",
+          "follow_up": {
+            "action": "read_source",
+            "locator": "1618ae5e5b894145",
+            "requirements": [
+              "original_acceptance_reply"
+            ]
+          }
+        }
+      },
+      "change_notes": [
+        "Согласие и его получение требуют содержания оригинала; транспортная запись сама по себе подтверждает только получение сообщения.",
+        "Длинный anchor согласия допускает покрытие несколькими дословными фрагментами того же источника.",
+        "Отправка по Date и нейтральное получение сообщения разрешены как отдельные необязательные события.",
+        "После удаления оригинала сохраняется только предложение и подтверждённое журналом получение; следующее действие читает оригинал по известному locator."
+      ]
+    },
+    {
+      "case_id": "V02",
+      "full": {
+        "facts": {
+          "cancellation_status": {
+            "value": "confirmed",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "9edd7227853c42a4",
+                  "anchor": "2026-09-18T10:20:00+03:00 — операция поставщика: бронирование снято с исполнения из-за отмены рейса."
+                }
+              ]
+            ]
+          },
+          "withdrawal_timing": {
+            "value": "unconfirmed",
+            "evidence_sets": []
+          }
+        },
+        "timeline": [
+          {
+            "event_type": "supplier_cancelled",
+            "at": "2026-09-18T10:20:00+03:00",
+            "role": "occurred",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "9edd7227853c42a4",
+                  "anchor": "2026-09-18T10:20:00+03:00 — операция поставщика: бронирование снято с исполнения из-за отмены рейса."
+                }
+              ]
+            ]
+          },
+          {
+            "event_type": "customer_replied",
+            "at": "2026-09-18T12:09:55+03:00",
+            "role": "sent",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "5c3fe2fc12a3430e",
+                  "anchor": "Отправлено клиентом через форму: 2026-09-18T12:09:55+03:00"
+                }
+              ]
+            ]
+          }
+        ],
+        "optional_timeline": [
+          {
+            "event_type": "customer_message_received",
+            "at": "2026-09-18T12:10:00+03:00",
+            "role": "received",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "5c3fe2fc12a3430e",
+                  "anchor": "Получено службой поддержки: 2026-09-18T12:10:00+03:00"
+                }
+              ],
+              [
+                {
+                  "source_id": "9edd7227853c42a4",
+                  "anchor": "2026-09-18T12:10:00+03:00 — обращение клиента поступило через форму поддержки."
+                }
+              ]
+            ]
+          }
+        ],
+        "readiness": "request_evidence",
+        "follow_up": {
+          "action": "ask_user",
+          "locator": null,
+          "requirements": [
+            "original_customer_message",
+            "delivery_receipt"
+          ]
+        }
+      },
+      "ablation": null,
+      "change_notes": [
+        "Строка отправки формы достаточна для customer_replied; цитата содержания поздней жалобы не обязательна для этого события.",
+        "Получение формы разрешено только как customer_message_received с ролью received, а не как отправка или более ранний отказ.",
+        "Следующий вопрос формируется кодом из двух обязательных требований: исходное сообщение и подтверждение доставки."
+      ]
+    },
+    {
+      "case_id": "V03",
+      "full": {
+        "facts": {
+          "payment_outcome": {
+            "value": "refund_settled",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "a62eb31f18014f2e",
+                  "anchor": "запрос передан банку; трасса 189a5d15e84a4adb"
+                },
+                {
+                  "source_id": "649b9972ad454b5e",
+                  "anchor": "Трасса: 189a5d15e84a4adb"
+                },
+                {
+                  "source_id": "649b9972ad454b5e",
+                  "anchor": "Кредитование карты получателя по указанной возвратной трассе завершено."
+                }
+              ],
+              [
+                {
+                  "source_id": "a62eb31f18014f2e",
+                  "anchor": "Для сверки банк приложил документ 3088e5c39f854cf6"
+                },
+                {
+                  "source_id": "649b9972ad454b5e",
+                  "anchor": "Кредитование карты получателя по указанной возвратной трассе завершено."
+                }
+              ]
+            ]
+          }
+        },
+        "timeline": [
+          {
+            "event_type": "payment_captured",
+            "at": "2026-07-03T14:02:00+03:00",
+            "role": "occurred",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "a62eb31f18014f2e",
+                  "anchor": "2026-07-03T14:02:00+03:00 | capture | ответ эквайера 00; списание принято"
+                }
+              ],
+              [
+                {
+                  "source_id": "7fe04ac171704d90",
+                  "anchor": "Операция исполнена: 2026-07-03T14:02:00+03:00"
+                },
+                {
+                  "source_id": "7fe04ac171704d90",
+                  "anchor": "Средства списаны по бронированию."
+                }
+              ]
+            ]
+          },
+          {
+            "event_type": "refund_initiated",
+            "at": "2026-07-05T10:15:00+03:00",
+            "role": "occurred",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "a62eb31f18014f2e",
+                  "anchor": "2026-07-05T10:15:00+03:00 | return.submit | запрос передан банку"
+                }
+              ]
+            ]
+          },
+          {
+            "event_type": "refund_settled",
+            "at": "2026-07-06T17:42:00+03:00",
+            "role": "occurred",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "649b9972ad454b5e",
+                  "anchor": "Дата проводки по карте получателя: 2026-07-06T17:42:00+03:00"
+                },
+                {
+                  "source_id": "649b9972ad454b5e",
+                  "anchor": "Кредитование карты получателя по указанной возвратной трассе завершено."
+                }
+              ]
+            ]
+          }
+        ],
+        "optional_timeline": [],
+        "readiness": "ready_for_rules",
+        "follow_up": {
+          "action": "none",
+          "locator": null,
+          "requirements": []
+        }
+      },
+      "ablation": {
+        "removed_source_id": "649b9972ad454b5e",
+        "reference": {
+          "facts": {
+            "payment_outcome": {
+              "value": "refund_pending",
+              "evidence_sets": [
+                [
+                  {
+                    "source_id": "a62eb31f18014f2e",
+                    "anchor": "return.submit | запрос передан банку"
+                  }
+                ]
+              ]
+            }
+          },
+          "timeline": [
+            {
+              "event_type": "payment_captured",
+              "at": "2026-07-03T14:02:00+03:00",
+              "role": "occurred",
+              "evidence_sets": [
+                [
+                  {
+                    "source_id": "a62eb31f18014f2e",
+                    "anchor": "2026-07-03T14:02:00+03:00 | capture | ответ эквайера 00; списание принято"
+                  }
+                ],
+                [
+                  {
+                    "source_id": "7fe04ac171704d90",
+                    "anchor": "Операция исполнена: 2026-07-03T14:02:00+03:00"
+                  },
+                  {
+                    "source_id": "7fe04ac171704d90",
+                    "anchor": "Средства списаны по бронированию."
+                  }
+                ]
+              ]
+            },
+            {
+              "event_type": "refund_initiated",
+              "at": "2026-07-05T10:15:00+03:00",
+              "role": "occurred",
+              "evidence_sets": [
+                [
+                  {
+                    "source_id": "a62eb31f18014f2e",
+                    "anchor": "2026-07-05T10:15:00+03:00 | return.submit | запрос передан банку"
+                  }
+                ]
+              ]
+            }
+          ],
+          "optional_timeline": [],
+          "readiness": "request_evidence",
+          "follow_up": {
+            "action": "read_source",
+            "locator": "3088e5c39f854cf6",
+            "requirements": [
+              "bank_settlement_document"
+            ]
+          }
+        }
+      },
+      "change_notes": [
+        "Связь ledger с банком допускает два достаточных набора: совпадающая трасса в обоих источниках или прямой locator приложенного банковского документа.",
+        "Оба набора требуют банковского утверждения о завершённом зачислении; ссылка или return.submit не заменяет его.",
+        "Списание допускает доказательство журналом или квитанцией; время банковской проводки отделено от формирования выписки.",
+        "Без банковского документа сохраняются списание и отправка возврата, итог refund_pending; следующий шаг читает документ по известному locator."
+      ]
+    },
+    {
+      "case_id": "V04",
+      "full": {
+        "facts": {
+          "alternative_acceptance": {
+            "value": "conditional",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "f71822cddbf648f2",
+                  "anchor": "Если там тихий номер с окнами во двор, согласен на соседний корпус. Если окна на улицу, этот вариант мне не подходит."
+                }
+              ]
+            ]
+          }
+        },
+        "timeline": [
+          {
+            "event_type": "alternative_offered",
+            "at": "2026-10-08T12:10:00+03:00",
+            "role": "sent",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "7c4b78e8ce5a4af4",
+                  "anchor": "Отправлено: 2026-10-08T12:10:00+03:00"
+                },
+                {
+                  "source_id": "7c4b78e8ce5a4af4",
+                  "anchor": "можем предложить номер той же категории в соседнем корпусе"
+                }
+              ]
+            ]
+          },
+          {
+            "event_type": "customer_replied",
+            "at": "2026-10-08T12:25:00+03:00",
+            "role": "sent",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "f71822cddbf648f2",
+                  "anchor": "Заголовок исходного письма Date: 2026-10-08T12:25:00+03:00"
+                }
+              ]
+            ]
+          }
+        ],
+        "optional_timeline": [
+          {
+            "event_type": "customer_message_received",
+            "at": "2026-10-08T12:27:00+03:00",
+            "role": "received",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "f71822cddbf648f2",
+                  "anchor": "2026-10-08T12:27:00+03:00 | inbound-message | клиент → отель"
+                }
+              ]
+            ]
+          }
+        ],
+        "readiness": "request_evidence",
+        "follow_up": {
+          "action": "ask_user",
+          "locator": null,
+          "requirements": [
+            "quiet_room",
+            "courtyard_windows"
+          ]
+        }
+      },
+      "ablation": null,
+      "change_notes": [
+        "Условное согласие не создаёт события alternative_accepted; получение клиентского сообщения разрешено отдельно.",
+        "Следующий вопрос обязан сохранять оба независимых требования: тихий номер и окна во двор именно предложенного размещения."
+      ]
+    },
+    {
+      "case_id": "V05",
+      "full": {
+        "facts": {
+          "withdrawal_timing": {
+            "value": "before_supplier_cancel",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "b493b77f4c5e4dde",
+                  "anchor": "Received by supplier: 2026-10-04T09:30:00+03:00"
+                },
+                {
+                  "source_id": "b493b77f4c5e4dde",
+                  "anchor": "Я отказываюсь от этого бронирования."
+                },
+                {
+                  "source_id": "abd412ba34ae4156",
+                  "anchor": "2026-10-04T10:00:00+03:00 | операция поставщика | бронирование снято с исполнения из-за отмены рейса"
+                }
+              ]
+            ]
+          },
+          "cancellation_status": {
+            "value": "confirmed",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "abd412ba34ae4156",
+                  "anchor": "2026-10-04T10:00:00+03:00 | операция поставщика | бронирование снято с исполнения из-за отмены рейса"
+                }
+              ]
+            ]
+          }
+        },
+        "timeline": [
+          {
+            "event_type": "customer_withdrawal",
+            "at": "2026-10-04T09:30:00+03:00",
+            "role": "received",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "b493b77f4c5e4dde",
+                  "anchor": "Received by supplier: 2026-10-04T09:30:00+03:00"
+                },
+                {
+                  "source_id": "b493b77f4c5e4dde",
+                  "anchor": "Я отказываюсь от этого бронирования."
+                }
+              ]
+            ]
+          },
+          {
+            "event_type": "supplier_cancelled",
+            "at": "2026-10-04T10:00:00+03:00",
+            "role": "occurred",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "abd412ba34ae4156",
+                  "anchor": "2026-10-04T10:00:00+03:00 | операция поставщика | бронирование снято с исполнения из-за отмены рейса"
+                }
+              ]
+            ]
+          }
+        ],
+        "optional_timeline": [
+          {
+            "event_type": "customer_replied",
+            "at": "2026-10-04T09:26:00+03:00",
+            "role": "sent",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "b493b77f4c5e4dde",
+                  "anchor": "Date: 2026-10-04T09:26:00+03:00"
+                }
+              ]
+            ]
+          },
+          {
+            "event_type": "customer_message_received",
+            "at": "2026-10-04T09:30:00+03:00",
+            "role": "received",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "b493b77f4c5e4dde",
+                  "anchor": "Received by supplier: 2026-10-04T09:30:00+03:00"
+                }
+              ]
+            ]
+          }
+        ],
+        "readiness": "ready_for_rules",
+        "follow_up": {
+          "action": "none",
+          "locator": null,
+          "requirements": []
+        }
+      },
+      "ablation": {
+        "removed_source_id": "b493b77f4c5e4dde",
+        "reference": {
+          "facts": {
+            "withdrawal_timing": {
+              "value": "unconfirmed",
+              "evidence_sets": []
+            },
+            "cancellation_status": {
+              "value": "confirmed",
+              "evidence_sets": [
+                [
+                  {
+                    "source_id": "abd412ba34ae4156",
+                    "anchor": "2026-10-04T10:00:00+03:00 | операция поставщика | бронирование снято с исполнения из-за отмены рейса"
+                  }
+                ]
+              ]
+            }
+          },
+          "timeline": [
+            {
+              "event_type": "supplier_cancelled",
+              "at": "2026-10-04T10:00:00+03:00",
+              "role": "occurred",
+              "evidence_sets": [
+                [
+                  {
+                    "source_id": "abd412ba34ae4156",
+                    "anchor": "2026-10-04T10:00:00+03:00 | операция поставщика | бронирование снято с исполнения из-за отмены рейса"
+                  }
+                ]
+              ]
+            }
+          ],
+          "optional_timeline": [],
+          "readiness": "request_evidence",
+          "follow_up": {
+            "action": "read_source",
+            "locator": "2a7f66f5333640d3",
+            "requirements": [
+              "original_customer_message",
+              "delivery_receipt"
+            ]
+          }
+        }
+      },
+      "change_notes": [
+        "Отказ требует отдельно содержания сообщения и Received; сравнение включает фактическую отмену поставщиком.",
+        "Отправка по Date и нейтральное получение сообщения разрешены как необязательные события; экспорт, импорт и уведомление не подменяют их время.",
+        "Без оригинала сохраняется подтверждённая отмена, но неизвестно время получения отказа; чтение оригинала запрашивает и сообщение, и конверт доставки."
+      ]
+    },
+    {
+      "case_id": "V06",
+      "full": {
+        "facts": {
+          "cancellation_status": {
+            "value": "confirmed",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "845cff973bd4435d",
+                  "anchor": "2026-06-22T16:40:00+03:00 — бронирование отменено поставщиком, исполнение прекращено."
+                }
+              ]
+            ]
+          },
+          "payment_outcome": {
+            "value": "authorization_release",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "5f5576cbae5e40c6",
+                  "anchor": "auth.reverse | банк снял резерв по исходной авторизации"
+                },
+                {
+                  "source_id": "5f5576cbae5e40c6",
+                  "anchor": "запросов capture нет; строк в реестре списаний нет; запросов return.submit нет."
+                }
+              ]
+            ]
+          }
+        },
+        "timeline": [
+          {
+            "event_type": "supplier_cancelled",
+            "at": "2026-06-22T16:40:00+03:00",
+            "role": "occurred",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "845cff973bd4435d",
+                  "anchor": "2026-06-22T16:40:00+03:00 — бронирование отменено поставщиком, исполнение прекращено."
+                }
+              ]
+            ]
+          },
+          {
+            "event_type": "authorization_released",
+            "at": "2026-06-22T16:43:00+03:00",
+            "role": "occurred",
+            "evidence_sets": [
+              [
+                {
+                  "source_id": "5f5576cbae5e40c6",
+                  "anchor": "2026-06-22T16:43:00+03:00 | auth.reverse | банк снял резерв по исходной авторизации"
+                }
+              ]
+            ]
+          }
+        ],
+        "optional_timeline": [],
+        "readiness": "ready_for_rules",
+        "follow_up": {
+          "action": "none",
+          "locator": null,
+          "requirements": []
+        }
+      },
+      "ablation": null,
+      "change_notes": [
+        "Снятие резерва требует вместе запись auth.reverse и отсутствие связанного списания; значение исходного эталона сохранено.",
+        "Времена отмены и снятия резерва имеют роль occurred; справочный документ не требуется."
+      ]
+    }
+  ]
+}

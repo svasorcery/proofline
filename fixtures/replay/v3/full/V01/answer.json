@@ -1,0 +1,95 @@
+{
+  "results": [
+    {
+      "case_id": "V01",
+      "facts": [
+        {
+          "key": "alternative_acceptance",
+          "value": "confirmed",
+          "evidence": [
+            {
+              "source_id": "f9a88d5b726a4d4b",
+              "fragments": [
+                "In-Reply-To: предложение выезда в 18:20 вместо 16:00",
+                "Подтверждаю перенос на выезд в 18:20. Этот вариант мне подходит, оформляйте."
+              ]
+            }
+          ]
+        }
+      ],
+      "timeline": [
+        {
+          "event_type": "alternative_offered",
+          "time": {
+            "value": "2026-08-14T09:10:00+03:00",
+            "role": "sent"
+          },
+          "evidence": [
+            {
+              "source_id": "5b910f89ca134035",
+              "fragments": [
+                "Отправлено: 2026-08-14T09:10:00+03:00",
+                "Можем предложить выезд в 18:20 вместо 16:00, с тем же местом посадки. Напишите, подходит ли вам этот вариант."
+              ]
+            }
+          ]
+        },
+        {
+          "event_type": "customer_replied",
+          "time": {
+            "value": "2026-08-14T09:34:00+03:00",
+            "role": "sent"
+          },
+          "evidence": [
+            {
+              "source_id": "f9a88d5b726a4d4b",
+              "fragments": [
+                "Date: 2026-08-14T09:34:00+03:00",
+                "Подтверждаю перенос на выезд в 18:20. Этот вариант мне подходит, оформляйте."
+              ]
+            }
+          ]
+        },
+        {
+          "event_type": "customer_message_received",
+          "time": {
+            "value": "2026-08-14T09:36:00+03:00",
+            "role": "received"
+          },
+          "evidence": [
+            {
+              "source_id": "f9a88d5b726a4d4b",
+              "fragments": [
+                "Received by supplier: 2026-08-14T09:36:00+03:00",
+                "Подтверждаю перенос на выезд в 18:20. Этот вариант мне подходит, оформляйте."
+              ]
+            }
+          ]
+        },
+        {
+          "event_type": "alternative_accepted",
+          "time": {
+            "value": "2026-08-14T09:36:00+03:00",
+            "role": "received"
+          },
+          "evidence": [
+            {
+              "source_id": "f9a88d5b726a4d4b",
+              "fragments": [
+                "Received by supplier: 2026-08-14T09:36:00+03:00",
+                "In-Reply-To: предложение выезда в 18:20 вместо 16:00",
+                "Подтверждаю перенос на выезд в 18:20. Этот вариант мне подходит, оформляйте."
+              ]
+            }
+          ]
+        }
+      ],
+      "readiness": "ready_for_rules",
+      "follow_up": {
+        "action": "none",
+        "locator": null,
+        "requirements": []
+      }
+    }
+  ]
+}

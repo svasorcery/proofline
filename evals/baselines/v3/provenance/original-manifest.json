@@ -1,0 +1,19 @@
+{
+  "date": "2026-11-08",
+  "model": "gpt-5.6-sol",
+  "effort": "low",
+  "max_calls": 9,
+  "started_utc": "2026-11-08T11:27:24Z",
+  "inputs_sha256": {
+    "scenario-fit-v3\\cases.json": "f9c2676d82777146f522c1b122e718b0cb9cd8872210ad9224f18df6858f1e39",
+    "scenario-fit-v3\\reference_v3.json": "2e343d25e2f0766d4469dec48bb818847a13769a5610342873a5983f08f128b3",
+    "scenario-fit-v3\\policy_v3.json": "7a3879947041fae60c7cda6c71ff30c6e2d54d52c1a6b21fcedb216cf435d8f0",
+    "scenario-fit-v3\\METHOD.md": "b47a62ea19f359080dec8bb12b70624da2a9ead27e8a20e1d317819b1ad1a0b6",
+    "scenario-fit-v3\\contract.py": "8f4c7712378b6e2244fd203659fa7e7ef79cefda8d7229f9fa56f088c6f87042",
+    "scenario-fit-v3\\evaluate.py": "83a616599b51a583b3e4f8b8e551fa35693b65e4896ad5bd3260c9249f256994",
+    "scenario-fit-v3\\run_v3.py": "5ba192518b2d578b58e524ede6e22c12ea92d09b6edc4512724a145f1285422f",
+    "scenario-fit-v3\\test_contract.py": "ec7e0225f1a37b01828c1be65d09d2655cf15549a43e488ed17a3bb52c468e3e",
+    "scenario-fit-v3\\test_evaluate.py": "799cff9a2c91582766a5a6d610385ad4c6335c74015ea2e938ea47c5caf8cf26",
+    "scenario-fit\\run.py": "b8c27a8a0d63843209c0de869c4b2993220a9f8c6a784a150c5c7e7fbfb8ff57"
+  }
+}

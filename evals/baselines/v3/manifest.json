@@ -1,0 +1,339 @@
+{
+  "format_version": 1,
+  "baseline": "scenario-fit-v3",
+  "measured_on": "2026-11-08",
+  "curated_on": "2026-11-09",
+  "notes": "Paths are repository-relative. source_path identifies the immutable import, not a runtime dependency. All imported files are byte-for-byte copies. No new model calls.",
+  "files": [
+    {
+      "path": "contracts/assembly-output.schema.json",
+      "source_path": "contracts/assembly-output.schema.json",
+      "sha256": "f326da7d4c5337cd3a106f595ec6784d440d8370d1d27ec3d87ea7d2667b2d55",
+      "bytes": 4865
+    },
+    {
+      "path": "docs/research/v3-operator-cards.md",
+      "source_path": "evidence/experiments/scenario-fit-v3/OPERATOR-CARDS.md",
+      "sha256": "ce4394a0421aa2b2e689c4500f9ebf2970b944a40fedf52d6827cc5c76485a7f",
+      "bytes": 14549
+    },
+    {
+      "path": "evals/baselines/v3/approval_gate.py",
+      "source_path": "evidence/experiments/scenario-fit-v3/approval_gate.py",
+      "sha256": "d98265a9cd155f40e6097cab9768646b322b6666d390918c020a2f7a97aa1fe3",
+      "bytes": 950
+    },
+    {
+      "path": "evals/baselines/v3/contract.py",
+      "source_path": "evidence/experiments/scenario-fit-v3/contract.py",
+      "sha256": "8f4c7712378b6e2244fd203659fa7e7ef79cefda8d7229f9fa56f088c6f87042",
+      "bytes": 8582
+    },
+    {
+      "path": "evals/baselines/v3/evaluate.py",
+      "source_path": "evidence/experiments/scenario-fit-v3/evaluate.py",
+      "sha256": "83a616599b51a583b3e4f8b8e551fa35693b65e4896ad5bd3260c9249f256994",
+      "bytes": 2914
+    },
+    {
+      "path": "evals/baselines/v3/policy_v3.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/policy_v3.json",
+      "sha256": "7a3879947041fae60c7cda6c71ff30c6e2d54d52c1a6b21fcedb216cf435d8f0",
+      "bytes": 6422
+    },
+    {
+      "path": "evals/baselines/v3/policy_v3_1_unmeasured.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/policy_v3_1_unmeasured.json",
+      "sha256": "d0a2a0fc7b2ecfc8e0fc4add1cc0350c968970b81025b26fcdb3823fb2c3aff3",
+      "bytes": 7593
+    },
+    {
+      "path": "evals/baselines/v3/provenance/METHOD.md",
+      "source_path": "evidence/experiments/scenario-fit-v3/METHOD.md",
+      "sha256": "b47a62ea19f359080dec8bb12b70624da2a9ead27e8a20e1d317819b1ad1a0b6",
+      "bytes": 8817
+    },
+    {
+      "path": "evals/baselines/v3/provenance/original-manifest.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/manifest.json",
+      "sha256": "b4ac8fed8eb4450aa92e25d809825fd527bbfaded8490747b88ea164f7ee1dd6",
+      "bytes": 1221
+    },
+    {
+      "path": "evals/baselines/v3/provenance/run.py.txt",
+      "source_path": "evidence/experiments/scenario-fit/run.py",
+      "sha256": "b8c27a8a0d63843209c0de869c4b2993220a9f8c6a784a150c5c7e7fbfb8ff57",
+      "bytes": 16995
+    },
+    {
+      "path": "evals/baselines/v3/provenance/run_v3.py.txt",
+      "source_path": "evidence/experiments/scenario-fit-v3/run_v3.py",
+      "sha256": "5ba192518b2d578b58e524ede6e22c12ea92d09b6edc4512724a145f1285422f",
+      "bytes": 10738
+    },
+    {
+      "path": "evals/baselines/v3/provenance/test_approval_gate.py.txt",
+      "source_path": "evidence/experiments/scenario-fit-v3/test_approval_gate.py",
+      "sha256": "951494ce2da8052ef72a9a3e91ff38a98c2407a0abe73f061c40a0f6d3c46b05",
+      "bytes": 2484
+    },
+    {
+      "path": "evals/baselines/v3/recorded/scores.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/scores.json",
+      "sha256": "c617c529938c1ebe7ad560c91f6c4358490c4cd8276b81945236513353a642cb",
+      "bytes": 5448
+    },
+    {
+      "path": "evals/baselines/v3/recorded/summary.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/summary.json",
+      "sha256": "58f936cb643338b8722bd0512703a68b70175824a0926d57886c359cb1e51e08",
+      "bytes": 3808
+    },
+    {
+      "path": "evals/baselines/v3/reference_v3.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/reference_v3.json",
+      "sha256": "2e343d25e2f0766d4469dec48bb818847a13769a5610342873a5983f08f128b3",
+      "bytes": 28420
+    },
+    {
+      "path": "evals/baselines/v3/test_contract.py",
+      "source_path": "evidence/experiments/scenario-fit-v3/test_contract.py",
+      "sha256": "ec7e0225f1a37b01828c1be65d09d2655cf15549a43e488ed17a3bb52c468e3e",
+      "bytes": 4841
+    },
+    {
+      "path": "evals/baselines/v3/test_evaluate.py",
+      "source_path": "evidence/experiments/scenario-fit-v3/test_evaluate.py",
+      "sha256": "799cff9a2c91582766a5a6d610385ad4c6335c74015ea2e938ea47c5caf8cf26",
+      "bytes": 2995
+    },
+    {
+      "path": "fixtures/cases/travel-cases.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/cases.json",
+      "sha256": "f9c2676d82777146f522c1b122e718b0cb9cd8872210ad9224f18df6858f1e39",
+      "bytes": 17743
+    },
+    {
+      "path": "fixtures/replay/v3/ablation/V01/answer.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/ablation/V01/answer.json",
+      "sha256": "bcb40b275f74c204080152c15737c711fdb6d4407ca1d8bba952320b101e28e1",
+      "bytes": 2394
+    },
+    {
+      "path": "fixtures/replay/v3/ablation/V01/meta.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/ablation/V01/meta.json",
+      "sha256": "7d7a50d3df6c03f08925665a38c364d6360ebca22333715550073a8bbdf7b2ad",
+      "bytes": 340
+    },
+    {
+      "path": "fixtures/replay/v3/ablation/V01/pack.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/ablation/V01/pack.json",
+      "sha256": "4d451d35ca77b52aa956ee693cca69b54fb47f3e29fae924d989077ba70d97c7",
+      "bytes": 2103
+    },
+    {
+      "path": "fixtures/replay/v3/ablation/V01/prompt.txt",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/ablation/V01/prompt.txt",
+      "sha256": "7d1dc8b094afa661143ca834be5afd28630b19fbd37231aefdb3714d41c87c36",
+      "bytes": 11351
+    },
+    {
+      "path": "fixtures/replay/v3/ablation/V03/answer.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/ablation/V03/answer.json",
+      "sha256": "3c002c1d7199ab60560bae6d344a6f59995aabb219353863e835f1145fbd5998",
+      "bytes": 1812
+    },
+    {
+      "path": "fixtures/replay/v3/ablation/V03/meta.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/ablation/V03/meta.json",
+      "sha256": "c9cc884855e8c81d0de322cc5d7c36f54bd7a93dcb9aa6437f941faa6a06602d",
+      "bytes": 344
+    },
+    {
+      "path": "fixtures/replay/v3/ablation/V03/pack.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/ablation/V03/pack.json",
+      "sha256": "b82d35219a28f235b7a3d400c54d4f9dbf926ea1de5e3d5ae506b6deaf359886",
+      "bytes": 1553
+    },
+    {
+      "path": "fixtures/replay/v3/ablation/V03/prompt.txt",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/ablation/V03/prompt.txt",
+      "sha256": "7661a9c74186609901a2e0f3dfcf3ad127f8f70e910f2c0f9d69f49ee098d4b1",
+      "bytes": 11430
+    },
+    {
+      "path": "fixtures/replay/v3/ablation/V05/answer.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/ablation/V05/answer.json",
+      "sha256": "1a3bf2efeabfa3f773ec7ad336cbe58c22c521c0075fddbd793f8119fe956e36",
+      "bytes": 2182
+    },
+    {
+      "path": "fixtures/replay/v3/ablation/V05/meta.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/ablation/V05/meta.json",
+      "sha256": "cca7733027854029f95897f6919c2e8b818e30c4eac85d10f5d7f59a5ae401d2",
+      "bytes": 344
+    },
+    {
+      "path": "fixtures/replay/v3/ablation/V05/pack.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/ablation/V05/pack.json",
+      "sha256": "a9a27b50518388cf6f53686e1cbcbe2bc3eed0d96e0ea0d34eccdd20589eb485",
+      "bytes": 1927
+    },
+    {
+      "path": "fixtures/replay/v3/ablation/V05/prompt.txt",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/ablation/V05/prompt.txt",
+      "sha256": "616b751bf0eab9870e2fbfb3cfecb720e5de31e5986f75ae218a22fb3d35169a",
+      "bytes": 11741
+    },
+    {
+      "path": "fixtures/replay/v3/catalog.json",
+      "origin": "derived_relocation_catalog",
+      "sha256": "718b64fccedd3e9b05892637a9169ee7f1e3876e035850e28bc1d03352e09f41",
+      "bytes": 6638
+    },
+    {
+      "path": "fixtures/replay/v3/full/V01/answer.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/full/V01/answer.json",
+      "sha256": "2e2fc7b489bf22989612a6c24baadfc6c42bd71895148aa154964fdb5a295783",
+      "bytes": 3214
+    },
+    {
+      "path": "fixtures/replay/v3/full/V01/meta.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/full/V01/meta.json",
+      "sha256": "db0d1f8bdc6b1ed59e5dbfb550555d6b6326e19e0da3497ad9bace690e785870",
+      "bytes": 340
+    },
+    {
+      "path": "fixtures/replay/v3/full/V01/pack.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/full/V01/pack.json",
+      "sha256": "ee5bd373ab37b6495d23558cf1c0ad6de992ff8143131b4eb1951edebec033ba",
+      "bytes": 2823
+    },
+    {
+      "path": "fixtures/replay/v3/full/V01/prompt.txt",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/full/V01/prompt.txt",
+      "sha256": "4265249e101661aed8c5fc80cbcc45d8a231687e7fa38137d326549167cd4039",
+      "bytes": 11924
+    },
+    {
+      "path": "fixtures/replay/v3/full/V02/answer.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/full/V02/answer.json",
+      "sha256": "bae455e388bdd516625caa276779a2b5391a79264726df0ec1618f92ac8004a3",
+      "bytes": 3299
+    },
+    {
+      "path": "fixtures/replay/v3/full/V02/meta.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/full/V02/meta.json",
+      "sha256": "30cdd546e3f735657a36dbbfe1c2ab47742d2ede850dd38787eb84dd29d20b8b",
+      "bytes": 340
+    },
+    {
+      "path": "fixtures/replay/v3/full/V02/pack.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/full/V02/pack.json",
+      "sha256": "bcc75a3c151936ce534eccc1717c7d1ac32a3deee8221758bdf591cf4c4ed44f",
+      "bytes": 2956
+    },
+    {
+      "path": "fixtures/replay/v3/full/V02/prompt.txt",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/full/V02/prompt.txt",
+      "sha256": "92a6aceb2f9c4c207ba1166eb2af81545729a58138c7c141f4013d7f54ad7048",
+      "bytes": 12064
+    },
+    {
+      "path": "fixtures/replay/v3/full/V03/answer.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/full/V03/answer.json",
+      "sha256": "8aaae9c97dcf00a47c296dcccc2d41ce332595e6c4e288261b9afbb639481cb3",
+      "bytes": 3664
+    },
+    {
+      "path": "fixtures/replay/v3/full/V03/meta.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/full/V03/meta.json",
+      "sha256": "98e56ca3a958276f42032fb63c286318fd4cfd1d63d5e38d38a764b082b40def",
+      "bytes": 340
+    },
+    {
+      "path": "fixtures/replay/v3/full/V03/pack.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/full/V03/pack.json",
+      "sha256": "2685ff6c2dfa6a349245756536a684dc77640e05c193933697bef656fadaa684",
+      "bytes": 3257
+    },
+    {
+      "path": "fixtures/replay/v3/full/V03/prompt.txt",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/full/V03/prompt.txt",
+      "sha256": "a2bfcd0a480b1249f114c2b562e737216c9b7bb51c1f9d6daeb2f4318942fdec",
+      "bytes": 12024
+    },
+    {
+      "path": "fixtures/replay/v3/full/V04/answer.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/full/V04/answer.json",
+      "sha256": "54c9a7c96ad6de8da0349969f0a59763b929b090c234bf21c782a042bbe5b59d",
+      "bytes": 4323
+    },
+    {
+      "path": "fixtures/replay/v3/full/V04/meta.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/full/V04/meta.json",
+      "sha256": "0856a4a4986c9fdab2d4ca3065e59f3a2d796f4cda21df90dbc60ff3bfc439e3",
+      "bytes": 340
+    },
+    {
+      "path": "fixtures/replay/v3/full/V04/pack.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/full/V04/pack.json",
+      "sha256": "2d89235d9b7a91c6b21af312cb9762f792b8f95cc9a6c2b044f34a7fa0696768",
+      "bytes": 3924
+    },
+    {
+      "path": "fixtures/replay/v3/full/V04/prompt.txt",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/full/V04/prompt.txt",
+      "sha256": "387dcd9d0a235d48dca1a02bb261b7c9a1c70456f5dc992923fb091e26d9359d",
+      "bytes": 11742
+    },
+    {
+      "path": "fixtures/replay/v3/full/V05/answer.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/full/V05/answer.json",
+      "sha256": "6d727a073243c73a93c591cecbc9a1b43c2c15b93f281b8eebd539ae8e322cd7",
+      "bytes": 2711
+    },
+    {
+      "path": "fixtures/replay/v3/full/V05/meta.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/full/V05/meta.json",
+      "sha256": "52b40222f550f4df464e2bab0d22eeae3bea1c0a115f7a1febd9fd192a980326",
+      "bytes": 339
+    },
+    {
+      "path": "fixtures/replay/v3/full/V05/pack.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/full/V05/pack.json",
+      "sha256": "4db96afd3ec34aa5a51adf32f5921e5c70cfe2d4d7760e68d5cd34398c296648",
+      "bytes": 2384
+    },
+    {
+      "path": "fixtures/replay/v3/full/V05/prompt.txt",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/full/V05/prompt.txt",
+      "sha256": "aed942acff534150190b04a75c2b516428056767f388d9187c8db2ee2d20dbdb",
+      "bytes": 12261
+    },
+    {
+      "path": "fixtures/replay/v3/full/V06/answer.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/full/V06/answer.json",
+      "sha256": "e3cae4961348909c603ada549deaa18e988ce0f3372bb726235e2b3e55cfb5a8",
+      "bytes": 2419
+    },
+    {
+      "path": "fixtures/replay/v3/full/V06/meta.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/full/V06/meta.json",
+      "sha256": "0c3c377c2fc3ee7297c18b764bd3a97cc052766b6c39fad41ffb595de85bab41",
+      "bytes": 339
+    },
+    {
+      "path": "fixtures/replay/v3/full/V06/pack.json",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/full/V06/pack.json",
+      "sha256": "4c875e1bc978fcf4fe734ae3aea3e9aafb3c02240e29359c0e1aa63b741aa117",
+      "bytes": 2116
+    },
+    {
+      "path": "fixtures/replay/v3/full/V06/prompt.txt",
+      "source_path": "evidence/experiments/scenario-fit-v3/runs/initial/full/V06/prompt.txt",
+      "sha256": "96e778150c470382697342d2febf590c04d2cf41f78725dbe3c3e9e82bddb915",
+      "bytes": 11390
+    }
+  ]
+}

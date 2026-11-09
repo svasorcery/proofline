@@ -1,0 +1,15 @@
+{
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "low",
+  "elapsed_seconds": 29.162,
+  "exit_code": 0,
+  "usage": {
+    "input_tokens": 16203,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 970,
+    "reasoning_output_tokens": 282
+  },
+  "own_tool_events": 0,
+  "monetary_cost": null
+}

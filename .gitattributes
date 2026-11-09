@@ -1,0 +1,9 @@
+# Normalise maintained source and documentation.
+* text=auto eol=lf
+
+# Research hashes refer to exact bytes, including original line endings.
+# Accept recorded CRLF while still checking actual whitespace errors.
+/fixtures/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/evals/baselines/v3/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/contracts/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/docs/research/v3-operator-cards.md -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

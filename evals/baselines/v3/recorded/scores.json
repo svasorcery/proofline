@@ -1,0 +1,233 @@
+[
+  {
+    "mode": "full",
+    "case_id": "V01",
+    "runtime_valid": true,
+    "runtime_issues": [],
+    "facts_exact": true,
+    "evidence_complete": true,
+    "timeline_complete": true,
+    "followup_complete": true,
+    "readiness_ok": true,
+    "pack_pass": true,
+    "facts": [
+      {
+        "key": "alternative_acceptance",
+        "value_ok": true,
+        "evidence_ok": true
+      }
+    ],
+    "missing_events": [],
+    "unsupported_event_indices": [],
+    "missing_requirements": [],
+    "extra_requirements": []
+  },
+  {
+    "mode": "full",
+    "case_id": "V02",
+    "runtime_valid": true,
+    "runtime_issues": [],
+    "facts_exact": true,
+    "evidence_complete": true,
+    "timeline_complete": false,
+    "followup_complete": true,
+    "readiness_ok": true,
+    "pack_pass": false,
+    "facts": [
+      {
+        "key": "cancellation_status",
+        "value_ok": true,
+        "evidence_ok": true
+      },
+      {
+        "key": "withdrawal_timing",
+        "value_ok": true,
+        "evidence_ok": true
+      }
+    ],
+    "missing_events": [
+      "customer_replied"
+    ],
+    "unsupported_event_indices": [],
+    "missing_requirements": [],
+    "extra_requirements": []
+  },
+  {
+    "mode": "full",
+    "case_id": "V03",
+    "runtime_valid": true,
+    "runtime_issues": [],
+    "facts_exact": true,
+    "evidence_complete": true,
+    "timeline_complete": true,
+    "followup_complete": true,
+    "readiness_ok": true,
+    "pack_pass": true,
+    "facts": [
+      {
+        "key": "payment_outcome",
+        "value_ok": true,
+        "evidence_ok": true
+      }
+    ],
+    "missing_events": [],
+    "unsupported_event_indices": [],
+    "missing_requirements": [],
+    "extra_requirements": []
+  },
+  {
+    "mode": "full",
+    "case_id": "V04",
+    "runtime_valid": true,
+    "runtime_issues": [],
+    "facts_exact": true,
+    "evidence_complete": true,
+    "timeline_complete": false,
+    "followup_complete": false,
+    "readiness_ok": true,
+    "pack_pass": false,
+    "facts": [
+      {
+        "key": "alternative_acceptance",
+        "value_ok": true,
+        "evidence_ok": true
+      }
+    ],
+    "missing_events": [],
+    "unsupported_event_indices": [
+      3
+    ],
+    "missing_requirements": [],
+    "extra_requirements": []
+  },
+  {
+    "mode": "full",
+    "case_id": "V05",
+    "runtime_valid": true,
+    "runtime_issues": [],
+    "facts_exact": true,
+    "evidence_complete": true,
+    "timeline_complete": true,
+    "followup_complete": true,
+    "readiness_ok": true,
+    "pack_pass": true,
+    "facts": [
+      {
+        "key": "withdrawal_timing",
+        "value_ok": true,
+        "evidence_ok": true
+      },
+      {
+        "key": "cancellation_status",
+        "value_ok": true,
+        "evidence_ok": true
+      }
+    ],
+    "missing_events": [],
+    "unsupported_event_indices": [],
+    "missing_requirements": [],
+    "extra_requirements": []
+  },
+  {
+    "mode": "full",
+    "case_id": "V06",
+    "runtime_valid": true,
+    "runtime_issues": [],
+    "facts_exact": true,
+    "evidence_complete": true,
+    "timeline_complete": true,
+    "followup_complete": true,
+    "readiness_ok": true,
+    "pack_pass": true,
+    "facts": [
+      {
+        "key": "cancellation_status",
+        "value_ok": true,
+        "evidence_ok": true
+      },
+      {
+        "key": "payment_outcome",
+        "value_ok": true,
+        "evidence_ok": true
+      }
+    ],
+    "missing_events": [],
+    "unsupported_event_indices": [],
+    "missing_requirements": [],
+    "extra_requirements": []
+  },
+  {
+    "mode": "ablation",
+    "case_id": "V01",
+    "runtime_valid": true,
+    "runtime_issues": [],
+    "facts_exact": true,
+    "evidence_complete": true,
+    "timeline_complete": true,
+    "followup_complete": true,
+    "readiness_ok": true,
+    "pack_pass": true,
+    "facts": [
+      {
+        "key": "alternative_acceptance",
+        "value_ok": true,
+        "evidence_ok": true
+      }
+    ],
+    "missing_events": [],
+    "unsupported_event_indices": [],
+    "missing_requirements": [],
+    "extra_requirements": []
+  },
+  {
+    "mode": "ablation",
+    "case_id": "V03",
+    "runtime_valid": true,
+    "runtime_issues": [],
+    "facts_exact": true,
+    "evidence_complete": true,
+    "timeline_complete": true,
+    "followup_complete": true,
+    "readiness_ok": true,
+    "pack_pass": true,
+    "facts": [
+      {
+        "key": "payment_outcome",
+        "value_ok": true,
+        "evidence_ok": true
+      }
+    ],
+    "missing_events": [],
+    "unsupported_event_indices": [],
+    "missing_requirements": [],
+    "extra_requirements": []
+  },
+  {
+    "mode": "ablation",
+    "case_id": "V05",
+    "runtime_valid": true,
+    "runtime_issues": [],
+    "facts_exact": true,
+    "evidence_complete": true,
+    "timeline_complete": true,
+    "followup_complete": true,
+    "readiness_ok": true,
+    "pack_pass": true,
+    "facts": [
+      {
+        "key": "withdrawal_timing",
+        "value_ok": true,
+        "evidence_ok": true
+      },
+      {
+        "key": "cancellation_status",
+        "value_ok": true,
+        "evidence_ok": true
+      }
+    ],
+    "missing_events": [],
+    "unsupported_event_indices": [],
+    "missing_requirements": [],
+    "extra_requirements": []
+  }
+]

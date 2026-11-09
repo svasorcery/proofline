@@ -1,0 +1,75 @@
+{
+  "case_id": "V05",
+  "facts": [
+    {
+      "key": "withdrawal_timing",
+      "value": "before_supplier_cancel",
+      "evidence": [
+        {
+          "source_id": "b493b77f4c5e4dde",
+          "fragments": [
+            "Received by supplier: 2026-10-04T09:30:00+03:00",
+            "Я отказываюсь от этого бронирования. Пожалуйста, отмените его; варианты переноса не рассматриваю."
+          ]
+        },
+        {
+          "source_id": "abd412ba34ae4156",
+          "fragments": [
+            "2026-10-04T10:00:00+03:00 | операция поставщика | бронирование снято с исполнения из-за отмены рейса"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "cancellation_status",
+      "value": "confirmed",
+      "evidence": [
+        {
+          "source_id": "abd412ba34ae4156",
+          "fragments": [
+            "2026-10-04T10:00:00+03:00 | операция поставщика | бронирование снято с исполнения из-за отмены рейса"
+          ]
+        }
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "event_type": "customer_withdrawal",
+      "time": {
+        "value": "2026-10-04T09:30:00+03:00",
+        "role": "received"
+      },
+      "evidence": [
+        {
+          "source_id": "b493b77f4c5e4dde",
+          "fragments": [
+            "Received by supplier: 2026-10-04T09:30:00+03:00",
+            "Я отказываюсь от этого бронирования. Пожалуйста, отмените его; варианты переноса не рассматриваю."
+          ]
+        }
+      ]
+    },
+    {
+      "event_type": "supplier_cancelled",
+      "time": {
+        "value": "2026-10-04T10:00:00+03:00",
+        "role": "occurred"
+      },
+      "evidence": [
+        {
+          "source_id": "abd412ba34ae4156",
+          "fragments": [
+            "2026-10-04T10:00:00+03:00 | операция поставщика | бронирование снято с исполнения из-за отмены рейса"
+          ]
+        }
+      ]
+    }
+  ],
+  "readiness": "ready_for_rules",
+  "follow_up": {
+    "action": "none",
+    "locator": null,
+    "requirements": []
+  }
+}

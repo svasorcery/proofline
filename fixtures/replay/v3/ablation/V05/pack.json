@@ -1,0 +1,57 @@
+{
+  "case_id": "V05",
+  "facts": [
+    {
+      "key": "withdrawal_timing",
+      "value": "unconfirmed",
+      "evidence": [
+        {
+          "source_id": "abd412ba34ae4156",
+          "fragments": [
+            "2026-10-04T10:00:00+03:00 | операция поставщика | бронирование снято с исполнения из-за отмены рейса",
+            "2026-10-04T11:10:00+03:00 | архивный импорт | оригинал входящего письма перенесён в документ 2a7f66f5333640d3",
+            "Время архивного импорта не является временем доставки письма. Конверт доставки сохранён в оригинале."
+          ]
+        }
+      ]
+    },
+    {
+      "key": "cancellation_status",
+      "value": "confirmed",
+      "evidence": [
+        {
+          "source_id": "abd412ba34ae4156",
+          "fragments": [
+            "2026-10-04T10:00:00+03:00 | операция поставщика | бронирование снято с исполнения из-за отмены рейса"
+          ]
+        }
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "event_type": "supplier_cancelled",
+      "time": {
+        "value": "2026-10-04T10:00:00+03:00",
+        "role": "occurred"
+      },
+      "evidence": [
+        {
+          "source_id": "abd412ba34ae4156",
+          "fragments": [
+            "2026-10-04T10:00:00+03:00 | операция поставщика | бронирование снято с исполнения из-за отмены рейса"
+          ]
+        }
+      ]
+    }
+  ],
+  "readiness": "request_evidence",
+  "follow_up": {
+    "action": "read_source",
+    "locator": "2a7f66f5333640d3",
+    "requirements": [
+      "original_customer_message",
+      "delivery_receipt"
+    ]
+  }
+}
