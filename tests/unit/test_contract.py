@@ -94,3 +94,22 @@ def test_generated_schema_matches_the_frozen_wire_contract() -> None:
     changed["properties"]["follow_up"]["properties"]["locator"]["type"] = "string"
     assert not contract_matches(changed)
     assert generated_schema()["additionalProperties"] is False
+
+
+@pytest.mark.parametrize("field_name", ["title", "$defs", "$ref"])
+@pytest.mark.parametrize("nested", [False, True], ids=["root", "nested"])
+def test_schema_keywords_used_as_property_names_cannot_hide_contract_changes(
+    field_name: str,
+    nested: bool,
+) -> None:
+    changed = json.loads((ROOT / "contracts/assembly-output.schema.json").read_text())
+    target = changed["properties"]["follow_up"] if nested else changed
+    target["properties"][field_name] = {"type": "string"}
+    assert not contract_matches(changed)
+
+
+def test_schema_annotation_titles_do_not_change_the_wire_contract() -> None:
+    annotated = json.loads((ROOT / "contracts/assembly-output.schema.json").read_text())
+    annotated["title"] = "Another display name"
+    annotated["properties"]["follow_up"]["title"] = "Another nested display name"
+    assert contract_matches(annotated)

@@ -30,7 +30,17 @@ def _normalise(schema: JsonSchemaValue) -> JsonSchemaValue:
             resolved = walk(definitions[reference.removeprefix("#/$defs/")])
             siblings = walk({key: item for key, item in value.items() if key != "$ref"})
             return {"allOf": [resolved, siblings]} if siblings else resolved
-        result = {key: walk(item) for key, item in value.items() if key not in {"title", "$defs"}}
+        result: JsonSchemaValue = {}
+        for key, item in value.items():
+            if key in {"title", "$defs"}:
+                continue
+            if key == "properties":
+                # Property names are data, even when they match schema keywords.
+                result[key] = {
+                    name: walk(property_schema) for name, property_schema in item.items()
+                }
+            else:
+                result[key] = walk(item)
         alternatives = result.get("anyOf")
         if alternatives and all(set(item) == {"type"} for item in alternatives):
             result["type"] = sorted(item["type"] for item in alternatives)
