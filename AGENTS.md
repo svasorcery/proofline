@@ -8,7 +8,18 @@ Treat the frozen artifacts listed in `evals/baselines/v3/manifest.json` as immut
 
 Keep maintained documentation in `docs/`; local working notes, full import archives and transfer receipts belong in Git-ignored `notes/`. Never require those local files to run or understand the project. Preserve historical receipts as historical records; relocation maps belong beside the local archive. Do not delete the archive without the author's instruction and a verified preservation plan.
 
-Run the deterministic checks from the repository root:
+Run the maintained-library checks from the repository root:
+
+```sh
+uv sync --locked
+uv run --locked pytest
+uv run --locked ruff check .
+uv run --locked ruff format --check .
+uv run --locked mypy src
+uv run --locked python -m proofline.schema --check contracts/assembly-output.schema.json
+```
+
+Also run the frozen baseline checks (standard library only):
 
 ```sh
 python -B -X utf8 -m unittest discover -s evals/baselines/v3 -p "test_*.py"
