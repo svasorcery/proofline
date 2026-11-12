@@ -1,0 +1,19 @@
+{
+  "policy_version": "assembly-v3",
+  "schema_version": "assembly-output-v1",
+  "policy_sha256": "7a3879947041fae60c7cda6c71ff30c6e2d54d52c1a6b21fcedb216cf435d8f0",
+  "schema_sha256": "f326da7d4c5337cd3a106f595ec6784d440d8370d1d27ec3d87ea7d2667b2d55",
+  "cases_sha256": "f9c2676d82777146f522c1b122e718b0cb9cd8872210ad9224f18df6858f1e39",
+  "catalog_sha256": "718b64fccedd3e9b05892637a9169ee7f1e3876e035850e28bc1d03352e09f41",
+  "metadata_sha256": {
+    "v3-ablation-V01": "7d7a50d3df6c03f08925665a38c364d6360ebca22333715550073a8bbdf7b2ad",
+    "v3-ablation-V03": "c9cc884855e8c81d0de322cc5d7c36f54bd7a93dcb9aa6437f941faa6a06602d",
+    "v3-ablation-V05": "cca7733027854029f95897f6919c2e8b818e30c4eac85d10f5d7f59a5ae401d2",
+    "v3-full-V01": "db0d1f8bdc6b1ed59e5dbfb550555d6b6326e19e0da3497ad9bace690e785870",
+    "v3-full-V02": "30cdd546e3f735657a36dbbfe1c2ab47742d2ede850dd38787eb84dd29d20b8b",
+    "v3-full-V03": "98e56ca3a958276f42032fb63c286318fd4cfd1d63d5e38d38a764b082b40def",
+    "v3-full-V04": "0856a4a4986c9fdab2d4ca3065e59f3a2d796f4cda21df90dbc60ff3bfc439e3",
+    "v3-full-V05": "52b40222f550f4df464e2bab0d22eeae3bea1c0a115f7a1febd9fd192a980326",
+    "v3-full-V06": "0c3c377c2fc3ee7297c18b764bd3a97cc052766b6c39fad41ffb595de85bab41"
+  }
+}

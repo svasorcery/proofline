@@ -1,0 +1,198 @@
+{
+  "type": "object",
+  "properties": {
+    "case_id": {
+      "type": "string"
+    },
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "enum": [
+              "alternative_acceptance",
+              "payment_outcome",
+              "withdrawal_timing",
+              "cancellation_status"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "enum": [
+              "after_supplier_cancel",
+              "authorization_release",
+              "before_supplier_cancel",
+              "conditional",
+              "confirmed",
+              "not_accepted",
+              "refund_pending",
+              "refund_settled",
+              "unconfirmed"
+            ]
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "source_id": {
+                  "type": "string"
+                },
+                "fragments": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "source_id",
+                "fragments"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "key",
+          "value",
+          "evidence"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "timeline": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "event_type": {
+            "type": "string",
+            "enum": [
+              "alternative_offered",
+              "customer_replied",
+              "customer_message_received",
+              "alternative_accepted",
+              "customer_withdrawal",
+              "supplier_cancelled",
+              "payment_captured",
+              "refund_initiated",
+              "refund_settled",
+              "authorization_released"
+            ]
+          },
+          "time": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string"
+              },
+              "role": {
+                "type": "string",
+                "enum": [
+                  "sent",
+                  "received",
+                  "occurred"
+                ]
+              }
+            },
+            "required": [
+              "value",
+              "role"
+            ],
+            "additionalProperties": false
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "source_id": {
+                  "type": "string"
+                },
+                "fragments": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "source_id",
+                "fragments"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "event_type",
+          "time",
+          "evidence"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "readiness": {
+      "type": "string",
+      "enum": [
+        "ready_for_rules",
+        "request_evidence",
+        "human_review"
+      ]
+    },
+    "follow_up": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "none",
+            "ask_user",
+            "read_source",
+            "query_provider",
+            "query_payment"
+          ]
+        },
+        "locator": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "requirements": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "original_customer_message",
+              "delivery_receipt",
+              "quiet_room",
+              "courtyard_windows",
+              "original_acceptance_reply",
+              "bank_settlement_document"
+            ]
+          }
+        }
+      },
+      "required": [
+        "action",
+        "locator",
+        "requirements"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "case_id",
+    "facts",
+    "timeline",
+    "readiness",
+    "follow_up"
+  ],
+  "additionalProperties": false
+}

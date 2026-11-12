@@ -4,14 +4,23 @@ build-backend = "hatchling.build"
 
 [project]
 name = "proofline"
-version = "0.1.0"
+version = "0.2.0"
 description = "Evidence-backed case assembly for operator review"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = ["pydantic>=2.12,<3"]
+dependencies = [
+    "alembic>=1.16,<2",
+    "fastapi>=0.119,<1",
+    "psycopg[binary]>=3.2,<4",
+    "pydantic>=2.12,<3",
+    "pydantic-settings>=2.11,<3",
+    "sqlalchemy>=2.1,<3",
+    "uvicorn>=0.37,<1",
+]
 
 [dependency-groups]
 dev = [
+    "httpx2>=2.16,<3",
     "mypy>=1.18,<2",
     "pytest>=8.4,<10",
     "pytest-cov>=6,<8",
@@ -21,22 +30,26 @@ dev = [
 [tool.hatch.build.targets.wheel]
 packages = ["src/proofline"]
 
+[project.scripts]
+proofline = "proofline.cli:main"
+
 [tool.hatch.build.targets.sdist]
 include = [
-    "src/", "tests/", "contracts/", "fixtures/", "evals/", "docs/", ".github/",
-    "pyproject.toml", "uv.lock", "README.md", "AGENTS.md",
-    ".gitattributes", ".gitignore", ".python-version",
+    "src/", "tests/", "contracts/", "fixtures/", "evals/", "docs/", ".github/", "examples/",
+    "pyproject.toml", "uv.lock", "README.md", "AGENTS.md", "alembic.ini", "infrastructure/", ".env.example",
+    ".gitattributes", ".gitignore", ".dockerignore", ".python-version",
 ]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = ["--import-mode=importlib", "-ra", "--strict-config", "--strict-markers"]
+markers = ["postgres: integration tests requiring a dedicated PostgreSQL test database"]
 
 [tool.ruff]
 target-version = "py312"
 line-length = 100
 src = ["src", "tests"]
-include = ["pyproject.toml", "src/**/*.py", "tests/**/*.py"]
+include = ["pyproject.toml", "src/**/*.py", "tests/**/*.py", "examples/**/*.py"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
