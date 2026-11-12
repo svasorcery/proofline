@@ -1,0 +1,39 @@
+name: proofline
+
+services:
+  db:
+    image: postgres:17.11-bookworm@sha256:665dc7b37ac52a17e298511414c21d23ffa4e6a6ef6225b3e5d59c7afb35e994
+    environment:
+      POSTGRES_USER: proofline
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-proofline_local_only}
+      POSTGRES_DB: proofline
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U proofline -d proofline"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+  app:
+    build:
+      context: ..
+      dockerfile: infrastructure/Dockerfile
+    environment:
+      DATABASE_URL: postgresql+psycopg://proofline:${POSTGRES_PASSWORD:-proofline_local_only}@db:5432/proofline
+      APP_ORIGIN: ${APP_ORIGIN:-http://127.0.0.1:8000}
+      DEV_ORIGINS: ${DEV_ORIGINS:-[]}
+      PROOFLINE_FIXTURES_DIR: /app/fixtures
+      LIVE_ENABLED: "false"
+      VALIDATION_PROFILE: ${VALIDATION_PROFILE:-proofline-validation-v1}
+    ports:
+      - "127.0.0.1:${PROOFLINE_PORT:-8000}:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/ready', timeout=2)"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+volumes:
+  postgres_data:

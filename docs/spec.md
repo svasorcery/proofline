@@ -283,7 +283,7 @@ Runtime-тесты независимы от сети. Unit/integration/e2e CI �
 
 ## Структура репозитория
 
-Текущий репозиторий содержит документацию, фикстуры, воспроизводимую базу v3 и библиотеку первого этапа: строгий контракт и детерминированную валидацию. API, хранение версий, UI и провайдеры ниже — целевая структура следующих этапов. Описание реализованного интерфейса — в [validation.md](validation.md).
+Реализованы библиотека проверки и второй этап: PostgreSQL, миграции, версии, replay API и операторские решения. UI и live-провайдер остаются следующими этапами. Интерфейсы описаны в [validation.md](validation.md) и [api.md](api.md).
 
 ```text
 README.md, AGENTS.md
@@ -305,14 +305,14 @@ src/proofline/           # библиотека контракта/провер�
   application/           # анализ, редактирование, проверка и review
   domain/                # контракт, версии, статусы, ограничения
   validation/            # фрагменты, время, согласованность
-  providers/             # ReplayProvider и OpenAIResponsesProvider
+  providers/             # replay; OpenAIResponsesProvider появится на live-этапе
   persistence/           # SQLAlchemy, транзакции, Alembic
   presentation/          # детерминированные требования и деньги
   config.py
 frontend/                # будущий React/TypeScript/Vite UI
 tests/unit/, tests/integration/              # тесты библиотеки
 tests/e2e/                                  # будущие тесты полного пути
-infrastructure/          # будущие Dockerfile и Compose
+infrastructure/          # Dockerfile, локальный Compose и отдельная тестовая БД
 pyproject.toml, uv.lock   # пакет и зафиксированные зависимости
 ```
 

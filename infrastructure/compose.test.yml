@@ -1,0 +1,18 @@
+name: proofline-test
+
+services:
+  postgres:
+    image: postgres:17.11-bookworm@sha256:665dc7b37ac52a17e298511414c21d23ffa4e6a6ef6225b3e5d59c7afb35e994
+    environment:
+      POSTGRES_USER: proofline
+      POSTGRES_PASSWORD: proofline_test
+      POSTGRES_DB: proofline_test
+    ports:
+      - "127.0.0.1:${PROOFLINE_TEST_PORT:-15432}:5432"
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U proofline -d proofline_test"]
+      interval: 2s
+      timeout: 3s
+      retries: 20

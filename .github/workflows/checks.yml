@@ -39,8 +39,8 @@ jobs:
         run: uv run --locked ruff check .
       - name: Check types
         run: uv run --locked mypy src
-      - name: Test runtime library
-        run: uv run --locked pytest --cov=proofline --cov-report=term-missing
+      - name: Test without PostgreSQL
+        run: uv run --locked pytest -m "not postgres" --cov=proofline --cov-report=term-missing
       - name: Check generated schema
         run: uv run --locked python -m proofline.schema --check contracts/assembly-output.schema.json
       - name: Test frozen research baseline
@@ -49,3 +49,65 @@ jobs:
         run: uv run --locked python -B -X utf8 evals/baselines/v3/verify.py
       - name: Build distributions
         run: uv build
+
+  postgres:
+    name: PostgreSQL / Python ${{ matrix.python }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.12", "3.14"]
+    services:
+      postgres:
+        image: postgres:17.11-bookworm@sha256:665dc7b37ac52a17e298511414c21d23ffa4e6a6ef6225b3e5d59c7afb35e994
+        env:
+          POSTGRES_USER: proofline
+          POSTGRES_PASSWORD: proofline_test
+          POSTGRES_DB: proofline_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U proofline -d proofline_test"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 20
+    env:
+      TEST_DATABASE_URL: postgresql+psycopg://proofline:proofline_test@127.0.0.1:5432/proofline_test
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          version: "0.13.7"
+          python-version: ${{ matrix.python }}
+          enable-cache: true
+      - run: uv sync --locked
+      - name: Test migrations, HTTP and transaction races
+        run: uv run --locked pytest -m postgres
+
+  compose:
+    name: Compose replay walkthrough
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Start database
+        run: docker compose -f infrastructure/compose.yml up -d --wait db
+      - name: Build and migrate explicitly
+        run: docker compose -f infrastructure/compose.yml run --build --rm app migrate
+      - name: Seed explicitly
+        run: docker compose -f infrastructure/compose.yml run --rm app seed
+      - name: Start API
+        run: docker compose -f infrastructure/compose.yml up -d --wait app
+      - name: Exercise blocked, corrected and reviewed replay
+        run: python examples/replay_walkthrough.py
+      - name: Show logs on failure
+        if: failure()
+        run: docker compose -f infrastructure/compose.yml logs --no-color
+      - name: Clean up this job's disposable containers and volume
+        if: always()
+        run: docker compose -f infrastructure/compose.yml down --volumes

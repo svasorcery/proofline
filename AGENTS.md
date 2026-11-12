@@ -12,12 +12,19 @@ Run the maintained-library checks from the repository root:
 
 ```sh
 uv sync --locked
-uv run --locked pytest
+uv run --locked pytest -m "not postgres"
 uv run --locked ruff check .
 uv run --locked ruff format --check .
 uv run --locked mypy src
 uv run --locked python -m proofline.schema --check contracts/assembly-output.schema.json
 ```
+
+For PostgreSQL/HTTP/concurrency tests, start `infrastructure/compose.test.yml` and set
+`TEST_DATABASE_URL` to its dedicated `proofline_test` database, then run
+`uv run --locked pytest -m postgres`. These tests must use real PostgreSQL; do not
+substitute SQLite or silently skip them when the database is unavailable.
+See `docs/development.md` for shell-specific setup. A complete verification includes
+both test groups, the frozen baseline, and the Compose walkthrough.
 
 Also run the frozen baseline checks (standard library only):
 
