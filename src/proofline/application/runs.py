@@ -2,6 +2,7 @@
 
 import logging
 from datetime import UTC, datetime
+from threading import Lock
 
 from pydantic import JsonValue, ValidationError
 from sqlalchemy import select, update
@@ -51,6 +52,8 @@ class RunService:
     ) -> None:
         self.database, self.settings, self.provider = database, settings, provider
         self.owner_instance_id = owner_instance_id
+        self._completion_lock = Lock()
+        self._uncertain_completions: set[str] = set()
 
     def options(self, case_id: str) -> list[ReplayOption]:
         with read_session(self.database) as session:
@@ -130,7 +133,42 @@ class RunService:
             session.flush()
             run_id = run.id
         result, body, error = self._generate(prepared)
-        return self._finish(case_id, run_id, result, body, error), 201
+        try:
+            return self._finish(case_id, run_id, result, body, error), 201
+        except Exception:
+            # The commit may have reached PostgreSQL even when its acknowledgement was lost.
+            # Reconcile the stored outcome later; never generate the response again.
+            with self._completion_lock:
+                self._uncertain_completions.add(run_id)
+            raise
+
+    def reconcile_completions(self) -> int:
+        with self._completion_lock:
+            if not self._uncertain_completions:
+                return 0
+            pending = tuple(self._uncertain_completions)
+            with self.database.sessions.begin() as session:
+                interrupted = session.scalars(
+                    update(AnalysisRun)
+                    .where(
+                        AnalysisRun.id.in_(pending),
+                        AnalysisRun.owner_instance_id == self.owner_instance_id,
+                        AnalysisRun.status == "running",
+                    )
+                    .values(
+                        status="failed",
+                        finished_at=datetime.now(UTC),
+                        error={
+                            "code": "RUN_INTERRUPTED",
+                            "message": (
+                                "Analysis completion was interrupted; start a new run explicitly."
+                            ),
+                        },
+                    )
+                    .returning(AnalysisRun.id)
+                ).all()
+            self._uncertain_completions.difference_update(pending)
+            return len(interrupted)
 
     def _generate(
         self, prepared: PreparedReplay

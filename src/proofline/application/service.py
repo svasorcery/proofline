@@ -38,12 +38,13 @@ class WorkflowService:
         if not schema_is_current(self.database.engine):
             return False
         with self._recovery_lock:
-            if not self._recovery_complete:
-                try:
+            try:
+                if not self._recovery_complete:
                     self.runs.recover_interrupted()
-                except SQLAlchemyError:
-                    return False
-                self._recovery_complete = True
+                    self._recovery_complete = True
+                self.runs.reconcile_completions()
+            except SQLAlchemyError:
+                return False
         return True
 
     def recover_interrupted_runs(self) -> int:
