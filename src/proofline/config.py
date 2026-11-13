@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     app_origin: str = "http://127.0.0.1:8000"
     dev_origins: tuple[str, ...] = ()
     fixtures_dir: Path = Field(default=Path("fixtures"), validation_alias="PROOFLINE_FIXTURES_DIR")
+    ui_dir: Path = Field(default=Path("frontend/dist"), validation_alias="PROOFLINE_UI_DIR")
     live_enabled: bool = False
     validation_profile: str = Field(default="proofline-validation-v1", min_length=1)
     max_user_characters: int = Field(default=8000, gt=0)

@@ -1,0 +1,19 @@
+.proposal-editor > fieldset {
+  padding: 0;
+  border: 0;
+}
+.proposal-editor .editor-section {
+  padding: 1rem;
+  margin: 0.5rem 0;
+  background: var(--panel);
+}
+.proposal-editor .check {
+  align-items: flex-start;
+}
+.proposal-editor h2 {
+  margin-bottom: 0.2rem;
+}
+.proposal-editor .evidence-editor {
+  padding: 0.8rem;
+  background: var(--paper);
+}
