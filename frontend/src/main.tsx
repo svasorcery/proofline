@@ -46,7 +46,7 @@ function App() {
         </a>
         <div className="demo-label">
           <span className="dot" />
-          Учебное демо · Replay
+          Учебное демо
         </div>
       </header>
       {caseId ? <CaseWorkspace key={caseId} caseId={caseId} /> : <CaseList />}

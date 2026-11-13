@@ -2,7 +2,7 @@
 
 Proofline is a personal portfolio project for preparing an operator's review of a customer case: facts, source evidence, a timeline and specific missing confirmations. It does not authorise refunds, execute payments or send messages to customers.
 
-**Current milestone: replay-backed operator UI.** Review facts and chronology beside their source evidence, correct a proposal as a new revision, and record an explicit human decision. PostgreSQL preserves source versions, analysis runs, validation checks and decision history. Replay uses exact recorded inputs; live model access is a separate future milestone.
+**Current status: replay-backed operator UI; live adapter implemented, pending live acceptance.** Review facts and chronology beside their source evidence, correct a proposal as a new revision, and record an explicit human decision. PostgreSQL preserves source versions, analysis runs, validation checks and decision history. Replay uses exact recorded inputs. An opt-in OpenAI Responses adapter is covered by offline SDK/HTTP tests; actual API access, model compatibility and quality have not been verified. See [live configuration and acceptance](docs/live-provider.md).
 
 ## Run the local demo
 
@@ -68,7 +68,8 @@ These commands make no model calls and do not rewrite recorded results. The corr
 | --- | --- |
 | [docs/spec.md](docs/spec.md) | Current implementation contract |
 | [docs/development.md](docs/development.md) | Working with the repository and the next milestone |
-| [docs/api.md](docs/api.md) | Replay HTTP workflow, versions, conflicts and local configuration |
+| [docs/api.md](docs/api.md) | HTTP workflow, versions, conflicts and local configuration |
+| [docs/live-provider.md](docs/live-provider.md) | Opt-in live configuration, failure handling and pending live acceptance |
 | [docs/operator-ui.md](docs/operator-ui.md) | Operator workflow, demonstration stories and version history |
 | [docs/validation.md](docs/validation.md) | Library usage, validation boundaries and supported timestamp format |
 | [docs/research.md](docs/research.md) | Research decisions, evidence and limitations |
@@ -81,4 +82,4 @@ These commands make no model calls and do not rewrite recorded results. The corr
 | [evals/baselines/v3](evals/baselines/v3/README.md) | Frozen measured baseline and offline verification |
 | `notes/` | Optional local import archives and working notes; ignored by Git |
 
-The application uses Python/FastAPI/Pydantic, SQLAlchemy, PostgreSQL and React/TypeScript/Vite. The next milestone is an explicitly configured live adapter, with a separate invocation budget and acceptance checks. See the [implementation order](docs/spec.md#порядок-реализации).
+The application uses Python/FastAPI/Pydantic, SQLAlchemy, PostgreSQL, the official OpenAI SDK and React/TypeScript/Vite. Live has no automatic retries or Replay fallback and needs a separately approved API model and invocation budget. No model calls run in routine checks. Live acceptance remains open before portfolio packaging; see the [implementation order](docs/spec.md#порядок-реализации).

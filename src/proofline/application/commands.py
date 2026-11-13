@@ -1,12 +1,11 @@
 """Strict operator commands. Omitted patch fields are distinct from explicit null."""
 
-import json
 from typing import Annotated, Literal, Self
 
 from pydantic import AfterValidator, BaseModel, ConfigDict, Field, JsonValue, model_validator
 
 from proofline.domain.assembly import AssemblyOutput, FactKey
-from proofline.domain.inputs import Money
+from proofline.domain.inputs import Money, validate_storage_json
 from proofline.domain.sources import SourceKind
 
 
@@ -20,18 +19,6 @@ def _unique(value: list[FactKey]) -> list[FactKey]:
     if len(set(value)) != len(value):
         raise ValueError("Requested fact keys must be unique")
     return value
-
-
-def _reject_nul(value: JsonValue) -> None:
-    if isinstance(value, str) and "\u0000" in value:
-        raise ValueError("NUL characters cannot be stored in PostgreSQL text or JSON")
-    if isinstance(value, dict):
-        for key, item in value.items():
-            _reject_nul(key)
-            _reject_nul(item)
-    elif isinstance(value, list):
-        for item in value:
-            _reject_nul(item)
 
 
 type Nonblank = Annotated[str, AfterValidator(_nonblank)]
@@ -50,8 +37,7 @@ class _Command(BaseModel):
         # JSON-mode serialization can replace invalid dictionary keys. Validate
         # the original Python strings before any potentially lossy conversion.
         payload = self.model_dump(mode="python")
-        _reject_nul(payload)
-        json.dumps(payload, ensure_ascii=False, allow_nan=False).encode("utf-8")
+        validate_storage_json(payload)
         return self
 
 

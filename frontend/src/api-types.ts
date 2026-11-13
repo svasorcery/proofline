@@ -346,6 +346,45 @@ export interface components {
             /** Timeline */
             timeline: components["schemas"]["TimelineEvent"][];
         };
+        /** Capabilities */
+        Capabilities: {
+            /**
+             * Default Mode
+             * @default replay
+             * @constant
+             */
+            default_mode: "replay";
+            /** Event Types */
+            event_types: components["schemas"]["EventType"][];
+            /** Fact Keys */
+            fact_keys: components["schemas"]["FactKey"][];
+            /** Limits */
+            limits: {
+                [key: string]: number;
+            };
+            /**
+             * Live Access Verified
+             * @default false
+             * @constant
+             */
+            live_access_verified: false;
+            /** Live Available */
+            live_available: boolean;
+            /** Live Model */
+            live_model: string | null;
+            /** Live Profile */
+            live_profile: {
+                [key: string]: components["schemas"]["JsonValue"];
+            };
+            /** Live Reason */
+            live_reason: string | null;
+            /** Replay Available */
+            replay_available: boolean;
+            /** Requirement Keys */
+            requirement_keys: components["schemas"]["RequirementKey"][];
+            /** Validation Profile */
+            validation_profile: string;
+        };
         /** CaseCreate */
         CaseCreate: {
             /** Context */
@@ -908,9 +947,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": {
-                        [key: string]: components["schemas"]["JsonValue"];
-                    };
+                    "application/json": components["schemas"]["Capabilities"];
                 };
             };
         };
@@ -1605,15 +1642,4 @@ export type TimeRole = components['schemas']['TimeRole'];
 export type TimelineEvent = components['schemas']['TimelineEvent'];
 export type ValidationView = components['schemas']['ValidationView'];
 export type VersionCommand = components['schemas']['VersionCommand'];
-
-export interface Capabilities {
-  replay_available: boolean;
-  live_available: boolean;
-  live_reason: string;
-  default_mode: 'replay' | 'live';
-  validation_profile: string;
-  fact_keys: FactKey[];
-  event_types: EventType[];
-  requirement_keys: RequirementKey[];
-  limits: { user_characters: number; sources: number; source_characters: number; selected_characters: number };
-}
+export type Capabilities = components['schemas']['Capabilities'];

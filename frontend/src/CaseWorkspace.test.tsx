@@ -2,7 +2,7 @@ import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { api, ApiError, command } from './api';
-import type { CaseDetail, RunView } from './api-types';
+import type { CaseDetail, ProposalView, RunView } from './api-types';
 import { CaseWorkspace } from './CaseWorkspace';
 
 vi.mock('./api', async (importOriginal) => ({
@@ -73,6 +73,146 @@ function run(id: string, status: 'failed' | 'succeeded', startedAt: string): Run
 beforeEach(() => vi.clearAllMocks());
 
 describe('CaseWorkspace', () => {
+  it.each(['model', 'operator'] as const)(
+    'shows Live provenance for a selected %s revision while Replay is selected',
+    async (origin) => {
+      const sourceRun: RunView = {
+        ...run('live-source', 'succeeded', '2026-01-01T00:00:00Z'),
+        mode: 'live',
+        proposal_revision_id: 'model-result',
+        generation_profile: { model: 'actual-live-model' },
+      };
+      const root: ProposalView = {
+        id: 'model-result',
+        case_id: 'V01',
+        analysis_run_id: sourceRun.id,
+        parent_revision_id: null,
+        origin: 'model',
+        content_revision: 1,
+        input_digest: 'digest',
+        snapshot: sourceRun.snapshot,
+        source_bindings: {},
+        body_sha256: 'hash',
+        body: {
+          case_id: 'V01',
+          facts: [],
+          timeline: [],
+          readiness: 'human_review',
+          follow_up: { action: 'none', locator: null, requirements: [] },
+        },
+        reason: null,
+        created_at: sourceRun.started_at,
+        active: true,
+        stale: false,
+        validation_current: true,
+        status: 'needs_operator_review',
+        latest_validation: null,
+        validations: [],
+        blocking_issues: [],
+        decision: null,
+        decision_current: false,
+        case_version: 2,
+      };
+      const child: ProposalView = {
+        ...root,
+        id: 'operator-result',
+        origin: 'operator',
+        parent_revision_id: root.id,
+        analysis_run_id: null,
+      };
+      const current = origin === 'operator' ? child : root;
+      vi.mocked(api).mockImplementation(async (path) =>
+        path === '/capabilities'
+          ? { live_available: false, live_reason: 'LIVE_DISABLED', live_model: null }
+          : path === '/cases/V01'
+            ? { ...data, current_proposal_revision_id: current.id }
+            : path.endsWith('/proposals')
+              ? [root, child]
+              : path.endsWith('/runs')
+                ? [sourceRun]
+                : [],
+      );
+      render(<CaseWorkspace caseId="V01" />);
+      const text =
+        origin === 'operator'
+          ? /Основа правки: Live · новый вызов модели · actual-live-model/
+          : /Происхождение: Live · новый вызов модели · actual-live-model/;
+      expect(await screen.findByText(text)).toBeVisible();
+      expect(screen.getByRole('combobox', { name: 'Режим анализа' })).toHaveValue('replay');
+      expect(command).not.toHaveBeenCalled();
+    },
+  );
+
+  it('defaults to replay and requires an explicit selection before a single live request', async () => {
+    const user = userEvent.setup();
+    const caps = { live_available: true, live_model: 'configured-test-model', live_reason: null };
+    vi.mocked(api).mockImplementation(async (path) =>
+      path === '/capabilities' ? caps : path === '/cases/V01' ? data : [],
+    );
+    vi.mocked(command).mockResolvedValue(undefined);
+    render(<CaseWorkspace caseId="V01" />);
+    const mode = await screen.findByRole('combobox', { name: 'Режим анализа' });
+    expect(mode).toHaveValue('replay');
+    expect(screen.getByRole('button', { name: 'Запустить Replay' })).toBeDisabled();
+    await user.selectOptions(mode, 'live');
+    expect(screen.getByText('configured-test-model')).toBeVisible();
+    expect(screen.getByText(/Доступ и совместимость модели ещё не проверены/)).toBeVisible();
+    await user.click(screen.getByRole('button', { name: 'Запустить Live' }));
+    await waitFor(() => expect(command).toHaveBeenCalledTimes(1));
+    expect(command).toHaveBeenCalledWith(
+      '/cases/V01/runs',
+      'POST',
+      { mode: 'live', expected_case_version: 1 },
+      expect.any(String),
+    );
+  });
+
+  it('explains missing live access and never enables the mode', async () => {
+    vi.mocked(api).mockImplementation(async (path) =>
+      path === '/capabilities'
+        ? { live_available: false, live_model: null, live_reason: 'LIVE_KEY_MISSING' }
+        : path === '/cases/V01'
+          ? data
+          : [],
+    );
+    render(<CaseWorkspace caseId="V01" />);
+    await screen.findByRole('heading', { name: 'Test case' });
+    expect(screen.getByRole('option', { name: 'Live — новый вызов' })).toBeDisabled();
+    expect(screen.getByText(/На сервере не задан API-ключ/)).toBeVisible();
+    expect(command).not.toHaveBeenCalled();
+  });
+
+  it('keeps live selected after a provider failure without starting replay', async () => {
+    const user = userEvent.setup();
+    let failed = false;
+    const failedRun = {
+      ...run('live-failure', 'failed', '2026-01-02T00:00:00Z'),
+      mode: 'live',
+      error: { code: 'PROVIDER_RATE_LIMITED' },
+      generation_profile: { model: 'actual-test-model' },
+    };
+    vi.mocked(api).mockImplementation(async (path) =>
+      path === '/capabilities'
+        ? { live_available: true, live_model: 'configured-test-model', live_reason: null }
+        : path === '/cases/V01'
+          ? data
+          : path.endsWith('/runs') && failed
+            ? [failedRun]
+            : [],
+    );
+    vi.mocked(command).mockImplementation(async () => {
+      failed = true;
+    });
+    render(<CaseWorkspace caseId="V01" />);
+    const mode = await screen.findByRole('combobox', { name: 'Режим анализа' });
+    await user.selectOptions(mode, 'live');
+    await user.click(screen.getByRole('button', { name: 'Запустить Live' }));
+    await screen.findByRole('alert');
+    expect(mode).toHaveValue('live');
+    expect(command).toHaveBeenCalledTimes(1);
+    expect(screen.getByRole('alert')).toHaveTextContent('лимит');
+  });
+
   it('does not poll while a write or its post-save reload is busy', async () => {
     vi.useFakeTimers();
     try {
@@ -92,7 +232,7 @@ describe('CaseWorkspace', () => {
           }),
       );
       await act(async () => render(<CaseWorkspace caseId="V01" />));
-      expect(api).toHaveBeenCalledTimes(4);
+      expect(api).toHaveBeenCalledTimes(5);
       fireEvent.click(screen.getByText('Обращение и источники'));
       await act(async () =>
         fireEvent.click(screen.getByRole('checkbox', { name: 'Включить Source' })),
@@ -100,21 +240,21 @@ describe('CaseWorkspace', () => {
       expect(command).toHaveBeenCalledTimes(1);
 
       await act(async () => vi.advanceTimersByTimeAsync(2000));
-      expect(api).toHaveBeenCalledTimes(4);
+      expect(api).toHaveBeenCalledTimes(5);
 
       reload = true;
       await act(async () => finishWrite?.());
-      expect(delayed).toHaveLength(4);
-      expect(api).toHaveBeenCalledTimes(8);
+      expect(delayed).toHaveLength(5);
+      expect(api).toHaveBeenCalledTimes(10);
       await act(async () => vi.advanceTimersByTimeAsync(2000));
-      expect(api).toHaveBeenCalledTimes(8);
+      expect(api).toHaveBeenCalledTimes(10);
       expect(screen.getByRole('checkbox', { name: 'Включить Source' })).toBeDisabled();
 
       await act(async () => delayed.forEach((resolve) => resolve()));
       expect(screen.getByRole('checkbox', { name: 'Включить Source' })).toBeEnabled();
       reload = false;
       await act(async () => vi.advanceTimersByTimeAsync(1500));
-      expect(api).toHaveBeenCalledTimes(12);
+      expect(api).toHaveBeenCalledTimes(15);
       expect(command).toHaveBeenCalledTimes(1);
     } finally {
       vi.useRealTimers();
@@ -162,7 +302,7 @@ describe('CaseWorkspace', () => {
     await user.click(screen.getByRole('button', { name: 'Изменить источник' }));
     await user.type(screen.getByRole('textbox', { name: 'Текст новой версии' }), 'New source text');
     await user.click(screen.getByRole('button', { name: 'Создать версию текста' }));
-    await waitFor(() => expect(delayed).toHaveLength(4));
+    await waitFor(() => expect(delayed).toHaveLength(5));
     expect(command).toHaveBeenCalledTimes(1);
     expect(screen.getByRole('checkbox', { name: 'Включить Source' })).toBeDisabled();
     expect(screen.getByRole('button', { name: 'Создать версию текста' })).toBeDisabled();
@@ -195,7 +335,7 @@ describe('CaseWorkspace', () => {
 
     deferReads = true;
     await user.click(screen.getByRole('button', { name: 'Обновить данные' }));
-    await waitFor(() => expect(delayed).toHaveLength(4));
+    await waitFor(() => expect(delayed).toHaveLength(5));
     await user.click(screen.getByText('Обращение и источники'));
     const included = screen.getByRole('checkbox', { name: 'Включить Source' });
     await user.click(included);

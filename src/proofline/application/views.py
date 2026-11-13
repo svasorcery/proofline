@@ -5,7 +5,7 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, JsonValue
 
-from proofline.domain.assembly import AssemblyOutput, FactKey
+from proofline.domain.assembly import AssemblyOutput, EventType, FactKey, RequirementKey
 from proofline.domain.inputs import AnalysisInput, Money
 from proofline.domain.sources import SourceKind
 
@@ -22,6 +22,21 @@ type CaseStatus = Literal[
 
 class _View(BaseModel):
     model_config = ConfigDict(from_attributes=True)
+
+
+class Capabilities(_View):
+    replay_available: bool
+    live_available: bool
+    live_reason: str | None
+    live_model: str | None
+    live_access_verified: Literal[False] = False
+    live_profile: dict[str, JsonValue]
+    default_mode: Literal["replay"] = "replay"
+    validation_profile: str
+    fact_keys: list[FactKey]
+    event_types: list[EventType]
+    requirement_keys: list[RequirementKey]
+    limits: dict[str, int]
 
 
 class SourceVersionSummary(_View):

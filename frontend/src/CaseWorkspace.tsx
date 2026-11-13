@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { api, ApiError, command, newKey } from './api';
 import type {
   CaseDetail,
+  Capabilities,
   ProposalView,
   ReplayOption,
   RunView,
@@ -24,6 +25,7 @@ interface Workspace {
   options: ReplayOption[];
   proposals: ProposalView[];
   runs: RunView[];
+  capabilities: Capabilities;
 }
 interface PendingWrite {
   path: string;
@@ -34,13 +36,14 @@ interface PendingWrite {
 
 async function readWorkspace(base: string, signal: AbortSignal): Promise<Workspace> {
   const get = <T,>(path: string) => api<T>(path, { signal });
-  const [data, options, proposals, runs] = await Promise.all([
+  const [data, options, proposals, runs, capabilities] = await Promise.all([
     get<CaseDetail>(base),
     get<ReplayOption[]>(`${base}/replay-options`),
     get<ProposalView[]>(`${base}/proposals`),
     get<RunView[]>(`${base}/runs`),
+    get<Capabilities>('/capabilities'),
   ]);
-  return { data, options, proposals, runs };
+  return { data, options, proposals, runs, capabilities };
 }
 
 export function CaseWorkspace({ caseId }: { caseId: string }) {
@@ -55,6 +58,7 @@ export function CaseWorkspace({ caseId }: { caseId: string }) {
   const [refresh, setRefresh] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [replayId, setReplayId] = useState('');
+  const [mode, setMode] = useState<'replay' | 'live'>('replay');
   const [editingId, setEditingId] = useState<string | null>(null);
   const editor = editingId !== null;
   const readerRequest = useRef<AbortController | null>(null);
@@ -201,13 +205,20 @@ export function CaseWorkspace({ caseId }: { caseId: string }) {
         )}
       </main>
     );
-  const { data, options, proposals, runs } = workspace;
+  const { data, options, proposals, runs, capabilities } = workspace;
   const proposal = proposals.find(
     (p) => p.id === (editingId ?? selected ?? data.current_proposal_revision_id),
   );
   const chosenReplay = options.find((o) => o.replay_id === replayId) ?? options[0];
   const disabled = busy || pending !== null || uncertain;
   const latestRun = runs.at(-1);
+  let origin = proposal;
+  const visited = new Set<string>();
+  while (origin?.parent_revision_id && !origin.analysis_run_id && !visited.has(origin.id)) {
+    visited.add(origin.id);
+    origin = proposals.find((p) => p.id === origin?.parent_revision_id);
+  }
+  const originRun = runs.find((r) => r.id === origin?.analysis_run_id);
 
   return (
     <main className="page workspace-page" id="main">
@@ -277,57 +288,86 @@ export function CaseWorkspace({ caseId }: { caseId: string }) {
       </p>
       <CaseInput data={data} busy={disabled} write={write} onRead={openCurrent} />
       <section className="run-toolbar" aria-label="Запуск анализа">
-        <div className="run-mode">
-          <span className="mode-tag">Replay</span>
-          <strong>Сохранённая запись</strong>
-          <small>Новых вызовов модели нет</small>
-        </div>
-        <label className="replay-select">
-          Запись для текущего входа
+        <label>
+          Режим анализа
           <select
-            aria-label="Запись Replay"
-            value={chosenReplay?.replay_id ?? ''}
-            disabled={disabled || !options.length}
-            onChange={(e) => setReplayId(e.target.value)}
+            aria-label="Режим анализа"
+            value={mode}
+            disabled={disabled || data.analysis_running}
+            onChange={(e) => setMode(e.target.value as 'replay' | 'live')}
           >
-            {options.length ? (
-              options.map((o) => (
-                <option key={o.replay_id} value={o.replay_id}>
-                  {o.condition} · {o.recorded_on} · {o.model}
-                </option>
-              ))
-            ) : (
-              <option value="">Совместимых записей нет</option>
-            )}
+            <option value="replay">Replay — сохранённая запись</option>
+            <option value="live" disabled={!capabilities.live_available}>
+              Live — новый вызов
+            </option>
           </select>
         </label>
+        <div className="run-mode">
+          <span className="mode-tag">{mode === 'live' ? 'Live' : 'Replay'}</span>
+          <strong>{mode === 'live' ? capabilities.live_model : 'Сохранённая запись'}</strong>
+          <small>
+            {mode === 'live' ? 'Один новый запрос к OpenAI' : 'Новых вызовов модели нет'}
+          </small>
+        </div>
+        {mode === 'replay' ? (
+          <label className="replay-select">
+            Запись для текущего входа
+            <select
+              aria-label="Запись Replay"
+              value={chosenReplay?.replay_id ?? ''}
+              disabled={disabled || !options.length}
+              onChange={(e) => setReplayId(e.target.value)}
+            >
+              {options.length ? (
+                options.map((o) => (
+                  <option key={o.replay_id} value={o.replay_id}>
+                    {o.condition} · {o.recorded_on} · {o.model}
+                  </option>
+                ))
+              ) : (
+                <option value="">Совместимых записей нет</option>
+              )}
+            </select>
+          </label>
+        ) : null}
         <button
           className="button"
-          disabled={disabled || data.analysis_running || !chosenReplay}
+          disabled={
+            disabled ||
+            data.analysis_running ||
+            (mode === 'live' ? !capabilities.live_available : !chosenReplay)
+          }
           onClick={() => {
-            if (chosenReplay)
+            if (mode === 'live' || chosenReplay)
               void write(
                 `${base}/runs`,
                 'POST',
                 {
-                  mode: 'replay',
-                  replay_id: chosenReplay.replay_id,
+                  mode,
+                  ...(mode === 'replay' ? { replay_id: chosenReplay!.replay_id } : {}),
                   expected_case_version: data.version,
                 },
                 true,
               ).catch(() => {});
           }}
         >
-          {busy ? 'Сохранение…' : 'Запустить Replay'}
+          {busy ? 'Сохранение…' : mode === 'live' ? 'Запустить Live' : 'Запустить Replay'}
         </button>
-        <span className="subtle live-unavailable">Live недоступен</span>
+        <span className="subtle live-unavailable">
+          {capabilities.live_available ? 'Live настроен' : 'Live недоступен'}
+        </span>
       </section>
-      {!options.length ? (
+      <p className="subtle">
+        {capabilities.live_available
+          ? 'Доступ и совместимость модели ещё не проверены live-приёмкой. Проверки кода не подтверждают разбор автоматически.'
+          : label(capabilities.live_reason ?? 'LIVE_NOT_CONFIGURED')}
+      </p>
+      {!options.length && mode === 'replay' ? (
         <div className="notice warning">
           <strong>Для этого входа нет записи Replay</strong>
           <p>
             Текст, набор фактов или источники отличаются от сохранённого условия. Выберите исходные
-            версии либо продолжите подготовку данных. Live будет подключён отдельным этапом.
+            версии либо продолжите подготовку данных.
           </p>
         </div>
       ) : null}
@@ -398,7 +438,11 @@ export function CaseWorkspace({ caseId }: { caseId: string }) {
                 />
               ) : (
                 <>
-                  <ProposalRead proposal={proposal} onEvidence={openEvidence} />
+                  <ProposalRead
+                    proposal={proposal}
+                    originRun={originRun}
+                    onEvidence={openEvidence}
+                  />
                   <div className="revision-actions">
                     <button
                       className="secondary"
@@ -449,7 +493,8 @@ export function CaseWorkspace({ caseId }: { caseId: string }) {
               <p className="eyebrow">Первый шаг</p>
               <h2>Разбор ещё не создан</h2>
               <p>
-                Выберите совместимую запись и запустите Replay. Источники можно изучить до запуска.
+                Выберите режим анализа и изучите источники. Replay использует совместимую запись;
+                Live требует настроенного API-доступа и создаёт новый запрос.
               </p>
             </div>
           )}
@@ -463,8 +508,10 @@ export function CaseWorkspace({ caseId }: { caseId: string }) {
         {runs.map((run) => (
           <div key={run.id} className="run-history-item">
             <strong>
-              {label(run.status)} · {run.mode === 'replay' ? 'Replay, сохранённый ответ' : 'Live'}
+              {label(run.status)} ·{' '}
+              {run.mode === 'replay' ? 'Replay, сохранённый ответ' : 'Live, новый вызов'}
             </strong>
+            <span>{String(run.generation_profile.model ?? '')}</span>
             <time>{timestamp(run.started_at)}</time>
             {run.error ? <p>{label(String(run.error.code))}</p> : null}
             <JsonDetails

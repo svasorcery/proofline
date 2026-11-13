@@ -283,7 +283,7 @@ Runtime-тесты независимы от сети. Unit/integration/e2e CI �
 
 ## Структура репозитория
 
-Реализованы библиотека проверки, PostgreSQL-backed replay API и третий этап: операторский интерфейс с источниками, правками и явными решениями. Live-провайдер остаётся следующим этапом. Интерфейсы описаны в [validation.md](validation.md), [api.md](api.md) и [operator-ui.md](operator-ui.md).
+Реализованы библиотека проверки, PostgreSQL-backed API, операторский интерфейс с источниками, правками и явными решениями, а также код OpenAI Responses адаптера с детерминированными тестами без сети. Этап 4 остаётся открытым до отдельно согласованной live-приёмки доступа, модели, схемы и качества. Интерфейсы описаны в [validation.md](validation.md), [api.md](api.md), [operator-ui.md](operator-ui.md) и [live-provider.md](live-provider.md).
 
 ```text
 README.md, AGENTS.md
@@ -305,7 +305,7 @@ src/proofline/           # библиотека контракта/провер�
   application/           # анализ, редактирование, проверка и review
   domain/                # контракт, версии, статусы, ограничения
   validation/            # фрагменты, время, согласованность
-  providers/             # replay; OpenAIResponsesProvider появится на live-этапе
+  providers/             # replay, OpenAIResponsesProvider и неизмеренный live-профиль
   persistence/           # SQLAlchemy, транзакции, Alembic
   presentation/          # детерминированные требования и деньги
   config.py

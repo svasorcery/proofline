@@ -14,6 +14,7 @@ from proofline.api.static import register_static_ui
 from proofline.application.service import WorkflowService
 from proofline.config import Settings
 from proofline.persistence.database import Database, open_database
+from proofline.providers.openai_responses import LiveProvider
 from proofline.providers.replay import ReplayCatalog, ReplayProvider
 
 
@@ -22,12 +23,13 @@ def create_app(
     *,
     database: Database | None = None,
     provider: ReplayProvider | None = None,
+    live_provider: LiveProvider | None = None,
 ) -> FastAPI:
     config = settings if settings is not None else Settings()
     owns_database = database is None
     active_database = database if database is not None else open_database(config.database_url)
     active_provider = provider if provider is not None else ReplayCatalog(config.fixtures_dir)
-    service = WorkflowService(active_database, config, active_provider)
+    service = WorkflowService(active_database, config, active_provider, live_provider=live_provider)
 
     @asynccontextmanager
     async def lifespan(app: FastAPI) -> AsyncIterator[None]:
@@ -39,7 +41,7 @@ def create_app(
             if owns_database:
                 await run_in_threadpool(active_database.dispose)
 
-    app = FastAPI(title="Proofline replay API", version="0.2.0", lifespan=lifespan)
+    app = FastAPI(title="Proofline API", version="0.4.0", lifespan=lifespan)
     app.state.service = service
     register_error_handlers(app)
     app.add_middleware(

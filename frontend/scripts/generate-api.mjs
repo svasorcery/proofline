@@ -64,22 +64,7 @@ const names = [
 const aliases = names
   .map((name) => `export type ${name} = components['schemas']['${name}'];`)
   .join('\n');
-// Capabilities intentionally has an open JSON response in OpenAPI; retain its
-// documented public shape here until the API exposes a dedicated response DTO.
-const capabilities = `
-export interface Capabilities {
-  replay_available: boolean;
-  live_available: boolean;
-  live_reason: string;
-  default_mode: 'replay' | 'live';
-  validation_profile: string;
-  fact_keys: FactKey[];
-  event_types: EventType[];
-  requirement_keys: RequirementKey[];
-  limits: { user_characters: number; sources: number; source_characters: number; selected_characters: number };
-}
-`;
-const output = `${header}${generated}\n${aliases}\n${capabilities}`;
+const output = `${header}${generated}\n${aliases}\nexport type Capabilities = components['schemas']['Capabilities'];\n`;
 const path = new URL('../src/api-types.ts', import.meta.url);
 if (process.argv.includes('--check')) {
   if ((await readFile(path, 'utf8')) !== output) {
