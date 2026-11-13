@@ -283,7 +283,7 @@ Runtime-тесты независимы от сети. Unit/integration/e2e CI �
 
 ## Структура репозитория
 
-Реализованы библиотека проверки и второй этап: PostgreSQL, миграции, версии, replay API и операторские решения. UI и live-провайдер остаются следующими этапами. Интерфейсы описаны в [validation.md](validation.md) и [api.md](api.md).
+Реализованы библиотека проверки, PostgreSQL-backed replay API и третий этап: операторский интерфейс с источниками, правками и явными решениями. Live-провайдер остаётся следующим этапом. Интерфейсы описаны в [validation.md](validation.md), [api.md](api.md) и [operator-ui.md](operator-ui.md).
 
 ```text
 README.md, AGENTS.md
@@ -309,9 +309,9 @@ src/proofline/           # библиотека контракта/провер�
   persistence/           # SQLAlchemy, транзакции, Alembic
   presentation/          # детерминированные требования и деньги
   config.py
-frontend/                # будущий React/TypeScript/Vite UI
+frontend/                # React/TypeScript/Vite UI, unit/component и browser tests
 tests/unit/, tests/integration/              # тесты библиотеки
-tests/e2e/                                  # будущие тесты полного пути
+frontend/e2e/                               # браузерные тесты полного пути на Compose
 infrastructure/          # Dockerfile, локальный Compose и отдельная тестовая БД
 pyproject.toml, uv.lock   # пакет и зафиксированные зависимости
 ```

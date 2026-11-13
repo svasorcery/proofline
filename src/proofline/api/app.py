@@ -10,6 +10,7 @@ from starlette.middleware.cors import CORSMiddleware
 from proofline.api.errors import register_error_handlers
 from proofline.api.middleware import register_request_middleware
 from proofline.api.routes import register_routes
+from proofline.api.static import register_static_ui
 from proofline.application.service import WorkflowService
 from proofline.config import Settings
 from proofline.persistence.database import Database, open_database
@@ -51,4 +52,5 @@ def create_app(
     )
     register_request_middleware(app, config)
     register_routes(app, service)
+    register_static_ui(app, config.ui_dir)
     return app

@@ -87,14 +87,49 @@ jobs:
       - name: Test migrations, HTTP and transaction races
         run: uv run --locked pytest -m postgres
 
-  compose:
-    name: Compose replay walkthrough
+  frontend:
+    name: Operator UI
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: "24.22.3"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          version: "0.13.7"
+          python-version: "3.12"
+          enable-cache: true
+      - run: uv sync --locked
+      - run: npm --prefix frontend ci
+      - run: npm --prefix frontend run format:check
+      - run: npm --prefix frontend run lint
+      - run: npm --prefix frontend run check:api
+      - run: npm --prefix frontend test
+      - run: npm --prefix frontend run build
+
+  compose:
+    name: Compose and browser workflow
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: "24.22.3"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm --prefix frontend ci
+      - name: Install browser and system dependencies
+        working-directory: frontend
+        run: npx playwright install --with-deps chromium
       - name: Start database
         run: docker compose -f infrastructure/compose.yml up -d --wait db
       - name: Build and migrate explicitly
@@ -103,6 +138,10 @@ jobs:
         run: docker compose -f infrastructure/compose.yml run --rm app seed
       - name: Start API
         run: docker compose -f infrastructure/compose.yml up -d --wait app
+      - name: Exercise the operator UI against real PostgreSQL
+        env:
+          PROOFLINE_E2E_URL: http://127.0.0.1:8000
+        run: npm --prefix frontend run test:e2e
       - name: Exercise blocked, corrected and reviewed replay
         run: python examples/replay_walkthrough.py
       - name: Show logs on failure
