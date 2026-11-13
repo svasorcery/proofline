@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Evidence, ProposalView, SpanView, SnapshotSource } from './api-types';
+import type { Evidence, ProposalView, RunView, SpanView, SnapshotSource } from './api-types';
 import { label } from './labels';
 import { JsonDetails, Status, timestamp } from './shared';
 
@@ -8,22 +8,33 @@ export type OpenEvidence = (source: SnapshotSource, spans: SpanView[], focus?: S
 export function ProposalRead({
   proposal: p,
   onEvidence,
+  originRun,
 }: {
   proposal: ProposalView;
   onEvidence: OpenEvidence;
+  originRun?: RunView;
 }) {
   const [copyStatus, setCopyStatus] = useState('');
   return (
     <>
       <div className="section-heading">
         <div>
-          <p className="eyebrow">
-            {p.origin === 'operator' ? 'Правка оператора' : 'Сохранённый ответ модели'}
-          </p>
+          <p className="eyebrow">{p.origin === 'operator' ? 'Правка оператора' : 'Ответ модели'}</p>
           <h2>Разбор обращения</h2>
         </div>
         <Status status={p.status} />
       </div>
+      {originRun ? (
+        <p className="subtle">
+          {p.origin === 'operator' ? 'Основа правки: ' : 'Происхождение: '}
+          {originRun.mode === 'live' ? 'Live · новый вызов модели' : 'Replay · сохранённая запись'}
+          {' · '}
+          {String(originRun.generation_profile.model ?? '')}
+          {originRun.mode === 'replay' && originRun.generation_profile.recorded_on
+            ? ` · ${String(originRun.generation_profile.recorded_on)}`
+            : ''}
+        </p>
+      ) : null}
       {p.stale ? (
         <div className="notice warning">
           <strong>Исторический вход</strong>

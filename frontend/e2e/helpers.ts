@@ -11,5 +11,6 @@ export async function startReplay(page: Page) {
   expect(result.ok()).toBeTruthy();
   const run = (await result.json()) as RunView;
   await expect(page.getByLabel('Версия разбора')).toHaveValue(run.proposal_revision_id!);
+  await expect(page.getByText(/Происхождение: Replay · сохранённая запись/)).toBeVisible();
   return run;
 }

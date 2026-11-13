@@ -3,7 +3,7 @@
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, FastAPI, Header, Query, Response
-from pydantic import BaseModel, JsonValue
+from pydantic import BaseModel
 
 from proofline.application.commands import (
     ActivateProposal,
@@ -20,6 +20,7 @@ from proofline.application.commands import (
 from proofline.application.errors import ApplicationError
 from proofline.application.service import WorkflowService
 from proofline.application.views import (
+    Capabilities,
     CaseDetail,
     CasePage,
     CaseStatus,
@@ -73,8 +74,8 @@ def register_routes(app: FastAPI, service: WorkflowService) -> None:
         require_ready()
         return HealthView(status="ready")
 
-    @health_router.get("/capabilities", response_model=dict[str, JsonValue])
-    def capabilities() -> dict[str, JsonValue]:
+    @health_router.get("/capabilities", response_model=Capabilities)
+    def capabilities() -> Capabilities:
         return service.capabilities()
 
     @router.get("/cases", response_model=CasePage)

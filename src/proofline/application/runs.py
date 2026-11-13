@@ -1,6 +1,8 @@
 """Commit an input snapshot, generate outside the transaction, then finish with CAS."""
 
+import json
 import logging
+from dataclasses import replace
 from datetime import UTC, datetime
 from threading import Lock
 
@@ -29,9 +31,11 @@ from proofline.domain.inputs import (
     compatibility_digest,
     json_digest,
     source_bindings,
+    validate_storage_json,
 )
 from proofline.persistence.database import Database
 from proofline.persistence.models import AnalysisRun, ProposalRevision
+from proofline.providers.openai_responses import LiveProvider, PreparedLive
 from proofline.providers.replay import (
     GenerationResult,
     PreparedReplay,
@@ -49,9 +53,11 @@ class RunService:
         settings: Settings,
         provider: ReplayProvider,
         owner_instance_id: str,
+        live_provider: LiveProvider | None = None,
     ) -> None:
         self.database, self.settings, self.provider = database, settings, provider
         self.owner_instance_id = owner_instance_id
+        self.live_provider = live_provider
         self._completion_lock = Lock()
         self._uncertain_completions: set[str] = set()
 
@@ -94,7 +100,9 @@ class RunService:
                         "IDEMPOTENCY_CONFLICT", "This key belongs to a different command."
                     )
                 return run_view(session, previous), 202 if previous.status == "running" else 200
-            if command.mode == "live":
+            if command.mode == "live" and (
+                self.settings.live_unavailable_reason is not None or self.live_provider is None
+            ):
                 raise ApplicationError(
                     "LIVE_NOT_CONFIGURED",
                     "Live analysis is not configured; select replay explicitly.",
@@ -111,14 +119,16 @@ class RunService:
             require_version(case, command.expected_case_version)
             snapshot = current_input(session, case)
             check_limits(snapshot, self.settings)
-            if command.replay_id is None:
-                raise ApplicationError(
-                    "INVALID_REQUEST", "A replay ID is required.", status_code=422
-                )
-            prepared = self.provider.prepare(command.replay_id, snapshot)
+            prepared: PreparedReplay | PreparedLive
+            if command.mode == "live":
+                assert self.live_provider is not None
+                prepared = self.live_provider.prepare(snapshot)
+            else:
+                assert command.replay_id is not None
+                prepared = self.provider.prepare(command.replay_id, snapshot)
             run = AnalysisRun(
                 case_id=case_id,
-                mode="replay",
+                mode=command.mode,
                 idempotency_key=idempotency_key,
                 request_hash=request_hash,
                 snapshot=snapshot.model_dump(mode="json"),
@@ -171,16 +181,29 @@ class RunService:
             return len(interrupted)
 
     def _generate(
-        self, prepared: PreparedReplay
+        self, prepared: PreparedReplay | PreparedLive
     ) -> tuple[GenerationResult | None, AssemblyOutput | None, dict[str, JsonValue] | None]:
         result = None
         try:
-            result = self.provider.generate(prepared)
+            if isinstance(prepared, PreparedLive):
+                assert self.live_provider is not None
+                result = self.live_provider.generate(prepared)
+            else:
+                result = self.provider.generate(prepared)
+            if result.error is not None:
+                return result, None, result.error
+            if result.raw_output is None:
+                return (
+                    result,
+                    None,
+                    {"code": "INVALID_MODEL_OUTPUT", "message": "No output was returned."},
+                )
             body = AssemblyOutput.model_validate_json(result.raw_output)
+            validate_storage_json(body.model_dump(mode="json"))
             canonical_json(result.generation_profile).encode("utf-8")
             canonical_json(result.usage).encode("utf-8")
             return result, body, None
-        except ValidationError:
+        except (ValidationError, ValueError):
             return (
                 result,
                 None,
@@ -199,7 +222,7 @@ class RunService:
                 },
             )
         except Exception:
-            logger.exception("Analysis provider failed")
+            logger.error("Analysis provider failed; exception details omitted")
             return (
                 None,
                 None,
@@ -217,6 +240,20 @@ class RunService:
         body: AssemblyOutput | None,
         error: dict[str, JsonValue] | None,
     ) -> RunView:
+        if result is not None and result.raw_output is not None:
+            try:
+                validate_storage_json(result.raw_output)
+            except ValueError:
+                # Preserve otherwise unstorable raw text reversibly as a JSON
+                # string. This is diagnostic data, never a repaired model body.
+                result = replace(
+                    result,
+                    raw_output=json.dumps(result.raw_output, ensure_ascii=True),
+                    generation_profile={
+                        **result.generation_profile,
+                        "raw_output_encoding": "json-string",
+                    },
+                )
         with self.database.sessions.begin() as session:
             case = case_or_404(session, case_id, lock=True)
             values: dict[str, object] = {

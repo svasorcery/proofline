@@ -70,7 +70,7 @@ def test_ui_preserves_api_docs_and_safe_error_envelopes(ui_dir: Path) -> None:
         assert client.get("/health").json() == {"status": "ok"}
         assert client.get("/api/v1/capabilities").status_code == 200
         assert client.get("/docs").status_code == 200
-        assert client.get("/openapi.json").json()["info"]["title"] == "Proofline replay API"
+        assert client.get("/openapi.json").json()["info"]["title"] == "Proofline API"
         response = client.get("/api/v1/unknown")
         assert response.status_code == 404
         assert response.json()["code"] == "HTTP_404"

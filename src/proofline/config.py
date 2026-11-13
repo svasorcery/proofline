@@ -1,7 +1,7 @@
 from pathlib import Path
 from urllib.parse import urlsplit
 
-from pydantic import Field, field_validator
+from pydantic import Field, SecretStr, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -16,12 +16,30 @@ class Settings(BaseSettings):
     fixtures_dir: Path = Field(default=Path("fixtures"), validation_alias="PROOFLINE_FIXTURES_DIR")
     ui_dir: Path = Field(default=Path("frontend/dist"), validation_alias="PROOFLINE_UI_DIR")
     live_enabled: bool = False
+    openai_api_key: SecretStr | None = Field(default=None, repr=False, exclude=True)
+    openai_model: str = ""
     validation_profile: str = Field(default="proofline-validation-v1", min_length=1)
     max_user_characters: int = Field(default=8000, gt=0)
     max_sources: int = Field(default=20, gt=0)
     max_source_characters: int = Field(default=20000, gt=0)
     max_selected_characters: int = Field(default=80000, gt=0)
     model_timeout_seconds: int = Field(default=90, gt=0)
+    model_max_output_tokens: int = Field(default=4096, gt=0)
+
+    @property
+    def live_unavailable_reason(self) -> str | None:
+        if not self.live_enabled:
+            return "LIVE_DISABLED"
+        if self.openai_api_key is None or not self.openai_api_key.get_secret_value().strip():
+            return "LIVE_KEY_MISSING"
+        if not self.openai_model.strip():
+            return "LIVE_MODEL_MISSING"
+        return None
+
+    @field_validator("openai_model")
+    @classmethod
+    def trim_model(cls, value: str) -> str:
+        return value.strip()
 
     @field_validator("database_url")
     @classmethod

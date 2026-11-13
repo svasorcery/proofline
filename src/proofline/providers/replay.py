@@ -10,6 +10,7 @@ from proofline.application.errors import ApplicationError
 from proofline.domain.assembly import AssemblyOutput, FactKey
 from proofline.domain.inputs import AnalysisInput, Money, SnapshotSource, compatibility_digest
 from proofline.domain.sources import SourceKind, SourceReference, SourceSnapshot
+from proofline.providers.generation import GenerationResult as GenerationResult
 
 
 class _FixtureModel(BaseModel):
@@ -94,13 +95,6 @@ class ReplayOption(BaseModel):
     input_digest: str
     prompt_sha256: str
     output_sha256: str
-
-
-@dataclass(frozen=True, slots=True)
-class GenerationResult:
-    raw_output: str
-    generation_profile: dict[str, JsonValue]
-    usage: dict[str, JsonValue] | None
 
 
 @dataclass(frozen=True, slots=True)

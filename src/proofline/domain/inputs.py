@@ -20,6 +20,24 @@ def json_digest(value: object) -> str:
     return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
 
 
+def validate_storage_json(value: JsonValue) -> None:
+    """Reject non-finite JSON, invalid UTF-8 and PostgreSQL's forbidden NUL."""
+
+    def visit(item: JsonValue) -> None:
+        if isinstance(item, str) and "\u0000" in item:
+            raise ValueError("NUL characters cannot be stored in PostgreSQL text or JSON")
+        if isinstance(item, dict):
+            for key, child in item.items():
+                visit(key)
+                visit(child)
+        elif isinstance(item, list):
+            for child in item:
+                visit(child)
+
+    visit(value)
+    canonical_json(value).encode("utf-8")
+
+
 class Money(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True, frozen=True)
     amount_minor: int
