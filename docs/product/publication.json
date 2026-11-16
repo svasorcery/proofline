@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "proofline",
+  "title": "Proofline: на чём основан ответ",
+  "description": "Как Proofline помогает оператору сопоставить факты с документами, восстановить события и сохранить проверенный разбор обращения.",
+  "document": {
+    "path": "proofline.ru.md",
+    "sha256": "576272de92e17bd33786c39ef6277e0e695d67293ce97345e326e5a92ced09f3"
+  },
+  "assets": [
+    {
+      "path": "assets/proofline-map.svg",
+      "sha256": "5ef5e389e1d919141cceffa77c7957629893855c0c4e8bc22fb891f78bd1fbc4"
+    },
+    {
+      "path": "assets/conditional-consent.svg",
+      "sha256": "9478f32fc4530afc4f324c5d5142b67d4d7ddbf79f3f2bc92ecddeef7eeeb849"
+    },
+    {
+      "path": "assets/review-history.svg",
+      "sha256": "4eb5251dcb24fddfc1b3d6cccd55cf37e798ef2aea4f9f220b6f3be8ef05f8ba"
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 # Proofline
 
+**По-русски о продукте:** [Proofline: на чём основан ответ](docs/product/proofline.ru.md) – иллюстрированный рассказ об операторе, источниках и проверке разбора; описывает конечный вид проекта. [Версия для чтения одним файлом](docs/product/proofline.ru.html).
+
 Proofline is a personal portfolio project for preparing an operator's review of a customer case: facts, source evidence, a timeline and specific missing confirmations. It does not authorise refunds, execute payments or send messages to customers.
 
 **Current status: replay-backed operator UI; live adapter implemented, pending live acceptance.** Review facts and chronology beside their source evidence, correct a proposal as a new revision, and record an explicit human decision. PostgreSQL preserves source versions, analysis runs, validation checks and decision history. Replay uses exact recorded inputs. An opt-in OpenAI Responses adapter is covered by offline SDK/HTTP tests; actual API access, model compatibility and quality have not been verified. See [live configuration and acceptance](docs/live-provider.md).
