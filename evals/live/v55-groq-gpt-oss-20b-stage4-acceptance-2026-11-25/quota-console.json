@@ -1,0 +1,31 @@
+{
+  "plan": "Free",
+  "project": "Default Project",
+  "model": "openai/gpt-oss-20b",
+  "custom_project_limits": false,
+  "observed_at": "2026-11-25T19:27:27.270500+00:00",
+  "configured_limits": {
+    "requests_per_minute": 30,
+    "requests_per_day": 1000,
+    "tokens_per_minute": 8000,
+    "tokens_per_day": 200000
+  },
+  "configured_maximum_completion_tokens": 1000,
+  "planned_maximum_attempts": 6,
+  "daily_chart_utc": {
+    "approximate_requests": 30,
+    "approximate_tokens": 104946,
+    "conservative_token_upper_bound": 150000,
+    "data_delay_minutes": 15,
+    "basis": "Refreshed signed-in chart spans up to 28 requests and 120K tokens. The known v54 usage of 25,367 tokens brings the recorded total for November 25 UTC to about 104,946. Reserve up to 30K above the chart scale for rejected calls and delayed activity."
+  },
+  "evidence": "Current signed-in Free plan at $0, matching GPT-OSS 20B limits and Default Project with no custom limits. The v54 V06 headers confirm the request and token limits.",
+  "sources": [
+    "https://console.groq.com/settings/billing/plans",
+    "https://console.groq.com/settings/limits",
+    "https://console.groq.com/settings/project/limits",
+    "https://console.groq.com/settings/organization/usage?tab=activity"
+  ],
+  "usage_accounted_at": "2026-11-25T19:27:27.270500+00:00",
+  "last_matching_provider_limit_headers_at": "2026-11-25T19:09:41.185809+00:00"
+}

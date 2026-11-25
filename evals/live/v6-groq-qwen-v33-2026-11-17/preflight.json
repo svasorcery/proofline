@@ -1,0 +1,1 @@
+{"model": "qwen/qwen3.8-27b", "requested_reasoning_effort": "medium", "request_template_sha256": "7eafe1ee0c0586ca0be2710840c228980006c2607679620125d1bf75f91146e0", "sdk_version": "2.54.0", "case_fixture_sha256": "f9c2676d82777146f522c1b122e718b0cb9cd8872210ad9224f18df6858f1e39", "new_provider_calls_in_preflight": 0}

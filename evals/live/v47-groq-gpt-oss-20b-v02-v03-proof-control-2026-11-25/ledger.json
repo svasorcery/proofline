@@ -1,0 +1,36 @@
+{
+  "max_requests": 2,
+  "approved_budget_usd": 0,
+  "attempts": [
+    {
+      "condition": "full-V02",
+      "case_id": "V02",
+      "started_at": "2026-11-25T06:40:25.094455+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-gpt-oss-20b-v02-v03-proof-control-20261125-full-V02",
+      "http_status": 201,
+      "finished_at": "2026-11-25T06:40:32.191720+00:00",
+      "run_id": "05f3eb4d-578a-4f44-962f-e9faf8436f3e"
+    },
+    {
+      "condition": "full-V03",
+      "case_id": "V03",
+      "started_at": "2026-11-25T06:41:35.362680+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-gpt-oss-20b-v02-v03-proof-control-20261125-full-V03",
+      "http_status": 201,
+      "finished_at": "2026-11-25T06:41:36.848055+00:00",
+      "run_id": "00c45822-3b7f-401f-9c2a-56459c4cf257"
+    }
+  ],
+  "stopped": true,
+  "stop_reason": "Batch completed"
+}

@@ -1,0 +1,35 @@
+{
+  "plan": [
+    "V05"
+  ],
+  "requested_model": "qwen/qwen3.8-27b",
+  "reasoning_effort": "none",
+  "provider_attempts": 1,
+  "retries": 0,
+  "approved_budget_usd": 0,
+  "account_tier": "Free as confirmed in GroqCloud Console",
+  "spacings_seconds": [],
+  "technical_passes": 0,
+  "quality_passes": 0,
+  "known_reported_tokens": 0,
+  "unknown_usage_conditions": [
+    "V05"
+  ],
+  "single_application_instance": true,
+  "series_pass": false,
+  "stop_reason": "Stop on status 403 / failed after V05",
+  "cases": [
+    {
+      "case_id": "V05",
+      "technical_pass": false,
+      "provider_http_status": 403,
+      "network_error_type": null,
+      "provider_error_code": null,
+      "provider_error_stage": null,
+      "error_code": "PROVIDER_ACCESS_DENIED",
+      "quality_pass": false,
+      "reference_human_validated": false,
+      "usage": null
+    }
+  ]
+}

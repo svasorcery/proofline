@@ -1,0 +1,9 @@
+{
+  "new_inference_calls": 0,
+  "original_archive_files": {
+    "evals/live/v1-groq-2026-11-16": 26,
+    "evals/live/v2-groq-v32-2026-11-16": 9
+  },
+  "archive_bytes_unchanged": true,
+  "container_or_database_mutations": false
+}

@@ -1,0 +1,31 @@
+{
+  "plan": "Free",
+  "project": "Default Project",
+  "model": "openai/gpt-oss-20b",
+  "custom_project_limits": false,
+  "observed_at": "2026-11-25T12:51:30.614579+00:00",
+  "configured_limits": {
+    "requests_per_minute": 30,
+    "requests_per_day": 1000,
+    "tokens_per_minute": 8000,
+    "tokens_per_day": 200000
+  },
+  "configured_maximum_completion_tokens": 1000,
+  "planned_maximum_attempts": 1,
+  "daily_chart_utc": {
+    "approximate_requests": 6,
+    "approximate_tokens": 21736,
+    "conservative_token_upper_bound": 60464,
+    "data_delay_minutes": 15,
+    "basis": "The signed-in chart confirmed a $0 Free plan and 9,272 visible GPT-OSS tokens. Add the four v48 reservations, 12,464 reported tokens and up to 8,000 unknown tokens for v48 V04, keeping the previous delay and shared-use buffer."
+  },
+  "evidence": "The same signed-in Free-plan observation supplemented by matching later rate headers from v48 V04.",
+  "sources": [
+    "https://console.groq.com/settings/billing/plans",
+    "https://console.groq.com/settings/limits",
+    "https://console.groq.com/settings/project/limits",
+    "https://console.groq.com/settings/organization/usage?tab=activity"
+  ],
+  "usage_accounted_at": "2026-11-25T13:36:13.142642+00:00",
+  "last_matching_provider_limit_headers_at": "2026-11-25T13:01:53.325978+00:00"
+}

@@ -1,0 +1,132 @@
+{
+  "reviewer": "assistant",
+  "independent_human_labels": false,
+  "condition": "full-V04",
+  "provider_http_status": 200,
+  "schema_accepted": true,
+  "technical_pass": true,
+  "error": null,
+  "operator_decision_created": false,
+  "targeted_pass": true,
+  "complete_quality_pass": true,
+  "sending": {
+    "pass": true,
+    "evidence_checks": {
+      "send_header": true,
+      "reply_text": true
+    },
+    "actual": {
+      "event_type": "customer_replied",
+      "time": {
+        "value": "2026-10-08T12:25:00+03:00",
+        "role": "sent"
+      },
+      "evidence": [
+        {
+          "source_id": "f71822cddbf648f2",
+          "fragments": [
+            "Заголовок исходного письма Date: 2026-10-08T12:25:00+03:00",
+            "«Если там тихий номер с окнами во двор, согласен на соседний корпус. Если окна на улицу, этот вариант мне не подходит. Подтвердите, пожалуйста, куда выходят окна.»"
+          ]
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "pass": true,
+    "evidence_checks": {
+      "receipt_record": true
+    },
+    "actual": {
+      "event_type": "customer_message_received",
+      "time": {
+        "value": "2026-10-08T12:27:00+03:00",
+        "role": "received"
+      },
+      "evidence": [
+        {
+          "source_id": "f71822cddbf648f2",
+          "fragments": [
+            "2026-10-08T12:27:00+03:00 | inbound-message | клиент → отель"
+          ]
+        }
+      ]
+    }
+  },
+  "offer": {
+    "pass": true,
+    "evidence_checks": {
+      "send_time": true,
+      "offer_text": true
+    },
+    "actual": {
+      "event_type": "alternative_offered",
+      "time": {
+        "value": "2026-10-08T12:10:00+03:00",
+        "role": "sent"
+      },
+      "evidence": [
+        {
+          "source_id": "7c4b78e8ce5a4af4",
+          "fragments": [
+            "Отправлено: 2026-10-08T12:10:00+03:00",
+            "Вместо первоначального номера можем предложить номер той же категории в соседнем корпусе. Подойдёт ли такой вариант?"
+          ]
+        }
+      ]
+    }
+  },
+  "chronology": {
+    "pass": true,
+    "events": [
+      [
+        "alternative_offered",
+        "sent",
+        "2026-10-08T12:10:00+03:00"
+      ],
+      [
+        "customer_replied",
+        "sent",
+        "2026-10-08T12:25:00+03:00"
+      ],
+      [
+        "customer_message_received",
+        "received",
+        "2026-10-08T12:27:00+03:00"
+      ]
+    ]
+  },
+  "fact": {
+    "pass": true,
+    "values": {
+      "alternative_acceptance": "conditional"
+    }
+  },
+  "confirmations": {
+    "pass": true,
+    "actual": {
+      "action": "ask_user",
+      "locator": null,
+      "requirements": [
+        "quiet_room",
+        "courtyard_windows"
+      ]
+    },
+    "expected_requirements": [
+      "courtyard_windows",
+      "quiet_room"
+    ]
+  },
+  "literal_fragments": {
+    "valid": 8,
+    "total": 8
+  },
+  "nonliteral_fragments": [],
+  "runtime_status": "needs_operator_review",
+  "blocking_issues": [],
+  "selection": {
+    "offered_ids": 10,
+    "selected_ids": 8,
+    "raw_and_card_saved_separately": true
+  }
+}

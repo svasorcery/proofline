@@ -1,0 +1,3 @@
+# Groq Free GPT-OSS 20B control and acceptance
+
+The V01 control runs once on a closed stand. A passing technical and semantic control opens a fresh stand for one sequential V01–V06 batch. The request guard compares each request with the matching sealed v38 Qwen request. The approved changes are the model and reasoning effort only. Chat Completions uses strict structured outputs with the same input, schema, instruction, 1,000 completion-token ceiling, citation decoding and frozen rubric. Budget $0, up to one control plus six full-batch requests, zero retries. All subsequent request starts are spaced at least 65 seconds apart. The application stores original responses and cards separately, with no automatic operator decision.

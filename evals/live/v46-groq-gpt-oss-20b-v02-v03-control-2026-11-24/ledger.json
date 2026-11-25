@@ -1,0 +1,36 @@
+{
+  "max_requests": 2,
+  "approved_budget_usd": 0,
+  "attempts": [
+    {
+      "condition": "full-V02",
+      "case_id": "V02",
+      "started_at": "2026-11-24T20:27:34.303562+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-gpt-oss-20b-v02-v03-control-20261124-full-V02",
+      "http_status": 201,
+      "finished_at": "2026-11-24T20:27:37.886244+00:00",
+      "run_id": "23121068-8012-44e3-85fa-1bf8a74ddd84"
+    },
+    {
+      "condition": "full-V03",
+      "case_id": "V03",
+      "started_at": "2026-11-24T20:28:41.079946+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "failed",
+      "idempotency_key": "groq-gpt-oss-20b-v02-v03-control-20261124-full-V03",
+      "http_status": 201,
+      "finished_at": "2026-11-24T20:28:43.087738+00:00",
+      "run_id": "337a8512-c0f2-4bc4-89c3-dc7bcc4b3dea"
+    }
+  ],
+  "stopped": true,
+  "stop_reason": "Stop on status 400 / failed after V03"
+}

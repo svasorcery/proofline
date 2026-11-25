@@ -1,0 +1,81 @@
+{
+  "id": "V06",
+  "title": "\u0421\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u0435 \u043f\u043e\u0441\u0442\u0430\u0432\u0449\u0438\u043a\u0430 \u0438 \u0437\u0430\u043f\u0438\u0441\u044c \u043f\u043e \u043a\u0430\u0440\u0442\u0435",
+  "version": 1,
+  "content_revision": 1,
+  "current_proposal_revision_id": null,
+  "status": "unanalysed",
+  "analysis_running": false,
+  "created_at": "2026-11-25T17:02:45.239232Z",
+  "updated_at": "2026-11-25T17:02:45.239232Z",
+  "user_text": "\u041f\u0440\u043e\u0432\u0435\u0440\u044c\u0442\u0435, \u0447\u0442\u043e \u043f\u0440\u043e\u0438\u0437\u043e\u0448\u043b\u043e \u0441 \u0431\u0440\u043e\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435\u043c \u0438 \u043a\u0430\u0440\u0442\u043e\u0447\u043d\u043e\u0439 \u043e\u043f\u0435\u0440\u0430\u0446\u0438\u0435\u0439, \u0447\u0442\u043e\u0431\u044b \u0441\u043e\u0431\u0440\u0430\u0442\u044c \u043e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u0435.",
+  "requested_fact_keys": [
+    "payment_outcome",
+    "cancellation_status"
+  ],
+  "money": {
+    "amount_minor": 20300,
+    "currency": "USD",
+    "scale": 2
+  },
+  "context": {},
+  "sources": [
+    {
+      "case_id": "V06",
+      "source_id": "845cff973bd4435d",
+      "kind": "document",
+      "locator": "791c55aab97a494d",
+      "title": "845cff973bd4435d",
+      "trust": "primary",
+      "position": 0,
+      "included": true,
+      "current_version_id": "260e5831-9f93-45a2-9494-924df73d33d5",
+      "versions": [
+        {
+          "id": "260e5831-9f93-45a2-9494-924df73d33d5",
+          "sequence": 1,
+          "text_sha256": "3f56b9f4656bf6ed6581fc39a676cd1f474ab3a847da28e66de6de42c097ef35",
+          "created_at": "2026-11-25T17:02:45.239232Z"
+        }
+      ]
+    },
+    {
+      "case_id": "V06",
+      "source_id": "8ff53f4a97af49e0",
+      "kind": "document",
+      "locator": "bcea175bd8b54f99",
+      "title": "\u0421\u043f\u0440\u0430\u0432\u043e\u0447\u043d\u0430\u044f \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0430",
+      "trust": "context",
+      "position": 1,
+      "included": true,
+      "current_version_id": "1dcf6fad-95e2-4466-afde-7d13721be740",
+      "versions": [
+        {
+          "id": "1dcf6fad-95e2-4466-afde-7d13721be740",
+          "sequence": 1,
+          "text_sha256": "d9d33cf58a01f61152b677dff4a4155bef673e1174b5a5032cbefd1bc53dc2b3",
+          "created_at": "2026-11-25T17:02:45.239232Z"
+        }
+      ]
+    },
+    {
+      "case_id": "V06",
+      "source_id": "5f5576cbae5e40c6",
+      "kind": "payment_ledger",
+      "locator": "8a716dd4c8a2434d",
+      "title": "\u0417\u0430\u043f\u0438\u0441\u044c \u043e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u044f",
+      "trust": "primary",
+      "position": 2,
+      "included": true,
+      "current_version_id": "51284193-4f67-4087-899b-5cc2acd62250",
+      "versions": [
+        {
+          "id": "51284193-4f67-4087-899b-5cc2acd62250",
+          "sequence": 1,
+          "text_sha256": "e607505ec1f0e14c5f7a25815ac58552efd880a7159a305062cf3b517726691c",
+          "created_at": "2026-11-25T17:02:45.239232Z"
+        }
+      ]
+    }
+  ]
+}

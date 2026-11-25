@@ -1,0 +1,15 @@
+{
+  "app_container_removed": true,
+  "runtime_key_injected_via_stdin_only": true,
+  "remaining_containers": [
+    "proofline-live-stage4-gpt-oss-20b-source-claims-20261125-db-1"
+  ],
+  "project": "proofline-live-stage4-gpt-oss-20b-source-claims-20261125",
+  "live_process_stopped": true,
+  "database_counts": {
+    "analysis_runs": 6,
+    "proposal_revisions": 6,
+    "review_decisions": 0
+  },
+  "database_stopped": true
+}

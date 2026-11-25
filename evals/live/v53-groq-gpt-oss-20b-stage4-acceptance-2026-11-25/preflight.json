@@ -1,0 +1,708 @@
+{
+  "cases": {
+    "V01": {
+      "condition": "ablation-V01",
+      "case_version": 2,
+      "input_digest": "a294763e6ca68dbf4ffb48adf430843c1bbb7427f80fcef9e6b09e3a35f41fbd",
+      "generation_profile": {
+        "mode": "live",
+        "provider": "groq",
+        "api": "chat_completions",
+        "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+        "request_profile": "groq-chat_completions-v33-citation-ids-test-v1-case-evidence-v1",
+        "new_model_call": true,
+        "usage_origin": "provider",
+        "model": "openai/gpt-oss-20b",
+        "requested_model": "openai/gpt-oss-20b",
+        "prompt_version": "proofline-responses-prompt-v3-candidate-1-choices-v1-confirmations-example-v1-citation-ids-v1-lookup-example-receipt-v1-reviewed-offer-v1",
+        "prompt_sha256": "c92b771a6c5fb121adf828c796018e5b52d51f46e7c82c93f6e90398615336b6",
+        "policy_version": "proofline-policy-v3.3-candidate-1",
+        "policy_sha256": "2d9b47d44aa0172a8c75ef6a5283009045695c088a174256ae9f4408abb691d3",
+        "schema_version": "assembly-output-v1",
+        "schema_sha256": "58ad7ac7ab62ee3b1cc4e82f66cf1ebe8d7c214b0f41cc7c8b0c560732db1812",
+        "request_sha256": "91df425e1d5f8f623268ae53c3e462e903497c85a93a6e58d39665844e0ff35f",
+        "max_output_tokens": 1000,
+        "timeout_seconds": 90,
+        "max_retries": 0,
+        "provider_request_id": null,
+        "provider_response_id": null,
+        "monetary_cost": null,
+        "pricing": null,
+        "reasoning_effort": "low",
+        "reviewed_timeline_events": 1,
+        "provider_schema_version": "assembly-citation-ids-v1",
+        "assembly_schema_sha256": "9d031d5c4bb85493f85fc50e97990dc7b0a34e6853154aac59636b9275b54eaa",
+        "provider_lookup_source_ids": [
+          "f9a88d5b726a4d4b"
+        ],
+        "provider_covered_requirements": [],
+        "provider_citation_catalogue_sha256": "ef45ae62704faed69132e3260445f8be4f335ccd9340a3a3e54663f3cbb4f17d",
+        "provider_citation_count": 9,
+        "canonical_timeline_order": "utc-v1",
+        "reviewed_citation_rules_v1": {
+          "unread_reply": {
+            "locator": "1618ae5e5b894145",
+            "archive_citation": "q13213244b18a2616",
+            "receipt_citation": "q6318e1ea0277b184",
+            "received_at": "2026-08-14T09:36:00+03:00",
+            "fill_missing_follow_up": true
+          },
+          "offer_quote": {
+            "sent_at": "2026-08-14T09:10:00+03:00",
+            "sent_citation": "q9f582ff912d00c41",
+            "offer_citation": "qd16d3f37917ed3eb"
+          }
+        }
+      },
+      "requested_facts": [
+        "alternative_acceptance"
+      ],
+      "request_utf8_bytes": 18786,
+      "app_owned_event_types": [],
+      "reviewed_rules_active": true
+    },
+    "V02": {
+      "condition": "full-V02",
+      "case_version": 1,
+      "input_digest": "1c9b1c8d94b2a5db05678f1bb6cf3425e43f1c959ca2fd0d3596283236720dc9",
+      "generation_profile": {
+        "mode": "live",
+        "provider": "groq",
+        "api": "chat_completions",
+        "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+        "request_profile": "groq-chat_completions-v33-citation-ids-test-v1-case-evidence-v1",
+        "new_model_call": true,
+        "usage_origin": "provider",
+        "model": "openai/gpt-oss-20b",
+        "requested_model": "openai/gpt-oss-20b",
+        "prompt_version": "proofline-responses-prompt-v3-candidate-1-choices-v1-confirmations-example-v1-citation-ids-v1-timeline-example-v1-support-form-timing-v2-reviewed-evidence-v1",
+        "prompt_sha256": "c76a98eb5d08fb19a9dcd72f35051f2f5d3a190a9566044ca7ade7b389c5e74b",
+        "policy_version": "proofline-policy-v3.3-candidate-1",
+        "policy_sha256": "2d9b47d44aa0172a8c75ef6a5283009045695c088a174256ae9f4408abb691d3",
+        "schema_version": "assembly-output-v1",
+        "schema_sha256": "7b1791b332afcfa0230145b8dd33b527029b33644cf9e45cd667d53808feab17",
+        "request_sha256": "c1617ac1a5f2c49395eb8ed2017245663e321097d375a54a12ff365d5a745efe",
+        "max_output_tokens": 1000,
+        "timeout_seconds": 90,
+        "max_retries": 0,
+        "provider_request_id": null,
+        "provider_response_id": null,
+        "monetary_cost": null,
+        "pricing": null,
+        "reasoning_effort": "low",
+        "reviewed_timeline_events": 3,
+        "provider_schema_version": "assembly-citation-ids-v1",
+        "assembly_schema_sha256": "9d031d5c4bb85493f85fc50e97990dc7b0a34e6853154aac59636b9275b54eaa",
+        "provider_lookup_source_ids": [],
+        "provider_covered_requirements": [],
+        "provider_citation_catalogue_sha256": "6ccce59a2528f389224e86ddca83f51bceacf71f6f9e22b7537b2770f071f282",
+        "provider_citation_count": 10,
+        "canonical_timeline_order": "utc-v1",
+        "reviewed_citation_rules_v1": {
+          "source_events": [
+            {
+              "event_type": "supplier_cancelled",
+              "time": {
+                "role": "occurred",
+                "value": "2026-09-18T10:20:00+03:00"
+              },
+              "evidence": [
+                "q2a7c63e76c2f8d84"
+              ]
+            },
+            {
+              "event_type": "customer_replied",
+              "time": {
+                "role": "sent",
+                "value": "2026-09-18T12:09:55+03:00"
+              },
+              "evidence": [
+                "qdb51cd176460e963"
+              ]
+            },
+            {
+              "event_type": "customer_message_received",
+              "time": {
+                "role": "received",
+                "value": "2026-09-18T12:10:00+03:00"
+              },
+              "evidence": [
+                "q5a61cea6811dabf1"
+              ]
+            }
+          ]
+        }
+      },
+      "requested_facts": [
+        "withdrawal_timing",
+        "cancellation_status"
+      ],
+      "request_utf8_bytes": 15301,
+      "app_owned_event_types": [
+        "customer_message_received",
+        "customer_replied",
+        "supplier_cancelled"
+      ],
+      "reviewed_rules_active": true
+    },
+    "V03": {
+      "condition": "full-V03",
+      "case_version": 1,
+      "input_digest": "44718f6aa97106e0e3da6ba2e728ea667a640f953b5306d993e24331eb9cba72",
+      "generation_profile": {
+        "mode": "live",
+        "provider": "groq",
+        "api": "chat_completions",
+        "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+        "request_profile": "groq-chat_completions-v33-citation-ids-test-v1-case-evidence-v1",
+        "new_model_call": true,
+        "usage_origin": "provider",
+        "model": "openai/gpt-oss-20b",
+        "requested_model": "openai/gpt-oss-20b",
+        "prompt_version": "proofline-responses-prompt-v3-candidate-1-choices-v1-confirmations-example-v1-citation-ids-v1-refund-evidence-v3-reviewed-evidence-v1",
+        "prompt_sha256": "80b998e658242269055d9feb6285d4a6db797f71220630881ecfac8286728429",
+        "policy_version": "proofline-policy-v3.3-candidate-1",
+        "policy_sha256": "2d9b47d44aa0172a8c75ef6a5283009045695c088a174256ae9f4408abb691d3",
+        "schema_version": "assembly-output-v1",
+        "schema_sha256": "5c168979225850c5ee42d9c5ee91e375408b95291102a4c6c33d3501240a2ff7",
+        "request_sha256": "16c3b594cf29b3cf23f4936b5b5ca46456b7b7af402c6924688b11bb50cd00dc",
+        "max_output_tokens": 1000,
+        "timeout_seconds": 90,
+        "max_retries": 0,
+        "provider_request_id": null,
+        "provider_response_id": null,
+        "monetary_cost": null,
+        "pricing": null,
+        "reasoning_effort": "low",
+        "provider_schema_version": "assembly-citation-ids-v1",
+        "assembly_schema_sha256": "9d031d5c4bb85493f85fc50e97990dc7b0a34e6853154aac59636b9275b54eaa",
+        "provider_lookup_source_ids": [],
+        "provider_covered_requirements": [],
+        "provider_citation_catalogue_sha256": "de2cdcf52f881d118a1739292439e3e36bba443fd0d57444b6ba926dea39d564",
+        "provider_citation_count": 14,
+        "canonical_timeline_order": "utc-v1",
+        "reviewed_citation_rules_v1": {
+          "refund_trace": {
+            "fact_evidence": [
+              "qde1bfb4947412c32",
+              "q868425d93bf771ad"
+            ],
+            "event_evidence": [
+              "q002607b0f87fe500",
+              "q868425d93bf771ad",
+              "q8a9df0d0eb7d50c7"
+            ],
+            "posting_time": "2026-07-06T17:42:00+03:00",
+            "trace": "q8a9df0d0eb7d50c7"
+          },
+          "source_events": [
+            {
+              "event_type": "payment_captured",
+              "time": {
+                "role": "occurred",
+                "value": "2026-07-03T14:02:00+03:00"
+              },
+              "evidence": [
+                "q6d7ce0b42b771e71"
+              ]
+            },
+            {
+              "event_type": "refund_initiated",
+              "time": {
+                "role": "occurred",
+                "value": "2026-07-05T10:15:00+03:00"
+              },
+              "evidence": [
+                "qde1bfb4947412c32"
+              ]
+            },
+            {
+              "event_type": "refund_settled",
+              "time": {
+                "role": "occurred",
+                "value": "2026-07-06T17:42:00+03:00"
+              },
+              "evidence": [
+                "q002607b0f87fe500",
+                "q868425d93bf771ad",
+                "q8a9df0d0eb7d50c7"
+              ]
+            }
+          ]
+        }
+      },
+      "requested_facts": [
+        "payment_outcome"
+      ],
+      "request_utf8_bytes": 15764,
+      "app_owned_event_types": [
+        "payment_captured",
+        "refund_initiated",
+        "refund_settled"
+      ],
+      "reviewed_rules_active": true
+    },
+    "V04": {
+      "condition": "full-V04",
+      "case_version": 1,
+      "input_digest": "4efb4bf589c85f0469c0088d4346bdf816c30c6e8c0c9cc015b8376638d8b190",
+      "generation_profile": {
+        "mode": "live",
+        "provider": "groq",
+        "api": "chat_completions",
+        "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+        "request_profile": "groq-chat_completions-v33-citation-ids-test-v1-case-evidence-v1",
+        "new_model_call": true,
+        "usage_origin": "provider",
+        "model": "openai/gpt-oss-20b",
+        "requested_model": "openai/gpt-oss-20b",
+        "prompt_version": "proofline-responses-prompt-v3-candidate-1-choices-v1-confirmations-example-v1-citation-ids-v1-compact-reply-v1",
+        "prompt_sha256": "d3d1c71898a4f2506ba91d2bfe9c51f55b2fbf3b27084ea5291d10eb2fe66f30",
+        "policy_version": "proofline-policy-v3.3-candidate-1",
+        "policy_sha256": "2d9b47d44aa0172a8c75ef6a5283009045695c088a174256ae9f4408abb691d3",
+        "schema_version": "assembly-output-v1",
+        "schema_sha256": "fe224bd1ef681d708e300a85b7d2a14e93e65c3575eb1f382f22194803d8f046",
+        "request_sha256": "9177f058d5cd0fbe18056d2953244b7161510e4463c94ba1a7683f9990f016da",
+        "max_output_tokens": 1000,
+        "timeout_seconds": 90,
+        "max_retries": 0,
+        "provider_request_id": null,
+        "provider_response_id": null,
+        "monetary_cost": null,
+        "pricing": null,
+        "reasoning_effort": "low",
+        "provider_schema_version": "assembly-citation-ids-compact-v1",
+        "assembly_schema_sha256": "9d031d5c4bb85493f85fc50e97990dc7b0a34e6853154aac59636b9275b54eaa",
+        "provider_lookup_source_ids": [],
+        "provider_covered_requirements": [
+          "original_acceptance_reply"
+        ],
+        "provider_reply_evidence": {
+          "source_id": "f71822cddbf648f2",
+          "source_version_id": "9805abfa-1b0c-48a6-b105-1ed1aca0b415",
+          "text_sha256": "5e336b6a7929f0833efb146f9c2aab434a870f01be9eeb22261199363b8c8e4a"
+        },
+        "provider_citation_catalogue_sha256": "d7e8b54d9489540dce458bdecae066b3ca9d84bce9b56ff160adb675373a59d5",
+        "provider_citation_count": 10,
+        "canonical_timeline_order": "utc-v1",
+        "reviewed_citation_rules_v1": {
+          "source_events": [
+            {
+              "event_type": "alternative_offered",
+              "time": {
+                "role": "sent",
+                "value": "2026-10-08T12:10:00+03:00"
+              },
+              "evidence": [
+                "q6dee66eacb59c58a",
+                "q4eb34d37d54419bf"
+              ]
+            },
+            {
+              "event_type": "customer_replied",
+              "time": {
+                "role": "sent",
+                "value": "2026-10-08T12:25:00+03:00"
+              },
+              "evidence": [
+                "q98a7f8d92d836c4e",
+                "q51eab61042266285"
+              ]
+            },
+            {
+              "event_type": "customer_message_received",
+              "time": {
+                "role": "received",
+                "value": "2026-10-08T12:27:00+03:00"
+              },
+              "evidence": [
+                "qaeb942da264fe255"
+              ]
+            }
+          ],
+          "compact_case_id": "V04"
+        }
+      },
+      "requested_facts": [
+        "alternative_acceptance"
+      ],
+      "request_utf8_bytes": 11967,
+      "app_owned_event_types": [
+        "alternative_offered",
+        "customer_message_received",
+        "customer_replied"
+      ],
+      "reviewed_rules_active": true
+    },
+    "V05": {
+      "condition": "full-V05",
+      "case_version": 1,
+      "input_digest": "c2643ef37244305d3004f85c678633bfa55147d7afb4087180fda30dc0a242d2",
+      "generation_profile": {
+        "mode": "live",
+        "provider": "groq",
+        "api": "chat_completions",
+        "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+        "request_profile": "groq-chat_completions-v33-citation-ids-test-v1-case-evidence-v1",
+        "new_model_call": true,
+        "usage_origin": "provider",
+        "model": "openai/gpt-oss-20b",
+        "requested_model": "openai/gpt-oss-20b",
+        "prompt_version": "proofline-responses-prompt-v3-candidate-1-choices-v1-confirmations-example-v1-citation-ids-v1-timeline-example-v1-cancellation-notice-v2",
+        "prompt_sha256": "643fc1139781ac791d06171ff0d607d8430e566413136846e6f8d742581b99aa",
+        "policy_version": "proofline-policy-v3.3-candidate-1",
+        "policy_sha256": "2d9b47d44aa0172a8c75ef6a5283009045695c088a174256ae9f4408abb691d3",
+        "schema_version": "assembly-output-v1",
+        "schema_sha256": "7a9b419eaeb3ce2b55df06b11090210f20f4d57bb76757f6e85c618fdd2a7c61",
+        "request_sha256": "c9bf555ea268fe41f1135017d84e34032c78ee7fe392da2637cf15a0b58fe989",
+        "max_output_tokens": 1000,
+        "timeout_seconds": 90,
+        "max_retries": 0,
+        "provider_request_id": null,
+        "provider_response_id": null,
+        "monetary_cost": null,
+        "pricing": null,
+        "reasoning_effort": "low",
+        "reviewed_timeline_events": 2,
+        "provider_schema_version": "assembly-citation-ids-v1",
+        "assembly_schema_sha256": "9d031d5c4bb85493f85fc50e97990dc7b0a34e6853154aac59636b9275b54eaa",
+        "provider_lookup_source_ids": [],
+        "provider_covered_requirements": [],
+        "provider_citation_catalogue_sha256": "a5a570b6376e6b382a2bc0617e8a948ced56d9947eb156b38d1be1c7e4bc9a3c",
+        "provider_citation_count": 14,
+        "canonical_timeline_order": "utc-v1",
+        "reviewed_citation_rules_v1": {
+          "event_roles": [
+            {
+              "from_type": "customer_message_received",
+              "to_type": "customer_withdrawal",
+              "role": "received",
+              "time": "2026-10-04T09:30:00+03:00",
+              "evidence": [
+                "qaf445027f75a9736",
+                "q7ee132193445d75c"
+              ],
+              "from_fact": {
+                "key": "withdrawal_timing",
+                "value": "before_supplier_cancel",
+                "citation": "q7ee132193445d75c"
+              }
+            },
+            {
+              "from_type": "customer_withdrawal",
+              "to_type": "customer_replied",
+              "role": "sent",
+              "time": "2026-10-04T09:26:00+03:00",
+              "evidence": [
+                "q42bcfc7609b25b40",
+                "q7ee132193445d75c"
+              ]
+            }
+          ]
+        }
+      },
+      "requested_facts": [
+        "withdrawal_timing",
+        "cancellation_status"
+      ],
+      "request_utf8_bytes": 19656,
+      "app_owned_event_types": [],
+      "reviewed_rules_active": true
+    },
+    "V06": {
+      "condition": "full-V06",
+      "case_version": 1,
+      "input_digest": "ee8e22c5e98f04177c3051b3fffe0dcfa5fdb99fa8f144a7ad533852d202bc9e",
+      "generation_profile": {
+        "mode": "live",
+        "provider": "groq",
+        "api": "chat_completions",
+        "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+        "request_profile": "groq-chat_completions-v33-citation-ids-test-v1-case-evidence-v1",
+        "new_model_call": true,
+        "usage_origin": "provider",
+        "model": "openai/gpt-oss-20b",
+        "requested_model": "openai/gpt-oss-20b",
+        "prompt_version": "proofline-responses-prompt-v3-candidate-1-choices-v1-confirmations-example-v1-citation-ids-v1-timeline-example-v1-bank-operations-v1",
+        "prompt_sha256": "52f6f6cd7bd11881b365e33fdb1ff826cffa644a4d24aec91d601c314a5160f1",
+        "policy_version": "proofline-policy-v3.3-candidate-1",
+        "policy_sha256": "2d9b47d44aa0172a8c75ef6a5283009045695c088a174256ae9f4408abb691d3",
+        "schema_version": "assembly-output-v1",
+        "schema_sha256": "421fb330f28b56f393222549aa222f141a2796ab5dbf43849c82635707ca677c",
+        "request_sha256": "c8f93e44e14bdf5beccb59313ec7d506af20a59fb21ee23dc73116ef990bcad3",
+        "max_output_tokens": 1000,
+        "timeout_seconds": 90,
+        "max_retries": 0,
+        "provider_request_id": null,
+        "provider_response_id": null,
+        "monetary_cost": null,
+        "pricing": null,
+        "reasoning_effort": "low",
+        "reviewed_timeline_events": 2,
+        "provider_schema_version": "assembly-citation-ids-v1",
+        "assembly_schema_sha256": "9d031d5c4bb85493f85fc50e97990dc7b0a34e6853154aac59636b9275b54eaa",
+        "provider_lookup_source_ids": [],
+        "provider_covered_requirements": [],
+        "provider_citation_catalogue_sha256": "0a3d6d14089026cfba049b8773405e31b3cd6981076f50a93d4634383fea1914",
+        "provider_citation_count": 7,
+        "canonical_timeline_order": "utc-v1",
+        "reviewed_citation_rules_v1": {
+          "authorization_release": {
+            "release": {
+              "event_type": "authorization_released",
+              "time": {
+                "role": "occurred",
+                "value": "2026-06-22T16:43:00+03:00"
+              },
+              "evidence": [
+                "q7f81fbafde2e517b"
+              ]
+            },
+            "cancellation": {
+              "event_type": "supplier_cancelled",
+              "time": {
+                "role": "occurred",
+                "value": "2026-06-22T16:40:00+03:00"
+              },
+              "evidence": [
+                "q2f436814cbc567d2"
+              ]
+            },
+            "no_charge_citation": "q9015e55a026ea800"
+          }
+        }
+      },
+      "requested_facts": [
+        "payment_outcome",
+        "cancellation_status"
+      ],
+      "request_utf8_bytes": 16382,
+      "app_owned_event_types": [],
+      "reviewed_rules_active": true
+    }
+  },
+  "bound_settings": {
+    "llm_provider": "groq",
+    "llm_model": "openai/gpt-oss-20b",
+    "groq_prompt_profile": "v3.3-citation-ids-test",
+    "groq_reasoning_effort": "low",
+    "model_max_output_tokens": 1000,
+    "model_timeout_seconds": 90,
+    "groq_test_lookup_sources": {
+      "V01": [
+        "f9a88d5b726a4d4b"
+      ]
+    },
+    "groq_test_required_events": {
+      "V01": [
+        {
+          "event_type": "customer_message_received",
+          "time": {
+            "value": "2026-08-14T09:36:00+03:00",
+            "role": "received"
+          },
+          "source_id": "b8821b7c6a2d432a",
+          "source_version_id": "951b5d73-cc1a-43fb-84ce-e84e5fbc2117",
+          "text_sha256": "42fc452f909ec003ff3b683bd732165dda66935b4cad292c48179451e608371f",
+          "fragment": "2026-08-14T09:36:00+03:00 \u2014 \u043f\u043e\u0447\u0442\u043e\u0432\u044b\u0439 \u0448\u043b\u044e\u0437 \u043f\u0440\u0438\u043d\u044f\u043b \u043e\u0442\u0432\u0435\u0442 \u043a\u043b\u0438\u0435\u043d\u0442\u0430 \u0432 \u044d\u0442\u043e\u0439 \u043f\u0435\u0440\u0435\u043f\u0438\u0441\u043a\u0435."
+        }
+      ],
+      "V02": [
+        {
+          "event_type": "supplier_cancelled",
+          "time": {
+            "value": "2026-09-18T10:20:00+03:00",
+            "role": "occurred"
+          },
+          "source_id": "9edd7227853c42a4",
+          "source_version_id": "dde6855b-053a-4833-a77e-449f3c022e54",
+          "text_sha256": "44bbb126e530eaecd664d84ef80596cffeb9432ca72ea4cc8bff6a72e25aa5e7",
+          "fragment": "2026-09-18T10:20:00+03:00 \u2014 \u043e\u043f\u0435\u0440\u0430\u0446\u0438\u044f \u043f\u043e\u0441\u0442\u0430\u0432\u0449\u0438\u043a\u0430: \u0431\u0440\u043e\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u0441\u043d\u044f\u0442\u043e \u0441 \u0438\u0441\u043f\u043e\u043b\u043d\u0435\u043d\u0438\u044f \u0438\u0437-\u0437\u0430 \u043e\u0442\u043c\u0435\u043d\u044b \u0440\u0435\u0439\u0441\u0430."
+        },
+        {
+          "event_type": "customer_replied",
+          "time": {
+            "value": "2026-09-18T12:09:55+03:00",
+            "role": "sent"
+          },
+          "source_id": "5c3fe2fc12a3430e",
+          "source_version_id": "89bff077-1203-4e8b-817e-f2a54c9bfb8d",
+          "text_sha256": "59c7bc6d334c6353e2d457d8e7d1e41967d8660eca39f2aeab596730f2b2abe3",
+          "fragment": "\u041e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u043e \u043a\u043b\u0438\u0435\u043d\u0442\u043e\u043c \u0447\u0435\u0440\u0435\u0437 \u0444\u043e\u0440\u043c\u0443: 2026-09-18T12:09:55+03:00"
+        },
+        {
+          "event_type": "customer_message_received",
+          "time": {
+            "value": "2026-09-18T12:10:00+03:00",
+            "role": "received"
+          },
+          "source_id": "5c3fe2fc12a3430e",
+          "source_version_id": "89bff077-1203-4e8b-817e-f2a54c9bfb8d",
+          "text_sha256": "59c7bc6d334c6353e2d457d8e7d1e41967d8660eca39f2aeab596730f2b2abe3",
+          "fragment": "\u041f\u043e\u043b\u0443\u0447\u0435\u043d\u043e \u0441\u043b\u0443\u0436\u0431\u043e\u0439 \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u043a\u0438: 2026-09-18T12:10:00+03:00"
+        }
+      ],
+      "V05": [
+        {
+          "event_type": "customer_withdrawal",
+          "time": {
+            "value": "2026-10-04T09:30:00+03:00",
+            "role": "received"
+          },
+          "source_id": "b493b77f4c5e4dde",
+          "source_version_id": "f059472b-dfcd-4b8c-8851-080893b65d26",
+          "text_sha256": "7fbeeb9eb3388749f480da9b5ee9a3f863d2632619916cd4771b99df78f20629",
+          "fragment": "Received by supplier: 2026-10-04T09:30:00+03:00\n\u042f \u043e\u0442\u043a\u0430\u0437\u044b\u0432\u0430\u044e\u0441\u044c \u043e\u0442 \u044d\u0442\u043e\u0433\u043e \u0431\u0440\u043e\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f. \u041f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430, \u043e\u0442\u043c\u0435\u043d\u0438\u0442\u0435 \u0435\u0433\u043e; \u0432\u0430\u0440\u0438\u0430\u043d\u0442\u044b \u043f\u0435\u0440\u0435\u043d\u043e\u0441\u0430 \u043d\u0435 \u0440\u0430\u0441\u0441\u043c\u0430\u0442\u0440\u0438\u0432\u0430\u044e."
+        },
+        {
+          "event_type": "supplier_cancelled",
+          "time": {
+            "value": "2026-10-04T10:00:00+03:00",
+            "role": "occurred"
+          },
+          "source_id": "abd412ba34ae4156",
+          "source_version_id": "67a778f1-62c4-4d05-98dc-9e321110ecb8",
+          "text_sha256": "0a378cc84cadeb94befc36c60edbfba4c23cf2eafb6e0eb8f501f2a6a1e7de87",
+          "fragment": "2026-10-04T10:00:00+03:00 | \u043e\u043f\u0435\u0440\u0430\u0446\u0438\u044f \u043f\u043e\u0441\u0442\u0430\u0432\u0449\u0438\u043a\u0430 | \u0431\u0440\u043e\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u0441\u043d\u044f\u0442\u043e \u0441 \u0438\u0441\u043f\u043e\u043b\u043d\u0435\u043d\u0438\u044f \u0438\u0437-\u0437\u0430 \u043e\u0442\u043c\u0435\u043d\u044b \u0440\u0435\u0439\u0441\u0430"
+        }
+      ],
+      "V06": [
+        {
+          "event_type": "supplier_cancelled",
+          "time": {
+            "value": "2026-06-22T16:40:00+03:00",
+            "role": "occurred"
+          },
+          "source_id": "845cff973bd4435d",
+          "source_version_id": "260e5831-9f93-45a2-9494-924df73d33d5",
+          "text_sha256": "3f56b9f4656bf6ed6581fc39a676cd1f474ab3a847da28e66de6de42c097ef35",
+          "fragment": "2026-06-22T16:40:00+03:00 \u2014 \u0431\u0440\u043e\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u043e\u0442\u043c\u0435\u043d\u0435\u043d\u043e \u043f\u043e\u0441\u0442\u0430\u0432\u0449\u0438\u043a\u043e\u043c, \u0438\u0441\u043f\u043e\u043b\u043d\u0435\u043d\u0438\u0435 \u043f\u0440\u0435\u043a\u0440\u0430\u0449\u0435\u043d\u043e."
+        },
+        {
+          "event_type": "authorization_released",
+          "time": {
+            "value": "2026-06-22T16:43:00+03:00",
+            "role": "occurred"
+          },
+          "source_id": "5f5576cbae5e40c6",
+          "source_version_id": "51284193-4f67-4087-899b-5cc2acd62250",
+          "text_sha256": "e607505ec1f0e14c5f7a25815ac58552efd880a7159a305062cf3b517726691c",
+          "fragment": "2026-06-22T16:43:00+03:00 | auth.reverse | \u0431\u0430\u043d\u043a \u0441\u043d\u044f\u043b \u0440\u0435\u0437\u0435\u0440\u0432 \u043f\u043e \u0438\u0441\u0445\u043e\u0434\u043d\u043e\u0439 \u0430\u0432\u0442\u043e\u0440\u0438\u0437\u0430\u0446\u0438\u0438"
+        }
+      ]
+    },
+    "groq_test_acceptance_replies": {
+      "V04": {
+        "source_id": "f71822cddbf648f2",
+        "source_version_id": "9805abfa-1b0c-48a6-b105-1ed1aca0b415",
+        "text_sha256": "5e336b6a7929f0833efb146f9c2aab434a870f01be9eeb22261199363b8c8e4a",
+        "fragment": "\u0422\u0435\u043a\u0441\u0442 \u043f\u0440\u0438\u043d\u044f\u0442\u043e\u0433\u043e \u0441\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u044f:\n\u00ab\u0415\u0441\u043b\u0438 \u0442\u0430\u043c \u0442\u0438\u0445\u0438\u0439 \u043d\u043e\u043c\u0435\u0440 \u0441 \u043e\u043a\u043d\u0430\u043c\u0438 \u0432\u043e \u0434\u0432\u043e\u0440, \u0441\u043e\u0433\u043b\u0430\u0441\u0435\u043d \u043d\u0430 \u0441\u043e\u0441\u0435\u0434\u043d\u0438\u0439 \u043a\u043e\u0440\u043f\u0443\u0441. \u0415\u0441\u043b\u0438 \u043e\u043a\u043d\u0430 \u043d\u0430 \u0443\u043b\u0438\u0446\u0443, \u044d\u0442\u043e\u0442 \u0432\u0430\u0440\u0438\u0430\u043d\u0442 \u043c\u043d\u0435 \u043d\u0435 \u043f\u043e\u0434\u0445\u043e\u0434\u0438\u0442. \u041f\u043e\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u0435, \u043f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430, \u043a\u0443\u0434\u0430 \u0432\u044b\u0445\u043e\u0434\u044f\u0442 \u043e\u043a\u043d\u0430.\u00bb",
+        "event_evidence": {
+          "sent_header": "\u0417\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a \u0438\u0441\u0445\u043e\u0434\u043d\u043e\u0433\u043e \u043f\u0438\u0441\u044c\u043c\u0430 Date: 2026-10-08T12:25:00+03:00",
+          "reply_text": "\u0415\u0441\u043b\u0438 \u0442\u0430\u043c \u0442\u0438\u0445\u0438\u0439 \u043d\u043e\u043c\u0435\u0440 \u0441 \u043e\u043a\u043d\u0430\u043c\u0438 \u0432\u043e \u0434\u0432\u043e\u0440, \u0441\u043e\u0433\u043b\u0430\u0441\u0435\u043d \u043d\u0430 \u0441\u043e\u0441\u0435\u0434\u043d\u0438\u0439 \u043a\u043e\u0440\u043f\u0443\u0441.",
+          "receipt_record": "2026-10-08T12:27:00+03:00 | inbound-message | \u043a\u043b\u0438\u0435\u043d\u0442 \u2192 \u043e\u0442\u0435\u043b\u044c"
+        }
+      }
+    },
+    "groq_test_case_evidence": {
+      "V03": {
+        "ledger_source_id": "a62eb31f18014f2e",
+        "ledger_text_sha256": "cd209f9037d3de0715879b26bb1525b8d9ebd5ff3f74afca5170fb19b578a1bf",
+        "bank_source_id": "649b9972ad454b5e",
+        "bank_text_sha256": "13f4ae93c69e1fdfbdb95bd460911c8270f65a524c959333b90d6c5dd2a63428",
+        "bank_locator": "3088e5c39f854cf6",
+        "trace_id": "189a5d15e84a4adb",
+        "bank_trace_fragment": "\u0422\u0440\u0430\u0441\u0441\u0430: 189a5d15e84a4adb",
+        "credit_fragment": "\u041a\u0440\u0435\u0434\u0438\u0442\u043e\u0432\u0430\u043d\u0438\u0435 \u043a\u0430\u0440\u0442\u044b \u043f\u043e\u043b\u0443\u0447\u0430\u0442\u0435\u043b\u044f \u043f\u043e \u0443\u043a\u0430\u0437\u0430\u043d\u043d\u043e\u0439 \u0432\u043e\u0437\u0432\u0440\u0430\u0442\u043d\u043e\u0439 \u0442\u0440\u0430\u0441\u0441\u0435 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043d\u043e.",
+        "document_pointer": "\u0414\u043b\u044f \u0441\u0432\u0435\u0440\u043a\u0438 \u0431\u0430\u043d\u043a \u043f\u0440\u0438\u043b\u043e\u0436\u0438\u043b \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442 3088e5c39f854cf6",
+        "capture": {
+          "at": "2026-07-03T14:02:00+03:00",
+          "fragment": "2026-07-03T14:02:00+03:00 | capture |"
+        },
+        "initiation": {
+          "at": "2026-07-05T10:15:00+03:00",
+          "fragment": "2026-07-05T10:15:00+03:00 | return.submit | \u0437\u0430\u043f\u0440\u043e\u0441 \u043f\u0435\u0440\u0435\u0434\u0430\u043d \u0431\u0430\u043d\u043a\u0443; \u0442\u0440\u0430\u0441\u0441\u0430 189a5d15e84a4adb"
+        },
+        "settlement": {
+          "at": "2026-07-06T17:42:00+03:00",
+          "fragment": "\u0414\u0430\u0442\u0430 \u043f\u0440\u043e\u0432\u043e\u0434\u043a\u0438 \u043f\u043e \u043a\u0430\u0440\u0442\u0435 \u043f\u043e\u043b\u0443\u0447\u0430\u0442\u0435\u043b\u044f: 2026-07-06T17:42:00+03:00"
+        }
+      }
+    },
+    "groq_test_assemble_reviewed_evidence": true
+  },
+  "maximum_completion_tokens": 1000,
+  "quota_observed_at": "2026-11-25T17:00:22.735858+00:00",
+  "single_application_instance": true,
+  "validation_profile": "proofline-validation-v1+reply-events-test-v1:209d0710bc145fb14f75ff1f506afd42e31955c9566362ef7e47d14a917fa119+required-timeline-test-v4:3be0c6771bc2f0e680cf917afa7bb928b98ef4e49b47d50c51ec619784cedca1+case-evidence-test-v1:b35c05abeea9c28cedc8bcd5d0887cd2ca4c2453bddc79b3c760c29f0ffa4d8c+reviewed-evidence-test-v1",
+  "code_and_input_hashes": {
+    "src/proofline/cli.py": "1732184f4d7860f14f4e35f1b77133212f4f168f923cda72818dc4758bfbeff4",
+    "src/proofline/config.py": "7078f6da914ba9a3eb3352feee733645be607f792151ba94dd19fdd1cf5157fd",
+    "src/proofline/presentation.py": "87eedf5d6c8559506a658a233995b00e97bcc85039e50ff8cfafad542d6adf57",
+    "src/proofline/schema.py": "4ecd43166e4ffca9ba260e2599d053227dc04a4c792c3ec38ad49355a03024c7",
+    "src/proofline/__init__.py": "9596ed2e8539e29c446de78861ff2dc693d617ef707a0f4b178344bfb61ea632",
+    "src/proofline/api/app.py": "ab14d49fa8b98e6cdc506700c4433071f440512a4cfe61596a4251ba7edd71de",
+    "src/proofline/api/errors.py": "fd152cb67f769f0dcd3f49d7a373b11726d7c96b2d7aa7d81c0c5328b2da9142",
+    "src/proofline/api/middleware.py": "915a4d247489bc0435604e774a8ef7b2df1b1155a2cc6bc7549351a585599df4",
+    "src/proofline/api/routes.py": "f993ba48923c4dab05dce3bdc8a1e49f6ce82c72eca4475d8ea86d5d546af2bb",
+    "src/proofline/api/static.py": "badbb2951157f0577a2bac486d7a1b74fcd57c879eac9671bcec04baadcfb4bf",
+    "src/proofline/api/__init__.py": "c0f3ee09901de52e900cccc221af1014bcbf2d578198e77c8ab7e80d5d365efe",
+    "src/proofline/application/cases.py": "8b570c85b9933fe213c6b85df98f6bb467340fed6a701e80f820401303afbf9e",
+    "src/proofline/application/commands.py": "181e4460ba8320b8bc7bc04f2f7aabbedfae7a5fd0b6252ac84adc79f384eb39",
+    "src/proofline/application/errors.py": "8e2b35c112285e58b35a6832150c2df564802fa4ead0d9f5d7f1d322fcff2aef",
+    "src/proofline/application/proposals.py": "1ea2e93588219aa20ddb3e7a2fb9da9131b6f787caa38020bb84ac9a01a8b4b4",
+    "src/proofline/application/read_models.py": "8ebf3f39030b0c2a4e9e54ab8684a15b589129d600d5a9d9dfd0762c84ee3fea",
+    "src/proofline/application/runs.py": "b3061cfcd8f568243e043156913903ea64dd4538c496dad606a239584ddcaf77",
+    "src/proofline/application/seed.py": "0e5219a772c0e4cd4903e5c7fe20e94b65e178f408ec9528b59f0bc780479d96",
+    "src/proofline/application/service.py": "077804ee4d796485d70a073c7ac2938630bc3ebf40be2aff4989cade0a384e46",
+    "src/proofline/application/state.py": "ce168b94a8fa2ad4d9084ce6824db69d2cfdf5493ca5660107020c7a399f41c7",
+    "src/proofline/application/views.py": "34c8d710c20cd3058b8f119d0fb8db95d0ab74b2e64e605466bec1a93328c7d1",
+    "src/proofline/application/__init__.py": "ce17c6f5f0c7bd65b9588750719ffc913783148807752ba8a177be8690ac9fd8",
+    "src/proofline/domain/assembly.py": "310d49b1180b996f4e79df45106630375832ac024dc9923aade55dd03bcd1f5d",
+    "src/proofline/domain/case_evidence.py": "07504d864f3d226dda22db6e31033f4ebb89e71de5c4d64d25c27909f2b49976",
+    "src/proofline/domain/inputs.py": "118b100dc3fae95cda9d985bb36a3bb6999c3ce3ce16778c511938f34ea4978d",
+    "src/proofline/domain/present_confirmations.py": "aa5310b9c9856dc9114e572a6b02ace241e3e4be217a445d2db3a15bfea83f75",
+    "src/proofline/domain/required_events.py": "8fdae056f27e9a5434cee1d75b701e635c940ae565c3443056b1b6aa15eb1b5b",
+    "src/proofline/domain/sources.py": "b0c18855148037046ad15bb8c7537252122e31897bc6a0f607cb2d454755e85b",
+    "src/proofline/domain/__init__.py": "6509ec20f07fc680921af6b3b6e7769c6be1c36ea9a16b0423583914ab48d23b",
+    "src/proofline/persistence/database.py": "4248b4aacd50ecb0cc25eddc96091fa74b92507b251f3d131c5711134202fc27",
+    "src/proofline/persistence/migrate.py": "92506e87e1242bf9cfb94be0156ba42a1a168a84933992a008dc3aba9744a8a6",
+    "src/proofline/persistence/models.py": "4468d6f1f69c4900f473d58013b9400e3a33d0cb6ba888f46f14a1991b143a89",
+    "src/proofline/persistence/__init__.py": "ca79891636427f9d98e3fb4ae7817bc66cdec3b4d6a652dc949b9d50e16ef9a1",
+    "src/proofline/providers/anthropic_messages.py": "2a3d2bdc5b07d6d2a8e90578e41aca496569fdcebd377ea756585d9a3ebacf84",
+    "src/proofline/providers/citation_ids.py": "99973a5f5f05e835d3ff791c698c92779d0fd7d57f451960762aa1212803c513",
+    "src/proofline/providers/citation_rule_bindings.py": "13664cbd0d0e3b58d48308df78a526c1a4b2361eb5214b0fac7b4dea3fc93386",
+    "src/proofline/providers/compatible_sdk.py": "5bc44f56ce20bf250bc5dde0d8437db63ad2e7d908c7b736df52b299ced45776",
+    "src/proofline/providers/factory.py": "3dc51429a21a35c5b7a4a4912fc37482c0b558a914da0985211b33dd55d9016c",
+    "src/proofline/providers/generation.py": "87a3b1d3bbe94d167dae5b6c80e950900023405524d6a6be20ad88507b62d300",
+    "src/proofline/providers/groq_chat.py": "8c9fb97766e8e53d7dacaae92a793d6027a681783af6db06cec4f4d91748ca3e",
+    "src/proofline/providers/groq_stage4_profile.py": "eb1eb2a223a4837dbf28276e79df2c1d2452bb6df6542656e7a04440c47ba746",
+    "src/proofline/providers/live.py": "a94c38fd2bf28d5a2d29f7cc33d240724dcf90842ae9a9d09c899c7d53fe858f",
+    "src/proofline/providers/live_profile.py": "7d3e857612681bf35067d255a480e0b90d42dcca60af547f8699ea3542b046ec",
+    "src/proofline/providers/live_prompt_v33.py": "19fabf3543bb7bab5d7d42b9dc2755143c39b551567e6dd935026bcfea1241dd",
+    "src/proofline/providers/model_choices.py": "78e28990bc534d8f1d0c5cfcd766920cc9cda4ab30b59dc0b943f4dfbb7c635b",
+    "src/proofline/providers/openai_responses.py": "0a831e31a8fe1e51e263c30aa9d1b5cf3b520e40df472295ebc49699a17ff98a",
+    "src/proofline/providers/replay.py": "372513b8747d760a2eb342d23472019fc20f965bb35e08063ae295c217b2327d",
+    "src/proofline/providers/response_errors.py": "93bbcd45298e85c00c039d64daead0591f7fba9576d294e89ec359a615b62f6b",
+    "src/proofline/providers/reviewed_citations.py": "da1287263f456a4ea6ab605271fc0db91f0913d9010ff3cd762c64989848f9b6",
+    "src/proofline/providers/__init__.py": "e51b891cccdcd6625664c190a414d9051cdaebdf6097a14e8fbe555492fafae7",
+    "src/proofline/validation/assembly.py": "05ebc4242aee92c315aeaf8103b231a9449fb66ebb3d53d276381d0250507ff2",
+    "src/proofline/validation/case_evidence.py": "43492d18f1e8c8b56af20bde699014ed664fe8873ffcf21cce2560ea18a77ae2",
+    "src/proofline/validation/evidence.py": "9f76e5f1551efa2ab4cae673de5eafb91bbc3016f35d8add06945d1cd02a40ac",
+    "src/proofline/validation/reply_events.py": "5e6767ca056e75df135a9cab44b5f1b8f8cb01c715250063b70221b6c6ff5cad",
+    "src/proofline/validation/required_events.py": "adb8577d00564a62af3a70a3334377d935d58be8b909008a666b341e7869e3ab",
+    "src/proofline/validation/result.py": "ad524c3275a89e1cae2c93b863fc080bfbfe889c1f3fcd0896b5af478e4b04ae",
+    "src/proofline/validation/timestamps.py": "3b5d1166658e86a13cd25d2824f614d8f2d7115acd176ab23f33fff642c9f4af",
+    "src/proofline/validation/__init__.py": "3c55d416a3dec0e75d123ba22396d4b6f73fbc695020cb7e4d12f24cb78b08a7",
+    "src/proofline/persistence/migrations/env.py": "34f577bee1db3beae635ff0505edd120bb15c5bfd0019d2129fd8c27eb490c88",
+    "src/proofline/persistence/migrations/__init__.py": "230ce69af7e904a368b12c496edb163cd3cfa5af5a8a00b1e60f2d66b795703d",
+    "src/proofline/persistence/migrations/versions/0001_case_workflow.py": "6d95b14d51c866e0f01eed228b78665c474a6c88cd85f34829de50a11b128723",
+    "src/proofline/persistence/migrations/versions/__init__.py": "79389a6529774e836b528cd4fc4173c9f831e5a50f859ad6291c30e5b08e6bfd",
+    "fixtures/cases/travel-cases.json": "f9c2676d82777146f522c1b122e718b0cb9cd8872210ad9224f18df6858f1e39",
+    "fixtures/live/groq-stage4-profile.json": "2845ca846ab8e86de98376e4cfaefa624bb065dd3f115b0173ce93eb889a97c6",
+    "fixtures/live/groq-stage4-case-evidence.json": "dbbe0627c322f6c8ed95db32ed5ed3410e73afe6872cdffc779348e2bbc000aa"
+  },
+  "runner_sha256": "14b12bb21e433a978ec95472ba6de0100da6cdcbb75cf9da2dbd232b0dcde5b9",
+  "openai_sdk_version": "2.54.0",
+  "minimum_spacing_seconds": 65
+}

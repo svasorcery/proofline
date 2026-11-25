@@ -1,0 +1,107 @@
+{
+  "reviewer": "assistant",
+  "independent_human_labels": false,
+  "condition": "ablation-V01",
+  "provider_http_status": 200,
+  "schema_accepted": true,
+  "technical_pass": true,
+  "error": null,
+  "operator_decision_created": false,
+  "targeted_pass": true,
+  "complete_quality_pass": false,
+  "sending": {
+    "pass": true,
+    "evidence_checks": {
+      "offer_time": true,
+      "offer_text": true
+    },
+    "actual": {
+      "event_type": "alternative_offered",
+      "time": {
+        "value": "2026-08-14T09:10:00+03:00",
+        "role": "sent"
+      },
+      "evidence": [
+        {
+          "source_id": "5b910f89ca134035",
+          "fragments": [
+            "Отправлено: 2026-08-14T09:10:00+03:00",
+            "Можем предложить выезд в 18:20 вместо 16:00, с тем же местом посадки. Напишите, подходит ли вам этот вариант."
+          ]
+        }
+      ]
+    }
+  },
+  "receipt": {
+    "pass": true,
+    "evidence_checks": {
+      "receipt_record": true
+    },
+    "actual": {
+      "event_type": "customer_message_received",
+      "time": {
+        "value": "2026-08-14T09:36:00+03:00",
+        "role": "received"
+      },
+      "evidence": [
+        {
+          "source_id": "b8821b7c6a2d432a",
+          "fragments": [
+            "2026-08-14T09:36:00+03:00 — почтовый шлюз принял ответ клиента в этой переписке.",
+            "From: адрес клиента из бронирования; In-Reply-To: исходное письмо поставщика."
+          ]
+        }
+      ]
+    }
+  },
+  "chronology": {
+    "pass": false,
+    "events": [
+      [
+        "alternative_offered",
+        "sent",
+        "2026-08-14T09:10:00+03:00"
+      ],
+      [
+        "customer_replied",
+        "sent",
+        "2026-08-14T09:36:00+03:00"
+      ],
+      [
+        "customer_message_received",
+        "received",
+        "2026-08-14T09:36:00+03:00"
+      ]
+    ],
+    "missing": []
+  },
+  "fact_values": {
+    "alternative_acceptance": "unconfirmed"
+  },
+  "readiness": "request_evidence",
+  "confirmations": {
+    "pass": true,
+    "actual": {
+      "action": "read_source",
+      "locator": "1618ae5e5b894145",
+      "requirements": [
+        "original_acceptance_reply"
+      ]
+    },
+    "expected_requirements": [
+      "original_acceptance_reply"
+    ]
+  },
+  "literal_fragments": {
+    "valid": 7,
+    "total": 7
+  },
+  "nonliteral_fragments": [],
+  "runtime_status": "needs_operator_review",
+  "blocking_issues": [],
+  "selection": {
+    "offered_ids": 9,
+    "selected_ids": 7,
+    "raw_and_card_saved_separately": true
+  }
+}

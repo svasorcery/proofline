@@ -1,0 +1,5 @@
+{
+  "offline_gate_pass": true,
+  "diagnostics_safe": true,
+  "scope": "Exact V04 wire and private mock rejection"
+}

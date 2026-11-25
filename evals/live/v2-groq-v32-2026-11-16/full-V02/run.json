@@ -1,0 +1,104 @@
+{
+  "id": "22b50fa5-fdc0-4ecb-98da-4cfbf6587c70",
+  "case_id": "V02",
+  "mode": "live",
+  "status": "failed",
+  "content_revision": 1,
+  "base_case_version": 1,
+  "input_digest": "1c9b1c8d94b2a5db05678f1bb6cf3425e43f1c959ca2fd0d3596283236720dc9",
+  "snapshot": {
+    "case_id": "V02",
+    "user_text": "\u0412\u043e\u0441\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u0435 \u043f\u043e\u0440\u044f\u0434\u043e\u043a \u043e\u0442\u043a\u0430\u0437\u0430 \u043a\u043b\u0438\u0435\u043d\u0442\u0430 \u0438 \u043e\u0442\u043c\u0435\u043d\u044b \u043f\u043e\u0441\u0442\u0430\u0432\u0449\u0438\u043a\u043e\u043c \u043f\u043e \u0438\u043c\u0435\u044e\u0449\u0438\u043c\u0441\u044f \u043c\u0430\u0442\u0435\u0440\u0438\u0430\u043b\u0430\u043c. \u0415\u0441\u043b\u0438 \u0432\u0440\u0435\u043c\u0435\u043d\u0438 \u043e\u0442\u043a\u0430\u0437\u0430 \u043d\u0435 \u0445\u0432\u0430\u0442\u0430\u0435\u0442, \u0443\u043a\u0430\u0436\u0438\u0442\u0435 \u043d\u0443\u0436\u043d\u043e\u0435 \u043f\u043e\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043d\u0438\u0435.",
+    "requested_fact_keys": [
+      "withdrawal_timing",
+      "cancellation_status"
+    ],
+    "money": {
+      "amount_minor": 9200,
+      "currency": "USD",
+      "scale": 2
+    },
+    "context": {},
+    "catalog": [
+      {
+        "case_id": "V02",
+        "source_id": "5c3fe2fc12a3430e",
+        "kind": "document",
+        "locator": "8b61ea1c4d4f4b4d",
+        "title": "5c3fe2fc12a3430e",
+        "trust": "primary",
+        "position": 0,
+        "included": true,
+        "version_id": "e42ae171-6a7a-48a8-aed5-65b7f55e970a",
+        "text": "\u0412\u0445\u043e\u0434\u044f\u0449\u0435\u0435 \u043e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u0435 \u043a\u043b\u0438\u0435\u043d\u0442\u0430\n\u041e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u043e \u043a\u043b\u0438\u0435\u043d\u0442\u043e\u043c \u0447\u0435\u0440\u0435\u0437 \u0444\u043e\u0440\u043c\u0443: 2026-09-18T12:09:55+03:00\n\u041f\u043e\u043b\u0443\u0447\u0435\u043d\u043e \u0441\u043b\u0443\u0436\u0431\u043e\u0439 \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u043a\u0438: 2026-09-18T12:10:00+03:00\n\u042f \u0443\u0442\u0440\u043e\u043c \u043f\u0438\u0441\u0430\u043b, \u0447\u0442\u043e \u043f\u043e\u0435\u0437\u0434\u043a\u0430 \u043c\u043d\u0435 \u0431\u043e\u043b\u044c\u0448\u0435 \u043d\u0435 \u043d\u0443\u0436\u043d\u0430. \u0412 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u043d\u043e\u043c \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0438 \u2014 \u0442\u0435\u043a\u0441\u0442 \u043c\u043e\u0435\u0433\u043e \u0441\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u044f. \u041f\u043e\u0447\u0435\u043c\u0443 \u0435\u0433\u043e \u043d\u0435 \u0443\u0447\u043b\u0438?\n\u0423 \u0432\u043b\u043e\u0436\u0435\u043d\u043d\u043e\u0433\u043e \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u044f \u043d\u0435\u0442 \u043f\u043e\u0447\u0442\u043e\u0432\u044b\u0445 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u043e\u0432 \u0438\u043b\u0438 \u043e\u0442\u043c\u0435\u0442\u043a\u0438 \u0434\u043e\u0441\u0442\u0430\u0432\u043a\u0438. \u041d\u0430 \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0438 \u0432\u0438\u0434\u043d\u0430 \u043f\u043e\u0434\u043f\u0438\u0441\u044c \u00ab\u0447\u0435\u0440\u043d\u043e\u0432\u0438\u043a\u00bb.\n\u0421\u0441\u044b\u043b\u043a\u0430 \u043d\u0430 \u0436\u0443\u0440\u043d\u0430\u043b \u043e\u0431\u0440\u0430\u0431\u043e\u0442\u043a\u0438 \u0431\u0440\u043e\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f: 84934bcfab7e4745.",
+        "text_sha256": "59c7bc6d334c6353e2d457d8e7d1e41967d8660eca39f2aeab596730f2b2abe3"
+      },
+      {
+        "case_id": "V02",
+        "source_id": "9edd7227853c42a4",
+        "kind": "provider_log",
+        "locator": "84934bcfab7e4745",
+        "title": "\u0417\u0430\u043f\u0438\u0441\u044c \u043e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u044f",
+        "trust": "primary",
+        "position": 1,
+        "included": true,
+        "version_id": "274e09cf-e665-4003-aa58-f2ffc1273533",
+        "text": "2026-09-18T10:20:00+03:00 \u2014 \u043e\u043f\u0435\u0440\u0430\u0446\u0438\u044f \u043f\u043e\u0441\u0442\u0430\u0432\u0449\u0438\u043a\u0430: \u0431\u0440\u043e\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u0441\u043d\u044f\u0442\u043e \u0441 \u0438\u0441\u043f\u043e\u043b\u043d\u0435\u043d\u0438\u044f \u0438\u0437-\u0437\u0430 \u043e\u0442\u043c\u0435\u043d\u044b \u0440\u0435\u0439\u0441\u0430.\n2026-09-18T12:10:00+03:00 \u2014 \u043e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u0435 \u043a\u043b\u0438\u0435\u043d\u0442\u0430 \u043f\u043e\u0441\u0442\u0443\u043f\u0438\u043b\u043e \u0447\u0435\u0440\u0435\u0437 \u0444\u043e\u0440\u043c\u0443 \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u043a\u0438.\n\u0412 \u0437\u0430\u043f\u0438\u0441\u0438 \u0444\u043e\u0440\u043c\u044b \u0435\u0441\u0442\u044c \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435 \u0442\u0435\u043a\u0441\u0442\u0430. \u0418\u0441\u0445\u043e\u0434\u043d\u043e\u0433\u043e \u043f\u0438\u0441\u044c\u043c\u0430 \u0438 \u043a\u0432\u0438\u0442\u0430\u043d\u0446\u0438\u0438 \u0435\u0433\u043e \u043f\u0440\u0438\u0451\u043c\u0430 \u0432\u043e \u0432\u043b\u043e\u0436\u0435\u043d\u0438\u044f\u0445 \u043d\u0435\u0442. \u0418\u043c\u043f\u043e\u0440\u0442 \u043f\u043e\u0447\u0442\u043e\u0432\u043e\u0433\u043e \u044f\u0449\u0438\u043a\u0430 \u0434\u043e \u043e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u044f \u0447\u0435\u0440\u0435\u0437 \u0444\u043e\u0440\u043c\u0443 \u043d\u0435 \u0432\u044b\u043f\u043e\u043b\u043d\u044f\u043b\u0441\u044f.",
+        "text_sha256": "44bbb126e530eaecd664d84ef80596cffeb9432ca72ea4cc8bff6a72e25aa5e7"
+      },
+      {
+        "case_id": "V02",
+        "source_id": "fbb314d7c25a411f",
+        "kind": "document",
+        "locator": "f23f59acf1ff4f3f",
+        "title": "\u0421\u043f\u0440\u0430\u0432\u043e\u0447\u043d\u0430\u044f \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0430",
+        "trust": "context",
+        "position": 2,
+        "included": true,
+        "version_id": "eef7cfb8-c967-416c-a950-897055b5f0b6",
+        "text": "\u0421\u043f\u0440\u0430\u0432\u043e\u0447\u043d\u0430\u044f \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0430 \u0444\u043e\u0440\u043c\u044b \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u043a\u0438. \u0424\u043e\u0440\u043c\u0430 \u043f\u0440\u0438\u043d\u0438\u043c\u0430\u0435\u0442 \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u044f \u0438 \u0444\u0430\u0439\u043b\u044b \u0441\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u0439. \u0410\u0432\u0442\u043e\u043c\u0430\u0442\u0438\u0447\u0435\u0441\u043a\u0430\u044f \u043a\u0432\u0438\u0442\u0430\u043d\u0446\u0438\u044f \u043e\u0442\u043d\u043e\u0441\u0438\u0442\u0441\u044f \u0442\u043e\u043b\u044c\u043a\u043e \u043a \u043e\u0442\u043f\u0440\u0430\u0432\u043a\u0435 \u0441\u0430\u043c\u043e\u0439 \u0444\u043e\u0440\u043c\u044b.",
+        "text_sha256": "9e8c231f13968b582efc7b54c2b7acd2a136159feae40ad8303c3d93fbada9b3"
+      }
+    ]
+  },
+  "started_at": "2026-11-16T20:47:01.423764Z",
+  "finished_at": "2026-11-16T20:47:07.231637Z",
+  "generation_profile": {
+    "api": "responses",
+    "mode": "live",
+    "model": "openai/gpt-oss-120b",
+    "pricing": null,
+    "endpoint": "https://api.groq.com/openai/v1/responses",
+    "provider": "groq",
+    "http_status": 400,
+    "max_retries": 0,
+    "usage_origin": "provider",
+    "monetary_cost": null,
+    "policy_sha256": "f1490205098564aec23a1a4a5289d5e053fcb3f8611e09348690e1782846fa14",
+    "prompt_sha256": "6519091abb6f9669b4ed7d530b1867a42cee27d30baacd5064a0528ff84e562d",
+    "schema_sha256": "9d031d5c4bb85493f85fc50e97990dc7b0a34e6853154aac59636b9275b54eaa",
+    "new_model_call": true,
+    "policy_version": "proofline-policy-v3.2-candidate-1",
+    "prompt_version": "proofline-responses-prompt-v2-candidate-1",
+    "request_sha256": "40befa040e78ee5c54fe11cdf701789f10b2fd88f3fcf13a86b4d0ad048346e3",
+    "schema_version": "assembly-output-v1",
+    "latency_seconds": 5.749182,
+    "request_profile": "groq-responses-v1",
+    "requested_model": "openai/gpt-oss-120b",
+    "timeout_seconds": 90,
+    "max_output_tokens": 4096,
+    "provider_error_code": "json_validate_failed",
+    "provider_error_type": "invalid_request_error",
+    "provider_request_id": "req_01m7k1szv6erfs1dr3ywhr2hj0",
+    "provider_error_param": null,
+    "provider_error_stage": "output_validation",
+    "provider_response_id": null
+  },
+  "raw_output": null,
+  "usage": null,
+  "error": {
+    "code": "INVALID_MODEL_OUTPUT",
+    "message": "Live analysis failed; no automatic retry was made."
+  },
+  "proposal_revision_id": null
+}

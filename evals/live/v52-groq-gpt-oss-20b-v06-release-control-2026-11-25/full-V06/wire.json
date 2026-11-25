@@ -1,0 +1,14 @@
+{
+  "sent_at": "2026-11-25T17:03:10.426829+00:00",
+  "request_sha256": "c8f93e44e14bdf5beccb59313ec7d506af20a59fb21ee23dc73116ef990bcad3",
+  "http_status": 200,
+  "rate_limit_headers": {
+    "x-ratelimit-limit-requests": "1000",
+    "x-ratelimit-limit-tokens": "8000",
+    "x-ratelimit-remaining-requests": "999",
+    "x-ratelimit-remaining-tokens": "3977",
+    "x-ratelimit-reset-requests": "1m26.4s",
+    "x-ratelimit-reset-tokens": "30.172s"
+  },
+  "provider_request_id": "req_01m89tjhvrea89pnmgvehj8g74"
+}

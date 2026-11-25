@@ -1,0 +1,18 @@
+[
+  {
+    "condition": "full-V02",
+    "business_snapshot_equal_to_gpt_oss": true,
+    "qwen_proposal_status": "needs_operator_review",
+    "gpt_oss_proposal_status": "needs_operator_review",
+    "qwen_request_id": "req_01m7mpebzvecf8vez220dk34jc",
+    "gpt_oss_request_id": "req_01m7mfg3zhexytn2jmy79rjne5"
+  },
+  {
+    "condition": "full-V04",
+    "business_snapshot_equal_to_gpt_oss": true,
+    "qwen_proposal_status": "blocked_for_approval",
+    "gpt_oss_proposal_status": "needs_operator_review",
+    "qwen_request_id": "req_01m7mpgwntem1vvwkxrxkmekhp",
+    "gpt_oss_request_id": "req_01m7mfjmqqe20btv4qp2xnth6h"
+  }
+]

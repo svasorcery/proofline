@@ -1,0 +1,22 @@
+{
+  "max_requests": 1,
+  "approved_budget_usd": 0,
+  "attempts": [
+    {
+      "condition": "full-V06",
+      "case_id": "V06",
+      "started_at": "2026-11-18T12:31:25.327211+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-qwen-v06-bank-v23-20261118-full-V06",
+      "http_status": 201,
+      "finished_at": "2026-11-18T12:31:35.038680+00:00",
+      "run_id": "a7d9245e-596d-447e-a922-fe6f5eb9ebe1"
+    }
+  ],
+  "stopped": true,
+  "stop_reason": "Batch ended"
+}

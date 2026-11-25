@@ -1,0 +1,15 @@
+{
+  "reviewer": "assistant",
+  "independent_human_labels": false,
+  "condition": "full-V02",
+  "provider_http_status": 400,
+  "schema_accepted": false,
+  "technical_pass": false,
+  "error": {
+    "code": "INVALID_MODEL_OUTPUT",
+    "message": "Live analysis failed; no automatic retry was made."
+  },
+  "operator_decision_created": false,
+  "targeted_pass": false,
+  "complete_quality_pass": false
+}

@@ -1,0 +1,5 @@
+# Groq Free GPT-OSS 20B with reviewed V01 gateway receipt
+
+The guarded control runs V01 once. If it passes application validation and the frozen rubric, all six cases run once on a fresh closed stand with the same profile. The V01 wire body matches the sealed v39 GPT-OSS request. All payloads match the v38 Qwen requests except the provider-side model and reasoning effort. The public assembly contract and default instructions are preserved. GPT-OSS 20B low, strict Chat Completions, 1,000 completion tokens, budget $0, one control and up to six acceptance calls, zero retries.
+
+Only the test profile can attach the reviewed V01 receipt. The selected journal version and exact evidence line must match the reviewed event. One archive pointer must identify exactly one eligible unread document in the catalogue. For a proposal requesting only that original while acceptance remains unconfirmed, the decoder proposes opening it and adds its reviewed receipt if the receipt event is absent. The decoded card and original provider output are stored separately. The evaluator checks the resulting card and there are no operator decisions.

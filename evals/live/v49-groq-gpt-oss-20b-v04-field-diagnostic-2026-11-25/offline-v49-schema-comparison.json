@@ -1,0 +1,16 @@
+{
+  "scope": "One live diagnostic control and offline counterfactuals, no new model calls.",
+  "v48_root_keys_match": false,
+  "v49_root_diagnostics": {
+    "unexpected_field_count": 0,
+    "missing_required_fields": []
+  },
+  "request_unchanged": true,
+  "exact_nested_violation_available": false,
+  "offline_samples_with_same_root_diagnostics": {
+    "v34_archived_response": "accepted",
+    "copy_with_invalid_timeline_role": "rejected",
+    "copy_with_object_in_fact_evidence": "rejected",
+    "copy_with_unallowed_followup_requirement": "rejected"
+  }
+}

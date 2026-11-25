@@ -1,0 +1,92 @@
+{
+  "max_requests": 6,
+  "approved_budget_usd": 0,
+  "attempts": [
+    {
+      "condition": "ablation-V01",
+      "case_id": "V01",
+      "started_at": "2026-11-24T14:41:35.839268+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 2
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-qwen-cancellation-time-acceptance-20261124-ablation-V01",
+      "http_status": 201,
+      "finished_at": "2026-11-24T14:41:39.468607+00:00",
+      "run_id": "042c07dd-7f8a-478d-bb1c-31427770b9c4"
+    },
+    {
+      "condition": "full-V02",
+      "case_id": "V02",
+      "started_at": "2026-11-24T14:42:42.297233+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-qwen-cancellation-time-acceptance-20261124-full-V02",
+      "http_status": 201,
+      "finished_at": "2026-11-24T14:42:44.078290+00:00",
+      "run_id": "0a15866c-0444-47b5-a097-a35e8b769554"
+    },
+    {
+      "condition": "full-V03",
+      "case_id": "V03",
+      "started_at": "2026-11-24T14:43:47.431453+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-qwen-cancellation-time-acceptance-20261124-full-V03",
+      "http_status": 201,
+      "finished_at": "2026-11-24T14:43:51.217499+00:00",
+      "run_id": "8fcefbeb-9532-419f-a0c6-cee6f12839b1"
+    },
+    {
+      "condition": "full-V04",
+      "case_id": "V04",
+      "started_at": "2026-11-24T14:44:52.588995+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-qwen-cancellation-time-acceptance-20261124-full-V04",
+      "http_status": 201,
+      "finished_at": "2026-11-24T14:44:54.218844+00:00",
+      "run_id": "a57985b5-a099-44a8-8f28-29d3c8962af5"
+    },
+    {
+      "condition": "full-V05",
+      "case_id": "V05",
+      "started_at": "2026-11-24T14:45:57.803320+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-qwen-cancellation-time-acceptance-20261124-full-V05",
+      "http_status": 201,
+      "finished_at": "2026-11-24T14:45:59.654946+00:00",
+      "run_id": "2807130c-5e08-43af-a388-e105dd61e549"
+    },
+    {
+      "condition": "full-V06",
+      "case_id": "V06",
+      "started_at": "2026-11-24T14:47:02.943913+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-qwen-cancellation-time-acceptance-20261124-full-V06",
+      "http_status": 201,
+      "finished_at": "2026-11-24T14:47:05.401972+00:00",
+      "run_id": "510e6cdd-bf50-47a4-9a7d-4328692c2be9"
+    }
+  ],
+  "stopped": true,
+  "stop_reason": "Batch completed"
+}

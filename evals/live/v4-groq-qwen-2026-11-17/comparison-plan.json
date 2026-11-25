@@ -1,0 +1,22 @@
+{
+  "comparison_archive": "evals/live/v3-groq-chat-2026-11-17",
+  "changed_request_fields": [
+    "model"
+  ],
+  "all_other_template_fields_equal": true,
+  "conditions": [
+    "full-V02",
+    "full-V04"
+  ],
+  "fixed_policy": "proofline-policy-v3.2-candidate-1",
+  "fixed_schema": "assembly-output-v1",
+  "api": "chat_completions",
+  "reasoning_effort": "provider-default",
+  "new_inference_calls_in_preflight": 0,
+  "public_documentation": {
+    "strict": "https://console.groq.com/docs/structured-outputs",
+    "free_limits": "https://console.groq.com/docs/rate-limits",
+    "model": "https://console.groq.com/docs/model/qwen/qwen3.8-27b"
+  },
+  "limitations": "Single attempt per case, different backend defaults and fresh source-version UUIDs; no estimate of general reliability."
+}

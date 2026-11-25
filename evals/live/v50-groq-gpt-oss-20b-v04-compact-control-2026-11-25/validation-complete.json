@@ -1,0 +1,16 @@
+{
+  "offline_gate_pass": true,
+  "compact_contract_verified": true,
+  "offline_model_calls": 0,
+  "offline_rubric_cases": 6,
+  "pytest_with_postgresql_passed": 498,
+  "frozen_baseline_tests_passed": 21,
+  "frozen_baseline_verified": true,
+  "ruff": true,
+  "mypy": true,
+  "canonical_schema_unchanged": true,
+  "isolated_replay_walkthrough_passed": true,
+  "prior_live_archives_verified": 49,
+  "offline_gate_sha256": "dfee4eac9b3f1c5568e7b5765cfbfe10245218f485b1a7837e435f9617c8ad59",
+  "recorded_at": "2026-11-25T14:13:02.3665344+00:00"
+}

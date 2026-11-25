@@ -1,0 +1,33 @@
+{
+  "sent_at": "2026-11-24T20:28:41.304553+00:00",
+  "request_sha256": "f5cf157dbdea57619b09c5818b57344b50072b26f4c9818d45aef070b8f2a019",
+  "http_status": 400,
+  "rate_limit_headers": {
+    "x-ratelimit-limit-requests": "1000",
+    "x-ratelimit-limit-tokens": "8000",
+    "x-ratelimit-remaining-requests": "998",
+    "x-ratelimit-remaining-tokens": "3315",
+    "x-ratelimit-reset-requests": "2m52.8s",
+    "x-ratelimit-reset-tokens": "35.137s"
+  },
+  "provider_request_id": "req_01m87ky48nekwb7mdjsg7r7tdw",
+  "failed_output_shape": {
+    "candidate_characters": 1098,
+    "top_level_keys_match": true,
+    "timeline_count": 1,
+    "refund_evidence": {
+      "payment_fact": {
+        "ids": 4,
+        "objects": 0,
+        "other": 0
+      },
+      "timeline": [
+        {
+          "ids": 0,
+          "objects": 1,
+          "other": 0
+        }
+      ]
+    }
+  }
+}

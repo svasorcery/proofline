@@ -1,0 +1,30 @@
+{
+  "output_limit_source": "Prior Groq rejection diagnosed in v24; retained as a conservative cap.",
+  "model": "qwen/qwen3.8-27b",
+  "configured_limits": {
+    "requests_per_minute": 30,
+    "tokens_per_minute": 8000,
+    "tokens_per_day": 200000,
+    "requests_per_day": 1000
+  },
+  "daily_chart_utc": {
+    "approximate_requests": 28,
+    "approximate_tokens": 122731,
+    "data_delay_minutes": 15,
+    "conservative_token_upper_bound": 140000
+  },
+  "observed_at": "2026-11-24T14:14:27.5668633+00:00",
+  "evidence": "Signed-in Billing Free as Current Plan; Organization Limits and Default Project limits viewed before dispatch.",
+  "custom_project_limits": false,
+  "observed_output_tokens_per_minute": 1000,
+  "scope": "Conservative bounds from the highest visible November UTC daily bars in Qwen Activity, all projects. Latest day displays no nonzero bar.",
+  "sources": [
+    "https://console.groq.com/settings/billing/plans",
+    "https://console.groq.com/settings/limits",
+    "https://console.groq.com/settings/project/limits",
+    "https://console.groq.com/settings/organization/usage?tab=activity"
+  ],
+  "project": "Default Project",
+  "planned_maximum_attempts": 1,
+  "plan": "Free"
+}

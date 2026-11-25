@@ -1,0 +1,198 @@
+{
+  "plan": [
+    "V05"
+  ],
+  "requested_model": "qwen/qwen3.8-27b",
+  "reasoning_effort": "none",
+  "provider_attempts": 1,
+  "retries": 0,
+  "approved_budget_usd": 0,
+  "account_tier": "Free as confirmed in GroqCloud Console",
+  "spacings_seconds": [],
+  "technical_passes": 1,
+  "quality_passes": 0,
+  "known_reported_tokens": 4373,
+  "unknown_usage_conditions": [],
+  "single_application_instance": true,
+  "series_pass": false,
+  "stop_reason": "Batch completed",
+  "cases": [
+    {
+      "case_id": "V05",
+      "technical_pass": true,
+      "provider_http_status": 200,
+      "network_error_type": null,
+      "provider_error_code": null,
+      "provider_error_stage": null,
+      "error_code": null,
+      "quality_pass": false,
+      "reference_human_validated": false,
+      "usage": {
+        "queue_time": 0.096447849,
+        "total_time": 1.248392832,
+        "prompt_time": 0.28034996,
+        "total_tokens": 4373,
+        "prompt_tokens": 3920,
+        "completion_time": 0.968042872,
+        "completion_tokens": 453
+      },
+      "reference_checks": {
+        "case_id": "V05",
+        "runtime_valid": true,
+        "runtime_issues": [],
+        "facts_exact": true,
+        "evidence_complete": true,
+        "timeline_complete": false,
+        "followup_complete": true,
+        "readiness_ok": true,
+        "pack_pass": false,
+        "facts": [
+          {
+            "key": "withdrawal_timing",
+            "value_ok": true,
+            "evidence_ok": true
+          },
+          {
+            "key": "cancellation_status",
+            "value_ok": true,
+            "evidence_ok": true
+          }
+        ],
+        "missing_events": [],
+        "unsupported_event_indices": [
+          3
+        ],
+        "missing_requirements": [],
+        "extra_requirements": []
+      },
+      "card_status": "blocked_for_approval",
+      "blocking_issues": [
+        {
+          "code": "notification_time_used_as_cancellation",
+          "path": [
+            "timeline",
+            3,
+            "evidence"
+          ],
+          "message": "Время отправки уведомления не подтверждает время отмены. Укажите время операции поставщика по журналу."
+        }
+      ],
+      "quoted_fragments": {
+        "literal": 9,
+        "total": 9
+      },
+      "expected_facts": {
+        "withdrawal_timing": "before_supplier_cancel",
+        "cancellation_status": "confirmed"
+      },
+      "actual_facts": {
+        "withdrawal_timing": "before_supplier_cancel",
+        "cancellation_status": "confirmed"
+      },
+      "expected_timeline": [
+        {
+          "event_type": "customer_withdrawal",
+          "value": "2026-10-04T09:30:00+03:00",
+          "role": "received"
+        },
+        {
+          "event_type": "supplier_cancelled",
+          "value": "2026-10-04T10:00:00+03:00",
+          "role": "occurred"
+        }
+      ],
+      "raw_timeline_order": [
+        {
+          "role": "sent",
+          "value": "2026-10-04T09:26:00+03:00"
+        },
+        {
+          "role": "received",
+          "value": "2026-10-04T09:30:00+03:00"
+        },
+        {
+          "role": "occurred",
+          "value": "2026-10-04T10:00:00+03:00"
+        },
+        {
+          "role": "occurred",
+          "value": "2026-10-05T15:05:00+03:00"
+        }
+      ],
+      "actual_timeline": [
+        {
+          "event_type": "customer_replied",
+          "time": {
+            "value": "2026-10-04T09:26:00+03:00",
+            "role": "sent"
+          },
+          "evidence": [
+            {
+              "source_id": "b493b77f4c5e4dde",
+              "fragments": [
+                "Date: 2026-10-04T09:26:00+03:00"
+              ]
+            }
+          ]
+        },
+        {
+          "event_type": "customer_withdrawal",
+          "time": {
+            "value": "2026-10-04T09:30:00+03:00",
+            "role": "received"
+          },
+          "evidence": [
+            {
+              "source_id": "b493b77f4c5e4dde",
+              "fragments": [
+                "Received by supplier: 2026-10-04T09:30:00+03:00",
+                "Я отказываюсь от этого бронирования. Пожалуйста, отмените его; варианты переноса не рассматриваю."
+              ]
+            }
+          ]
+        },
+        {
+          "event_type": "supplier_cancelled",
+          "time": {
+            "value": "2026-10-04T10:00:00+03:00",
+            "role": "occurred"
+          },
+          "evidence": [
+            {
+              "source_id": "abd412ba34ae4156",
+              "fragments": [
+                "2026-10-04T10:00:00+03:00 | операция поставщика | бронирование снято с исполнения из-за отмены рейса"
+              ]
+            }
+          ]
+        },
+        {
+          "event_type": "supplier_cancelled",
+          "time": {
+            "value": "2026-10-05T15:05:00+03:00",
+            "role": "occurred"
+          },
+          "evidence": [
+            {
+              "source_id": "8d8725ea313142f0",
+              "fragments": [
+                "Уведомление отправлено клиенту: 2026-10-05T15:05:00+03:00"
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_follow_up": {
+        "action": "none",
+        "locator": null,
+        "requirements": []
+      },
+      "actual_follow_up": {
+        "action": "none",
+        "locator": null,
+        "requirements": []
+      },
+      "actual_readiness": "ready_for_rules"
+    }
+  ]
+}

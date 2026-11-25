@@ -1,0 +1,15 @@
+{
+  "runtime_key_injected_via_stdin_only": true,
+  "remaining_containers": [
+    "proofline-live-stage4-source-bound-control-20261124-db-1"
+  ],
+  "live_process_stopped": true,
+  "database_stopped": true,
+  "project": "proofline-live-stage4-source-bound-control-20261124",
+  "database_counts": {
+    "analysis_runs": 2,
+    "proposal_revisions": 2,
+    "review_decisions": 0
+  },
+  "app_container_removed": true
+}

@@ -1,0 +1,38 @@
+{
+  "reviewer": "assistant",
+  "independent_human_labels": false,
+  "condition": "full-V02",
+  "technical_pass": true,
+  "fact_values": {
+    "pass": false,
+    "correct": 1,
+    "total": 2,
+    "expected": {"withdrawal_timing": "unconfirmed", "cancellation_status": "confirmed"},
+    "actual": {"withdrawal_timing": "after_supplier_cancel", "cancellation_status": "confirmed"}
+  },
+  "evidence_sufficiency": {
+    "pass": false,
+    "notes": "Receipt of the support form is established, but its content reports an earlier claimed message. It does not unambiguously establish a new withdrawal; the attached image is marked draft and lacks delivery headers. Fact evidence cites receipt time and cancellation only. The customer_withdrawal event quotes the earlier-message claim, not a new unambiguous withdrawal."
+  },
+  "chronology": {
+    "pass": false,
+    "correct": [
+      "supplier_cancelled occurred 2026-09-18T10:20:00+03:00",
+      "customer_replied sent 2026-09-18T12:09:55+03:00"
+    ],
+    "missing": ["customer_message_received received 2026-09-18T12:10:00+03:00"],
+    "unsupported": ["customer_withdrawal received 2026-09-18T12:10:00+03:00"],
+    "notes": "Sending time is now included separately; the receipt is still assigned the unsupported withdrawal meaning."
+  },
+  "next_step": {
+    "pass": false,
+    "expected_readiness": "request_evidence",
+    "expected_action": "ask_user",
+    "expected_requirements": ["original_customer_message", "delivery_receipt"],
+    "actual_readiness": "ready_for_rules",
+    "actual_action": "none"
+  },
+  "runtime_validation": "needs_operator_review without blocking issues",
+  "overall_pass": false,
+  "operator_decision_created": false
+}

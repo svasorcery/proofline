@@ -1,0 +1,5 @@
+# Closed Groq Free Stage 4 acceptance
+
+Qwen 3.8 27B, Chat Completions strict JSON Schema, reasoning none, a ceiling of 1,000 completion tokens, and a budget of $0. All V01–V06 run once, on one isolated instance with one profile, spaced at least 65 seconds, for six calls maximum. The guard stops at any technical failure. V05's request is identical to the v37 control. The other five requests are identical to v34.
+
+Raw model output remains separate from the proposal. V03 can link the bank trace chosen for the settlement event to a partially supported settlement fact. V05 can clarify the type of an existing message event when its exact source and timestamp prove the role. If the selected refusal occurs only in the timing fact, the same reviewed receipt ID must occur both in that fact and in the receipt event to reuse the refusal. The decoder does not add events, change times or add quotes absent from raw selections. The frozen rubric and application validation operate on the operator-facing card. No operator decisions are executed by the batch.

@@ -1,0 +1,15 @@
+{
+  "runtime_key_injected_via_stdin_only": true,
+  "app_container_removed": true,
+  "database_stopped": true,
+  "database_counts": {
+    "analysis_runs": 3,
+    "proposal_revisions": 2,
+    "review_decisions": 0
+  },
+  "project": "proofline-live-stage4-single-profile-20261118",
+  "live_process_stopped": true,
+  "remaining_containers": [
+    "proofline-live-stage4-single-profile-20261118-db-1"
+  ]
+}

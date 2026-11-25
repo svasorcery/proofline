@@ -1,0 +1,35 @@
+{
+  "observed_date": "2026-11-17",
+  "source": "Read-only Groq Console > Dashboard > Logs > Show Errors Only",
+  "url": "https://console.groq.com/dashboard/logs?cursor=&only_errors=true",
+  "new_inference_calls": 0,
+  "records": [
+    {
+      "trial": "v1",
+      "condition": "full-V05",
+      "local_request_id": "req_01m7jr4a38e8xt58skwactap6m",
+      "displayed_request_id": "req_0...ap6m",
+      "request_time_moscow": "2026-11-16 20:57:54",
+      "http_status": 400,
+      "code": "json_validate_failed",
+      "input_tokens": 2460,
+      "output_tokens": 2383,
+      "ttft_seconds": 0.37107,
+      "latency_seconds": 5.39517
+    },
+    {
+      "trial": "v2-v3.2",
+      "condition": "full-V02",
+      "local_request_id": "req_01m7k1szv6erfs1dr3ywhr2hj0",
+      "displayed_request_id": "req_0...2hj0",
+      "request_time_moscow": "2026-11-16 23:47:02",
+      "http_status": 400,
+      "code": "json_validate_failed",
+      "input_tokens": 2639,
+      "output_tokens": 1942,
+      "ttft_seconds": 0.349704,
+      "latency_seconds": 4.353856
+    }
+  ],
+  "interpretation": "Both displayed completion token counts are below requested 4096. This provides no evidence of hitting that output cap, but does not identify the exact JSON/schema violation. Original API usage=null records remain unchanged."
+}

@@ -1,0 +1,15 @@
+{
+  "project": "proofline-live-stage4-gpt-oss-20b-v04-compact-control-20261125",
+  "runtime_key_injected_via_stdin_only": true,
+  "app_container_removed": true,
+  "database_stopped": true,
+  "remaining_containers": [
+    "proofline-live-stage4-gpt-oss-20b-v04-compact-control-20261125-db-1"
+  ],
+  "database_counts": {
+    "analysis_runs": 1,
+    "proposal_revisions": 1,
+    "review_decisions": 0
+  },
+  "live_process_stopped": true
+}

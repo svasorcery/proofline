@@ -1,0 +1,176 @@
+{
+  "new_inference_calls": 0,
+  "checks": {
+    "live_v1": {
+      "command": [
+        "python",
+        "-B",
+        "-X",
+        "utf8",
+        "scripts/verify_live_archive.py",
+        "evals/live/v1-groq-2026-11-16"
+      ],
+      "exit_code": 0,
+      "output": {
+        "archive_integrity": "pass",
+        "artifact_hashes_verified": 25,
+        "reserved_attempts": 5,
+        "unique_provider_responses": 4,
+        "historical_policy_versions": [
+          "proofline-policy-v3.1-unmeasured-1"
+        ],
+        "stopped": true,
+        "received_usage_totals": {
+          "input_tokens": 9319,
+          "output_tokens": 6978,
+          "total_tokens": 16297
+        },
+        "usage_unknown_for": [
+          "full-V05"
+        ],
+        "outcomes": [
+          {
+            "condition": "full-V02",
+            "status": "succeeded",
+            "error_code": null
+          },
+          {
+            "condition": "full-V04",
+            "status": "succeeded",
+            "error_code": null
+          },
+          {
+            "condition": "full-V01",
+            "status": "succeeded",
+            "error_code": null
+          },
+          {
+            "condition": "full-V03",
+            "status": "succeeded",
+            "error_code": null
+          },
+          {
+            "condition": "full-V05",
+            "status": "failed",
+            "error_code": "PROVIDER_REQUEST_REJECTED"
+          }
+        ],
+        "source_drift": {
+          "changed": [
+            "src/proofline/providers/live_profile.py",
+            "src/proofline/providers/openai_responses.py"
+          ],
+          "missing": [],
+          "interpretation": "Provenance comparison only; recorded evidence is verified independently."
+        }
+      }
+    },
+    "live_v2": {
+      "command": [
+        "python",
+        "-B",
+        "-X",
+        "utf8",
+        "scripts/verify_live_archive.py",
+        "evals/live/v2-groq-v32-2026-11-16"
+      ],
+      "exit_code": 0,
+      "output": {
+        "archive_integrity": "pass",
+        "artifact_hashes_verified": 8,
+        "reserved_attempts": 1,
+        "unique_provider_responses": 0,
+        "historical_policy_versions": [
+          "proofline-policy-v3.2-candidate-1"
+        ],
+        "stopped": true,
+        "received_usage_totals": {
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0
+        },
+        "usage_unknown_for": [
+          "full-V02"
+        ],
+        "outcomes": [
+          {
+            "condition": "full-V02",
+            "status": "failed",
+            "error_code": "INVALID_MODEL_OUTPUT"
+          }
+        ],
+        "source_drift": {
+          "changed": [],
+          "missing": [],
+          "interpretation": "Provenance comparison only; recorded evidence is verified independently."
+        }
+      }
+    },
+    "frozen_baseline": {
+      "command": [
+        "python",
+        "-B",
+        "-X",
+        "utf8",
+        "evals/baselines/v3/verify.py"
+      ],
+      "exit_code": 0,
+      "output": {
+        "artifact_hashes_verified": 55,
+        "measured_input_hashes_verified": 10,
+        "post_run_artifact_hashes_verified": 3,
+        "reference_conditions_validated": 9,
+        "recorded_conditions": 9,
+        "pack_pass": 7,
+        "failed_conditions": [
+          "full/V02",
+          "full/V04"
+        ],
+        "literal_fragments": 72,
+        "fact_values_correct": 13,
+        "blocked_for_approval": [
+          "full/V04"
+        ],
+        "needs_operator_review": 8,
+        "policy_v3_1_measured": false,
+        "new_model_calls": 0
+      }
+    },
+    "diff_whitespace": {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    "frozen_baseline_tests": {
+      "command": [
+        "python",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "evals/baselines/v3",
+        "-p",
+        "test_*.py"
+      ],
+      "exit_code": 0,
+      "output": ".....................\r\n----------------------------------------------------------------------\r\nRan 21 tests in 0.335s\r\n\r\nOK",
+      "execution": "Approved outside filesystem sandbox after two temporary-directory PermissionError failures. No test code changed."
+    }
+  },
+  "initial_sandbox_test_attempt": {
+    "tests_run": 21,
+    "errors": 2,
+    "error": "PermissionError WinError 5 creating standalone in temporary directory",
+    "affected_tests": [
+      "test_changed_recording_fails_instead_of_silently_rebasing_metrics",
+      "test_standalone_copy_preserves_measured_failures_and_operator_gate"
+    ]
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "format_version": 1,
+  "completed_at": "2026-11-16T20:49:57.889976+00:00",
+  "outcome": "stopped_on_first_technical_error",
+  "requests_attempted": 1,
+  "max_requests": 10,
+  "unused_budget_requests": 9,
+  "technical_successes": 0,
+  "technical_failures": 1,
+  "stop_condition": "full-V02",
+  "stop_error": {
+    "code": "INVALID_MODEL_OUTPUT",
+    "message": "Live analysis failed; no automatic retry was made."
+  },
+  "provider_error_code": "json_validate_failed",
+  "provider_error_type": "invalid_request_error",
+  "provider_error_stage": "output_validation",
+  "provider_request_id": "req_01m7k1szv6erfs1dr3ywhr2hj0",
+  "http_status": 400,
+  "latency_seconds": 5.749182,
+  "quality": {
+    "assessed_cases": 0,
+    "complete_passes": null,
+    "status": "not_assessed_no_proposal"
+  },
+  "received_usage_totals": null,
+  "usage_unknown_for": [
+    "full-V02"
+  ],
+  "approved_budget_usd": 0,
+  "account_tier": "Free",
+  "account_tier_source": "author confirmation",
+  "monetary_cost_measured": null,
+  "operator_decisions_created": 0,
+  "automatic_retries": 0,
+  "fallbacks": 0,
+  "live_disabled_after_stop": true,
+  "acceptance_runtime_keys_removed": true,
+  "main_volume_unchanged": true,
+  "main_volume_sha256_before": "57fb73708a79c7df91d2eca38812b3882f55619cd96e0233a7af2b9c6dbced46",
+  "main_volume_sha256_after": "57fb73708a79c7df91d2eca38812b3882f55619cd96e0233a7af2b9c6dbced46",
+  "v1_artifacts_unchanged": true,
+  "v1_database_unchanged": true,
+  "same_v02_business_context_as_v1": true,
+  "remaining_conditions_not_run": [
+    "full-V04",
+    "full-V01",
+    "full-V03",
+    "full-V05",
+    "full-V06",
+    "ablation-V01",
+    "ablation-V03",
+    "ablation-V05",
+    "injection-V04"
+  ]
+}

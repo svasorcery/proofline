@@ -1,0 +1,40 @@
+{
+  "reviewer": "assistant",
+  "independent_human_labels": false,
+  "condition": "full-V04",
+  "technical_pass": true,
+  "fact_values": {
+    "pass": true,
+    "correct": 1,
+    "total": 1,
+    "expected": {"alternative_acceptance": "conditional"},
+    "actual": {"alternative_acceptance": "conditional"}
+  },
+  "evidence_sufficiency": {
+    "pass": false,
+    "notes": "The fact's own evidence correctly quotes the conditional acceptance and both unresolved conditions. However, alternative_offered cites only 'Отправлено: 2026-10-08T12:10:00+03:00', without the hotel's actual offer text. This timestamp cannot by itself prove an offer under the fixed field-local criterion and v3.2 instruction. The customer_replied citation is also only a Date header; it lacks sender/message context. Fragments elsewhere or uncited text in the same source do not transfer to this event."
+  },
+  "chronology": {
+    "pass": true,
+    "correct": [
+      "alternative_offered sent 2026-10-08T12:10:00+03:00",
+      "customer_replied sent 2026-10-08T12:25:00+03:00",
+      "customer_message_received received 2026-10-08T12:27:00+03:00"
+    ],
+    "missing": [],
+    "unsupported": [],
+    "notes": "All event values, times and roles match the supplied case; event-level evidence insufficiency is assessed separately. No unconditional alternative_accepted event was emitted."
+  },
+  "next_step": {
+    "pass": true,
+    "expected_readiness": "request_evidence",
+    "expected_action": "ask_user",
+    "expected_requirements": ["quiet_room", "courtyard_windows"],
+    "actual_readiness": "request_evidence",
+    "actual_action": "ask_user",
+    "actual_requirements": ["quiet_room", "courtyard_windows"]
+  },
+  "runtime_validation": "needs_operator_review without blocking issues",
+  "overall_pass": false,
+  "operator_decision_created": false
+}

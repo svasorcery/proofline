@@ -1,0 +1,13 @@
+{
+  "request_id_suffix": "setx",
+  "observed_time_moscow": "2026-11-24T18:11:03+03:00",
+  "model": "qwen/qwen3.8-27b",
+  "http_status": 400,
+  "error_type": "invalid_request_error",
+  "local_error_parameter": "response_format",
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "provider_latency_seconds": 0.008,
+  "source": "Groq Console / Dashboard / Logs / Show Errors Only",
+  "exact_schema_keyword_exposed": false
+}

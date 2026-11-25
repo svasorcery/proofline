@@ -1,0 +1,53 @@
+{
+  "scope": "Offline diagnosis after v46; the live results are unchanged.",
+  "model_calls": 0,
+  "v02_counterfactuals": {
+    "fact=False,next_step=False": {
+      "application_issues": [],
+      "rubric_pass": false,
+      "timeline_unchanged": true
+    },
+    "fact=True,next_step=False": {
+      "application_issues": [
+        "premature_readiness"
+      ],
+      "rubric_pass": false,
+      "timeline_unchanged": true
+    },
+    "fact=False,next_step=True": {
+      "application_issues": [],
+      "rubric_pass": false,
+      "timeline_unchanged": true
+    },
+    "fact=True,next_step=True": {
+      "application_issues": [],
+      "rubric_pass": true,
+      "timeline_unchanged": true
+    }
+  },
+  "v03": {
+    "actual_fail_shape": {
+      "candidate_characters": 1098,
+      "top_level_keys_match": true,
+      "timeline_count": 1,
+      "refund_evidence": {
+        "payment_fact": {
+          "ids": 4,
+          "objects": 0,
+          "other": 0
+        },
+        "timeline": [
+          {
+            "ids": 0,
+            "objects": 1,
+            "other": 0
+          }
+        ]
+      }
+    },
+    "remaining_object_example_found": true,
+    "candidate_removes_only_remaining_object_example": true,
+    "candidate_has_no_object_citation_examples": true,
+    "candidate_schema_unchanged": true
+  }
+}

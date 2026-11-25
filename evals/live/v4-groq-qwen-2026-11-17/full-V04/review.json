@@ -1,0 +1,40 @@
+{
+  "reviewer": "assistant", "independent_human_labels": false,
+  "condition": "full-V04", "technical_pass": true,
+  "technical_pass_scope": "Provider request and JSON shape succeeded; application evidence/fact validators blocked the proposal.",
+  "fact_values": {
+    "pass": false, "correct": 0, "total": 1,
+    "expected": {"alternative_acceptance": "conditional"},
+    "actual_entries": [
+      {"key": "alternative_acceptance", "value": "unconfirmed"},
+      {"key": "alternative_acceptance", "value": "unconfirmed"}
+    ],
+    "unique_requested_keys_pass": false,
+    "notes": "The one requested fact is emitted twice, both with the wrong value. Scoring denominator is requested facts, not duplicate output entries."
+  },
+  "evidence_sufficiency": {
+    "pass": false,
+    "notes": "The first duplicate fact has no evidence. The second quotes explicit conditional acceptance but assigns unconfirmed. Its third fragment replaces the source newline after 'Текст принятого сообщения:' with a space, violating literal quotation."
+  },
+  "chronology": {
+    "pass": false, "correct": [], "unsupported": [],
+    "missing": [
+      "alternative_offered sent 2026-10-08T12:10:00+03:00",
+      "customer_replied sent 2026-10-08T12:25:00+03:00",
+      "customer_message_received received 2026-10-08T12:27:00+03:00"
+    ],
+    "notes": "No timeline events are emitted, although reply times are quoted in fact evidence."
+  },
+  "next_step": {
+    "pass": false,
+    "expected_readiness": "request_evidence", "expected_action": "ask_user",
+    "expected_requirements": ["quiet_room", "courtyard_windows"],
+    "actual_readiness": "request_evidence", "actual_action": "read_source",
+    "actual_locator": "f588eb3ec91c417e",
+    "actual_requirements": ["original_acceptance_reply", "quiet_room", "courtyard_windows"],
+    "notes": "The selected hotel-offer source is already included. Original acceptance reply is also supplied, not missing. Re-reading the same snapshot cannot establish the unresolved room conditions."
+  },
+  "runtime_validation": "blocked_for_approval",
+  "runtime_blocking_codes": ["fact_keys_mismatch", "fragment_not_literal", "repeated_snapshot_lookup"],
+  "overall_pass": false, "operator_decision_created": false
+}

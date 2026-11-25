@@ -1,0 +1,22 @@
+{
+  "max_requests": 1,
+  "approved_budget_usd": 0,
+  "attempts": [
+    {
+      "condition": "full-V06",
+      "case_id": "V06",
+      "started_at": "2026-11-25T17:03:08.391035+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-gpt-oss-20b-release-v06-control-20261125-full-V06",
+      "http_status": 201,
+      "finished_at": "2026-11-25T17:03:11.789967+00:00",
+      "run_id": "d1cbe726-d2b8-46fb-8ca0-16e18f191a5f"
+    }
+  ],
+  "stopped": true,
+  "stop_reason": "Batch completed"
+}

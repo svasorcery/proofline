@@ -1,0 +1,99 @@
+{
+  "id": "V01",
+  "title": "\u041f\u0435\u0440\u0435\u043f\u0438\u0441\u043a\u0430 \u043e \u0432\u0440\u0435\u043c\u0435\u043d\u0438 \u0432\u044b\u0435\u0437\u0434\u0430",
+  "version": 2,
+  "content_revision": 2,
+  "current_proposal_revision_id": null,
+  "status": "unanalysed",
+  "analysis_running": false,
+  "created_at": "2026-11-24T20:09:48.372796Z",
+  "updated_at": "2026-11-24T20:10:35.425920Z",
+  "user_text": "\u0412 \u0438\u0441\u0442\u043e\u0440\u0438\u0438 \u0432\u0438\u0436\u0443 \u043d\u043e\u0432\u043e\u0435 \u0432\u0440\u0435\u043c\u044f. \u0421\u043e\u0431\u0435\u0440\u0438\u0442\u0435 \u043f\u043e\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043d\u0438\u0435 \u0442\u043e\u0433\u043e, \u043e \u0447\u0451\u043c \u0434\u043e\u0433\u043e\u0432\u043e\u0440\u0438\u043b\u0438\u0441\u044c \u0441 \u043f\u043e\u0441\u0442\u0430\u0432\u0449\u0438\u043a\u043e\u043c.",
+  "requested_fact_keys": [
+    "alternative_acceptance"
+  ],
+  "money": {
+    "amount_minor": 16700,
+    "currency": "USD",
+    "scale": 2
+  },
+  "context": {},
+  "sources": [
+    {
+      "case_id": "V01",
+      "source_id": "5b910f89ca134035",
+      "kind": "document",
+      "locator": "743be4e0f2004f13",
+      "title": "5b910f89ca134035",
+      "trust": "primary",
+      "position": 0,
+      "included": true,
+      "current_version_id": "2b93c45d-c324-4631-a533-9a02c993e330",
+      "versions": [
+        {
+          "id": "2b93c45d-c324-4631-a533-9a02c993e330",
+          "sequence": 1,
+          "text_sha256": "8730b45159b3ad7d11f7117786e0237158e5767236231d90cc7c9e64ee6d6ae8",
+          "created_at": "2026-11-24T20:09:48.372796Z"
+        }
+      ]
+    },
+    {
+      "case_id": "V01",
+      "source_id": "b5df68cf9b9c4f15",
+      "kind": "document",
+      "locator": "07968b8cd218434e",
+      "title": "\u0421\u043f\u0440\u0430\u0432\u043e\u0447\u043d\u0430\u044f \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0430",
+      "trust": "context",
+      "position": 1,
+      "included": true,
+      "current_version_id": "9abbc0d3-196a-48ee-9275-0445dc0f6395",
+      "versions": [
+        {
+          "id": "9abbc0d3-196a-48ee-9275-0445dc0f6395",
+          "sequence": 1,
+          "text_sha256": "6a19fe8509355f0388dcc3351dcca1917ce4d421d788ca0e93f33e136817e10d",
+          "created_at": "2026-11-24T20:09:48.372796Z"
+        }
+      ]
+    },
+    {
+      "case_id": "V01",
+      "source_id": "b8821b7c6a2d432a",
+      "kind": "provider_log",
+      "locator": "011dad68c7164f5d",
+      "title": "\u0417\u0430\u043f\u0438\u0441\u044c \u043e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u044f",
+      "trust": "primary",
+      "position": 2,
+      "included": true,
+      "current_version_id": "951b5d73-cc1a-43fb-84ce-e84e5fbc2117",
+      "versions": [
+        {
+          "id": "951b5d73-cc1a-43fb-84ce-e84e5fbc2117",
+          "sequence": 1,
+          "text_sha256": "42fc452f909ec003ff3b683bd732165dda66935b4cad292c48179451e608371f",
+          "created_at": "2026-11-24T20:09:48.372796Z"
+        }
+      ]
+    },
+    {
+      "case_id": "V01",
+      "source_id": "f9a88d5b726a4d4b",
+      "kind": "document",
+      "locator": "1618ae5e5b894145",
+      "title": "f9a88d5b726a4d4b",
+      "trust": "primary",
+      "position": 3,
+      "included": false,
+      "current_version_id": "e8f0ff2a-485f-4b82-b372-5840113f5779",
+      "versions": [
+        {
+          "id": "e8f0ff2a-485f-4b82-b372-5840113f5779",
+          "sequence": 1,
+          "text_sha256": "c3fb37a53f395bd5429837611c66836e692417f7414370f34d87ad7712c21214",
+          "created_at": "2026-11-24T20:09:48.372796Z"
+        }
+      ]
+    }
+  ]
+}

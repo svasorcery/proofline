@@ -1,0 +1,30 @@
+{
+  "custom_project_limits": false,
+  "sources": [
+    "https://console.groq.com/settings/billing",
+    "https://console.groq.com/settings/organization/usage?tab=activity",
+    "https://console.groq.com/docs/rate-limits"
+  ],
+  "model": "qwen/qwen3.8-27b",
+  "output_limit_source": "Documented in v24 account rejection and used in v29.",
+  "planned_maximum_attempts": 1,
+  "scope": "Use the highest visible daily bars on the fresh user screenshot as a conservative bound; no exact UTC day claim.",
+  "observed_at": "2026-11-19T09:28:14.3057991+00:00",
+  "plan": "Free",
+  "project": "Default Project",
+  "observed_output_tokens_per_minute": 1000,
+  "daily_chart_utc": {
+    "data_delay_minutes": 15,
+    "approximate_tokens": 123000,
+    "approximate_requests": 28,
+    "conservative_token_upper_bound": 140000
+  },
+  "evidence": "User screenshots: Billing Current Plan Free $0 and organization Qwen Activity.",
+  "project_settings_source": "Last verified same project in v29; fresh screenshot confirms Free.",
+  "configured_limits": {
+    "requests_per_day": 1000,
+    "requests_per_minute": 30,
+    "tokens_per_minute": 8000,
+    "tokens_per_day": 200000
+  }
+}

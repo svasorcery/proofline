@@ -1,0 +1,32 @@
+{
+  "protected_files_unchanged": true,
+  "protected_files_verified": 425,
+  "protected_container_states_unchanged": true,
+  "protected_containers_verified": 33,
+  "protected_volumes_unchanged": true,
+  "protected_volume_fingerprints": {
+    "proofline-live-qwen-choices-v04-20261118-db-1": "1a88c9fb4e1661ca4ca686d7cb40d41851437b680c4e323b44e912c9a294f6f8",
+    "proofline-live-qwen-choices-pair-20261117-db-1": "15cedff422e7784de70522b9e01c84914dd9468de062dc546030f280f6e0d7b4",
+    "proofline-live-qwen-choices-20261117-db-1": "d21be7fee80d2fe9cde3fe78f8d64f7e1f8b5df0fa35704a3b2f99adde4f6160",
+    "proofline-live-qwen-v33-20261117-db-1": "23fe2f3c8980fd8b3a22af3cca268083fc61aa4bcd76d4dfc5e97d97a9e7544e",
+    "proofline-live-qwen-medium-20261117-db-1": "c451ace54a090e8adcfeb6aed07dea93c07fb10fa0b12c1049afc29000dda850",
+    "proofline-live-qwen-20261117-db-1": "053e4a5e6bb3b07e80928fc0afbc452718577178a2717e9e69c06eaa9d7406be",
+    "proofline-live-chat-20261117-db-1": "a12957456d5555dbc147846473493d3698664c42a1d42cddd100ca3b7fcac2ef",
+    "proofline-live-v32-20261116-db-1": "156a12501c7cbe1b16aa5048e38477f6e3485244477ed6c32c235e16a8d1607e",
+    "proofline-live-m4-20261116-db-1": "22de98266ff3a69bf02383c1726b46f66f049ac02eb47ea778ec4158557efc64",
+    "proofline-db-1": "df52645f43f3113517ac791634f7baba5ff75fdaacaecf12583818cea8e8d3f0",
+    "proofline-live-qwen-confirmations-v04-20261118-db-1": "7c2925317809e009e71f6e6fbbbad496310d227c1d010df8797e82ba2045c44a",
+    "proofline-live-qwen-same-document-v04-20261118-db-1": "36095af266b21c65294cc6a20ec0f35b800833d3b27a0d61a8fcca7f34462f29",
+    "proofline-live-qwen-citation-ids-v04-20261118-db-1": "ae23d0daa32e75a90a2ec534a7dad8156aad78be5c661ceb45daf1e68596f91a",
+    "proofline-live-qwen-citation-ids-v02-20261118-db-1": "a199df103323ca7ca7393804a9d295a1090dec03b2ff08b9a438cc824e3eebc3",
+    "proofline-live-qwen-timeline-v02-20261118-db-1": "db593a28ce19bf41d60c1dc73ed8f60e38d371e2282c978239c131fe48ee20a7",
+    "proofline-live-qwen-timeline-example-v02-20261118-db-1": "06884fbd112bc45dad433a82f2badc638a23b2a05051830f51cd9ad08046af18",
+    "proofline-live-qwen-citation-ids-v01-20261118-db-1": "21e82af23ab3ef2d3f28d2c7a97a80d89d97667af8fd5d3df0fcbaa99162a395",
+    "proofline-live-qwen-lookup-example-v01-20261118-db-1": "e2343ab4b5f404102bbfaeaa1838d163f6388d6612669918a51935c02ccee6a1",
+    "proofline-live-qwen-receipt-role-v01-20261118-db-1": "9fb16bf36fcf0a825a93839c5e80d2bb35f99a5fcb6f7ac79c630d4174fd6708",
+    "proofline-live-qwen-remaining-20261118-db-1": "73127a0fe5fb45b1a6a9530b466be8ada87829f20a0372689ad5e030420f4a6d",
+    "proofline-live-qwen-remaining-timeline-20261118-db-1": "641f948748f2f041af29c28611d231a987d5d2e054ef25ff9e67920e1de7356c",
+    "proofline-live-qwen-v06-quota-20261118-db-1": "5096d411fda8a92c97dfc0823a59349aaca6d2ca10343351ada118e5984be07f",
+    "proofline-live-qwen-v06-order-20261118-db-1": "b7d71cef11495752317e7597f383b94143c12f82e75eec5a1f0e47a6572d31fb"
+  }
+}

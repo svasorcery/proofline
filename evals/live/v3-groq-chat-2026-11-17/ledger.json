@@ -1,0 +1,37 @@
+{
+  "format_version": 1,
+  "max_requests": 2,
+  "approved_budget_usd": 0,
+  "stopped": true,
+  "attempts": [
+    {
+      "condition": "full-V02",
+      "case_id": "V02",
+      "started_at": "2026-11-17T10:05:31.548757+00:00",
+      "idempotency_key": "groq-chat-v3-20261117-full-V02",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "finished_at": "2026-11-17T10:05:40.402853+00:00",
+      "http_status": 201,
+      "run_id": "811bee2d-0aca-41c4-b800-d79b04ba26a5"
+    },
+    {
+      "condition": "full-V04",
+      "case_id": "V04",
+      "started_at": "2026-11-17T10:06:56.072794+00:00",
+      "idempotency_key": "groq-chat-v3-20261117-full-V04",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "finished_at": "2026-11-17T10:07:00.162545+00:00",
+      "http_status": 201,
+      "run_id": "68e7d8a9-1a6c-4b5c-947e-ad75934f3fcf"
+    }
+  ],
+  "stop_reason": "Approved two-request budget completed"
+}

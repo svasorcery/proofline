@@ -1,0 +1,64 @@
+{
+  "max_requests": 6,
+  "approved_budget_usd": 0,
+  "attempts": [
+    {
+      "condition": "ablation-V01",
+      "case_id": "V01",
+      "started_at": "2026-11-25T12:58:35.500495+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 2
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-gpt-oss-20b-reviewed-assembly-acceptance-20261125-ablation-V01",
+      "http_status": 201,
+      "finished_at": "2026-11-25T12:58:39.421252+00:00",
+      "run_id": "9e8dea18-cbbb-4927-9a2e-d65672c66262"
+    },
+    {
+      "condition": "full-V02",
+      "case_id": "V02",
+      "started_at": "2026-11-25T12:59:42.812323+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-gpt-oss-20b-reviewed-assembly-acceptance-20261125-full-V02",
+      "http_status": 201,
+      "finished_at": "2026-11-25T12:59:43.948900+00:00",
+      "run_id": "8ad56405-7d94-45c7-bf6d-5caa27f25e87"
+    },
+    {
+      "condition": "full-V03",
+      "case_id": "V03",
+      "started_at": "2026-11-25T13:00:47.954956+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-gpt-oss-20b-reviewed-assembly-acceptance-20261125-full-V03",
+      "http_status": 201,
+      "finished_at": "2026-11-25T13:00:48.851396+00:00",
+      "run_id": "f7d3533d-95c9-41bd-8b79-3c747c9d5841"
+    },
+    {
+      "condition": "full-V04",
+      "case_id": "V04",
+      "started_at": "2026-11-25T13:01:53.114880+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "failed",
+      "idempotency_key": "groq-gpt-oss-20b-reviewed-assembly-acceptance-20261125-full-V04",
+      "http_status": 201,
+      "finished_at": "2026-11-25T13:01:55.395347+00:00",
+      "run_id": "8bc761e6-1a99-4997-a340-3b957ca605ed"
+    }
+  ],
+  "stopped": true,
+  "stop_reason": "Stop on status 400 / failed after V04"
+}

@@ -1,0 +1,42 @@
+{
+  "reviewer": "assistant",
+  "independent_human_labels": false,
+  "condition": "full-V02",
+  "technical_pass": true,
+  "fact_values": {
+    "pass": true,
+    "correct": 2,
+    "total": 2,
+    "expected": {"cancellation_status": "confirmed", "withdrawal_timing": "unconfirmed"},
+    "actual": {"cancellation_status": "confirmed", "withdrawal_timing": "unconfirmed"}
+  },
+  "evidence_sufficiency": {
+    "pass": true,
+    "notes": "The facts cite the supplier operation and the absence of an original withdrawal and delivery receipt. The reference note corroborates the distinction between the form and the earlier message. The cancellation evidence contains the event time, but a timestamp under facts does not create a timeline entry."
+  },
+  "chronology": {
+    "pass": false,
+    "correct": [],
+    "missing": [
+      "supplier_cancelled occurred 2026-09-18T10:20:00+03:00",
+      "customer_replied sent 2026-09-18T12:09:55+03:00",
+      "customer_message_received received 2026-09-18T12:10:00+03:00"
+    ],
+    "unsupported": []
+  },
+  "next_step": {
+    "pass": false,
+    "expected_readiness": "request_evidence",
+    "expected_action": "ask_user",
+    "expected_requirements": ["original_customer_message", "delivery_receipt"],
+    "actual_readiness": "request_evidence",
+    "actual_action": "query_provider",
+    "actual_locator": "84934bcfab7e4745",
+    "actual_requirements": ["original_customer_message", "delivery_receipt"],
+    "notes": "The action now matches provider_log, but the same log is already included. All catalogue sources are included, so the stop condition for a lookup holds and the missing documents should be requested with ask_user."
+  },
+  "runtime_validation": "blocked_for_approval",
+  "runtime_blocking_codes": ["repeated_snapshot_lookup"],
+  "overall_pass": false,
+  "operator_decision_created": false
+}

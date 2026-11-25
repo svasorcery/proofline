@@ -1,0 +1,87 @@
+{
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b",
+  "requested_reasoning_effort": "medium",
+  "requests_attempted": 2,
+  "approved_max_requests": 2,
+  "approved_budget_usd": 0,
+  "technical_successes": 2,
+  "technical_failures": 0,
+  "complete_quality_passes": 0,
+  "conditions": [
+    {
+      "condition": "full-V02",
+      "matching_business_snapshot": true,
+      "provider_default": {
+        "technical_pass": true,
+        "quality_pass": false,
+        "runtime_validation": "needs_operator_review without blocking issues",
+        "latency_seconds": 3.848339,
+        "request_id": "req_01m7mpebzvecf8vez220dk34jc",
+        "usage": {
+          "prompt_tokens": 2109,
+          "completion_tokens": 616,
+          "total_tokens": 2725
+        },
+        "reported_reasoning_tokens": null,
+        "literal_fragments_valid": null
+      },
+      "medium": {
+        "technical_pass": true,
+        "quality_pass": false,
+        "runtime_validation": "blocked_for_approval",
+        "latency_seconds": 9.395866,
+        "request_id": "req_01m7ndxmnje4h93hp29qxbfb8x",
+        "usage": {
+          "prompt_tokens": 2109,
+          "completion_tokens": 1572,
+          "total_tokens": 3681
+        },
+        "reported_reasoning_tokens": 1024,
+        "literal_fragments_valid": 6
+      }
+    },
+    {
+      "condition": "full-V04",
+      "matching_business_snapshot": true,
+      "provider_default": {
+        "technical_pass": true,
+        "quality_pass": false,
+        "runtime_validation": "blocked_for_approval",
+        "latency_seconds": 1.44206,
+        "request_id": "req_01m7mpgwntem1vvwkxrxkmekhp",
+        "usage": {
+          "prompt_tokens": 2081,
+          "completion_tokens": 261,
+          "total_tokens": 2342
+        },
+        "reported_reasoning_tokens": null,
+        "literal_fragments_valid": null
+      },
+      "medium": {
+        "technical_pass": true,
+        "quality_pass": false,
+        "runtime_validation": "needs_operator_review without blocking issues",
+        "latency_seconds": 5.088667,
+        "request_id": "req_01m7ndzt6weytavdfghwnvgcnz",
+        "usage": {
+          "prompt_tokens": 2083,
+          "completion_tokens": 1654,
+          "total_tokens": 3737
+        },
+        "reported_reasoning_tokens": 1024,
+        "literal_fragments_valid": 8
+      }
+    }
+  ],
+  "literal_fragments": 14,
+  "literal_fragments_valid": 14,
+  "usage": {
+    "prompt_tokens": 4192,
+    "completion_tokens": 3226,
+    "total_tokens": 7418,
+    "reasoning_tokens_included_in_completion": 2048
+  },
+  "monetary_cost": null,
+  "operator_decisions": 0
+}

@@ -1,0 +1,154 @@
+{
+  "case_id": "V06",
+  "technical_pass": true,
+  "provider_http_status": 200,
+  "network_error_type": null,
+  "provider_error_code": null,
+  "provider_error_stage": null,
+  "provider_output_field_diagnostics": null,
+  "error_code": null,
+  "quality_pass": false,
+  "reference_human_validated": false,
+  "usage": {
+    "queue_time": 0.08587115,
+    "total_time": 0.709451867,
+    "prompt_time": 0.214932386,
+    "total_tokens": 4301,
+    "prompt_tokens": 3880,
+    "completion_time": 0.494519481,
+    "completion_tokens": 421,
+    "completion_tokens_details": {
+      "reasoning_tokens": 179
+    }
+  },
+  "reviewed_evidence_rules_active": true,
+  "app_owned_event_types": [],
+  "raw_timeline_respects_assembly": true,
+  "reference_checks": {
+    "case_id": "V06",
+    "runtime_valid": true,
+    "runtime_issues": [],
+    "facts_exact": true,
+    "evidence_complete": false,
+    "timeline_complete": false,
+    "followup_complete": true,
+    "readiness_ok": true,
+    "pack_pass": false,
+    "facts": [
+      {
+        "key": "cancellation_status",
+        "value_ok": true,
+        "evidence_ok": true
+      },
+      {
+        "key": "payment_outcome",
+        "value_ok": true,
+        "evidence_ok": false
+      }
+    ],
+    "missing_events": [],
+    "unsupported_event_indices": [
+      0
+    ],
+    "missing_requirements": [],
+    "extra_requirements": []
+  },
+  "card_status": "needs_operator_review",
+  "blocking_issues": [],
+  "quoted_fragments": {
+    "literal": 5,
+    "total": 5
+  },
+  "expected_facts": {
+    "cancellation_status": "confirmed",
+    "payment_outcome": "authorization_release"
+  },
+  "actual_facts": {
+    "payment_outcome": "authorization_release",
+    "cancellation_status": "confirmed"
+  },
+  "expected_timeline": [
+    {
+      "event_type": "supplier_cancelled",
+      "value": "2026-06-22T16:40:00+03:00",
+      "role": "occurred"
+    },
+    {
+      "event_type": "authorization_released",
+      "value": "2026-06-22T16:43:00+03:00",
+      "role": "occurred"
+    }
+  ],
+  "raw_timeline_order": [
+    {
+      "value": "2026-06-22T16:40:00+03:00",
+      "role": "occurred"
+    },
+    {
+      "value": "2026-06-22T15:52:00+03:00",
+      "role": "occurred"
+    },
+    {
+      "value": "2026-06-22T16:43:00+03:00",
+      "role": "occurred"
+    }
+  ],
+  "actual_timeline": [
+    {
+      "event_type": "payment_captured",
+      "time": {
+        "value": "2026-06-22T15:52:00+03:00",
+        "role": "occurred"
+      },
+      "evidence": [
+        {
+          "source_id": "5f5576cbae5e40c6",
+          "fragments": [
+            "2026-06-22T15:52:00+03:00 | auth.open | банк одобрил резерв по карте"
+          ]
+        }
+      ]
+    },
+    {
+      "event_type": "supplier_cancelled",
+      "time": {
+        "value": "2026-06-22T16:40:00+03:00",
+        "role": "occurred"
+      },
+      "evidence": [
+        {
+          "source_id": "845cff973bd4435d",
+          "fragments": [
+            "2026-06-22T16:40:00+03:00 — бронирование отменено поставщиком, исполнение прекращено."
+          ]
+        }
+      ]
+    },
+    {
+      "event_type": "authorization_released",
+      "time": {
+        "value": "2026-06-22T16:43:00+03:00",
+        "role": "occurred"
+      },
+      "evidence": [
+        {
+          "source_id": "5f5576cbae5e40c6",
+          "fragments": [
+            "2026-06-22T16:43:00+03:00 | auth.reverse | банк снял резерв по исходной авторизации"
+          ]
+        }
+      ]
+    }
+  ],
+  "expected_follow_up": {
+    "action": "none",
+    "locator": null,
+    "requirements": []
+  },
+  "actual_follow_up": {
+    "action": "none",
+    "locator": null,
+    "requirements": []
+  },
+  "actual_readiness": "ready_for_rules"
+}

@@ -1,0 +1,28 @@
+{
+  "scope": "Local counterfactuals on copies of v42, not new live results.",
+  "model_calls": 0,
+  "variants": {
+    "as_recorded": {
+      "application_issues": [],
+      "rubric_pass": false,
+      "missing_events": [
+        "alternative_offered"
+      ],
+      "unsupported_event_indices": [
+        0
+      ]
+    },
+    "quote_in_event": {
+      "application_issues": [],
+      "rubric_pass": true,
+      "missing_events": [],
+      "unsupported_event_indices": []
+    },
+    "quote_in_fact": {
+      "application_issues": [],
+      "rubric_pass": true,
+      "missing_events": [],
+      "unsupported_event_indices": []
+    }
+  }
+}

@@ -1,0 +1,478 @@
+"""Check the V05 with a timeline floor and source-bound decoding, then conditionally accept all six cases."""
+
+import asyncio
+import hashlib
+import json
+import re
+import sys
+import time
+from datetime import UTC, datetime
+from pathlib import Path
+from urllib.parse import urlsplit
+from uuid import UUID
+
+import httpx
+import openai
+import proofline
+from fastapi.testclient import TestClient
+from sqlalchemy import text
+
+from proofline.api.app import create_app
+from proofline.application.state import case_or_404, current_input, read_session
+from proofline.config import Settings
+from proofline.domain.inputs import AnalysisInput, compatibility_digest, json_digest
+from proofline.persistence.database import open_database
+from proofline.persistence.models import Source, SourceVersion
+from proofline.providers.factory import create_live_provider
+from proofline.providers.groq_stage4_profile import bind_profile, read_profile, snapshots_for
+from proofline.providers.replay import ReplayCatalog
+
+OUT = Path("/archive")
+SPEC_PATH = Path("/profile-spec.json")
+EVIDENCE_PATH = Path("/case-evidence.json")
+PHASE = sys.argv[2] if __name__ == "__main__" else "control"
+PLAN = {"control": ("V01",), "acceptance": ("V01", "V02", "V03", "V04", "V05", "V06")}[PHASE]
+LEDGER = OUT / "ledger.json"
+PREFLIGHT = OUT / "preflight.json"
+MODEL = "openai/gpt-oss-20b"
+PROFILE = "v3.3-citation-ids-test"
+SPACING = 65
+OUTPUT_LIMIT = 1000
+EFFORT = 'low'
+RATE_HEADERS = (
+    "retry-after", "x-ratelimit-limit-requests", "x-ratelimit-limit-tokens",
+    "x-ratelimit-remaining-requests", "x-ratelimit-remaining-tokens",
+    "x-ratelimit-reset-requests", "x-ratelimit-reset-tokens",
+)
+def read(path):
+    return json.loads(path.read_text(encoding="utf-8-sig"))
+
+
+def save(path, value):
+    temporary = path.with_suffix(".tmp")
+    temporary.write_text(json.dumps(value, ensure_ascii=True, indent=2) + "\n", encoding="utf-8")
+    temporary.replace(path)
+
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def now():
+    return datetime.now(UTC).isoformat()
+
+
+def check_window(last):
+    headers = last["rate_limit_headers"]
+    if int(headers["x-ratelimit-remaining-requests"]) <= 0:
+        raise RuntimeError("Groq daily request allowance is exhausted")
+    if int(headers["x-ratelimit-limit-tokens"]) != 8000:
+        raise RuntimeError("Groq token rate limit differs from last verified Free settings")
+    if int(headers["x-ratelimit-limit-requests"]) != 1000:
+        raise RuntimeError("Groq daily request limit differs from last verified Free settings")
+    elapsed = (datetime.now(UTC) - datetime.fromisoformat(last["sent_at"])).total_seconds()
+    wait = max(0, SPACING - elapsed)
+    while wait > 0:
+        print(json.dumps({"waiting_for_window_seconds": round(wait, 2)}), flush=True)
+        time.sleep(min(wait, 30))
+        elapsed = (datetime.now(UTC) - datetime.fromisoformat(last["sent_at"])).total_seconds()
+        wait = max(0, SPACING - elapsed)
+
+
+def describe_offer_shape(candidate, schema):
+    reviewed = schema["$defs"].get("ReviewedV01Offer")
+    if reviewed is None or not isinstance(candidate.get("timeline"), list):
+        return None
+    fields = reviewed["properties"]
+    expected = set(fields["evidence"]["items"]["enum"])
+    expected_time = {"role": "sent", "value": fields["time"]["properties"]["value"]["enum"][0]}
+    offers = [event for event in candidate["timeline"]
+              if isinstance(event, dict) and event.get("event_type") == "alternative_offered"]
+    rows = []
+    for event in offers:
+        evidence = event.get("evidence")
+        is_id_list = isinstance(evidence, list) and all(isinstance(x,str) for x in evidence)
+        rows.append({
+            "time_matches": event.get("time") == expected_time,
+            "citation_count": len(evidence) if is_id_list else None,
+            "all_citations_permitted": all(item in expected for item in evidence) if is_id_list else None,
+            "exact_pair": is_id_list and len(evidence)==len(expected) and set(evidence)==expected,
+        })
+    return {"offer_event_count": len(offers), "offers": rows}
+
+
+class SingleRequest(httpx.AsyncHTTPTransport):
+    def __init__(self, expected):
+        super().__init__(retries=0, trust_env=False)
+        self.expected = expected
+        self.wire = None
+
+    async def handle_async_request(self, request):
+        assert self.wire is not None
+        assert request.method == "POST"
+        assert str(request.url) == "https://api.groq.com/openai/v1/chat/completions"
+        body = json.loads(await request.aread())
+        assert body == self.expected
+        baseline = {"sent_at": now(), "request_sha256": json_digest(body)}
+        with self.wire.open("x", encoding="utf-8") as reservation:
+            json.dump(baseline, reservation)
+        response = None
+        try:
+            response = await super().handle_async_request(request)
+            await response.aread()  # Detect read failures before handing the JSON back to the SDK.
+        except (httpx.RequestError, OSError, asyncio.CancelledError) as exc:
+            save(self.wire, {
+                **baseline,
+                "http_status": response.status_code if response is not None else None,
+                "network_error_type": type(exc).__name__,
+                "network_error_cause_type": type(exc.__cause__).__name__ if exc.__cause__ else None,
+            })
+            if response is not None:
+                await response.aclose()
+            raise
+        headers = {
+            name: value for name in RATE_HEADERS
+            if (value := response.headers.get(name)) and re.fullmatch(r"[0-9.dhms]{1,32}", value)
+        }
+        request_id = response.headers.get("x-request-id", "")
+        observation = {**baseline, "http_status": response.status_code, "rate_limit_headers": headers}
+        if re.fullmatch(r"req_[A-Za-z0-9_-]{1,90}", request_id):
+            observation["provider_request_id"] = request_id
+        if response.status_code == 400:
+            # Keep only diagnostics about shape. Ignore provider error text.
+            try:
+                failed = json.loads(await response.aread())["error"].get("failed_generation")
+                if isinstance(failed, str):
+                    shape = {"candidate_characters": len(failed)}
+                    data = json.loads(failed)
+                    if isinstance(data, dict):
+                        schema = body["response_format"]["json_schema"]["schema"]
+                        shape.update(
+                            top_level_keys_match=set(data) == set(schema["properties"]),
+                            timeline_count=len(data["timeline"]) if isinstance(data.get("timeline"), list) else None,
+                        )
+                    offer_shape = describe_offer_shape(data, schema)
+                    if offer_shape is not None:
+                        shape["reviewed_offer"] = offer_shape
+                    observation["failed_output_shape"] = shape
+            except (AttributeError, KeyError, TypeError, ValueError, httpx.HTTPError):
+                pass
+        save(self.wire, observation)
+        return response
+
+
+class GuardedProvider:
+    def __init__(self, settings, requests, conditions):
+        self.settings = settings
+        self.requests = requests
+        self.conditions = conditions
+        self.provider = create_live_provider(settings)
+        self.current_case = None
+
+    def prepare(self, snapshot):
+        assert snapshot.case_id == self.current_case
+        prepared = self.provider.prepare(snapshot)
+        assert prepared.request == self.requests[self.current_case]
+        return prepared
+
+    def generate(self, prepared):
+        case_id = self.current_case
+        transport = SingleRequest(self.requests[case_id])
+        transport.wire = OUT / self.conditions[case_id] / "wire.json"
+        provider = create_live_provider(self.settings, transport=transport)
+        return provider.generate(prepared)
+
+
+def prepare(db, base, spec):
+    assert base.live_unavailable_reason == "LIVE_DISABLED" and base.selected_api_key is None
+    assert base.groq_test_case_evidence is None
+    assert urlsplit(base.database_url).hostname == "db"
+    assert Path(proofline.__file__).is_relative_to("/app/current-source")
+    quota = read(OUT / "quota-console.json")
+    assert quota["plan"] == "Free" and quota["project"] == "Default Project"
+    assert quota["model"] == MODEL and not quota["custom_project_limits"]
+    limits = quota["configured_limits"]
+    daily = quota["daily_chart_utc"]
+    assert limits == {"requests_per_minute": 30, "requests_per_day": 1000,
+                      "tokens_per_minute": 8000, "tokens_per_day": 200000}
+    assert limits["requests_per_day"] - daily["approximate_requests"] >= 7
+    assert limits["tokens_per_day"] - daily["conservative_token_upper_bound"] >= 7 * 8000
+    now = datetime.now(UTC)
+    signed_in_plan_read = datetime.fromisoformat(quota["observed_at"])
+    assert 0 <= (now - signed_in_plan_read).total_seconds() <= 3600
+    quota_reference = read(Path("/last-control/ablation-V01/wire.json"))
+    assert quota_reference["http_status"] == 400
+    last_control_profile = read(Path("/last-control/ablation-V01/run.json"))["generation_profile"]
+    assert last_control_profile["provider_error_code"] == "json_validate_failed"
+    assert last_control_profile["requested_model"] == MODEL
+    headers = quota_reference["rate_limit_headers"]
+    assert int(headers["x-ratelimit-limit-requests"]) == limits["requests_per_day"]
+    assert int(headers["x-ratelimit-limit-tokens"]) == limits["tokens_per_minute"]
+    header_age = now - datetime.fromisoformat(quota_reference["sent_at"])
+    assert 0 <= header_age.total_seconds() < 3600
+    snapshots = snapshots_for(db, spec)
+    bound = {
+        **bind_profile(spec, snapshots),
+        "llm_model": MODEL,
+        "groq_reasoning_effort": EFFORT,
+        "model_max_output_tokens": OUTPUT_LIMIT,
+        "groq_test_case_evidence": read(EVIDENCE_PATH),
+    }
+    assert OUTPUT_LIMIT <= quota["configured_maximum_completion_tokens"]
+    options = {**base.model_dump(), **bound, "live_enabled": True}
+    safe_settings = Settings(_env_file=None, llm_api_key="offline-preflight", **options)
+    provider = create_live_provider(safe_settings)
+    receipts = {}
+    requests = {}
+    with read_session(db) as session:
+        for table in ("analysis_runs", "proposal_revisions", "review_decisions"):
+            assert session.scalar(text(f"SELECT count(*) FROM {table}")) == 0
+        for case in spec.cases:
+            case_id = case.case_id
+            if case_id not in PLAN:
+                continue
+            version = case_or_404(session, case_id).version
+            assert version == 1 + bool(case.excluded_sources)
+            snapshot = snapshots[case_id]
+            prepared = provider.prepare(snapshot)
+            request = prepared.request
+            profile = prepared.generation_profile
+            assert request["model"] == MODEL
+            assert request["reasoning_effort"] == EFFORT
+            assert request["max_completion_tokens"] == OUTPUT_LIMIT
+            if case_id == "V01":
+                assert profile["prompt_version"].endswith("-reviewed-offer-v1")
+                assert profile["prompt_sha256"] == read(OUT / "offline-gpt-oss-verification.json")["verified_v01_prompt_sha256"]
+            elif case_id == "V05":
+                assert profile["prompt_version"].endswith("-cancellation-notice-v2")
+            elif case_id != "V03":
+                assert profile["prompt_sha256"] == case.expected_prompt_sha256
+            assert profile["provider_lookup_source_ids"] == case.lookup_sources
+            assert bool(profile["provider_covered_requirements"]) == bool(case.reviewed_reply)
+            assert profile["provider_schema_version"] == "assembly-citation-ids-v1"
+            assert profile.get("reviewed_timeline_events", 0) == len(case.reviewed_events)
+            assert profile["canonical_timeline_order"] == "utc-v1"
+            assert profile["request_sha256"] == json_digest(request)
+            wire = request["response_format"]["json_schema"]
+            assert wire["strict"] is True and wire["name"] == "assembly_citation_ids"
+            numbered = json.loads(request["messages"][1]["content"])
+            original = snapshot.model_dump(mode="json")
+            actual_ids = []
+            for source, original_source in zip(numbered["catalog"], original["catalog"], strict=True):
+                lines = source.pop("citation_lines", [])
+                if source["included"]:
+                    source["text"] = "\n".join(row["text"] for row in lines)
+                    actual_ids.extend(row["citation_id"] for row in lines if row["citation_id"])
+                else:
+                    assert not lines
+                    assert source["text"] is None
+                    assert original_source["text"] is None
+            assert numbered == original, f"{case_id}: citation catalog does not restore the pinned snapshot"
+            assert profile["provider_citation_count"] == len(set(actual_ids)) == len(actual_ids)
+            for definition in ("FactWithCitationIds", "TimelineEventWithCitationIds"):
+                assert wire["schema"]["$defs"][definition]["properties"]["evidence"]["items"]["enum"] == actual_ids
+            predecessor = read(Path("/reference-profile") / case.condition / "request.json")
+            offline = read(OUT / "offline-gpt-oss-verification.json")
+            prior_profile = offline["qwen_cases"][case_id]
+            expected_rules = (
+                offline["verified_v01_citation_rule"] if case_id == "V01"
+                else prior_profile.get("reviewed_citation_rules_v1")
+            )
+            assert profile.get("reviewed_citation_rules_v1") == expected_rules
+            expected_schema = (
+                offline["verified_v01_schema_sha256"] if case_id == "V01"
+                else prior_profile["schema_sha256"]
+            )
+            assert profile["schema_sha256"] == expected_schema
+            assert prior_profile["request_sha256"] == json_digest(predecessor)
+            predecessor.update(model=MODEL, reasoning_effort=EFFORT)
+            if case_id == "V01":
+                predecessor["response_format"]["json_schema"]["schema"] = offline["verified_v01_schema"]
+                predecessor["messages"][0]["content"] = offline["verified_v01_instruction"]
+            assert request == predecessor, f"{case_id}: input, prompt, schema or other parameters changed"
+            size = len(json.dumps(request, ensure_ascii=False, separators=(",", ":")).encode())
+            receipts[case_id] = {
+                "condition": case.condition, "case_version": version, "input_digest": case.input_digest,
+                "generation_profile": profile, "requested_facts": list(snapshot.requested_fact_keys),
+                "request_utf8_bytes": size,
+                "only_model_and_effort_changed_from_v38": case_id != "V01",
+                "v01_offer_guidance_only_from_v43": case_id == "V01",
+                "reviewed_rules_active": "reviewed_citation_rules_v1" in profile,
+            }
+            requests[case_id] = request
+    package = Path(proofline.__file__).parent
+    source_hashes = {"src/proofline/" + p.relative_to(package).as_posix(): sha(p) for p in package.rglob("*.py")}
+    source_hashes["fixtures/cases/travel-cases.json"] = sha(base.fixtures_dir / "cases/travel-cases.json")
+    source_hashes["fixtures/live/groq-stage4-profile.json"] = sha(SPEC_PATH)
+    source_hashes["fixtures/live/groq-stage4-case-evidence.json"] = sha(EVIDENCE_PATH)
+    return {
+        "cases": receipts, "bound_settings": bound, "maximum_completion_tokens": OUTPUT_LIMIT,
+        "quota_observed_at": quota["observed_at"], "single_application_instance": True,
+        "validation_profile": safe_settings.effective_validation_profile,
+        "code_and_input_hashes": source_hashes, "runner_sha256": sha(Path(__file__)),
+        "openai_sdk_version": openai.__version__, "minimum_spacing_seconds": SPACING,
+    }, requests, options
+
+
+def get(client, route):
+    response = client.get(route)
+    response.raise_for_status()
+    return response.json()
+
+
+def trial(client, ledger, case_id, condition, version, expected):
+    path = f"/api/v1/cases/{case_id}"
+    folder = OUT / condition
+    case = get(client, path)
+    assert case["version"] == version and not get(client, path + "/runs")
+    save(folder / "case-before.json", case)
+    assert len(ledger["attempts"]) < ledger["max_requests"]
+    assert not any(a["case_id"] == case_id for a in ledger["attempts"])
+    body = {"mode": "live", "expected_case_version": version}
+    attempt = {"condition": condition, "case_id": case_id, "started_at": now(),
+               "request": body, "state": "reserved_before_post",
+               "idempotency_key": f"groq-gpt-oss-20b-v01-guidance-{PHASE}-20261124-{condition}"}
+    ledger["attempts"].append(attempt)
+    save(LEDGER, ledger)
+    wire_path = folder / "wire.json"
+    response = client.post(path + "/runs", json=body, headers={"Idempotency-Key": attempt["idempotency_key"]})
+    attempt.update(http_status=response.status_code, finished_at=now())
+    save(LEDGER, ledger)
+    if response.status_code == 201:
+        run = response.json()
+    else:
+        runs = get(client, path + "/runs")
+        if len(runs) != 1:
+            raise RuntimeError("Ambiguous application result. No second POST.")
+        run = runs[0]
+    save(folder / "run.json", run)
+    attempt.update(state=run["status"], run_id=run["id"])
+    save(LEDGER, ledger)
+    profile = run["generation_profile"]
+    assert profile["request_sha256"] == json_digest(expected)
+    if run["status"] == "succeeded":
+        card = get(client, "/api/v1/proposals/" + run["proposal_revision_id"])
+        assert card["decision"] is None and card["analysis_run_id"] == run["id"]
+        save(folder / "proposal.json", card)
+    observation = read(wire_path) if wire_path.exists() else {}
+    print(json.dumps({"case_id": case_id, "run": run["status"],
+                      "http_status": observation.get("http_status"), "error": run["error"],
+                      "network_error_type": observation.get("network_error_type")}),
+          flush=True)
+    return observation, run["status"]
+
+
+def prepare_v01(db, base, spec):
+    v01 = spec.cases[0]
+    assert v01.case_id == "V01" and len(v01.excluded_sources) == 1
+    path = "/api/v1/cases/V01"
+    with TestClient(create_app(base, database=db), base_url=base.app_origin) as client:
+        version = get(client, path)["version"]
+        if version == 1:
+            response = client.patch(
+                f"{path}/sources/{v01.excluded_sources[0]}",
+                json={"expected_case_version": 1, "included": False},
+            )
+            response.raise_for_status()
+        assert get(client, path)["version"] == 2
+
+
+def restore_v34_source_ids(db, base):
+    assert base.live_unavailable_reason == "LIVE_DISABLED" and base.selected_api_key is None
+    assert urlsplit(base.database_url).hostname == "db"
+    with db.sessions.begin() as session:
+        for table in ("analysis_runs", "proposal_revisions", "review_decisions"):
+            assert session.scalar(text(f"SELECT count(*) FROM {table}")) == 0
+        for case_id in PLAN:
+            condition = "ablation-V01" if case_id == "V01" else f"full-{case_id}"
+            data = read(Path("/baseline") / condition / "run.json")
+            expected = AnalysisInput.model_validate_json(json.dumps(data["snapshot"]))
+            case = case_or_404(session, case_id, lock=True)
+            assert case.version == (2 if case_id == "V01" else 1)
+            seeded = current_input(session, case)
+            assert expected.case_id == case_id
+            assert compatibility_digest(seeded) == compatibility_digest(expected)
+            for original, seeded_source in zip(expected.catalog, seeded.catalog, strict=True):
+                assert original.included == seeded_source.included
+                assert original.source_id == seeded_source.source_id
+                if not original.included:
+                    continue
+                assert str(UUID(original.version_id)) == original.version_id
+                source = session.get(Source, (case_id, original.source_id))
+                row = session.get(SourceVersion, source.current_version_id)
+                assert row.sequence == 1 and row.id == seeded_source.version_id
+                assert row.text == original.text and row.text_sha256 == original.text_sha256
+                row.id = original.version_id
+                source.current_version_id = original.version_id
+            session.flush()
+            session.expire_all()
+            assert current_input(session, case) == expected
+
+
+def main(action, db, base):
+    assert not LEDGER.exists()
+    spec = read_profile(SPEC_PATH)
+    conditions = {case.case_id: case.condition for case in spec.cases if case.case_id in PLAN}
+    if action == "preflight":
+        prepare_v01(db, base, spec)
+        restore_v34_source_ids(db, base)
+    receipt, requests, options = prepare(db, base, spec)
+    if action == "preflight":
+        for case_id, request in requests.items():
+            folder = OUT / conditions[case_id]
+            folder.mkdir(exist_ok=True)
+            save(folder / "request.json", request)
+        save(PREFLIGHT, receipt)
+        print(json.dumps({"preflight": "pass", "cases": {key: {
+            "request_bytes": value["request_utf8_bytes"],
+            "citations": value["generation_profile"]["provider_citation_count"],
+        } for key, value in receipt["cases"].items()}, "provider_calls": 0}), flush=True)
+        return
+    assert action == "live" and read(PREFLIGHT) == receipt
+    assert all(read(OUT / conditions[case_id] / "request.json") == body for case_id, body in requests.items())
+    if PHASE == "control":
+        last = read(Path("/last-control/ablation-V01/wire.json"))
+    else:
+        assert read(Path("/control/summary.json"))["series_pass"]
+        last = read(Path("/control/ablation-V01/wire.json"))
+    key = sys.stdin.readline().strip()
+    if not re.fullmatch(r"gsk_[A-Za-z0-9_-]{16,}", key):
+        raise SystemExit("Missing or malformed credential. No attempt reserved.")
+    settings = Settings(_env_file=None, llm_api_key=key, **options)
+    del key
+    ledger = {"max_requests": len(PLAN), "approved_budget_usd": 0, "attempts": [],
+              "stopped": False, "stop_reason": None}
+    with LEDGER.open("x", encoding="utf-8") as reservation:
+        json.dump(ledger, reservation)
+    try:
+        provider = GuardedProvider(settings, requests, conditions)
+        app = create_app(settings, database=db, provider=ReplayCatalog(base.fixtures_dir), live_provider=provider)
+        with TestClient(app, base_url=settings.app_origin, raise_server_exceptions=False,
+                        follow_redirects=False) as client:
+            caps = get(client, "/api/v1/capabilities")
+            assert caps["live_available"] and caps["live_provider"] == "groq" and caps["live_model"] == MODEL
+            assert caps["validation_profile"] == receipt["validation_profile"]
+            for case_id in PLAN:
+                if last is not None:
+                    check_window(last)
+                provider.current_case = case_id
+                version = receipt["cases"][case_id]["case_version"]
+                last, status = trial(client, ledger, case_id, conditions[case_id], version, requests[case_id])
+                if last.get("http_status") != 200 or status != "succeeded":
+                    ledger["stop_reason"] = f"Stop on status {last.get('http_status')} / {status} after {case_id}"
+                    break
+            else:
+                ledger["stop_reason"] = "Batch completed"
+    finally:
+        ledger["stopped"] = True
+        ledger["stop_reason"] = ledger["stop_reason"] or "Interrupted on unexpected application or quota error"
+        save(LEDGER, ledger)
+
+
+if __name__ == "__main__":
+    config = Settings(_env_file=None)
+    database = open_database(config.database_url)
+    try:
+        main(sys.argv[1], database, config)
+    finally:
+        database.dispose()

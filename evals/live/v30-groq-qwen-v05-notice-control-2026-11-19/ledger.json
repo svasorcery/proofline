@@ -1,0 +1,22 @@
+{
+  "max_requests": 1,
+  "approved_budget_usd": 0,
+  "attempts": [
+    {
+      "condition": "full-V05",
+      "case_id": "V05",
+      "started_at": "2026-11-19T09:29:15.853386+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "failed",
+      "idempotency_key": "groq-qwen-notice-20261119-full-V05",
+      "http_status": 201,
+      "finished_at": "2026-11-19T09:29:20.082866+00:00",
+      "run_id": "c67b7f51-f520-4ad7-a8b4-66f153e08295"
+    }
+  ],
+  "stopped": true,
+  "stop_reason": "Stop on status 403 / failed after V05"
+}

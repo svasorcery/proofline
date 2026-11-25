@@ -1,0 +1,15 @@
+{
+  "case_id": "V06",
+  "artifact": "v21",
+  "provider_attempts": 0,
+  "request_unchanged": true,
+  "original_run_and_card_unchanged": true,
+  "original_case_body_sha256": "4968874cbecc9cf121d1dd2711dc7bc914c617b7db6094ab5f816f871b80c6df",
+  "new_decoder_body_sha256": "83485f9369cc2a3d6fa308ff6c613c663d68e47047ce773c0a433fdc6f25f47d",
+  "new_order": [
+    "2026-06-22T16:40:00+03:00",
+    "2026-06-22T16:43:00+03:00"
+  ],
+  "new_status": "needs_operator_review",
+  "full_frozen_rubric_pass": true
+}

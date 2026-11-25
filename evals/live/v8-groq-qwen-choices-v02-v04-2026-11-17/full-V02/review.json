@@ -1,0 +1,47 @@
+{
+  "reviewer": "assistant",
+  "independent_human_labels": false,
+  "condition": "full-V02",
+  "technical_pass": true,
+  "fact_values": {
+    "pass": true,
+    "correct": 2,
+    "total": 2,
+    "expected": {"cancellation_status": "confirmed", "withdrawal_timing": "unconfirmed"},
+    "actual": {"cancellation_status": "confirmed", "withdrawal_timing": "unconfirmed"}
+  },
+  "evidence_sufficiency": {
+    "pass": false,
+    "literal_fragments": "7/11",
+    "notes": "Four fragments contain U+0014 control characters and differ from the selected source text. Neither the cancellation fact nor its event has a valid literal cited fragment. The time within the rejected cancellation fragment therefore has no valid evidence span. The sending and receipt events cite the form with the correct timestamps."
+  },
+  "chronology": {
+    "pass": true,
+    "correct": [
+      "supplier_cancelled occurred 2026-09-18T10:20:00+03:00",
+      "customer_replied sent 2026-09-18T12:09:55+03:00",
+      "customer_message_received received 2026-09-18T12:10:00+03:00"
+    ],
+    "missing": [],
+    "unsupported": [],
+    "notes": "The event types, times and roles match. The cancellation event's invalid citation is scored separately."
+  },
+  "next_step": {
+    "pass": true,
+    "expected": {
+      "action": "ask_user",
+      "locator": null,
+      "requirements": ["original_customer_message", "delivery_receipt"]
+    },
+    "actual": {
+      "action": "ask_user",
+      "locator": null,
+      "requirements": ["original_customer_message", "delivery_receipt"]
+    },
+    "readiness": "request_evidence"
+  },
+  "runtime_validation": "blocked_for_approval",
+  "runtime_blocking_codes": ["fragment_not_literal", "time_not_in_fragments"],
+  "overall_pass": false,
+  "operator_decision_created": false
+}

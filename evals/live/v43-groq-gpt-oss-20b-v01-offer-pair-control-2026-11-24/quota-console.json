@@ -1,0 +1,31 @@
+{
+  "plan": "Free",
+  "project": "Default Project",
+  "model": "openai/gpt-oss-20b",
+  "custom_project_limits": false,
+  "observed_at": "2026-11-24T18:51:29.499859+00:00",
+  "configured_limits": {
+    "requests_per_minute": 30,
+    "requests_per_day": 1000,
+    "tokens_per_minute": 8000,
+    "tokens_per_day": 200000
+  },
+  "configured_maximum_completion_tokens": 1000,
+  "planned_maximum_attempts": 7,
+  "daily_chart_utc": {
+    "approximate_requests": 4,
+    "approximate_tokens": 18015,
+    "conservative_token_upper_bound": 58602,
+    "data_delay_minutes": 15,
+    "basis": "The most recent signed-in usage chart showed 4,413 tokens. Subsequent sealed GPT-OSS 20B calls v40, v41 and v42 add 13,602 tokens. Free rate headers matched in v42. Carry the conservative buffer for delayed activity."
+  },
+  "evidence": "Free Current Plan $0, Organization Limits for exact model, no custom limits in Default Project. The current browser refresh did not complete; admission also checks the matching headers from the latest sealed response.",
+  "sources": [
+    "https://console.groq.com/settings/billing/plans",
+    "https://console.groq.com/settings/limits",
+    "https://console.groq.com/settings/project/limits",
+    "https://console.groq.com/settings/organization/usage?tab=activity"
+  ],
+  "usage_accounted_at": "2026-11-24T19:47:51.660267+00:00",
+  "last_matching_provider_limit_headers_at": "2026-11-24T19:29:08.080552+00:00"
+}

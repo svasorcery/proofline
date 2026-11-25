@@ -1,0 +1,15 @@
+{
+  "runtime_key_injected_via_stdin_only": true,
+  "database_counts": {
+    "analysis_runs": 1,
+    "proposal_revisions": 1,
+    "review_decisions": 0
+  },
+  "app_container_removed": true,
+  "remaining_containers": [
+    "proofline-live-stage4-v05-cancellation-time-20261124-db-1"
+  ],
+  "database_stopped": true,
+  "project": "proofline-live-stage4-v05-cancellation-time-20261124",
+  "live_process_stopped": true
+}

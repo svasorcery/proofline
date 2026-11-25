@@ -1,0 +1,22 @@
+{
+  "max_requests": 1,
+  "approved_budget_usd": 0,
+  "attempts": [
+    {
+      "condition": "full-V06",
+      "case_id": "V06",
+      "started_at": "2026-11-18T12:21:37.837873+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-qwen-v06-order-v22-20261118-full-V06",
+      "http_status": 201,
+      "finished_at": "2026-11-18T12:21:46.692456+00:00",
+      "run_id": "2b0d90f1-8ce3-428c-b661-0c30173d83d6"
+    }
+  ],
+  "stopped": true,
+  "stop_reason": "Batch ended"
+}

@@ -1,0 +1,132 @@
+{
+  "id": "841856fa-f225-478d-8999-f05a89c0efc3",
+  "case_id": "V01",
+  "mode": "live",
+  "status": "succeeded",
+  "content_revision": 2,
+  "base_case_version": 2,
+  "input_digest": "a294763e6ca68dbf4ffb48adf430843c1bbb7427f80fcef9e6b09e3a35f41fbd",
+  "snapshot": {
+    "case_id": "V01",
+    "user_text": "\u0412 \u0438\u0441\u0442\u043e\u0440\u0438\u0438 \u0432\u0438\u0436\u0443 \u043d\u043e\u0432\u043e\u0435 \u0432\u0440\u0435\u043c\u044f. \u0421\u043e\u0431\u0435\u0440\u0438\u0442\u0435 \u043f\u043e\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043d\u0438\u0435 \u0442\u043e\u0433\u043e, \u043e \u0447\u0451\u043c \u0434\u043e\u0433\u043e\u0432\u043e\u0440\u0438\u043b\u0438\u0441\u044c \u0441 \u043f\u043e\u0441\u0442\u0430\u0432\u0449\u0438\u043a\u043e\u043c.",
+    "requested_fact_keys": [
+      "alternative_acceptance"
+    ],
+    "money": {
+      "amount_minor": 16700,
+      "currency": "USD",
+      "scale": 2
+    },
+    "context": {},
+    "catalog": [
+      {
+        "case_id": "V01",
+        "source_id": "5b910f89ca134035",
+        "kind": "document",
+        "locator": "743be4e0f2004f13",
+        "title": "5b910f89ca134035",
+        "trust": "primary",
+        "position": 0,
+        "included": true,
+        "version_id": "2b93c45d-c324-4631-a533-9a02c993e330",
+        "text": "\u041f\u0438\u0441\u044c\u043c\u043e \u043f\u043e\u0441\u0442\u0430\u0432\u0449\u0438\u043a\u0430 \u043a\u043b\u0438\u0435\u043d\u0442\u0443\n\u041e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u043e: 2026-08-14T09:10:00+03:00\n\u041c\u043e\u0436\u0435\u043c \u043f\u0440\u0435\u0434\u043b\u043e\u0436\u0438\u0442\u044c \u0432\u044b\u0435\u0437\u0434 \u0432 18:20 \u0432\u043c\u0435\u0441\u0442\u043e 16:00, \u0441 \u0442\u0435\u043c \u0436\u0435 \u043c\u0435\u0441\u0442\u043e\u043c \u043f\u043e\u0441\u0430\u0434\u043a\u0438. \u041d\u0430\u043f\u0438\u0448\u0438\u0442\u0435, \u043f\u043e\u0434\u0445\u043e\u0434\u0438\u0442 \u043b\u0438 \u0432\u0430\u043c \u044d\u0442\u043e\u0442 \u0432\u0430\u0440\u0438\u0430\u043d\u0442.\n\u041a\u0432\u0438\u0442\u0430\u043d\u0446\u0438\u044f \u043f\u0435\u0440\u0435\u043f\u0438\u0441\u043a\u0438: 011dad68c7164f5d.",
+        "text_sha256": "8730b45159b3ad7d11f7117786e0237158e5767236231d90cc7c9e64ee6d6ae8"
+      },
+      {
+        "case_id": "V01",
+        "source_id": "b5df68cf9b9c4f15",
+        "kind": "document",
+        "locator": "07968b8cd218434e",
+        "title": "\u0421\u043f\u0440\u0430\u0432\u043e\u0447\u043d\u0430\u044f \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0430",
+        "trust": "context",
+        "position": 1,
+        "included": true,
+        "version_id": "9abbc0d3-196a-48ee-9275-0445dc0f6395",
+        "text": "\u0421\u043f\u0440\u0430\u0432\u043e\u0447\u043d\u0430\u044f \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0430 \u043c\u0435\u0441\u0442\u0430 \u043f\u043e\u0441\u0430\u0434\u043a\u0438. \u0412\u0445\u043e\u0434 \u0441\u043e \u0441\u0442\u043e\u0440\u043e\u043d\u044b \u0441\u0435\u0432\u0435\u0440\u043d\u043e\u0433\u043e \u0444\u0430\u0441\u0430\u0434\u0430. \u042d\u0442\u043e \u043e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0434\u043e\u0441\u0442\u0443\u043f\u0430, \u043f\u0435\u0440\u0435\u043f\u0438\u0441\u043a\u0430 \u043f\u043e \u0438\u0437\u043c\u0435\u043d\u0435\u043d\u0438\u044f\u043c \u0437\u0434\u0435\u0441\u044c \u043d\u0435 \u0445\u0440\u0430\u043d\u0438\u0442\u0441\u044f.",
+        "text_sha256": "6a19fe8509355f0388dcc3351dcca1917ce4d421d788ca0e93f33e136817e10d"
+      },
+      {
+        "case_id": "V01",
+        "source_id": "b8821b7c6a2d432a",
+        "kind": "provider_log",
+        "locator": "011dad68c7164f5d",
+        "title": "\u0417\u0430\u043f\u0438\u0441\u044c \u043e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u044f",
+        "trust": "primary",
+        "position": 2,
+        "included": true,
+        "version_id": "951b5d73-cc1a-43fb-84ce-e84e5fbc2117",
+        "text": "2026-08-14T09:36:00+03:00 \u2014 \u043f\u043e\u0447\u0442\u043e\u0432\u044b\u0439 \u0448\u043b\u044e\u0437 \u043f\u0440\u0438\u043d\u044f\u043b \u043e\u0442\u0432\u0435\u0442 \u043a\u043b\u0438\u0435\u043d\u0442\u0430 \u0432 \u044d\u0442\u043e\u0439 \u043f\u0435\u0440\u0435\u043f\u0438\u0441\u043a\u0435.\nFrom: \u0430\u0434\u0440\u0435\u0441 \u043a\u043b\u0438\u0435\u043d\u0442\u0430 \u0438\u0437 \u0431\u0440\u043e\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f; In-Reply-To: \u0438\u0441\u0445\u043e\u0434\u043d\u043e\u0435 \u043f\u0438\u0441\u044c\u043c\u043e \u043f\u043e\u0441\u0442\u0430\u0432\u0449\u0438\u043a\u0430.\n\u041e\u0440\u0438\u0433\u0438\u043d\u0430\u043b MIME \u043f\u043e\u043c\u0435\u0449\u0451\u043d \u0432 \u0430\u0440\u0445\u0438\u0432: 1618ae5e5b894145.\n\u0422\u0435\u043b\u043e \u043f\u0438\u0441\u044c\u043c\u0430 \u043d\u0435 \u043a\u043e\u043f\u0438\u0440\u0443\u0435\u0442\u0441\u044f \u0432 \u0442\u0440\u0430\u043d\u0441\u043f\u043e\u0440\u0442\u043d\u044b\u0439 \u0436\u0443\u0440\u043d\u0430\u043b.",
+        "text_sha256": "42fc452f909ec003ff3b683bd732165dda66935b4cad292c48179451e608371f"
+      },
+      {
+        "case_id": "V01",
+        "source_id": "f9a88d5b726a4d4b",
+        "kind": "document",
+        "locator": "1618ae5e5b894145",
+        "title": "f9a88d5b726a4d4b",
+        "trust": "primary",
+        "position": 3,
+        "included": false,
+        "version_id": null,
+        "text": null,
+        "text_sha256": null
+      }
+    ]
+  },
+  "started_at": "2026-11-24T15:44:50.960080Z",
+  "finished_at": "2026-11-24T15:44:54.445080Z",
+  "generation_profile": {
+    "api": "chat_completions",
+    "mode": "live",
+    "model": "openai/gpt-oss-20b",
+    "pricing": null,
+    "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+    "provider": "groq",
+    "max_retries": 0,
+    "usage_origin": "provider",
+    "finish_reason": "stop",
+    "monetary_cost": null,
+    "policy_sha256": "2d9b47d44aa0172a8c75ef6a5283009045695c088a174256ae9f4408abb691d3",
+    "prompt_sha256": "8220a580fdb540a7e59ba410a15ae3fe1a2e6ffac85a8d0f409c496f5dd87528",
+    "schema_sha256": "b2cd6f28313ec6bea5e2a231e55ea9c3296babb68e6d125f23f3ae3f8b07609b",
+    "new_model_call": true,
+    "policy_version": "proofline-policy-v3.3-candidate-1",
+    "prompt_version": "proofline-responses-prompt-v3-candidate-1-choices-v1-confirmations-example-v1-citation-ids-v1-lookup-example-receipt-v1",
+    "request_sha256": "4f5238237962089d7c94f87f0c525bc72ec0fe97f3cf2ff1d717a4d9945bd41e",
+    "schema_version": "assembly-output-v1",
+    "latency_seconds": 3.120686,
+    "request_profile": "groq-chat_completions-v33-citation-ids-test-v1-case-evidence-v1",
+    "requested_model": "openai/gpt-oss-20b",
+    "timeout_seconds": 90,
+    "reasoning_effort": "low",
+    "max_output_tokens": 1000,
+    "raw_output_format": "output-text",
+    "provider_request_id": "req_01m873pfbrev08jtrpnz3z25sh",
+    "provider_response_id": "chatcmpl-5cd0ac17-571a-46c8-9bb7-3a07002e9224",
+    "assembly_schema_sha256": "9d031d5c4bb85493f85fc50e97990dc7b0a34e6853154aac59636b9275b54eaa",
+    "provider_citation_count": 9,
+    "provider_schema_version": "assembly-citation-ids-v1",
+    "canonical_timeline_order": "utc-v1",
+    "reviewed_timeline_events": 1,
+    "provider_lookup_source_ids": [
+      "f9a88d5b726a4d4b"
+    ],
+    "provider_covered_requirements": [],
+    "provider_citation_catalogue_sha256": "ef45ae62704faed69132e3260445f8be4f335ccd9340a3a3e54663f3cbb4f17d"
+  },
+  "raw_output": "{\"case_id\":\"V01\",\"facts\":{\"alternative_acceptance\":{\"value\":\"unconfirmed\",\"evidence\":[]}},\"timeline\":[{\"event_type\":\"alternative_offered\",\"time\":{\"value\":\"2026-08-14T09:10:00+03:00\",\"role\":\"sent\"},\"evidence\":[\"q9f582ff912d00c41\",\"qd16d3f37917ed3eb\"]}],\"readiness\":\"request_evidence\",\"follow_up\":{\"action\":\"ask_user\",\"locator\":null,\"requirements\":[\"original_acceptance_reply\"]}}",
+  "usage": {
+    "queue_time": 0.283393887,
+    "total_time": 0.613148274,
+    "prompt_time": 0.2469742,
+    "total_tokens": 4413,
+    "prompt_tokens": 4057,
+    "completion_time": 0.366174074,
+    "completion_tokens": 356,
+    "completion_tokens_details": {
+      "reasoning_tokens": 234
+    }
+  },
+  "error": null,
+  "proposal_revision_id": "748b46a2-978f-4fd1-83ed-fe7f657dcc82"
+}

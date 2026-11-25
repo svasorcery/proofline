@@ -1,0 +1,16 @@
+{
+  "observed_at": "2026-11-18T06:25:04.772685+00:00",
+  "model": "qwen/qwen3.8-27b",
+  "organization_limits": {
+    "requests_per_minute": 30,
+    "requests_per_day": 1000,
+    "tokens_per_minute": 8000,
+    "tokens_per_day": 200000
+  },
+  "project": "Default Project",
+  "project_rate_limits": "inherits organization limits; no custom limits",
+  "source_urls": [
+    "https://console.groq.com/settings/limits",
+    "https://console.groq.com/settings/project/limits"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "model_calls_in_offline_check": 0,
+  "actual_schema_sha256": "2fe03ef588ab3ada0c0809ea63930d186e19573b4fea93405fc2144c0743bafa",
+  "preview_schema_sha256": "128706a4cca9a54cc6b7974363ea23984f5142af4a4ff3a9514e4917d92eeb65",
+  "reviewed_cancellation_time": "2026-10-04T10:00:00+03:00",
+  "actual_schema": {
+    "v32_false_second_cancellation": "accepted"
+  },
+  "preview_schema": {
+    "v32_false_second_cancellation": "rejected",
+    "substituted_notice_time": "rejected",
+    "copy_with_only_supported_events": "accepted"
+  },
+  "copy_passes_frozen_rubric": true,
+  "status": "Local schema preview only; provider not tested"
+}

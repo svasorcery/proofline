@@ -1,0 +1,13 @@
+{
+  "offline_gate_pass": true,
+  "source_claims_contract_verified": true,
+  "offline_model_calls": 0,
+  "offline_rubric_cases": 6,
+  "recorded_v53_requests_preserved": true,
+  "targeted_regressions_passed": 35,
+  "previous_offline_turn_pytest_with_postgresql_passed": 512,
+  "previous_offline_turn_frozen_baseline_tests_passed": 21,
+  "previous_offline_turn_replay_passed": true,
+  "offline_gate_sha256": "7ae16fcacaca6e39fb9ed2f588b97e62b7a1125ef3a917d0ce4060657405d37b",
+  "recorded_at": "2026-11-25T19:02:34.2992053+00:00"
+}

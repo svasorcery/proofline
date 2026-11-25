@@ -1,0 +1,50 @@
+{
+  "max_requests": 6,
+  "approved_budget_usd": 0,
+  "attempts": [
+    {
+      "condition": "ablation-V01",
+      "case_id": "V01",
+      "started_at": "2026-11-18T14:14:13.031234+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 2
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-qwen-single-profile-v24-20261118-ablation-V01",
+      "http_status": 201,
+      "finished_at": "2026-11-18T14:14:22.098454+00:00",
+      "run_id": "859b9499-63d7-4cce-82f6-207674e60fb5"
+    },
+    {
+      "condition": "full-V02",
+      "case_id": "V02",
+      "started_at": "2026-11-18T14:15:22.883306+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-qwen-single-profile-v24-20261118-full-V02",
+      "http_status": 201,
+      "finished_at": "2026-11-18T14:15:26.601844+00:00",
+      "run_id": "6d3f2afb-9f49-4a98-b56e-0d96f2e83105"
+    },
+    {
+      "condition": "full-V03",
+      "case_id": "V03",
+      "started_at": "2026-11-18T14:16:28.148292+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "failed",
+      "idempotency_key": "groq-qwen-single-profile-v24-20261118-full-V03",
+      "http_status": 201,
+      "finished_at": "2026-11-18T14:16:28.673727+00:00",
+      "run_id": "a0112d35-0ee8-44da-9627-8402e4fa2587"
+    }
+  ],
+  "stopped": true,
+  "stop_reason": "Stop on provider status 429 after V03"
+}

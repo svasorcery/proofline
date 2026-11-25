@@ -1,0 +1,22 @@
+{
+  "max_requests": 1,
+  "approved_budget_usd": 0,
+  "attempts": [
+    {
+      "condition": "full-V03",
+      "case_id": "V03",
+      "started_at": "2026-11-18T17:24:28.487156+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-qwen-control-20261118-full-V03",
+      "http_status": 201,
+      "finished_at": "2026-11-18T17:24:31.422429+00:00",
+      "run_id": "393939fe-8618-4651-b8c5-a620e1ea9fda"
+    }
+  ],
+  "stopped": true,
+  "stop_reason": "Batch completed"
+}

@@ -1,0 +1,78 @@
+{
+  "format_version": 1,
+  "completed_at": "2026-11-16T18:01:55.541171+00:00",
+  "outcome": "stopped_on_first_technical_error_acceptance_not_passed",
+  "requests_attempted": 5,
+  "max_requests": 10,
+  "unused_budget_requests": 5,
+  "technical_successes": 4,
+  "technical_failures": 1,
+  "stop_condition": "full-V05",
+  "stop_error": {
+    "reviewer": "assistant",
+    "independent_human_labels": false,
+    "condition": "full-V05",
+    "technical_pass": false,
+    "overall_pass": null,
+    "quality_assessed": false,
+    "error_code": "PROVIDER_REQUEST_REJECTED",
+    "http_status": 400,
+    "provider_request_id": "req_01m7jr4a38e8xt58skwactap6m",
+    "notes": "Stopped immediately after the first provider error. No retry, schema/policy changes or further inference. Exact provider error text is intentionally not persisted by the adapter; root cause is not established. Usage and monetary cost are unknown/null."
+  },
+  "known_usage_totals": {
+    "input_tokens": 9319,
+    "output_tokens": 6978,
+    "total_tokens": 16297,
+    "reasoning_tokens": 5499
+  },
+  "usage_unknown_for": [
+    "full-V05"
+  ],
+  "approved_budget_usd": 0,
+  "account_tier": "Free",
+  "account_tier_source": "author confirmation, not API billing audit",
+  "monetary_cost_measured": null,
+  "quality": {
+    "assessed_cases": 4,
+    "complete_passes": 0,
+    "fact_values_correct": 4,
+    "fact_values_total": 5,
+    "literal_fragments_unique": 17,
+    "literal_fragments_total": 17,
+    "case_passes_by_dimension": {
+      "fact_values": 3,
+      "evidence_sufficiency": 0,
+      "chronology": 2,
+      "next_step": 3
+    },
+    "reviewer": "assistant",
+    "independent_human_labels": false
+  },
+  "successful_latency_seconds": {
+    "values": [
+      6.990405,
+      3.724713,
+      5.098469,
+      3.851412
+    ],
+    "min": 3.724713,
+    "max": 6.990405
+  },
+  "remaining_conditions_not_run": [
+    "full-V06",
+    "ablation-V01",
+    "ablation-V03",
+    "ablation-V05",
+    "injection-V04"
+  ],
+  "operator_decisions_created": 0,
+  "automatic_retries": 0,
+  "fallbacks": 0,
+  "live_disabled_after_stop": true,
+  "main_original_state": "stopped since 2026-11-14",
+  "main_volume_unchanged": true,
+  "main_volume_sha256_before": "57fb73708a79c7df91d2eca38812b3882f55619cd96e0233a7af2b9c6dbced46",
+  "main_volume_sha256_after": "57fb73708a79c7df91d2eca38812b3882f55619cd96e0233a7af2b9c6dbced46",
+  "acceptance_runtime_keys_removed": true
+}

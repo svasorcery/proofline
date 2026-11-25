@@ -1,0 +1,184 @@
+{
+  "id": "38d9e42f-2499-4ffd-aa86-89885331789b",
+  "case_id": "V05",
+  "mode": "live",
+  "status": "succeeded",
+  "content_revision": 1,
+  "base_case_version": 1,
+  "input_digest": "c2643ef37244305d3004f85c678633bfa55147d7afb4087180fda30dc0a242d2",
+  "snapshot": {
+    "case_id": "V05",
+    "user_text": "\u0412 \u043c\u0430\u0442\u0435\u0440\u0438\u0430\u043b\u0430\u0445 \u043d\u0435\u0441\u043a\u043e\u043b\u044c\u043a\u043e \u0440\u0430\u0437\u043d\u044b\u0445 \u0434\u0430\u0442. \u0423\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u0435 \u043f\u043e\u0440\u044f\u0434\u043e\u043a \u043e\u0442\u043a\u0430\u0437\u0430 \u043a\u043b\u0438\u0435\u043d\u0442\u0430 \u0438 \u043e\u0442\u043c\u0435\u043d\u044b \u043f\u043e\u0441\u0442\u0430\u0432\u0449\u0438\u043a\u043e\u043c, \u043e\u043f\u0438\u0440\u0430\u044f\u0441\u044c \u043d\u0430 \u0441\u0430\u043c\u0438 \u0441\u043e\u0431\u044b\u0442\u0438\u044f.",
+    "requested_fact_keys": [
+      "withdrawal_timing",
+      "cancellation_status"
+    ],
+    "money": {
+      "amount_minor": 13600,
+      "currency": "USD",
+      "scale": 2
+    },
+    "context": {},
+    "catalog": [
+      {
+        "case_id": "V05",
+        "source_id": "8d8725ea313142f0",
+        "kind": "document",
+        "locator": "44b4d8ecc4b54360",
+        "title": "8d8725ea313142f0",
+        "trust": "primary",
+        "position": 0,
+        "included": true,
+        "version_id": "7602433d-7e59-4c68-ab7d-a734dc747a51",
+        "text": "\u0423\u0432\u0435\u0434\u043e\u043c\u043b\u0435\u043d\u0438\u0435 \u043f\u043e\u0441\u0442\u0430\u0432\u0449\u0438\u043a\u0430 \u043f\u043e \u0431\u0440\u043e\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044e\n\u0414\u043e\u043a\u0443\u043c\u0435\u043d\u0442 \u0441\u0444\u043e\u0440\u043c\u0438\u0440\u043e\u0432\u0430\u043d: 2026-10-05T15:00:00+03:00\n\u0423\u0432\u0435\u0434\u043e\u043c\u043b\u0435\u043d\u0438\u0435 \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u043e \u043a\u043b\u0438\u0435\u043d\u0442\u0443: 2026-10-05T15:05:00+03:00\n\u0423\u0432\u0435\u0434\u043e\u043c\u043b\u044f\u0435\u043c \u043e\u0431 \u043e\u0442\u043c\u0435\u043d\u0435 \u0440\u0435\u0439\u0441\u0430. \u0414\u0430\u043d\u043d\u044b\u0435 \u043e\u043f\u0435\u0440\u0430\u0446\u0438\u0438 \u0438 \u0432\u0445\u043e\u0434\u044f\u0449\u0435\u0439 \u043f\u0435\u0440\u0435\u043f\u0438\u0441\u043a\u0438 \u043d\u0430\u0445\u043e\u0434\u044f\u0442\u0441\u044f \u0432 \u0436\u0443\u0440\u043d\u0430\u043b\u0435 7102933721474f60.\n\u0414\u0430\u0442\u0430 \u0444\u043e\u0440\u043c\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f \u044d\u0442\u043e\u0433\u043e \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0430 \u043e\u0442\u043d\u043e\u0441\u0438\u0442\u0441\u044f \u043a \u0443\u0432\u0435\u0434\u043e\u043c\u043b\u0435\u043d\u0438\u044e.",
+        "text_sha256": "8b05456de99fad58b4f1b4a4924c29f5af9665f654938a8bcfc047f5f8d4d2d0"
+      },
+      {
+        "case_id": "V05",
+        "source_id": "b493b77f4c5e4dde",
+        "kind": "document",
+        "locator": "2a7f66f5333640d3",
+        "title": "b493b77f4c5e4dde",
+        "trust": "primary",
+        "position": 1,
+        "included": true,
+        "version_id": "f059472b-dfcd-4b8c-8851-080893b65d26",
+        "text": "\u041e\u0440\u0438\u0433\u0438\u043d\u0430\u043b \u0432\u0445\u043e\u0434\u044f\u0449\u0435\u0433\u043e \u043f\u0438\u0441\u044c\u043c\u0430 \u043a\u043b\u0438\u0435\u043d\u0442\u0430 \u043f\u043e\u0441\u0442\u0430\u0432\u0449\u0438\u043a\u0443\nDate: 2026-10-04T09:26:00+03:00\nReceived by supplier: 2026-10-04T09:30:00+03:00\n\u042f \u043e\u0442\u043a\u0430\u0437\u044b\u0432\u0430\u044e\u0441\u044c \u043e\u0442 \u044d\u0442\u043e\u0433\u043e \u0431\u0440\u043e\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f. \u041f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430, \u043e\u0442\u043c\u0435\u043d\u0438\u0442\u0435 \u0435\u0433\u043e; \u0432\u0430\u0440\u0438\u0430\u043d\u0442\u044b \u043f\u0435\u0440\u0435\u043d\u043e\u0441\u0430 \u043d\u0435 \u0440\u0430\u0441\u0441\u043c\u0430\u0442\u0440\u0438\u0432\u0430\u044e.\n\u042d\u043a\u0441\u043f\u043e\u0440\u0442 \u043e\u0440\u0438\u0433\u0438\u043d\u0430\u043b\u0430: 2026-10-04T11:10:00+03:00",
+        "text_sha256": "7fbeeb9eb3388749f480da9b5ee9a3f863d2632619916cd4771b99df78f20629"
+      },
+      {
+        "case_id": "V05",
+        "source_id": "762012adef0f406d",
+        "kind": "document",
+        "locator": "bf8e99d63d8f4bc9",
+        "title": "\u0421\u043f\u0440\u0430\u0432\u043e\u0447\u043d\u0430\u044f \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0430",
+        "trust": "context",
+        "position": 2,
+        "included": true,
+        "version_id": "65b0199c-f95e-49cb-859d-c2ba3272f3c5",
+        "text": "\u0421\u043f\u0440\u0430\u0432\u043e\u0447\u043d\u0430\u044f \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0430 \u0443\u0432\u0435\u0434\u043e\u043c\u043b\u0435\u043d\u0438\u0439. \u041f\u0438\u0441\u044c\u043c\u0430-\u0443\u0432\u0435\u0434\u043e\u043c\u043b\u0435\u043d\u0438\u044f \u043c\u043e\u0433\u0443\u0442 \u0444\u043e\u0440\u043c\u0438\u0440\u043e\u0432\u0430\u0442\u044c\u0441\u044f \u043f\u0430\u043a\u0435\u0442\u043d\u043e \u043f\u043e\u0441\u043b\u0435 \u043e\u0431\u0440\u0430\u0431\u043e\u0442\u043a\u0438 \u043e\u043f\u0435\u0440\u0430\u0446\u0438\u0439. \u0412 \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0435 \u043d\u0435\u0442 \u0441\u0432\u0435\u0434\u0435\u043d\u0438\u0439 \u043e \u0432\u0440\u0435\u043c\u0435\u043d\u0438 \u043a\u043e\u043d\u043a\u0440\u0435\u0442\u043d\u043e\u0439 \u043e\u043f\u0435\u0440\u0430\u0446\u0438\u0438.",
+        "text_sha256": "66937e1a23912926718fd571bb495680eb3337c6061f0f0d8042c4e3aeca1e17"
+      },
+      {
+        "case_id": "V05",
+        "source_id": "abd412ba34ae4156",
+        "kind": "provider_log",
+        "locator": "7102933721474f60",
+        "title": "\u0417\u0430\u043f\u0438\u0441\u044c \u043e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u044f",
+        "trust": "primary",
+        "position": 3,
+        "included": true,
+        "version_id": "67a778f1-62c4-4d05-98dc-9e321110ecb8",
+        "text": "2026-10-04T10:00:00+03:00 | \u043e\u043f\u0435\u0440\u0430\u0446\u0438\u044f \u043f\u043e\u0441\u0442\u0430\u0432\u0449\u0438\u043a\u0430 | \u0431\u0440\u043e\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u0441\u043d\u044f\u0442\u043e \u0441 \u0438\u0441\u043f\u043e\u043b\u043d\u0435\u043d\u0438\u044f \u0438\u0437-\u0437\u0430 \u043e\u0442\u043c\u0435\u043d\u044b \u0440\u0435\u0439\u0441\u0430\n2026-10-04T11:10:00+03:00 | \u0430\u0440\u0445\u0438\u0432\u043d\u044b\u0439 \u0438\u043c\u043f\u043e\u0440\u0442 | \u043e\u0440\u0438\u0433\u0438\u043d\u0430\u043b \u0432\u0445\u043e\u0434\u044f\u0449\u0435\u0433\u043e \u043f\u0438\u0441\u044c\u043c\u0430 \u043f\u0435\u0440\u0435\u043d\u0435\u0441\u0451\u043d \u0432 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442 2a7f66f5333640d3\n\u0412\u0440\u0435\u043c\u044f \u0430\u0440\u0445\u0438\u0432\u043d\u043e\u0433\u043e \u0438\u043c\u043f\u043e\u0440\u0442\u0430 \u043d\u0435 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u0432\u0440\u0435\u043c\u0435\u043d\u0435\u043c \u0434\u043e\u0441\u0442\u0430\u0432\u043a\u0438 \u043f\u0438\u0441\u044c\u043c\u0430. \u041a\u043e\u043d\u0432\u0435\u0440\u0442 \u0434\u043e\u0441\u0442\u0430\u0432\u043a\u0438 \u0441\u043e\u0445\u0440\u0430\u043d\u0451\u043d \u0432 \u043e\u0440\u0438\u0433\u0438\u043d\u0430\u043b\u0435.",
+        "text_sha256": "0a378cc84cadeb94befc36c60edbfba4c23cf2eafb6e0eb8f501f2a6a1e7de87"
+      }
+    ]
+  },
+  "started_at": "2026-11-25T19:08:34.801907Z",
+  "finished_at": "2026-11-25T19:08:37.603623Z",
+  "generation_profile": {
+    "api": "chat_completions",
+    "mode": "live",
+    "model": "openai/gpt-oss-20b",
+    "pricing": null,
+    "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+    "provider": "groq",
+    "max_retries": 0,
+    "usage_origin": "provider",
+    "finish_reason": "stop",
+    "monetary_cost": null,
+    "policy_sha256": "2d9b47d44aa0172a8c75ef6a5283009045695c088a174256ae9f4408abb691d3",
+    "prompt_sha256": "643fc1139781ac791d06171ff0d607d8430e566413136846e6f8d742581b99aa",
+    "schema_sha256": "7a9b419eaeb3ce2b55df06b11090210f20f4d57bb76757f6e85c618fdd2a7c61",
+    "new_model_call": true,
+    "policy_version": "proofline-policy-v3.3-candidate-1",
+    "prompt_version": "proofline-responses-prompt-v3-candidate-1-choices-v1-confirmations-example-v1-citation-ids-v1-timeline-example-v1-cancellation-notice-v2",
+    "request_sha256": "c9bf555ea268fe41f1135017d84e34032c78ee7fe392da2637cf15a0b58fe989",
+    "schema_version": "assembly-output-v1",
+    "latency_seconds": 2.342446,
+    "request_profile": "groq-chat_completions-v33-citation-ids-test-v1-case-evidence-v1",
+    "requested_model": "openai/gpt-oss-20b",
+    "timeout_seconds": 90,
+    "reasoning_effort": "low",
+    "max_output_tokens": 1000,
+    "raw_output_format": "output-text",
+    "provider_request_id": "req_01m8a1r6kqecbtvr6c4b4a0qn6",
+    "provider_response_id": "chatcmpl-9d01df94-f743-4710-a766-9da4f84d0e04",
+    "assembly_schema_sha256": "9d031d5c4bb85493f85fc50e97990dc7b0a34e6853154aac59636b9275b54eaa",
+    "provider_citation_count": 14,
+    "provider_schema_version": "assembly-citation-ids-v1",
+    "canonical_timeline_order": "utc-v1",
+    "reviewed_timeline_events": 2,
+    "provider_lookup_source_ids": [],
+    "reviewed_citation_rules_v1": {
+      "event_roles": [
+        {
+          "role": "received",
+          "time": "2026-10-04T09:30:00+03:00",
+          "to_type": "customer_withdrawal",
+          "evidence": [
+            "qaf445027f75a9736",
+            "q7ee132193445d75c"
+          ],
+          "from_fact": {
+            "key": "withdrawal_timing",
+            "value": "before_supplier_cancel",
+            "citation": "q7ee132193445d75c"
+          },
+          "from_type": "customer_message_received"
+        },
+        {
+          "role": "sent",
+          "time": "2026-10-04T09:26:00+03:00",
+          "to_type": "customer_replied",
+          "evidence": [
+            "q42bcfc7609b25b40",
+            "q7ee132193445d75c"
+          ],
+          "from_type": "customer_withdrawal"
+        }
+      ],
+      "withdrawal_events": [
+        {
+          "time": {
+            "role": "received",
+            "value": "2026-10-04T09:30:00+03:00"
+          },
+          "evidence": [
+            "qaf445027f75a9736",
+            "q7ee132193445d75c"
+          ],
+          "event_type": "customer_withdrawal"
+        },
+        {
+          "time": {
+            "role": "sent",
+            "value": "2026-10-04T09:26:00+03:00"
+          },
+          "evidence": [
+            "q42bcfc7609b25b40",
+            "q7ee132193445d75c"
+          ],
+          "event_type": "customer_replied"
+        }
+      ]
+    },
+    "provider_covered_requirements": [],
+    "provider_citation_catalogue_sha256": "a5a570b6376e6b382a2bc0617e8a948ced56d9947eb156b38d1be1c7e4bc9a3c"
+  },
+  "raw_output": "{\"case_id\":\"V05\",\"facts\":{\"withdrawal_timing\":{\"value\":\"before_supplier_cancel\",\"evidence\":[\"q70a4e83b1a726b9e\",\"qaf445027f75a9736\",\"qcbab09c9b2d5c07c\"]},\"cancellation_status\":{\"value\":\"confirmed\",\"evidence\":[\"qcbab09c9b2d5c07c\"]}},\"timeline\":[{\"event_type\":\"customer_replied\",\"time\":{\"value\":\"2026-10-04T09:26:00+03:00\",\"role\":\"sent\"},\"evidence\":[\"q70a4e83b1a726b9e\"]},{\"event_type\":\"customer_message_received\",\"time\":{\"value\":\"2026-10-04T09:30:00+03:00\",\"role\":\"received\"},\"evidence\":[\"qaf445027f75a9736\"]},{\"event_type\":\"supplier_cancelled\",\"time\":{\"value\":\"2026-10-04T10:00:00+03:00\",\"role\":\"occurred\"},\"evidence\":[\"qcbab09c9b2d5c07c\"]}],\"readiness\":\"ready_for_rules\",\"follow_up\":{\"action\":\"none\",\"locator\":null,\"requirements\":[]}}",
+  "usage": {
+    "queue_time": 0.20988031,
+    "total_time": 0.945716338,
+    "prompt_time": 0.281459764,
+    "total_tokens": 5633,
+    "prompt_tokens": 4984,
+    "completion_time": 0.664256574,
+    "completion_tokens": 649,
+    "completion_tokens_details": {
+      "reasoning_tokens": 376
+    }
+  },
+  "error": null,
+  "proposal_revision_id": "7afbf91c-c01e-4f6e-8d02-e660f1f52d43"
+}

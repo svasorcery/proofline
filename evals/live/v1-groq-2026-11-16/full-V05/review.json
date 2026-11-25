@@ -1,0 +1,12 @@
+{
+  "reviewer": "assistant",
+  "independent_human_labels": false,
+  "condition": "full-V05",
+  "technical_pass": false,
+  "overall_pass": null,
+  "quality_assessed": false,
+  "error_code": "PROVIDER_REQUEST_REJECTED",
+  "http_status": 400,
+  "provider_request_id": "req_01m7jr4a38e8xt58skwactap6m",
+  "notes": "Stopped immediately after the first provider error. No retry, schema/policy changes or further inference. Exact provider error text is intentionally not persisted by the adapter; root cause is not established. Usage and monetary cost are unknown/null."
+}

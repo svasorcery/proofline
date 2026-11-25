@@ -1,0 +1,65 @@
+{
+  "capabilities": {
+    "replay_available": true,
+    "live_available": false,
+    "live_reason": "LIVE_DISABLED",
+    "live_provider": "groq",
+    "live_model": "qwen/qwen3.8-27b",
+    "live_access_verified": false,
+    "live_profile": {
+      "prompt_version": "proofline-responses-prompt-v2-candidate-1",
+      "schema_version": "assembly-output-v1",
+      "policy_version": "proofline-policy-v3.2-candidate-1",
+      "quality_measured": false
+    },
+    "default_mode": "replay",
+    "validation_profile": "proofline-validation-v1",
+    "fact_keys": [
+      "alternative_acceptance",
+      "payment_outcome",
+      "withdrawal_timing",
+      "cancellation_status"
+    ],
+    "event_types": [
+      "alternative_offered",
+      "customer_replied",
+      "customer_message_received",
+      "alternative_accepted",
+      "customer_withdrawal",
+      "supplier_cancelled",
+      "payment_captured",
+      "refund_initiated",
+      "refund_settled",
+      "authorization_released"
+    ],
+    "requirement_keys": [
+      "original_customer_message",
+      "delivery_receipt",
+      "quiet_room",
+      "courtyard_windows",
+      "original_acceptance_reply",
+      "bank_settlement_document"
+    ],
+    "limits": {
+      "user_characters": 8000,
+      "sources": 20,
+      "source_characters": 20000,
+      "selected_characters": 80000,
+      "model_output_tokens": 4096,
+      "model_timeout_seconds": 90
+    }
+  },
+  "runtime": {
+    "live_enabled": false,
+    "runtime_keys_empty": true
+  },
+  "database_counts": {
+    "cases": 6,
+    "sources": 21,
+    "source_versions": 21,
+    "analysis_runs": 2,
+    "proposal_revisions": 2,
+    "validation_checks": 2,
+    "review_decisions": 0
+  }
+}

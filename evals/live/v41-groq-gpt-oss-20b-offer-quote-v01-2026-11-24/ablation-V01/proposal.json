@@ -1,0 +1,190 @@
+{
+  "id": "7c580a40-0e36-4225-a3d7-b5ea06f608ff",
+  "case_id": "V01",
+  "analysis_run_id": "d8fda2fd-1ead-412d-b71b-e9f0b3a61c4d",
+  "parent_revision_id": null,
+  "origin": "model",
+  "content_revision": 2,
+  "input_digest": "a294763e6ca68dbf4ffb48adf430843c1bbb7427f80fcef9e6b09e3a35f41fbd",
+  "snapshot": {
+    "case_id": "V01",
+    "user_text": "\u0412 \u0438\u0441\u0442\u043e\u0440\u0438\u0438 \u0432\u0438\u0436\u0443 \u043d\u043e\u0432\u043e\u0435 \u0432\u0440\u0435\u043c\u044f. \u0421\u043e\u0431\u0435\u0440\u0438\u0442\u0435 \u043f\u043e\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043d\u0438\u0435 \u0442\u043e\u0433\u043e, \u043e \u0447\u0451\u043c \u0434\u043e\u0433\u043e\u0432\u043e\u0440\u0438\u043b\u0438\u0441\u044c \u0441 \u043f\u043e\u0441\u0442\u0430\u0432\u0449\u0438\u043a\u043e\u043c.",
+    "requested_fact_keys": [
+      "alternative_acceptance"
+    ],
+    "money": {
+      "amount_minor": 16700,
+      "currency": "USD",
+      "scale": 2
+    },
+    "context": {},
+    "catalog": [
+      {
+        "case_id": "V01",
+        "source_id": "5b910f89ca134035",
+        "kind": "document",
+        "locator": "743be4e0f2004f13",
+        "title": "5b910f89ca134035",
+        "trust": "primary",
+        "position": 0,
+        "included": true,
+        "version_id": "2b93c45d-c324-4631-a533-9a02c993e330",
+        "text": "\u041f\u0438\u0441\u044c\u043c\u043e \u043f\u043e\u0441\u0442\u0430\u0432\u0449\u0438\u043a\u0430 \u043a\u043b\u0438\u0435\u043d\u0442\u0443\n\u041e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u043e: 2026-08-14T09:10:00+03:00\n\u041c\u043e\u0436\u0435\u043c \u043f\u0440\u0435\u0434\u043b\u043e\u0436\u0438\u0442\u044c \u0432\u044b\u0435\u0437\u0434 \u0432 18:20 \u0432\u043c\u0435\u0441\u0442\u043e 16:00, \u0441 \u0442\u0435\u043c \u0436\u0435 \u043c\u0435\u0441\u0442\u043e\u043c \u043f\u043e\u0441\u0430\u0434\u043a\u0438. \u041d\u0430\u043f\u0438\u0448\u0438\u0442\u0435, \u043f\u043e\u0434\u0445\u043e\u0434\u0438\u0442 \u043b\u0438 \u0432\u0430\u043c \u044d\u0442\u043e\u0442 \u0432\u0430\u0440\u0438\u0430\u043d\u0442.\n\u041a\u0432\u0438\u0442\u0430\u043d\u0446\u0438\u044f \u043f\u0435\u0440\u0435\u043f\u0438\u0441\u043a\u0438: 011dad68c7164f5d.",
+        "text_sha256": "8730b45159b3ad7d11f7117786e0237158e5767236231d90cc7c9e64ee6d6ae8"
+      },
+      {
+        "case_id": "V01",
+        "source_id": "b5df68cf9b9c4f15",
+        "kind": "document",
+        "locator": "07968b8cd218434e",
+        "title": "\u0421\u043f\u0440\u0430\u0432\u043e\u0447\u043d\u0430\u044f \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0430",
+        "trust": "context",
+        "position": 1,
+        "included": true,
+        "version_id": "9abbc0d3-196a-48ee-9275-0445dc0f6395",
+        "text": "\u0421\u043f\u0440\u0430\u0432\u043e\u0447\u043d\u0430\u044f \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0430 \u043c\u0435\u0441\u0442\u0430 \u043f\u043e\u0441\u0430\u0434\u043a\u0438. \u0412\u0445\u043e\u0434 \u0441\u043e \u0441\u0442\u043e\u0440\u043e\u043d\u044b \u0441\u0435\u0432\u0435\u0440\u043d\u043e\u0433\u043e \u0444\u0430\u0441\u0430\u0434\u0430. \u042d\u0442\u043e \u043e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0434\u043e\u0441\u0442\u0443\u043f\u0430, \u043f\u0435\u0440\u0435\u043f\u0438\u0441\u043a\u0430 \u043f\u043e \u0438\u0437\u043c\u0435\u043d\u0435\u043d\u0438\u044f\u043c \u0437\u0434\u0435\u0441\u044c \u043d\u0435 \u0445\u0440\u0430\u043d\u0438\u0442\u0441\u044f.",
+        "text_sha256": "6a19fe8509355f0388dcc3351dcca1917ce4d421d788ca0e93f33e136817e10d"
+      },
+      {
+        "case_id": "V01",
+        "source_id": "b8821b7c6a2d432a",
+        "kind": "provider_log",
+        "locator": "011dad68c7164f5d",
+        "title": "\u0417\u0430\u043f\u0438\u0441\u044c \u043e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u044f",
+        "trust": "primary",
+        "position": 2,
+        "included": true,
+        "version_id": "951b5d73-cc1a-43fb-84ce-e84e5fbc2117",
+        "text": "2026-08-14T09:36:00+03:00 \u2014 \u043f\u043e\u0447\u0442\u043e\u0432\u044b\u0439 \u0448\u043b\u044e\u0437 \u043f\u0440\u0438\u043d\u044f\u043b \u043e\u0442\u0432\u0435\u0442 \u043a\u043b\u0438\u0435\u043d\u0442\u0430 \u0432 \u044d\u0442\u043e\u0439 \u043f\u0435\u0440\u0435\u043f\u0438\u0441\u043a\u0435.\nFrom: \u0430\u0434\u0440\u0435\u0441 \u043a\u043b\u0438\u0435\u043d\u0442\u0430 \u0438\u0437 \u0431\u0440\u043e\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f; In-Reply-To: \u0438\u0441\u0445\u043e\u0434\u043d\u043e\u0435 \u043f\u0438\u0441\u044c\u043c\u043e \u043f\u043e\u0441\u0442\u0430\u0432\u0449\u0438\u043a\u0430.\n\u041e\u0440\u0438\u0433\u0438\u043d\u0430\u043b MIME \u043f\u043e\u043c\u0435\u0449\u0451\u043d \u0432 \u0430\u0440\u0445\u0438\u0432: 1618ae5e5b894145.\n\u0422\u0435\u043b\u043e \u043f\u0438\u0441\u044c\u043c\u0430 \u043d\u0435 \u043a\u043e\u043f\u0438\u0440\u0443\u0435\u0442\u0441\u044f \u0432 \u0442\u0440\u0430\u043d\u0441\u043f\u043e\u0440\u0442\u043d\u044b\u0439 \u0436\u0443\u0440\u043d\u0430\u043b.",
+        "text_sha256": "42fc452f909ec003ff3b683bd732165dda66935b4cad292c48179451e608371f"
+      },
+      {
+        "case_id": "V01",
+        "source_id": "f9a88d5b726a4d4b",
+        "kind": "document",
+        "locator": "1618ae5e5b894145",
+        "title": "f9a88d5b726a4d4b",
+        "trust": "primary",
+        "position": 3,
+        "included": false,
+        "version_id": null,
+        "text": null,
+        "text_sha256": null
+      }
+    ]
+  },
+  "source_bindings": {
+    "5b910f89ca134035": {
+      "version_id": "2b93c45d-c324-4631-a533-9a02c993e330",
+      "text_sha256": "8730b45159b3ad7d11f7117786e0237158e5767236231d90cc7c9e64ee6d6ae8"
+    },
+    "b5df68cf9b9c4f15": {
+      "version_id": "9abbc0d3-196a-48ee-9275-0445dc0f6395",
+      "text_sha256": "6a19fe8509355f0388dcc3351dcca1917ce4d421d788ca0e93f33e136817e10d"
+    },
+    "b8821b7c6a2d432a": {
+      "version_id": "951b5d73-cc1a-43fb-84ce-e84e5fbc2117",
+      "text_sha256": "42fc452f909ec003ff3b683bd732165dda66935b4cad292c48179451e608371f"
+    }
+  },
+  "body": {
+    "case_id": "V01",
+    "facts": [
+      {
+        "key": "alternative_acceptance",
+        "value": "unconfirmed",
+        "evidence": []
+      }
+    ],
+    "timeline": [
+      {
+        "event_type": "customer_message_received",
+        "time": {
+          "value": "2026-08-14T09:36:00+03:00",
+          "role": "received"
+        },
+        "evidence": [
+          {
+            "source_id": "b8821b7c6a2d432a",
+            "fragments": [
+              "2026-08-14T09:36:00+03:00 \u2014 \u043f\u043e\u0447\u0442\u043e\u0432\u044b\u0439 \u0448\u043b\u044e\u0437 \u043f\u0440\u0438\u043d\u044f\u043b \u043e\u0442\u0432\u0435\u0442 \u043a\u043b\u0438\u0435\u043d\u0442\u0430 \u0432 \u044d\u0442\u043e\u0439 \u043f\u0435\u0440\u0435\u043f\u0438\u0441\u043a\u0435."
+            ]
+          }
+        ]
+      }
+    ],
+    "readiness": "request_evidence",
+    "follow_up": {
+      "action": "read_source",
+      "locator": "1618ae5e5b894145",
+      "requirements": [
+        "original_acceptance_reply"
+      ]
+    }
+  },
+  "body_sha256": "defc7808b7fc229a6cfe19a854f5a8ee4bc910f6aec747b283d291c47392eae5",
+  "reason": null,
+  "created_at": "2026-11-24T19:08:40.669028Z",
+  "active": true,
+  "stale": false,
+  "validation_current": true,
+  "status": "needs_operator_review",
+  "latest_validation": {
+    "id": "a9ff10ec-90df-44a5-8fbc-b00248a25baa",
+    "proposal_revision_id": "7c580a40-0e36-4225-a3d7-b5ea06f608ff",
+    "profile_version": "proofline-validation-v1+reply-events-test-v1:af1c6e643f000e91e5b534ccbaea7968c90fb087f645ba1c8e69dfbad4e4e3e3+required-timeline-test-v4:1e2518c982307a0d7df2d2f9d20b4f8488816e1f6fac3b177b7729c503cd8c79+case-evidence-test-v1:b35c05abeea9c28cedc8bcd5d0887cd2ca4c2453bddc79b3c760c29f0ffa4d8c",
+    "result": "needs_operator_review",
+    "issues": [],
+    "resolved_spans": [
+      {
+        "source_id": "b8821b7c6a2d432a",
+        "source_version_id": "951b5d73-cc1a-43fb-84ce-e84e5fbc2117",
+        "source_sha256": "42fc452f909ec003ff3b683bd732165dda66935b4cad292c48179451e608371f",
+        "start_cp": 0,
+        "end_cp": 80,
+        "fragment": "2026-08-14T09:36:00+03:00 \u2014 \u043f\u043e\u0447\u0442\u043e\u0432\u044b\u0439 \u0448\u043b\u044e\u0437 \u043f\u0440\u0438\u043d\u044f\u043b \u043e\u0442\u0432\u0435\u0442 \u043a\u043b\u0438\u0435\u043d\u0442\u0430 \u0432 \u044d\u0442\u043e\u0439 \u043f\u0435\u0440\u0435\u043f\u0438\u0441\u043a\u0435.",
+        "path": [
+          "timeline",
+          0,
+          "evidence",
+          0,
+          "fragments",
+          0
+        ]
+      }
+    ],
+    "created_at": "2026-11-24T19:08:40.669028Z"
+  },
+  "validations": [
+    {
+      "id": "a9ff10ec-90df-44a5-8fbc-b00248a25baa",
+      "proposal_revision_id": "7c580a40-0e36-4225-a3d7-b5ea06f608ff",
+      "profile_version": "proofline-validation-v1+reply-events-test-v1:af1c6e643f000e91e5b534ccbaea7968c90fb087f645ba1c8e69dfbad4e4e3e3+required-timeline-test-v4:1e2518c982307a0d7df2d2f9d20b4f8488816e1f6fac3b177b7729c503cd8c79+case-evidence-test-v1:b35c05abeea9c28cedc8bcd5d0887cd2ca4c2453bddc79b3c760c29f0ffa4d8c",
+      "result": "needs_operator_review",
+      "issues": [],
+      "resolved_spans": [
+        {
+          "source_id": "b8821b7c6a2d432a",
+          "source_version_id": "951b5d73-cc1a-43fb-84ce-e84e5fbc2117",
+          "source_sha256": "42fc452f909ec003ff3b683bd732165dda66935b4cad292c48179451e608371f",
+          "start_cp": 0,
+          "end_cp": 80,
+          "fragment": "2026-08-14T09:36:00+03:00 \u2014 \u043f\u043e\u0447\u0442\u043e\u0432\u044b\u0439 \u0448\u043b\u044e\u0437 \u043f\u0440\u0438\u043d\u044f\u043b \u043e\u0442\u0432\u0435\u0442 \u043a\u043b\u0438\u0435\u043d\u0442\u0430 \u0432 \u044d\u0442\u043e\u0439 \u043f\u0435\u0440\u0435\u043f\u0438\u0441\u043a\u0435.",
+          "path": [
+            "timeline",
+            0,
+            "evidence",
+            0,
+            "fragments",
+            0
+          ]
+        }
+      ],
+      "created_at": "2026-11-24T19:08:40.669028Z"
+    }
+  ],
+  "blocking_issues": [],
+  "decision": null,
+  "decision_current": false,
+  "case_version": 3
+}

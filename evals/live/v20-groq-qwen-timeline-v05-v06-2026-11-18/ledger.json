@@ -1,0 +1,36 @@
+{
+  "max_requests": 2,
+  "approved_budget_usd": 0,
+  "attempts": [
+    {
+      "condition": "full-V05",
+      "case_id": "V05",
+      "started_at": "2026-11-18T11:19:55.881768+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-qwen-remaining-timeline-v20-20261118-full-V05",
+      "http_status": 201,
+      "finished_at": "2026-11-18T11:20:00.612360+00:00",
+      "run_id": "203210fc-ac1c-4d73-9966-19e1bb1ef835"
+    },
+    {
+      "condition": "full-V06",
+      "case_id": "V06",
+      "started_at": "2026-11-18T11:21:01.681511+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "failed",
+      "idempotency_key": "groq-qwen-remaining-timeline-v20-20261118-full-V06",
+      "http_status": 201,
+      "finished_at": "2026-11-18T11:21:02.257018+00:00",
+      "run_id": "9e3094f4-3757-466a-802c-f0e13b013505"
+    }
+  ],
+  "stopped": true,
+  "stop_reason": "Stop on provider status 429 after V06"
+}

@@ -1,0 +1,16 @@
+{
+  "format_version": 1,
+  "recorded_at": "2026-11-16T19:53:09.116376+00:00",
+  "new_inference_requests": 0,
+  "purpose": "Read-only diagnosis and proposed changes, no active code/policy changes",
+  "original_run_path": "evals/live/v1-groq-2026-11-16/full-V05/run.json",
+  "original_run_sha256": "e3f912934ecf405f6e07417b8f1d09535d4a2f0856b5a5d9925f2288ce56f7b9",
+  "active_policy_sha256": "48f493c4c251b4a566fa37c655e33ea2bde72ec703ab1d249e4a5bb0b2da333e",
+  "candidate_path": "docs/proposals/2026-11-16-live-policy-v3.2-candidate.txt",
+  "candidate_sha256": "f8b286a4b6d23c8ae6a0f20bdb3d4ca1ec48ae8ca8a7a687c79f07f29602659c",
+  "candidate_generation_tested": false,
+  "evidence_hashes": {
+    "offline-diagnostic-probe.json": "296af927dfbe33f5e4f44a661cae428528bd4c4985dc649163bba8f22513c7e5",
+    "provider-console-observation.json": "48671046d26f57202a910a931b973e167e85afdc7095285a866bff1786864767"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b",
+  "requested_reasoning_effort": "medium",
+  "policy_version": "proofline-policy-v3.3-candidate-1",
+  "requests_attempted": 2,
+  "approved_max_requests": 2,
+  "approved_budget_usd": 0,
+  "technical_successes": 2,
+  "technical_failures": 0,
+  "complete_quality_passes": 0,
+  "conditions": [
+    {
+      "condition": "full-V02",
+      "matching_business_snapshot": true,
+      "v3.2_medium": {
+        "technical_pass": true,
+        "quality_pass": false,
+        "runtime_validation": "blocked_for_approval",
+        "latency_seconds": 9.395866,
+        "request_id": "req_01m7ndxmnje4h93hp29qxbfb8x",
+        "usage": {
+          "prompt_tokens": 2109,
+          "completion_tokens": 1572,
+          "total_tokens": 3681
+        },
+        "reported_reasoning_tokens": 1024,
+        "literal_fragments_valid": null
+      },
+      "v3.3_medium": {
+        "technical_pass": true,
+        "quality_pass": false,
+        "runtime_validation": "blocked_for_approval",
+        "latency_seconds": 7.472804,
+        "request_id": "req_01m7nfk3fqeyktyyr8shae6593",
+        "usage": {
+          "prompt_tokens": 2599,
+          "completion_tokens": 1390,
+          "total_tokens": 3989
+        },
+        "reported_reasoning_tokens": 1024,
+        "literal_fragments_valid": 5
+      }
+    },
+    {
+      "condition": "full-V04",
+      "matching_business_snapshot": true,
+      "v3.2_medium": {
+        "technical_pass": true,
+        "quality_pass": false,
+        "runtime_validation": "needs_operator_review without blocking issues",
+        "latency_seconds": 5.088667,
+        "request_id": "req_01m7ndzt6weytavdfghwnvgcnz",
+        "usage": {
+          "prompt_tokens": 2083,
+          "completion_tokens": 1654,
+          "total_tokens": 3737
+        },
+        "reported_reasoning_tokens": 1024,
+        "literal_fragments_valid": null
+      },
+      "v3.3_medium": {
+        "technical_pass": true,
+        "quality_pass": false,
+        "runtime_validation": "blocked_for_approval",
+        "latency_seconds": 4.607175,
+        "request_id": "req_01m7nfngfceddtf9t4p0f32e8p",
+        "usage": {
+          "prompt_tokens": 2567,
+          "completion_tokens": 1783,
+          "total_tokens": 4350
+        },
+        "reported_reasoning_tokens": 1024,
+        "literal_fragments_valid": 9
+      }
+    }
+  ],
+  "literal_fragments": 14,
+  "literal_fragments_valid": 14,
+  "usage": {
+    "prompt_tokens": 5166,
+    "completion_tokens": 3173,
+    "total_tokens": 8339,
+    "reasoning_tokens_included_in_completion": 2048
+  },
+  "monetary_cost": null,
+  "operator_decisions": 0
+}

@@ -1,0 +1,14 @@
+{
+  "reviewer": "assistant",
+  "independent_human_labels": false,
+  "condition": "full-V04",
+  "technical_pass": false,
+  "provider_http_status": 429,
+  "error_code": "PROVIDER_RATE_LIMITED",
+  "provider_schema_accepted": null,
+  "runtime_validation": null,
+  "overall_pass": false,
+  "quality_assessed": false,
+  "notes": "Groq rate-limited the authorised request. No completion, usage, or proposal is recorded. The exact quota bucket is unknown. No retry or fallback was made.",
+  "operator_decision_created": false
+}

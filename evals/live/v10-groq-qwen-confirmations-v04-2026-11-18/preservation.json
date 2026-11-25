@@ -1,0 +1,19 @@
+{
+  "protected_files_unchanged": true,
+  "protected_files_verified": 233,
+  "protected_container_states_unchanged": true,
+  "protected_containers_verified": 20,
+  "protected_volumes_unchanged": true,
+  "protected_volume_fingerprints": {
+    "proofline-live-qwen-choices-v04-20261118-db-1": "1a88c9fb4e1661ca4ca686d7cb40d41851437b680c4e323b44e912c9a294f6f8",
+    "proofline-live-qwen-choices-pair-20261117-db-1": "15cedff422e7784de70522b9e01c84914dd9468de062dc546030f280f6e0d7b4",
+    "proofline-live-qwen-choices-20261117-db-1": "ae23d0daa32e75a90a2ec534a7dad8156aad78be5c661ceb45daf1e68596f91a",
+    "proofline-live-qwen-v33-20261117-db-1": "21e82af23ab3ef2d3f28d2c7a97a80d89d97667af8fd5d3df0fcbaa99162a395",
+    "proofline-live-qwen-medium-20261117-db-1": "e2343ab4b5f404102bbfaeaa1838d163f6388d6612669918a51935c02ccee6a1",
+    "proofline-live-qwen-20261117-db-1": "9fb16bf36fcf0a825a93839c5e80d2bb35f99a5fcb6f7ac79c630d4174fd6708",
+    "proofline-live-chat-20261117-db-1": "73127a0fe5fb45b1a6a9530b466be8ada87829f20a0372689ad5e030420f4a6d",
+    "proofline-live-v32-20261116-db-1": "641f948748f2f041af29c28611d231a987d5d2e054ef25ff9e67920e1de7356c",
+    "proofline-live-m4-20261116-db-1": "5096d411fda8a92c97dfc0823a59349aaca6d2ca10343351ada118e5984be07f",
+    "proofline-db-1": "b7d71cef11495752317e7597f383b94143c12f82e75eec5a1f0e47a6572d31fb"
+  }
+}

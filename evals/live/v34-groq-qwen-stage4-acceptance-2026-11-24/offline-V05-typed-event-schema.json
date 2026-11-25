@@ -1,0 +1,10 @@
+{
+  "new_model_calls": 0,
+  "scope": "Only the recorded V05 snapshot with a single reviewed supplier receipt and a confirmed cancellation",
+  "checks": {
+    "recorded_wrong_role": "rejected",
+    "sent_label_fixed_but_receipt_is_generic": "rejected",
+    "both_event_labels_supported_by_the_same_quotes": "accepted"
+  },
+  "status": "Offline preview only; current app schema not changed"
+}
