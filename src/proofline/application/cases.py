@@ -65,7 +65,7 @@ class CaseService:
         if not 1 <= limit <= 100 or offset < 0:
             raise ApplicationError("INVALID_REQUEST", "Invalid pagination.", status_code=422)
         with read_session(self.database) as session:
-            query = case_summary_query(self.settings.validation_profile)
+            query = case_summary_query(self.settings.effective_validation_profile)
             if status is not None:
                 query = query.where(query.selected_columns.display_status == status)
             total = session.scalar(select(func.count()).select_from(query.subquery())) or 0
@@ -82,7 +82,7 @@ class CaseService:
     def get(self, case_id: str) -> CaseDetail:
         with read_session(self.database) as session:
             return case_detail(
-                session, case_or_404(session, case_id), self.settings.validation_profile
+                session, case_or_404(session, case_id), self.settings.effective_validation_profile
             )
 
     def create(self, command: CaseCreate) -> CaseDetail:
@@ -111,7 +111,7 @@ class CaseService:
             )
             session.add(case)
             session.flush()
-            return case_detail(session, case, self.settings.validation_profile)
+            return case_detail(session, case, self.settings.effective_validation_profile)
 
     def update(self, case_id: str, command: CasePatch) -> CaseDetail:
         with self.database.sessions.begin() as session:
@@ -141,7 +141,7 @@ class CaseService:
                 touch(case, content=changed_input)
                 check_limits(current_input(session, case), self.settings)
             session.flush()
-            return case_detail(session, case, self.settings.validation_profile)
+            return case_detail(session, case, self.settings.effective_validation_profile)
 
     def _text(self, value: str) -> tuple[str, str]:
         text = value.replace("\r\n", "\n").replace("\r", "\n")
@@ -215,7 +215,7 @@ class CaseService:
             touch(case, content=True)
             check_limits(current_input(session, case), self.settings)
             session.flush()
-            return case_detail(session, case, self.settings.validation_profile)
+            return case_detail(session, case, self.settings.effective_validation_profile)
 
     def add_version(self, case_id: str, source_id: str, command: SourceVersionCreate) -> CaseDetail:
         text, digest = self._text(command.text)
@@ -246,7 +246,7 @@ class CaseService:
             touch(case, content=True)
             check_limits(current_input(session, case), self.settings)
             session.flush()
-            return case_detail(session, case, self.settings.validation_profile)
+            return case_detail(session, case, self.settings.effective_validation_profile)
 
     def update_source(self, case_id: str, source_id: str, command: SourcePatch) -> CaseDetail:
         with self.database.sessions.begin() as session:
@@ -311,7 +311,7 @@ class CaseService:
                 touch(case, content=True)
                 check_limits(current_input(session, case), self.settings)
             session.flush()
-            return case_detail(session, case, self.settings.validation_profile)
+            return case_detail(session, case, self.settings.effective_validation_profile)
 
     def get_version(self, case_id: str, source_id: str, version_id: str) -> SourceVersionView:
         with read_session(self.database) as session:

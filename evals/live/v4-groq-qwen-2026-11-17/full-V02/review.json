@@ -1,0 +1,35 @@
+{
+  "reviewer": "assistant",
+  "independent_human_labels": false,
+  "condition": "full-V02",
+  "technical_pass": true,
+  "fact_values": {
+    "pass": true, "correct": 2, "total": 2,
+    "expected": {"withdrawal_timing": "unconfirmed", "cancellation_status": "confirmed"},
+    "actual": {"withdrawal_timing": "unconfirmed", "cancellation_status": "confirmed"}
+  },
+  "evidence_sufficiency": {
+    "pass": true,
+    "notes": "The unknown withdrawal timing is supported by the explicit absence of original message/delivery evidence; cancellation is supported by the executed operation. The receipt event quotes the support-form receipt record and form timestamps. No unsupported customer_withdrawal event is invented."
+  },
+  "chronology": {
+    "pass": false,
+    "correct": [
+      "supplier_cancelled occurred 2026-09-18T10:20:00+03:00",
+      "customer_message_received received 2026-09-18T12:10:00+03:00"
+    ],
+    "missing": ["customer_replied sent 2026-09-18T12:09:55+03:00"],
+    "unsupported": [],
+    "notes": "The sending timestamp appears in evidence attached to the receipt event, but no separate sending event is emitted. The fixed criterion requires separate sending and receipt events."
+  },
+  "next_step": {
+    "pass": true,
+    "expected_readiness": "request_evidence", "expected_action": "ask_user",
+    "expected_requirements": ["original_customer_message", "delivery_receipt"],
+    "actual_readiness": "request_evidence", "actual_action": "ask_user",
+    "actual_requirements": ["original_customer_message", "delivery_receipt"]
+  },
+  "runtime_validation": "needs_operator_review without blocking issues",
+  "overall_pass": false,
+  "operator_decision_created": false
+}

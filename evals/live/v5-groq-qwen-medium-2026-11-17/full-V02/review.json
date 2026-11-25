@@ -1,0 +1,41 @@
+{
+  "reviewer": "assistant",
+  "independent_human_labels": false,
+  "condition": "full-V02",
+  "technical_pass": true,
+  "fact_values": {
+    "pass": true,
+    "correct": 2,
+    "total": 2,
+    "expected": {"cancellation_status": "confirmed", "withdrawal_timing": "unconfirmed"},
+    "actual": {"cancellation_status": "confirmed", "withdrawal_timing": "unconfirmed"}
+  },
+  "evidence_sufficiency": {
+    "pass": true,
+    "notes": "The cited supplier operation establishes the cancellation. The draft and lack of the original message and receipt support uncertainty. The form receipt is a customer message, with the timestamp and meaning in its own evidence."
+  },
+  "chronology": {
+    "pass": false,
+    "correct": [
+      "supplier_cancelled occurred 2026-09-18T10:20:00+03:00",
+      "customer_message_received received 2026-09-18T12:10:00+03:00"
+    ],
+    "missing": ["customer_replied sent 2026-09-18T12:09:55+03:00"],
+    "unsupported": []
+  },
+  "next_step": {
+    "pass": false,
+    "expected_readiness": "request_evidence",
+    "expected_action": "ask_user",
+    "expected_requirements": ["original_customer_message", "delivery_receipt"],
+    "actual_readiness": "request_evidence",
+    "actual_action": "read_source",
+    "actual_locator": "84934bcfab7e4745",
+    "actual_requirements": ["original_customer_message", "delivery_receipt"],
+    "notes": "This locator points to an already included provider log. Both the lookup kind and the repeated lookup are blocked. In v4 the same model correctly chose ask_user."
+  },
+  "runtime_validation": "blocked_for_approval",
+  "runtime_blocking_codes": ["wrong_lookup_kind", "repeated_snapshot_lookup"],
+  "overall_pass": false,
+  "operator_decision_created": false
+}

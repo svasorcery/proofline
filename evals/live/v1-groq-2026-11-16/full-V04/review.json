@@ -1,0 +1,47 @@
+{
+  "reviewer": "assistant",
+  "independent_human_labels": false,
+  "condition": "full-V04",
+  "technical_pass": true,
+  "fact_values": {
+    "pass": true,
+    "correct": 1,
+    "total": 1,
+    "expected": {
+      "alternative_acceptance": "conditional"
+    },
+    "actual": {
+      "alternative_acceptance": "conditional"
+    }
+  },
+  "evidence_sufficiency": {
+    "pass": false,
+    "notes": "Fact citation includes the unresolved conditions and negation correctly. Timeline evidence for customer_replied identifies inbound receipt at 12:27, not sending at 12:25. The offer event cites only the timestamp, not the specific offer."
+  },
+  "chronology": {
+    "pass": false,
+    "missing": [
+      "customer_replied sent 2026-10-08T12:25:00+03:00",
+      "customer_message_received received 2026-10-08T12:27:00+03:00"
+    ],
+    "incorrect": [
+      "customer_replied sent 2026-10-08T12:27:00+03:00"
+    ],
+    "correct": [
+      "alternative_offered sent 2026-10-08T12:10:00+03:00"
+    ]
+  },
+  "next_step": {
+    "pass": true,
+    "expected_readiness": "request_evidence",
+    "expected_action": "ask_user",
+    "expected_requirements": [
+      "quiet_room",
+      "courtyard_windows"
+    ],
+    "notes": "Both confirmations requested, no unconditional acceptance and no rereading of the existing snapshot."
+  },
+  "runtime_validation": "needs_operator_review without blocking issues",
+  "overall_pass": false,
+  "operator_decision_created": false
+}

@@ -1,0 +1,10 @@
+{
+  "protected_files_unchanged": true,
+  "protected_files_verified": 535,
+  "protected_container_states_unchanged": true,
+  "protected_containers_verified": 38,
+  "checked_volume_contents_unchanged": true,
+  "checked_volume_fingerprints": {
+    "proofline-live-stage4-v03-control-20261118-db-1": "69331bd173851adf617f5b946c7ad306044c9fe01428b7611b92d56659e94e1c"
+  }
+}

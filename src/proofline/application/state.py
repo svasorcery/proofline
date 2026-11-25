@@ -10,8 +10,12 @@ from sqlalchemy import select, text
 from sqlalchemy.orm import Session
 
 from proofline.application.errors import ApplicationError
-from proofline.config import Settings
+from proofline.config import GROQ_CONFIRMATION_PROFILES, Settings
 from proofline.domain.assembly import AssemblyOutput
+from proofline.domain.case_evidence import (
+    reviewed_withdrawal_proof_missing,
+    reviewed_withdrawal_snapshot,
+)
 from proofline.domain.inputs import (
     AnalysisInput,
     canonical_json,
@@ -27,6 +31,13 @@ from proofline.persistence.models import (
     ValidationCheck,
 )
 from proofline.validation import validate_assembly
+from proofline.validation.case_evidence import (
+    check_case_evidence,
+    check_missing_withdrawal_proof,
+    check_withdrawal_refusal_text,
+)
+from proofline.validation.reply_events import check_reply_events
+from proofline.validation.required_events import check_required_events
 
 
 @contextmanager
@@ -167,12 +178,39 @@ def latest_check(session: Session, proposal_id: str) -> ValidationCheck | None:
 
 
 def record_validation(
-    session: Session, proposal: ProposalRevision, profile: str
+    session: Session, proposal: ProposalRevision, settings: Settings
 ) -> ValidationCheck:
     snapshot = AnalysisInput.model_validate_json(canonical_json(proposal.snapshot))
-    result = validate_assembly(
-        AssemblyOutput.model_validate(proposal.body), snapshot.to_validation_context()
+    output = AssemblyOutput.model_validate(proposal.body)
+    context = snapshot.to_validation_context()
+    result = validate_assembly(output, context)
+    binding = None
+    if settings.groq_prompt_profile in GROQ_CONFIRMATION_PROFILES:
+        binding = (settings.groq_test_acceptance_replies or {}).get(snapshot.case_id)
+        if binding is not None:
+            result = check_reply_events(output, snapshot, result, binding)
+    assemble_reviewed_evidence = settings.groq_test_assemble_reviewed_evidence
+    required = settings.required_events(snapshot)
+    result = check_required_events(
+        output,
+        context,
+        result,
+        required,
+        check_capture=assemble_reviewed_evidence,
     )
+    if assemble_reviewed_evidence and reviewed_withdrawal_proof_missing(snapshot):
+        result = check_missing_withdrawal_proof(output, result)
+    elif assemble_reviewed_evidence and reviewed_withdrawal_snapshot(snapshot):
+        result = check_withdrawal_refusal_text(output, context, result, required)
+    if settings.groq_test_case_evidence is not None:
+        result = check_case_evidence(
+            output,
+            context,
+            result,
+            settings.groq_test_case_evidence.get(snapshot.case_id),
+            reply_already_included=binding is not None and binding.matches(snapshot),
+            assemble_reviewed_evidence=assemble_reviewed_evidence,
+        )
     issues: list[dict[str, JsonValue]] = [
         {"code": issue.code, "path": list(issue.path), "message": issue.message}
         for issue in result.issues
@@ -180,7 +218,7 @@ def record_validation(
     spans: list[dict[str, JsonValue]] = [asdict(span) for span in result.fragments]
     check = ValidationCheck(
         proposal_revision_id=proposal.id,
-        profile_version=profile,
+        profile_version=settings.effective_validation_profile,
         result=result.state,
         issues=issues,
         resolved_spans=spans,

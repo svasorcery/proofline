@@ -1,0 +1,10 @@
+{
+  "schema_sha256": "187dd64d7f298f8588ac36a53dad2f671a6956357c985345c3345438ea8865c1",
+  "only_v27_minimum_changed": true,
+  "cases": {
+    "v27_empty_timeline": "rejected",
+    "two_events": "rejected",
+    "v19_three_events": "accepted"
+  },
+  "new_model_calls": 0
+}

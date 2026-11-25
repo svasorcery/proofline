@@ -4,7 +4,11 @@
 
 Proofline is a personal portfolio project for preparing an operator's review of a customer case: facts, source evidence, a timeline and specific missing confirmations. It does not authorise refunds, execute payments or send messages to customers.
 
-**Current status: replay-backed operator UI; live adapter implemented, pending live acceptance.** Review facts and chronology beside their source evidence, correct a proposal as a new revision, and record an explicit human decision. PostgreSQL preserves source versions, analysis runs, validation checks and decision history. Replay uses exact recorded inputs. An opt-in OpenAI Responses adapter is covered by offline SDK/HTTP tests; actual API access, model compatibility and quality have not been verified. See [live configuration and acceptance](docs/live-provider.md).
+**Current status — Stage 4 live acceptance passed.** All six synthetic cases passed the quality rubric on one closed Groq Free test instance using GPT-OSS 20B. The replay-backed operator workflow is verified. Review facts and chronology beside their sources, correct a proposal as a new revision, and record an explicit human decision. PostgreSQL preserves source versions, analysis runs, validation checks and decision history. Opt-in OpenAI, DeepSeek, Groq and Anthropic adapters are covered by offline SDK/HTTP tests. See the [Stage 4 acceptance report](docs/live-acceptance-stage-4-v05-fact-2026-11-25.md), [earlier six-case series](docs/live-acceptance-stage-4-source-claims-2026-11-25.md) and [public demo review](docs/solution-review-2026-11-18.md).
+
+The default live policy is a v3.2 candidate with [offline verification](docs/v3.2-offline-verification-2026-11-16.md). Its [separate Responses trial](docs/live-acceptance-v3.2-2026-11-16.md) stopped on the first request with `json_validate_failed`, producing no card. A [two-request Groq Chat trial on 17 November](docs/live-acceptance-groq-chat-2026-11-17.md) returned two schema-valid cards. V02 retained a semantic error and V04 had insufficient event evidence.
+
+A [separate Qwen comparison](docs/live-acceptance-qwen-2026-11-17.md) used the same v3.2 instruction and schema for V02/V04. V02 handled the withdrawal uncertainty correctly but omitted a timeline event; V04 was blocked for duplicated facts, a nonliteral fragment and repeated snapshot lookup. Neither model passed the full quality criteria on these two cases.
 
 ## Run the local demo
 
@@ -71,7 +75,7 @@ These commands make no model calls and do not rewrite recorded results. The corr
 | [docs/spec.md](docs/spec.md) | Current implementation contract |
 | [docs/development.md](docs/development.md) | Working with the repository and the next milestone |
 | [docs/api.md](docs/api.md) | HTTP workflow, versions, conflicts and local configuration |
-| [docs/live-provider.md](docs/live-provider.md) | Opt-in live configuration, failure handling and pending live acceptance |
+| [docs/live-provider.md](docs/live-provider.md) | Opt-in live configuration, failure handling and acceptance results |
 | [docs/operator-ui.md](docs/operator-ui.md) | Operator workflow, demonstration stories and version history |
 | [docs/validation.md](docs/validation.md) | Library usage, validation boundaries and supported timestamp format |
 | [docs/research.md](docs/research.md) | Research decisions, evidence and limitations |
@@ -84,4 +88,4 @@ These commands make no model calls and do not rewrite recorded results. The corr
 | [evals/baselines/v3](evals/baselines/v3/README.md) | Frozen measured baseline and offline verification |
 | `notes/` | Optional local import archives and working notes; ignored by Git |
 
-The application uses Python/FastAPI/Pydantic, SQLAlchemy, PostgreSQL, the official OpenAI SDK and React/TypeScript/Vite. Live has no automatic retries or Replay fallback and needs a separately approved API model and invocation budget. No model calls run in routine checks. Live acceptance remains open before portfolio packaging; see the [implementation order](docs/spec.md#порядок-реализации).
+The application uses Python/FastAPI/Pydantic, SQLAlchemy, PostgreSQL, the official OpenAI SDK, HTTPX and React/TypeScript/Vite. Select the live provider, model and backend key through `LLM_PROVIDER`, `LLM_MODEL` and `LLM_API_KEY`. Groq Free passed closed acceptance with GPT-OSS 20B and remains subject to account quotas. Live needs a separately approved API model and invocation budget. Routine checks run offline. [Implementation order](docs/spec.md#порядок-реализации).

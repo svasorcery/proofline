@@ -1,0 +1,54 @@
+{
+  "reviewer": "assistant",
+  "independent_human_labels": false,
+  "condition": "full-V04",
+  "technical_pass": true,
+  "fact_values": {
+    "pass": false,
+    "correct_requested_values": 1,
+    "requested_keys": ["alternative_acceptance"],
+    "expected": {"alternative_acceptance": "conditional"},
+    "actual": {
+      "alternative_acceptance": "conditional",
+      "payment_outcome": "unconfirmed",
+      "withdrawal_timing": "unconfirmed",
+      "cancellation_status": "unconfirmed"
+    },
+    "notes": "The one requested value is correct. The response also adds three unrequested facts and fails the exact-key criterion."
+  },
+  "evidence_sufficiency": {
+    "pass": true,
+    "notes": "The requested fact quotes the actual conditional reply. The offer includes time and content. The sending event now has the Date header together with the actual text of the reply from the same record. The receipt event has the inbound record and the reply text. This addresses the field-local evidence gap observed in v5. The irrelevant information card does not establish the guest's room assignment."
+  },
+  "chronology": {
+    "pass": true,
+    "correct": [
+      "alternative_offered sent 2026-10-08T12:10:00+03:00",
+      "customer_replied sent 2026-10-08T12:25:00+03:00",
+      "customer_message_received received 2026-10-08T12:27:00+03:00"
+    ],
+    "missing": [],
+    "unsupported": []
+  },
+  "next_step": {
+    "pass": false,
+    "expected_readiness": "request_evidence",
+    "expected_action": "ask_user",
+    "expected_requirements": ["quiet_room", "courtyard_windows"],
+    "actual_readiness": "request_evidence",
+    "actual_action": "ask_user",
+    "actual_requirements": [
+      "original_customer_message",
+      "delivery_receipt",
+      "quiet_room",
+      "courtyard_windows",
+      "original_acceptance_reply",
+      "bank_settlement_document"
+    ],
+    "notes": "The model chose the right action and included both relevant conditions. Four unrelated requirements were added. The runtime blocker is the extra fact keys. The extra requirements fail semantic review."
+  },
+  "runtime_validation": "blocked_for_approval",
+  "runtime_blocking_codes": ["fact_keys_mismatch"],
+  "overall_pass": false,
+  "operator_decision_created": false
+}

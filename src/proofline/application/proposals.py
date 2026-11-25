@@ -40,7 +40,7 @@ class ProposalService:
                 session,
                 proposal,
                 case_or_404(session, proposal.case_id),
-                self.settings.validation_profile,
+                self.settings.effective_validation_profile,
             )
 
     def list(self, case_id: str) -> list[ProposalView]:
@@ -52,7 +52,7 @@ class ProposalService:
                 .order_by(ProposalRevision.created_at, ProposalRevision.id)
             ).all()
             return [
-                proposal_view(session, proposal, case, self.settings.validation_profile)
+                proposal_view(session, proposal, case, self.settings.effective_validation_profile)
                 for proposal in proposals
             ]
 
@@ -83,11 +83,11 @@ class ProposalService:
             )
             session.add(child)
             session.flush()
-            record_validation(session, child, self.settings.validation_profile)
+            record_validation(session, child, self.settings)
             case.current_proposal_revision_id = child.id
             touch(case)
             session.flush()
-            return proposal_view(session, child, case, self.settings.validation_profile)
+            return proposal_view(session, child, case, self.settings.effective_validation_profile)
 
     def activate(self, case_id: str, command: ActivateProposal) -> ProposalView:
         with self.database.sessions.begin() as session:
@@ -102,7 +102,9 @@ class ProposalService:
             case.current_proposal_revision_id = proposal.id
             touch(case)
             session.flush()
-            return proposal_view(session, proposal, case, self.settings.validation_profile)
+            return proposal_view(
+                session, proposal, case, self.settings.effective_validation_profile
+            )
 
     def validate(self, revision_id: str, command: VersionCommand) -> ProposalView:
         with self.database.sessions.begin() as session:
@@ -110,10 +112,12 @@ class ProposalService:
             case = case_or_404(session, proposal.case_id, lock=True)
             require_version(case, command.expected_case_version)
             require_current(session, case, proposal)
-            record_validation(session, proposal, self.settings.validation_profile)
+            record_validation(session, proposal, self.settings)
             touch(case)
             session.flush()
-            return proposal_view(session, proposal, case, self.settings.validation_profile)
+            return proposal_view(
+                session, proposal, case, self.settings.effective_validation_profile
+            )
 
     def decide(
         self, revision_id: str, command: DecisionCreate, idempotency_key: str
@@ -151,13 +155,13 @@ class ProposalService:
             previous_check = latest_check(session, revision_id)
             if command.kind == "approve" and (
                 previous_check is None
-                or previous_check.profile_version != self.settings.validation_profile
+                or previous_check.profile_version != self.settings.effective_validation_profile
             ):
                 raise ApplicationError(
                     "VALIDATION_PROFILE_CHANGED",
                     "Revalidate this revision with the current profile.",
                 )
-            check = record_validation(session, proposal, self.settings.validation_profile)
+            check = record_validation(session, proposal, self.settings)
             if command.kind == "approve" and check.result == "blocked_for_approval":
                 raise ApplicationError(
                     "VALIDATION_BLOCKED", "Resolve the blocking issues before approval."

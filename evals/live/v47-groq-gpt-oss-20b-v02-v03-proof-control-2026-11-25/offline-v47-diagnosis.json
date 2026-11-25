@@ -1,0 +1,42 @@
+{
+  "scope": "Local counterfactuals after v47. No new live results.",
+  "model_calls": 0,
+  "cases": {
+    "V02": {
+      "recorded": {
+        "application_issues": [
+          "required_timeline_event_missing"
+        ],
+        "rubric_pass": false,
+        "evidence_complete": true,
+        "missing_events": [
+          "supplier_cancelled"
+        ]
+      },
+      "only_change_on_copy": "timeline_event_from_already_selected_cancellation",
+      "local_result": {
+        "application_issues": [],
+        "rubric_pass": true,
+        "evidence_complete": true,
+        "missing_events": []
+      }
+    },
+    "V03": {
+      "recorded": {
+        "application_issues": [
+          "refund_settlement_link_missing"
+        ],
+        "rubric_pass": false,
+        "evidence_complete": false,
+        "missing_events": []
+      },
+      "only_change_on_copy": "bank_trace_in_settlement_event",
+      "local_result": {
+        "application_issues": [],
+        "rubric_pass": true,
+        "evidence_complete": true,
+        "missing_events": []
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "case_id": "V03",
+  "technical_pass": false,
+  "provider_http_status": 429,
+  "provider_error_code": null,
+  "provider_error_stage": null,
+  "error_code": "PROVIDER_RATE_LIMITED",
+  "quality_pass": false,
+  "reference_human_validated": false,
+  "usage": null
+}

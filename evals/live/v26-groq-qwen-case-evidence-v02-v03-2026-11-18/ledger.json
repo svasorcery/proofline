@@ -1,0 +1,36 @@
+{
+  "max_requests": 2,
+  "approved_budget_usd": 0,
+  "attempts": [
+    {
+      "condition": "full-V02",
+      "case_id": "V02",
+      "started_at": "2026-11-18T16:24:21.822800+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-qwen-case-evidence-v26-20261118-full-V02",
+      "http_status": 201,
+      "finished_at": "2026-11-18T16:24:26.021769+00:00",
+      "run_id": "eb7d0788-711a-4f85-a59a-b983708da501"
+    },
+    {
+      "condition": "full-V03",
+      "case_id": "V03",
+      "started_at": "2026-11-18T16:25:28.838362+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "failed",
+      "idempotency_key": "groq-qwen-case-evidence-v26-20261118-full-V03",
+      "http_status": 201,
+      "finished_at": "2026-11-18T16:25:33.994461+00:00",
+      "run_id": "7f18543d-f0c9-41ff-8558-f3b3ffb608c7"
+    }
+  ],
+  "stopped": true,
+  "stop_reason": "Stop on status None / failed after V03"
+}

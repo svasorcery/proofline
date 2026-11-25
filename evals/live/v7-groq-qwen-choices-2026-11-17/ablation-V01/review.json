@@ -1,0 +1,33 @@
+{
+  "reviewer": "assistant",
+  "independent_human_labels": false,
+  "condition": "ablation-V01",
+  "provider_schema_accepted": true,
+  "requested_fact_correct": true,
+  "selected_expected_source": true,
+  "follow_up": {
+    "action": "read_source",
+    "locator": "1618ae5e5b894145",
+    "requirements": [
+      "original_acceptance_reply"
+    ]
+  },
+  "chronology": [
+    [
+      "alternative_offered",
+      "sent",
+      "2026-08-14T09:10:00+03:00"
+    ],
+    [
+      "customer_message_received",
+      "received",
+      "2026-08-14T09:36:00+03:00"
+    ]
+  ],
+  "literal_fragments": 11,
+  "evidence_sufficiency": "The offer cites its time and content. Receipt is supported by the gateway record linked to the supplier message. Receipt alone does not establish acceptance, since the text of the reply is withheld.",
+  "proposal_status": "needs_operator_review",
+  "blocked_by_application": false,
+  "operator_decision_created": false,
+  "scope": "One development case. Operational acceptance and repetition are unmeasured."
+}

@@ -1,0 +1,12 @@
+{
+  "case_id": "V05",
+  "technical_pass": false,
+  "provider_http_status": 403,
+  "network_error_type": null,
+  "provider_error_code": null,
+  "provider_error_stage": null,
+  "error_code": "PROVIDER_ACCESS_DENIED",
+  "quality_pass": false,
+  "reference_human_validated": false,
+  "usage": null
+}

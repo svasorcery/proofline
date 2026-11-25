@@ -1,0 +1,69 @@
+{
+  "model_calls_in_offline_check": 0,
+  "actual_decoder_error": "Duplicate citation ID in evidence",
+  "repeated_id": "q42bcfc7609b25b40",
+  "repeated_source_line": "Date: 2026-10-04T09:26:00+03:00",
+  "missing_fact_receipt_id": "qaf445027f75a9736",
+  "missing_fact_receipt_line": "Received by supplier: 2026-10-04T09:30:00+03:00",
+  "after_deduplicating_a_copy": {
+    "rubric": {
+      "case_id": "V05",
+      "runtime_valid": true,
+      "runtime_issues": [],
+      "facts_exact": true,
+      "evidence_complete": false,
+      "timeline_complete": true,
+      "followup_complete": true,
+      "readiness_ok": true,
+      "pack_pass": false,
+      "facts": [
+        {
+          "key": "withdrawal_timing",
+          "value_ok": true,
+          "evidence_ok": false
+        },
+        {
+          "key": "cancellation_status",
+          "value_ok": true,
+          "evidence_ok": true
+        }
+      ],
+      "missing_events": [],
+      "unsupported_event_indices": [],
+      "missing_requirements": [],
+      "extra_requirements": []
+    },
+    "runtime_issue_codes": []
+  },
+  "after_adding_the_receipt_to_the_fact_in_a_copy": {
+    "rubric": {
+      "case_id": "V05",
+      "runtime_valid": true,
+      "runtime_issues": [],
+      "facts_exact": true,
+      "evidence_complete": true,
+      "timeline_complete": true,
+      "followup_complete": true,
+      "readiness_ok": true,
+      "pack_pass": true,
+      "facts": [
+        {
+          "key": "withdrawal_timing",
+          "value_ok": true,
+          "evidence_ok": true
+        },
+        {
+          "key": "cancellation_status",
+          "value_ok": true,
+          "evidence_ok": true
+        }
+      ],
+      "missing_events": [],
+      "unsupported_event_indices": [],
+      "missing_requirements": [],
+      "extra_requirements": []
+    },
+    "runtime_issue_codes": []
+  },
+  "original_artifacts_rewritten": false
+}

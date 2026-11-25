@@ -1,0 +1,10 @@
+{
+  "protected_files_unchanged": true,
+  "protected_files_verified": 518,
+  "protected_container_states_unchanged": true,
+  "protected_containers_verified": 37,
+  "checked_volume_contents_unchanged": true,
+  "checked_volume_fingerprints": {
+    "proofline-live-stage4-qwen-case-evidence-20261118-db-1": "033d0aa7a78b0569e71fd8162bf12ea3c8cc0eee5a99a8e0dd9c274fa7faa3c3"
+  }
+}

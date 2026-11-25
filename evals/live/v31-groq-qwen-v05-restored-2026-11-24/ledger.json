@@ -1,0 +1,22 @@
+{
+  "max_requests": 1,
+  "approved_budget_usd": 0,
+  "attempts": [
+    {
+      "condition": "full-V05",
+      "case_id": "V05",
+      "started_at": "2026-11-24T14:15:05.738762+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "failed",
+      "idempotency_key": "groq-qwen-restored-20261124-full-V05",
+      "http_status": 201,
+      "finished_at": "2026-11-24T14:15:10.436782+00:00",
+      "run_id": "128353e7-5e87-47b8-beeb-e1d6b4eaaff2"
+    }
+  ],
+  "stopped": true,
+  "stop_reason": "Stop on status 200 / failed after V05"
+}

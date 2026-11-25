@@ -1,0 +1,26 @@
+{
+  "custom_project_limits": false,
+  "daily_chart_utc": {
+    "approximate_tokens": 70381,
+    "conservative_token_upper_bound": 80000,
+    "approximate_requests": 15,
+    "data_delay_minutes": 15
+  },
+  "configured_limits": {
+    "tokens_per_minute": 8000,
+    "requests_per_day": 1000,
+    "requests_per_minute": 30,
+    "tokens_per_day": 200000
+  },
+  "project": "Default Project",
+  "sources": [
+    "https://console.groq.com/settings/organization/usage?tab=activity",
+    "https://console.groq.com/settings/billing",
+    "https://console.groq.com/settings/limits",
+    "https://console.groq.com/settings/project/limits"
+  ],
+  "model": "qwen/qwen3.8-27b",
+  "observed_at": "2026-11-18T14:09:00.2532793+00:00",
+  "scope": "Organization Usage Activity in UTC, all projects, stacked input and output tokens from the rendered Qwen chart",
+  "plan": "Free"
+}

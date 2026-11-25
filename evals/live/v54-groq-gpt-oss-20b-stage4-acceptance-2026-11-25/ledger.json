@@ -1,0 +1,92 @@
+{
+  "max_requests": 6,
+  "approved_budget_usd": 0,
+  "attempts": [
+    {
+      "condition": "ablation-V01",
+      "case_id": "V01",
+      "started_at": "2026-11-25T19:04:11.215778+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 2
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-gpt-oss-20b-v54-acceptance-20261125-ablation-V01",
+      "http_status": 201,
+      "finished_at": "2026-11-25T19:04:14.947752+00:00",
+      "run_id": "f6e37a26-c451-4d68-b55f-60e69e192a29"
+    },
+    {
+      "condition": "full-V02",
+      "case_id": "V02",
+      "started_at": "2026-11-25T19:05:18.420559+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-gpt-oss-20b-v54-acceptance-20261125-full-V02",
+      "http_status": 201,
+      "finished_at": "2026-11-25T19:05:19.594036+00:00",
+      "run_id": "a9616f25-9b84-44c6-a201-91d8acd8caaf"
+    },
+    {
+      "condition": "full-V03",
+      "case_id": "V03",
+      "started_at": "2026-11-25T19:06:23.556210+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-gpt-oss-20b-v54-acceptance-20261125-full-V03",
+      "http_status": 201,
+      "finished_at": "2026-11-25T19:06:24.680312+00:00",
+      "run_id": "019aaaef-a4b5-4e0d-b3fa-537c04533fbc"
+    },
+    {
+      "condition": "full-V04",
+      "case_id": "V04",
+      "started_at": "2026-11-25T19:07:28.876630+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-gpt-oss-20b-v54-acceptance-20261125-full-V04",
+      "http_status": 201,
+      "finished_at": "2026-11-25T19:07:31.608654+00:00",
+      "run_id": "860c4a37-c5ef-4365-b70d-08e2a3d07323"
+    },
+    {
+      "condition": "full-V05",
+      "case_id": "V05",
+      "started_at": "2026-11-25T19:08:34.779750+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-gpt-oss-20b-v54-acceptance-20261125-full-V05",
+      "http_status": 201,
+      "finished_at": "2026-11-25T19:08:38.094045+00:00",
+      "run_id": "38d9e42f-2499-4ffd-aa86-89885331789b"
+    },
+    {
+      "condition": "full-V06",
+      "case_id": "V06",
+      "started_at": "2026-11-25T19:09:40.466875+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-gpt-oss-20b-v54-acceptance-20261125-full-V06",
+      "http_status": 201,
+      "finished_at": "2026-11-25T19:09:42.679277+00:00",
+      "run_id": "9946c2d9-70f8-4cb3-8d9a-c9ad17912a5c"
+    }
+  ],
+  "stopped": true,
+  "stop_reason": "Batch completed"
+}

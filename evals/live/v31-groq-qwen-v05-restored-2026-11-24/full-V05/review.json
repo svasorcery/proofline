@@ -1,0 +1,20 @@
+{
+  "case_id": "V05",
+  "technical_pass": false,
+  "provider_http_status": 200,
+  "network_error_type": null,
+  "provider_error_code": null,
+  "provider_error_stage": null,
+  "error_code": "INVALID_MODEL_OUTPUT",
+  "quality_pass": false,
+  "reference_human_validated": false,
+  "usage": {
+    "queue_time": 0.517635665,
+    "total_time": 1.246794392,
+    "prompt_time": 0.323982965,
+    "total_tokens": 4275,
+    "prompt_tokens": 3861,
+    "completion_time": 0.922811427,
+    "completion_tokens": 414
+  }
+}

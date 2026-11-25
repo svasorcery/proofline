@@ -1,0 +1,71 @@
+{
+  "status": "stopped_on_technical_error",
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b",
+  "reasoning_effort": "medium",
+  "approved_max_requests": 2,
+  "approved_budget_usd": 0,
+  "requests_attempted": 2,
+  "technical_successes": 1,
+  "complete_quality_passes": 0,
+  "conditions": [
+    {
+      "condition": "full-V02",
+      "matching_business_snapshot": true,
+      "technical_pass": true,
+      "quality_pass": false,
+      "runtime_status": "blocked_for_approval",
+      "v6_runtime_status": "blocked_for_approval",
+      "usage": {
+        "queue_time": 0.033100168,
+        "total_time": 4.201331488,
+        "prompt_time": 0.246981416,
+        "total_tokens": 4450,
+        "prompt_tokens": 2642,
+        "completion_time": 3.954350072,
+        "completion_tokens": 1808,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1024
+        }
+      },
+      "v6_usage": {
+        "queue_time": 0.105339761,
+        "total_time": 3.901570186,
+        "prompt_time": 0.198726538,
+        "total_tokens": 3989,
+        "prompt_tokens": 2599,
+        "completion_time": 3.702843648,
+        "completion_tokens": 1390,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1024
+        }
+      },
+      "literal_fragments_valid": 7,
+      "literal_fragments_total": 11
+    },
+    {
+      "condition": "full-V04",
+      "matching_business_snapshot": true,
+      "technical_pass": false,
+      "quality_pass": false,
+      "runtime_status": null,
+      "v6_runtime_status": "blocked_for_approval",
+      "usage": null,
+      "v6_usage": {
+        "queue_time": 0.03214687,
+        "total_time": 4.109027715,
+        "prompt_time": 0.202431319,
+        "total_tokens": 4350,
+        "prompt_tokens": 2567,
+        "completion_time": 3.906596396,
+        "completion_tokens": 1783,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1024
+        }
+      },
+      "literal_fragments_valid": 0,
+      "literal_fragments_total": 0
+    }
+  ],
+  "operator_decisions": 0
+}

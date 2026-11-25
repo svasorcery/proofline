@@ -1,0 +1,40 @@
+{
+  "reviewer": "assistant",
+  "independent_human_labels": false,
+  "condition": "full-V04",
+  "technical_pass": true,
+  "fact_values": {
+    "pass": true,
+    "correct": 1,
+    "total": 1,
+    "expected": {"alternative_acceptance": "conditional"},
+    "actual": {"alternative_acceptance": "conditional"}
+  },
+  "evidence_sufficiency": {
+    "pass": false,
+    "notes": "The conditional fact cites the offer and actual reply. The offer event has its own time and offer text. The receipt event has its own inbound record and message text. The sending event cites only the original letter Date header, with no sender or link to this customer's reply in its own fragments. The same field-local criterion rejected a Date-only customer_replied citation in GPT-OSS v3. Other events' evidence does not transfer."
+  },
+  "chronology": {
+    "pass": true,
+    "correct": [
+      "alternative_offered sent 2026-10-08T12:10:00+03:00",
+      "customer_replied sent 2026-10-08T12:25:00+03:00",
+      "customer_message_received received 2026-10-08T12:27:00+03:00"
+    ],
+    "missing": [],
+    "unsupported": [],
+    "notes": "Event types and times all match. Insufficient citation for the sending event is recorded separately."
+  },
+  "next_step": {
+    "pass": true,
+    "expected_readiness": "request_evidence",
+    "expected_action": "ask_user",
+    "expected_requirements": ["quiet_room", "courtyard_windows"],
+    "actual_readiness": "request_evidence",
+    "actual_action": "ask_user",
+    "actual_requirements": ["quiet_room", "courtyard_windows"]
+  },
+  "runtime_validation": "needs_operator_review without blocking issues",
+  "overall_pass": false,
+  "operator_decision_created": false
+}

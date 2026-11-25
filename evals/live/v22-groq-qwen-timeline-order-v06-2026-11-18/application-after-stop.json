@@ -1,0 +1,15 @@
+{
+  "project": "proofline-live-qwen-v06-order-20261118",
+  "live_process_stopped": true,
+  "remaining_containers": [
+    "proofline-live-qwen-v06-order-20261118-db-1"
+  ],
+  "app_container_removed": true,
+  "database_counts": {
+    "analysis_runs": 1,
+    "proposal_revisions": 1,
+    "review_decisions": 0
+  },
+  "runtime_key_injected_via_stdin_only": true,
+  "database_stopped": true
+}

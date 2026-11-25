@@ -1,0 +1,33 @@
+{
+  "reviewer": "assistant",
+  "independent_human_labels": false,
+  "condition": "full-V03",
+  "technical_pass": true,
+  "fact_values": {
+    "pass": true,
+    "correct": 1,
+    "total": 1,
+    "expected": {
+      "payment_outcome": "refund_settled"
+    },
+    "actual": {
+      "payment_outcome": "refund_settled"
+    }
+  },
+  "evidence_sufficiency": {
+    "pass": false,
+    "notes": "The settled refund event cites the completion statement but omits the posting timestamp from its fragments. Runtime correctly detects time_not_in_fragments; the model result cannot be approved as returned."
+  },
+  "chronology": {
+    "pass": true,
+    "notes": "Correct capture, initiation and settlement event values and occurred roles; correctly uses posting 2026-07-06T17:42:00+03:00 rather than statement generation."
+  },
+  "next_step": {
+    "pass": true,
+    "expected_readiness": "ready_for_rules",
+    "expected_action": "none"
+  },
+  "runtime_validation": "blocked_for_approval: time_not_in_fragments",
+  "overall_pass": false,
+  "operator_decision_created": false
+}

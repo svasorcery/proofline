@@ -1,0 +1,22 @@
+{
+  "max_requests": 1,
+  "approved_budget_usd": 0,
+  "attempts": [
+    {
+      "condition": "full-V05",
+      "case_id": "V05",
+      "started_at": "2026-11-24T15:23:11.987674+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-qwen-v05-timeline-floor-control-20261124-full-V05",
+      "http_status": 201,
+      "finished_at": "2026-11-24T15:23:14.545472+00:00",
+      "run_id": "90ee329c-8b53-4e3c-8a1c-5c4c4c05ff3c"
+    }
+  ],
+  "stopped": true,
+  "stop_reason": "Batch completed"
+}

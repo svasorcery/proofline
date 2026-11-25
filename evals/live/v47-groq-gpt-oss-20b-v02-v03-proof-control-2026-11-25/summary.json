@@ -1,0 +1,328 @@
+{
+  "plan": [
+    "V02",
+    "V03"
+  ],
+  "requested_model": "openai/gpt-oss-20b",
+  "reasoning_effort": "low",
+  "provider_attempts": 2,
+  "retries": 0,
+  "approved_budget_usd": 0,
+  "account_tier": "Free as confirmed in GroqCloud Console",
+  "spacings_seconds": [
+    65.114177
+  ],
+  "technical_passes": 2,
+  "quality_passes": 0,
+  "known_reported_tokens": 9272,
+  "unknown_usage_conditions": [],
+  "single_application_instance": true,
+  "series_pass": false,
+  "stop_reason": "Batch completed",
+  "cases": [
+    {
+      "case_id": "V02",
+      "technical_pass": true,
+      "provider_http_status": 200,
+      "network_error_type": null,
+      "provider_error_code": null,
+      "provider_error_stage": null,
+      "error_code": null,
+      "quality_pass": false,
+      "reference_human_validated": false,
+      "usage": {
+        "queue_time": 0.280286677,
+        "total_time": 0.937838973,
+        "prompt_time": 0.234815122,
+        "total_tokens": 4934,
+        "prompt_tokens": 4267,
+        "completion_time": 0.703023851,
+        "completion_tokens": 667,
+        "completion_tokens_details": {
+          "reasoning_tokens": 472
+        }
+      },
+      "reviewed_evidence_rules_active": false,
+      "reference_checks": {
+        "case_id": "V02",
+        "runtime_valid": true,
+        "runtime_issues": [],
+        "facts_exact": true,
+        "evidence_complete": true,
+        "timeline_complete": false,
+        "followup_complete": true,
+        "readiness_ok": true,
+        "pack_pass": false,
+        "facts": [
+          {
+            "key": "cancellation_status",
+            "value_ok": true,
+            "evidence_ok": true
+          },
+          {
+            "key": "withdrawal_timing",
+            "value_ok": true,
+            "evidence_ok": true
+          }
+        ],
+        "missing_events": [
+          "supplier_cancelled"
+        ],
+        "unsupported_event_indices": [],
+        "missing_requirements": [],
+        "extra_requirements": []
+      },
+      "card_status": "blocked_for_approval",
+      "blocking_issues": [
+        {
+          "code": "required_timeline_event_missing",
+          "path": [
+            "timeline"
+          ],
+          "message": "В хронологии пропущено подтверждённое событие."
+        }
+      ],
+      "quoted_fragments": {
+        "literal": 3,
+        "total": 3
+      },
+      "expected_facts": {
+        "cancellation_status": "confirmed",
+        "withdrawal_timing": "unconfirmed"
+      },
+      "actual_facts": {
+        "withdrawal_timing": "unconfirmed",
+        "cancellation_status": "confirmed"
+      },
+      "expected_timeline": [
+        {
+          "event_type": "supplier_cancelled",
+          "value": "2026-09-18T10:20:00+03:00",
+          "role": "occurred"
+        },
+        {
+          "event_type": "customer_replied",
+          "value": "2026-09-18T12:09:55+03:00",
+          "role": "sent"
+        }
+      ],
+      "raw_timeline_order": [
+        {
+          "value": "2026-09-18T12:09:55+03:00",
+          "role": "sent"
+        },
+        {
+          "value": "2026-09-18T12:10:00+03:00",
+          "role": "received"
+        }
+      ],
+      "actual_timeline": [
+        {
+          "event_type": "customer_replied",
+          "time": {
+            "value": "2026-09-18T12:09:55+03:00",
+            "role": "sent"
+          },
+          "evidence": [
+            {
+              "source_id": "5c3fe2fc12a3430e",
+              "fragments": [
+                "Отправлено клиентом через форму: 2026-09-18T12:09:55+03:00"
+              ]
+            }
+          ]
+        },
+        {
+          "event_type": "customer_message_received",
+          "time": {
+            "value": "2026-09-18T12:10:00+03:00",
+            "role": "received"
+          },
+          "evidence": [
+            {
+              "source_id": "5c3fe2fc12a3430e",
+              "fragments": [
+                "Получено службой поддержки: 2026-09-18T12:10:00+03:00"
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_follow_up": {
+        "action": "ask_user",
+        "locator": null,
+        "requirements": [
+          "original_customer_message",
+          "delivery_receipt"
+        ]
+      },
+      "actual_follow_up": {
+        "action": "ask_user",
+        "locator": null,
+        "requirements": [
+          "original_customer_message",
+          "delivery_receipt"
+        ]
+      },
+      "actual_readiness": "request_evidence"
+    },
+    {
+      "case_id": "V03",
+      "technical_pass": true,
+      "provider_http_status": 200,
+      "network_error_type": null,
+      "provider_error_code": null,
+      "provider_error_stage": null,
+      "error_code": null,
+      "quality_pass": false,
+      "reference_human_validated": false,
+      "usage": {
+        "queue_time": 0.209949494,
+        "total_time": 0.889913328,
+        "prompt_time": 0.198175045,
+        "total_tokens": 4338,
+        "prompt_tokens": 3689,
+        "completion_time": 0.691738283,
+        "completion_tokens": 649,
+        "completion_tokens_details": {
+          "reasoning_tokens": 392
+        }
+      },
+      "reviewed_evidence_rules_active": true,
+      "reference_checks": {
+        "case_id": "V03",
+        "runtime_valid": true,
+        "runtime_issues": [],
+        "facts_exact": true,
+        "evidence_complete": false,
+        "timeline_complete": true,
+        "followup_complete": true,
+        "readiness_ok": true,
+        "pack_pass": false,
+        "facts": [
+          {
+            "key": "payment_outcome",
+            "value_ok": true,
+            "evidence_ok": false
+          }
+        ],
+        "missing_events": [],
+        "unsupported_event_indices": [],
+        "missing_requirements": [],
+        "extra_requirements": []
+      },
+      "card_status": "blocked_for_approval",
+      "blocking_issues": [
+        {
+          "code": "refund_settlement_link_missing",
+          "path": [
+            "facts",
+            0,
+            "evidence"
+          ],
+          "message": "Свяжите запись о запуске возврата с выпиской и приведите подтверждение зачисления."
+        }
+      ],
+      "quoted_fragments": {
+        "literal": 7,
+        "total": 7
+      },
+      "expected_facts": {
+        "payment_outcome": "refund_settled"
+      },
+      "actual_facts": {
+        "payment_outcome": "refund_settled"
+      },
+      "expected_timeline": [
+        {
+          "event_type": "payment_captured",
+          "value": "2026-07-03T14:02:00+03:00",
+          "role": "occurred"
+        },
+        {
+          "event_type": "refund_initiated",
+          "value": "2026-07-05T10:15:00+03:00",
+          "role": "occurred"
+        },
+        {
+          "event_type": "refund_settled",
+          "value": "2026-07-06T17:42:00+03:00",
+          "role": "occurred"
+        }
+      ],
+      "raw_timeline_order": [
+        {
+          "role": "occurred",
+          "value": "2026-07-03T14:02:00+03:00"
+        },
+        {
+          "role": "occurred",
+          "value": "2026-07-05T10:15:00+03:00"
+        },
+        {
+          "role": "occurred",
+          "value": "2026-07-06T17:42:00+03:00"
+        }
+      ],
+      "actual_timeline": [
+        {
+          "event_type": "payment_captured",
+          "time": {
+            "value": "2026-07-03T14:02:00+03:00",
+            "role": "occurred"
+          },
+          "evidence": [
+            {
+              "source_id": "a62eb31f18014f2e",
+              "fragments": [
+                "2026-07-03T14:02:00+03:00 | capture | ответ эквайера 00; списание принято"
+              ]
+            }
+          ]
+        },
+        {
+          "event_type": "refund_initiated",
+          "time": {
+            "value": "2026-07-05T10:15:00+03:00",
+            "role": "occurred"
+          },
+          "evidence": [
+            {
+              "source_id": "a62eb31f18014f2e",
+              "fragments": [
+                "2026-07-05T10:15:00+03:00 | return.submit | запрос передан банку; трасса 189a5d15e84a4adb"
+              ]
+            }
+          ]
+        },
+        {
+          "event_type": "refund_settled",
+          "time": {
+            "value": "2026-07-06T17:42:00+03:00",
+            "role": "occurred"
+          },
+          "evidence": [
+            {
+              "source_id": "649b9972ad454b5e",
+              "fragments": [
+                "Кредитование карты получателя по указанной возвратной трассе завершено.",
+                "Дата проводки по карте получателя: 2026-07-06T17:42:00+03:00"
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_follow_up": {
+        "action": "none",
+        "locator": null,
+        "requirements": []
+      },
+      "actual_follow_up": {
+        "action": "none",
+        "locator": null,
+        "requirements": []
+      },
+      "actual_readiness": "ready_for_rules"
+    }
+  ]
+}

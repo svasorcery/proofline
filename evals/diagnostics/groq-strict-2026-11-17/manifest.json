@@ -1,0 +1,24 @@
+{
+  "format_version": 1,
+  "observed_date": "2026-11-17",
+  "purpose": "Strict decoding investigation and proposed Groq protocol change; no implementation or new live acceptance",
+  "new_inference_calls": 0,
+  "in_memory_sdk_requests": 2,
+  "external_provider_inference_requests": 0,
+  "api_key_read": false,
+  "runtime_code_or_config_changed": false,
+  "container_or_database_mutations": false,
+  "previous_archives_modified": false,
+  "report": "docs/groq-strict-decoding-2026-11-17.md",
+  "original_archive_manifest_hashes": {
+    "evals\\live\\v1-groq-2026-11-16\\manifest.json": "4152e43b973091a18f7e9a4a8987f63ad3fa3d02563a92802ee8d98de5989152",
+    "evals\\live\\v2-groq-v32-2026-11-16\\manifest.json": "6b1d7fbbfe0dd073e19e908c2e4a07a39b72181e7b2bdb6ba931e10406abf5da"
+  },
+  "artifact_hashes": {
+    "offline-wire-and-schema-audit.json": "0e06176408933c716fb6887cad18a9baa17640aee4151aa864c010cd3d37b85f",
+    "preservation.json": "e9056324fd67c3e484612ef26088c32006df25193697ce74542cce9da53cf2cd",
+    "provider-console-observation.json": "e0efc70eb99e319db996527af235f909cd62bc53096e3d6c368c984853266e91",
+    "provider-documentation-observation.json": "ae9007bcedae9382ab1d0b9cba161b63a681e2ae78bb19b461ce00cd941ced06",
+    "verification.json": "7822dae685edde2d131633f0959c8817591c4b772d604b2989fad5d42b5265b9"
+  }
+}

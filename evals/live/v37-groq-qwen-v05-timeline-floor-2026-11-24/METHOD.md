@@ -1,0 +1,5 @@
+# Closed Groq Free acceptance with reviewed timeline floor
+
+Qwen 3.8 27B, Chat Completions with strict JSON Schema, reasoning none, 1,000 completion tokens, budget $0. Source-bound evidence rules from v36 stay in effect. V05 requires at least two timeline items only when the checked receipt and completed cancellation match the selected source versions. The remaining five provider requests are identical to v34. V03, whose v36 control passed with the same request and decoder, requires the three reviewed refund operations.
+
+The live V05 control runs first, once. If application validation and the frozen rubric pass, a separate isolated instance runs all six cases exactly once on one profile. The guard checks the request, reserves one attempt before POST and stops on a technical error. Each start is spaced at least 65 seconds apart. Any reviewed decoding acts on model-selected IDs with the recorded evidence rules. Raw model output and the operator-facing proposal are distinct stored records.

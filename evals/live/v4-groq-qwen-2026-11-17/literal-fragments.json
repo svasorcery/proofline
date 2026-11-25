@@ -1,0 +1,92 @@
+[
+  {
+    "condition": "full-V02",
+    "path": "facts[0].evidence[0].fragments[0]",
+    "source_id": "9edd7227853c42a4",
+    "occurrences": 1,
+    "start": 0,
+    "end": 100,
+    "literal_and_unique": true
+  },
+  {
+    "condition": "full-V02",
+    "path": "facts[0].evidence[1].fragments[0]",
+    "source_id": "9edd7227853c42a4",
+    "occurrences": 1,
+    "start": 220,
+    "end": 277,
+    "literal_and_unique": true
+  },
+  {
+    "condition": "full-V02",
+    "path": "facts[1].evidence[0].fragments[0]",
+    "source_id": "9edd7227853c42a4",
+    "occurrences": 1,
+    "start": 0,
+    "end": 100,
+    "literal_and_unique": true
+  },
+  {
+    "condition": "full-V02",
+    "path": "timeline[0].evidence[0].fragments[0]",
+    "source_id": "9edd7227853c42a4",
+    "occurrences": 1,
+    "start": 0,
+    "end": 100,
+    "literal_and_unique": true
+  },
+  {
+    "condition": "full-V02",
+    "path": "timeline[1].evidence[0].fragments[0]",
+    "source_id": "9edd7227853c42a4",
+    "occurrences": 1,
+    "start": 101,
+    "end": 179,
+    "literal_and_unique": true
+  },
+  {
+    "condition": "full-V02",
+    "path": "timeline[1].evidence[1].fragments[0]",
+    "source_id": "5c3fe2fc12a3430e",
+    "occurrences": 1,
+    "start": 27,
+    "end": 85,
+    "literal_and_unique": true
+  },
+  {
+    "condition": "full-V02",
+    "path": "timeline[1].evidence[1].fragments[1]",
+    "source_id": "5c3fe2fc12a3430e",
+    "occurrences": 1,
+    "start": 86,
+    "end": 139,
+    "literal_and_unique": true
+  },
+  {
+    "condition": "full-V04",
+    "path": "facts[1].evidence[0].fragments[0]",
+    "source_id": "f71822cddbf648f2",
+    "occurrences": 1,
+    "start": 0,
+    "end": 60,
+    "literal_and_unique": true
+  },
+  {
+    "condition": "full-V04",
+    "path": "facts[1].evidence[0].fragments[1]",
+    "source_id": "f71822cddbf648f2",
+    "occurrences": 1,
+    "start": 61,
+    "end": 119,
+    "literal_and_unique": true
+  },
+  {
+    "condition": "full-V04",
+    "path": "facts[1].evidence[0].fragments[2]",
+    "source_id": "f71822cddbf648f2",
+    "occurrences": 0,
+    "start": null,
+    "end": null,
+    "literal_and_unique": false
+  }
+]

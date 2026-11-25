@@ -1,0 +1,92 @@
+{
+  "max_requests": 6,
+  "approved_budget_usd": 0,
+  "attempts": [
+    {
+      "condition": "ablation-V01",
+      "case_id": "V01",
+      "started_at": "2026-11-18T17:43:07.123559+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 2
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-qwen-minimum-acceptance-20261118-ablation-V01",
+      "http_status": 201,
+      "finished_at": "2026-11-18T17:43:09.407791+00:00",
+      "run_id": "919341e5-5f98-4271-bd0f-f41d0dd2fab2"
+    },
+    {
+      "condition": "full-V02",
+      "case_id": "V02",
+      "started_at": "2026-11-18T17:44:12.884769+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-qwen-minimum-acceptance-20261118-full-V02",
+      "http_status": 201,
+      "finished_at": "2026-11-18T17:44:14.804800+00:00",
+      "run_id": "8024010d-5d23-4122-9a4b-09686bbb6d2a"
+    },
+    {
+      "condition": "full-V03",
+      "case_id": "V03",
+      "started_at": "2026-11-18T17:45:18.064824+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-qwen-minimum-acceptance-20261118-full-V03",
+      "http_status": 201,
+      "finished_at": "2026-11-18T17:45:20.328716+00:00",
+      "run_id": "a8d36bbf-d44d-4908-98c0-b568dfba3387"
+    },
+    {
+      "condition": "full-V04",
+      "case_id": "V04",
+      "started_at": "2026-11-18T17:46:23.214634+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-qwen-minimum-acceptance-20261118-full-V04",
+      "http_status": 201,
+      "finished_at": "2026-11-18T17:46:25.216786+00:00",
+      "run_id": "e0fc5bff-ec3e-4bc8-9433-ccbe789d45f8"
+    },
+    {
+      "condition": "full-V05",
+      "case_id": "V05",
+      "started_at": "2026-11-18T17:47:28.360610+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-qwen-minimum-acceptance-20261118-full-V05",
+      "http_status": 201,
+      "finished_at": "2026-11-18T17:47:31.630060+00:00",
+      "run_id": "58411366-b631-4269-8144-d0955c43289c"
+    },
+    {
+      "condition": "full-V06",
+      "case_id": "V06",
+      "started_at": "2026-11-18T17:48:33.474727+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-qwen-minimum-acceptance-20261118-full-V06",
+      "http_status": 201,
+      "finished_at": "2026-11-18T17:48:35.126135+00:00",
+      "run_id": "365036f6-b4d3-4af7-aa45-14efab094ed7"
+    }
+  ],
+  "stopped": true,
+  "stop_reason": "Batch completed"
+}

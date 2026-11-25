@@ -1,0 +1,358 @@
+{
+  "id": "c8c50bb7-a9d1-4fdc-a2e2-bfa60a86ccb1",
+  "case_id": "V03",
+  "analysis_run_id": "495536db-4615-4c16-82f3-ae1ab4c98c84",
+  "parent_revision_id": null,
+  "origin": "model",
+  "content_revision": 1,
+  "input_digest": "44718f6aa97106e0e3da6ba2e728ea667a640f953b5306d993e24331eb9cba72",
+  "snapshot": {
+    "case_id": "V03",
+    "user_text": "\u0412 \u043a\u0430\u0431\u0438\u043d\u0435\u0442\u0435 \u043f\u043e\u044f\u0432\u0438\u043b\u0430\u0441\u044c \u0441\u0442\u0440\u043e\u043a\u0430 \u043e \u0432\u043e\u0437\u0432\u0440\u0430\u0442\u0435. \u0421\u043e\u0431\u0435\u0440\u0438\u0442\u0435 \u0444\u0430\u043a\u0442\u044b, \u043f\u043e\u043a\u0430\u0437\u044b\u0432\u0430\u044e\u0449\u0438\u0435, \u0447\u0442\u043e \u043f\u0440\u043e\u0438\u0437\u043e\u0448\u043b\u043e \u0441 \u043e\u043f\u043b\u0430\u0442\u043e\u0439.",
+    "requested_fact_keys": [
+      "payment_outcome"
+    ],
+    "money": {
+      "amount_minor": 24800,
+      "currency": "USD",
+      "scale": 2
+    },
+    "context": {},
+    "catalog": [
+      {
+        "case_id": "V03",
+        "source_id": "7fe04ac171704d90",
+        "kind": "document",
+        "locator": "0135d039782046f3",
+        "title": "7fe04ac171704d90",
+        "trust": "primary",
+        "position": 0,
+        "included": true,
+        "version_id": "ccafd0d8-7103-43f7-a3ff-a81ca2bace41",
+        "text": "\u041a\u0432\u0438\u0442\u0430\u043d\u0446\u0438\u044f \u043e\u043f\u043b\u0430\u0442\u044b \u043f\u0440\u043e\u0434\u0430\u0432\u0446\u0430\n\u041e\u043f\u0435\u0440\u0430\u0446\u0438\u044f \u0438\u0441\u043f\u043e\u043b\u043d\u0435\u043d\u0430: 2026-07-03T14:02:00+03:00\n\u0421\u0440\u0435\u0434\u0441\u0442\u0432\u0430 \u0441\u043f\u0438\u0441\u0430\u043d\u044b \u043f\u043e \u0431\u0440\u043e\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044e. \u041f\u043b\u0430\u0442\u0451\u0436\u043d\u0430\u044f \u0437\u0430\u043f\u0438\u0441\u044c: b79e31f2c3c74a46.\n\u041a\u043b\u0438\u0435\u043d\u0442 \u043f\u043e\u0437\u0434\u043d\u0435\u0435 \u043e\u0431\u0440\u0430\u0442\u0438\u043b\u0441\u044f \u0441 \u0432\u043e\u043f\u0440\u043e\u0441\u043e\u043c \u043e \u0434\u0432\u0438\u0436\u0435\u043d\u0438\u0438 \u0432\u043e\u0437\u0432\u0440\u0430\u0442\u0430 \u043f\u043e \u044d\u0442\u043e\u0439 \u043e\u043f\u043b\u0430\u0442\u0435.",
+        "text_sha256": "e6880a18b045b25ef166063abd40775a846d967edef63a03110c0b73feb528b5"
+      },
+      {
+        "case_id": "V03",
+        "source_id": "c15f16d5ca574f04",
+        "kind": "document",
+        "locator": "558dff0748374cd0",
+        "title": "\u0421\u043f\u0440\u0430\u0432\u043e\u0447\u043d\u0430\u044f \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0430",
+        "trust": "context",
+        "position": 1,
+        "included": true,
+        "version_id": "32f8acf1-8937-4fc3-9502-8ddf4035aec9",
+        "text": "\u0421\u043f\u0440\u0430\u0432\u043e\u0447\u043d\u0430\u044f \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0430 \u043b\u0438\u0447\u043d\u043e\u0433\u043e \u043a\u0430\u0431\u0438\u043d\u0435\u0442\u0430. \u041d\u0430 \u044d\u043a\u0440\u0430\u043d\u0435 \u0438\u0441\u0442\u043e\u0440\u0438\u044f \u043e\u043f\u0435\u0440\u0430\u0446\u0438\u0439 \u0433\u0440\u0443\u043f\u043f\u0438\u0440\u0443\u0435\u0442\u0441\u044f \u043f\u043e \u0431\u0440\u043e\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044e. \u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435 \u0433\u0440\u0443\u043f\u043f\u044b \u043d\u0435 \u0437\u0430\u043c\u0435\u043d\u044f\u0435\u0442 \u0431\u0430\u043d\u043a\u043e\u0432\u0441\u043a\u0443\u044e \u0432\u044b\u043f\u0438\u0441\u043a\u0443.",
+        "text_sha256": "aa2995a09b890d290651612191fa7809d5a01257e675c6374e0a556a5935df84"
+      },
+      {
+        "case_id": "V03",
+        "source_id": "649b9972ad454b5e",
+        "kind": "document",
+        "locator": "3088e5c39f854cf6",
+        "title": "649b9972ad454b5e",
+        "trust": "primary",
+        "position": 2,
+        "included": true,
+        "version_id": "d4fe101c-5bb2-4a65-98a9-ce8a629f50df",
+        "text": "\u0412\u044b\u043f\u0438\u0441\u043a\u0430 \u0431\u0430\u043d\u043a\u0430 \u043f\u043e \u0432\u043e\u0437\u0432\u0440\u0430\u0442\u043d\u044b\u043c \u043f\u0440\u043e\u0432\u043e\u0434\u043a\u0430\u043c\n\u0421\u0444\u043e\u0440\u043c\u0438\u0440\u043e\u0432\u0430\u043d\u0430: 2026-07-07T08:30:00+03:00\n\u0422\u0440\u0430\u0441\u0441\u0430: 189a5d15e84a4adb\n\u0414\u0430\u0442\u0430 \u043f\u0440\u043e\u0432\u043e\u0434\u043a\u0438 \u043f\u043e \u043a\u0430\u0440\u0442\u0435 \u043f\u043e\u043b\u0443\u0447\u0430\u0442\u0435\u043b\u044f: 2026-07-06T17:42:00+03:00\n\u041a\u0440\u0435\u0434\u0438\u0442\u043e\u0432\u0430\u043d\u0438\u0435 \u043a\u0430\u0440\u0442\u044b \u043f\u043e\u043b\u0443\u0447\u0430\u0442\u0435\u043b\u044f \u043f\u043e \u0443\u043a\u0430\u0437\u0430\u043d\u043d\u043e\u0439 \u0432\u043e\u0437\u0432\u0440\u0430\u0442\u043d\u043e\u0439 \u0442\u0440\u0430\u0441\u0441\u0435 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043d\u043e.\n\u0414\u0430\u0442\u0430 \u0444\u043e\u0440\u043c\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f \u0432\u044b\u043f\u0438\u0441\u043a\u0438 \u043d\u0435 \u044f\u0432\u043b\u044f\u0435\u0442\u0441\u044f \u0434\u0430\u0442\u043e\u0439 \u043f\u0440\u043e\u0432\u043e\u0434\u043a\u0438.",
+        "text_sha256": "13f4ae93c69e1fdfbdb95bd460911c8270f65a524c959333b90d6c5dd2a63428"
+      },
+      {
+        "case_id": "V03",
+        "source_id": "a62eb31f18014f2e",
+        "kind": "payment_ledger",
+        "locator": "b79e31f2c3c74a46",
+        "title": "\u0417\u0430\u043f\u0438\u0441\u044c \u043e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u044f",
+        "trust": "primary",
+        "position": 3,
+        "included": true,
+        "version_id": "b83aab40-a7ef-4bf2-b6aa-748b91309a43",
+        "text": "2026-07-03T14:02:00+03:00 | capture | \u043e\u0442\u0432\u0435\u0442 \u044d\u043a\u0432\u0430\u0439\u0435\u0440\u0430 00; \u0441\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u043f\u0440\u0438\u043d\u044f\u0442\u043e\n2026-07-05T10:15:00+03:00 | return.submit | \u0437\u0430\u043f\u0440\u043e\u0441 \u043f\u0435\u0440\u0435\u0434\u0430\u043d \u0431\u0430\u043d\u043a\u0443; \u0442\u0440\u0430\u0441\u0441\u0430 189a5d15e84a4adb\n\u0412 \u044d\u0442\u043e\u043c \u0436\u0443\u0440\u043d\u0430\u043b\u0435 \u043d\u0435\u0442 \u043f\u0440\u043e\u0432\u043e\u0434\u043e\u043a \u043f\u043e \u0441\u0447\u0451\u0442\u0443 \u043f\u043e\u043b\u0443\u0447\u0430\u0442\u0435\u043b\u044f. \u0414\u043b\u044f \u0441\u0432\u0435\u0440\u043a\u0438 \u0431\u0430\u043d\u043a \u043f\u0440\u0438\u043b\u043e\u0436\u0438\u043b \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442 3088e5c39f854cf6; \u0441\u043e\u043f\u043e\u0441\u0442\u0430\u0432\u043b\u0435\u043d\u0438\u0435 \u0432\u044b\u043f\u043e\u043b\u043d\u044f\u0435\u0442\u0441\u044f \u043f\u043e \u0442\u0440\u0430\u0441\u0441\u0435.",
+        "text_sha256": "cd209f9037d3de0715879b26bb1525b8d9ebd5ff3f74afca5170fb19b578a1bf"
+      }
+    ]
+  },
+  "source_bindings": {
+    "649b9972ad454b5e": {
+      "version_id": "d4fe101c-5bb2-4a65-98a9-ce8a629f50df",
+      "text_sha256": "13f4ae93c69e1fdfbdb95bd460911c8270f65a524c959333b90d6c5dd2a63428"
+    },
+    "7fe04ac171704d90": {
+      "version_id": "ccafd0d8-7103-43f7-a3ff-a81ca2bace41",
+      "text_sha256": "e6880a18b045b25ef166063abd40775a846d967edef63a03110c0b73feb528b5"
+    },
+    "a62eb31f18014f2e": {
+      "version_id": "b83aab40-a7ef-4bf2-b6aa-748b91309a43",
+      "text_sha256": "cd209f9037d3de0715879b26bb1525b8d9ebd5ff3f74afca5170fb19b578a1bf"
+    },
+    "c15f16d5ca574f04": {
+      "version_id": "32f8acf1-8937-4fc3-9502-8ddf4035aec9",
+      "text_sha256": "aa2995a09b890d290651612191fa7809d5a01257e675c6374e0a556a5935df84"
+    }
+  },
+  "body": {
+    "case_id": "V03",
+    "facts": [
+      {
+        "key": "payment_outcome",
+        "value": "refund_settled",
+        "evidence": [
+          {
+            "source_id": "649b9972ad454b5e",
+            "fragments": [
+              "\u041a\u0440\u0435\u0434\u0438\u0442\u043e\u0432\u0430\u043d\u0438\u0435 \u043a\u0430\u0440\u0442\u044b \u043f\u043e\u043b\u0443\u0447\u0430\u0442\u0435\u043b\u044f \u043f\u043e \u0443\u043a\u0430\u0437\u0430\u043d\u043d\u043e\u0439 \u0432\u043e\u0437\u0432\u0440\u0430\u0442\u043d\u043e\u0439 \u0442\u0440\u0430\u0441\u0441\u0435 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043d\u043e."
+            ]
+          }
+        ]
+      }
+    ],
+    "timeline": [
+      {
+        "event_type": "payment_captured",
+        "time": {
+          "value": "2026-07-03T14:02:00+03:00",
+          "role": "occurred"
+        },
+        "evidence": [
+          {
+            "source_id": "a62eb31f18014f2e",
+            "fragments": [
+              "2026-07-03T14:02:00+03:00 | capture | \u043e\u0442\u0432\u0435\u0442 \u044d\u043a\u0432\u0430\u0439\u0435\u0440\u0430 00; \u0441\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u043f\u0440\u0438\u043d\u044f\u0442\u043e"
+            ]
+          }
+        ]
+      },
+      {
+        "event_type": "refund_initiated",
+        "time": {
+          "value": "2026-07-05T10:15:00+03:00",
+          "role": "occurred"
+        },
+        "evidence": [
+          {
+            "source_id": "a62eb31f18014f2e",
+            "fragments": [
+              "2026-07-05T10:15:00+03:00 | return.submit | \u0437\u0430\u043f\u0440\u043e\u0441 \u043f\u0435\u0440\u0435\u0434\u0430\u043d \u0431\u0430\u043d\u043a\u0443; \u0442\u0440\u0430\u0441\u0441\u0430 189a5d15e84a4adb"
+            ]
+          }
+        ]
+      },
+      {
+        "event_type": "refund_settled",
+        "time": {
+          "value": "2026-07-06T17:42:00+03:00",
+          "role": "occurred"
+        },
+        "evidence": [
+          {
+            "source_id": "649b9972ad454b5e",
+            "fragments": [
+              "\u041a\u0440\u0435\u0434\u0438\u0442\u043e\u0432\u0430\u043d\u0438\u0435 \u043a\u0430\u0440\u0442\u044b \u043f\u043e\u043b\u0443\u0447\u0430\u0442\u0435\u043b\u044f \u043f\u043e \u0443\u043a\u0430\u0437\u0430\u043d\u043d\u043e\u0439 \u0432\u043e\u0437\u0432\u0440\u0430\u0442\u043d\u043e\u0439 \u0442\u0440\u0430\u0441\u0441\u0435 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043d\u043e."
+            ]
+          }
+        ]
+      }
+    ],
+    "readiness": "ready_for_rules",
+    "follow_up": {
+      "action": "none",
+      "locator": null,
+      "requirements": []
+    }
+  },
+  "body_sha256": "ea25bfe6cd56c90d769f4e4523322951d8fc3c5e939e02f3423134afe8954944",
+  "reason": null,
+  "created_at": "2026-11-16T17:56:37.143929Z",
+  "active": true,
+  "stale": false,
+  "validation_current": true,
+  "status": "blocked_for_approval",
+  "latest_validation": {
+    "id": "fb4b44f6-0f29-42f0-8385-c5305ce6ccb9",
+    "proposal_revision_id": "c8c50bb7-a9d1-4fdc-a2e2-bfa60a86ccb1",
+    "profile_version": "proofline-validation-v1",
+    "result": "blocked_for_approval",
+    "issues": [
+      {
+        "code": "time_not_in_fragments",
+        "path": [
+          "timeline",
+          2,
+          "time",
+          "value"
+        ],
+        "message": "\u0412\u0440\u0435\u043c\u044f \u0441\u043e\u0431\u044b\u0442\u0438\u044f \u0434\u043e\u043b\u0436\u043d\u043e \u0434\u043e\u0441\u043b\u043e\u0432\u043d\u043e \u043f\u0440\u0438\u0441\u0443\u0442\u0441\u0442\u0432\u043e\u0432\u0430\u0442\u044c \u0432 \u0435\u0433\u043e \u0434\u043e\u043a\u0430\u0437\u0430\u0442\u0435\u043b\u044c\u0441\u0442\u0432\u0430\u0445."
+      }
+    ],
+    "resolved_spans": [
+      {
+        "source_id": "649b9972ad454b5e",
+        "source_version_id": "d4fe101c-5bb2-4a65-98a9-ce8a629f50df",
+        "source_sha256": "13f4ae93c69e1fdfbdb95bd460911c8270f65a524c959333b90d6c5dd2a63428",
+        "start_cp": 164,
+        "end_cp": 235,
+        "fragment": "\u041a\u0440\u0435\u0434\u0438\u0442\u043e\u0432\u0430\u043d\u0438\u0435 \u043a\u0430\u0440\u0442\u044b \u043f\u043e\u043b\u0443\u0447\u0430\u0442\u0435\u043b\u044f \u043f\u043e \u0443\u043a\u0430\u0437\u0430\u043d\u043d\u043e\u0439 \u0432\u043e\u0437\u0432\u0440\u0430\u0442\u043d\u043e\u0439 \u0442\u0440\u0430\u0441\u0441\u0435 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043d\u043e.",
+        "path": [
+          "facts",
+          0,
+          "evidence",
+          0,
+          "fragments",
+          0
+        ]
+      },
+      {
+        "source_id": "a62eb31f18014f2e",
+        "source_version_id": "b83aab40-a7ef-4bf2-b6aa-748b91309a43",
+        "source_sha256": "cd209f9037d3de0715879b26bb1525b8d9ebd5ff3f74afca5170fb19b578a1bf",
+        "start_cp": 0,
+        "end_cp": 73,
+        "fragment": "2026-07-03T14:02:00+03:00 | capture | \u043e\u0442\u0432\u0435\u0442 \u044d\u043a\u0432\u0430\u0439\u0435\u0440\u0430 00; \u0441\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u043f\u0440\u0438\u043d\u044f\u0442\u043e",
+        "path": [
+          "timeline",
+          0,
+          "evidence",
+          0,
+          "fragments",
+          0
+        ]
+      },
+      {
+        "source_id": "a62eb31f18014f2e",
+        "source_version_id": "b83aab40-a7ef-4bf2-b6aa-748b91309a43",
+        "source_sha256": "cd209f9037d3de0715879b26bb1525b8d9ebd5ff3f74afca5170fb19b578a1bf",
+        "start_cp": 74,
+        "end_cp": 163,
+        "fragment": "2026-07-05T10:15:00+03:00 | return.submit | \u0437\u0430\u043f\u0440\u043e\u0441 \u043f\u0435\u0440\u0435\u0434\u0430\u043d \u0431\u0430\u043d\u043a\u0443; \u0442\u0440\u0430\u0441\u0441\u0430 189a5d15e84a4adb",
+        "path": [
+          "timeline",
+          1,
+          "evidence",
+          0,
+          "fragments",
+          0
+        ]
+      },
+      {
+        "source_id": "649b9972ad454b5e",
+        "source_version_id": "d4fe101c-5bb2-4a65-98a9-ce8a629f50df",
+        "source_sha256": "13f4ae93c69e1fdfbdb95bd460911c8270f65a524c959333b90d6c5dd2a63428",
+        "start_cp": 164,
+        "end_cp": 235,
+        "fragment": "\u041a\u0440\u0435\u0434\u0438\u0442\u043e\u0432\u0430\u043d\u0438\u0435 \u043a\u0430\u0440\u0442\u044b \u043f\u043e\u043b\u0443\u0447\u0430\u0442\u0435\u043b\u044f \u043f\u043e \u0443\u043a\u0430\u0437\u0430\u043d\u043d\u043e\u0439 \u0432\u043e\u0437\u0432\u0440\u0430\u0442\u043d\u043e\u0439 \u0442\u0440\u0430\u0441\u0441\u0435 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043d\u043e.",
+        "path": [
+          "timeline",
+          2,
+          "evidence",
+          0,
+          "fragments",
+          0
+        ]
+      }
+    ],
+    "created_at": "2026-11-16T17:56:37.143929Z"
+  },
+  "validations": [
+    {
+      "id": "fb4b44f6-0f29-42f0-8385-c5305ce6ccb9",
+      "proposal_revision_id": "c8c50bb7-a9d1-4fdc-a2e2-bfa60a86ccb1",
+      "profile_version": "proofline-validation-v1",
+      "result": "blocked_for_approval",
+      "issues": [
+        {
+          "code": "time_not_in_fragments",
+          "path": [
+            "timeline",
+            2,
+            "time",
+            "value"
+          ],
+          "message": "\u0412\u0440\u0435\u043c\u044f \u0441\u043e\u0431\u044b\u0442\u0438\u044f \u0434\u043e\u043b\u0436\u043d\u043e \u0434\u043e\u0441\u043b\u043e\u0432\u043d\u043e \u043f\u0440\u0438\u0441\u0443\u0442\u0441\u0442\u0432\u043e\u0432\u0430\u0442\u044c \u0432 \u0435\u0433\u043e \u0434\u043e\u043a\u0430\u0437\u0430\u0442\u0435\u043b\u044c\u0441\u0442\u0432\u0430\u0445."
+        }
+      ],
+      "resolved_spans": [
+        {
+          "source_id": "649b9972ad454b5e",
+          "source_version_id": "d4fe101c-5bb2-4a65-98a9-ce8a629f50df",
+          "source_sha256": "13f4ae93c69e1fdfbdb95bd460911c8270f65a524c959333b90d6c5dd2a63428",
+          "start_cp": 164,
+          "end_cp": 235,
+          "fragment": "\u041a\u0440\u0435\u0434\u0438\u0442\u043e\u0432\u0430\u043d\u0438\u0435 \u043a\u0430\u0440\u0442\u044b \u043f\u043e\u043b\u0443\u0447\u0430\u0442\u0435\u043b\u044f \u043f\u043e \u0443\u043a\u0430\u0437\u0430\u043d\u043d\u043e\u0439 \u0432\u043e\u0437\u0432\u0440\u0430\u0442\u043d\u043e\u0439 \u0442\u0440\u0430\u0441\u0441\u0435 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043d\u043e.",
+          "path": [
+            "facts",
+            0,
+            "evidence",
+            0,
+            "fragments",
+            0
+          ]
+        },
+        {
+          "source_id": "a62eb31f18014f2e",
+          "source_version_id": "b83aab40-a7ef-4bf2-b6aa-748b91309a43",
+          "source_sha256": "cd209f9037d3de0715879b26bb1525b8d9ebd5ff3f74afca5170fb19b578a1bf",
+          "start_cp": 0,
+          "end_cp": 73,
+          "fragment": "2026-07-03T14:02:00+03:00 | capture | \u043e\u0442\u0432\u0435\u0442 \u044d\u043a\u0432\u0430\u0439\u0435\u0440\u0430 00; \u0441\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u043f\u0440\u0438\u043d\u044f\u0442\u043e",
+          "path": [
+            "timeline",
+            0,
+            "evidence",
+            0,
+            "fragments",
+            0
+          ]
+        },
+        {
+          "source_id": "a62eb31f18014f2e",
+          "source_version_id": "b83aab40-a7ef-4bf2-b6aa-748b91309a43",
+          "source_sha256": "cd209f9037d3de0715879b26bb1525b8d9ebd5ff3f74afca5170fb19b578a1bf",
+          "start_cp": 74,
+          "end_cp": 163,
+          "fragment": "2026-07-05T10:15:00+03:00 | return.submit | \u0437\u0430\u043f\u0440\u043e\u0441 \u043f\u0435\u0440\u0435\u0434\u0430\u043d \u0431\u0430\u043d\u043a\u0443; \u0442\u0440\u0430\u0441\u0441\u0430 189a5d15e84a4adb",
+          "path": [
+            "timeline",
+            1,
+            "evidence",
+            0,
+            "fragments",
+            0
+          ]
+        },
+        {
+          "source_id": "649b9972ad454b5e",
+          "source_version_id": "d4fe101c-5bb2-4a65-98a9-ce8a629f50df",
+          "source_sha256": "13f4ae93c69e1fdfbdb95bd460911c8270f65a524c959333b90d6c5dd2a63428",
+          "start_cp": 164,
+          "end_cp": 235,
+          "fragment": "\u041a\u0440\u0435\u0434\u0438\u0442\u043e\u0432\u0430\u043d\u0438\u0435 \u043a\u0430\u0440\u0442\u044b \u043f\u043e\u043b\u0443\u0447\u0430\u0442\u0435\u043b\u044f \u043f\u043e \u0443\u043a\u0430\u0437\u0430\u043d\u043d\u043e\u0439 \u0432\u043e\u0437\u0432\u0440\u0430\u0442\u043d\u043e\u0439 \u0442\u0440\u0430\u0441\u0441\u0435 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043d\u043e.",
+          "path": [
+            "timeline",
+            2,
+            "evidence",
+            0,
+            "fragments",
+            0
+          ]
+        }
+      ],
+      "created_at": "2026-11-16T17:56:37.143929Z"
+    }
+  ],
+  "blocking_issues": [
+    {
+      "code": "time_not_in_fragments",
+      "path": [
+        "timeline",
+        2,
+        "time",
+        "value"
+      ],
+      "message": "\u0412\u0440\u0435\u043c\u044f \u0441\u043e\u0431\u044b\u0442\u0438\u044f \u0434\u043e\u043b\u0436\u043d\u043e \u0434\u043e\u0441\u043b\u043e\u0432\u043d\u043e \u043f\u0440\u0438\u0441\u0443\u0442\u0441\u0442\u0432\u043e\u0432\u0430\u0442\u044c \u0432 \u0435\u0433\u043e \u0434\u043e\u043a\u0430\u0437\u0430\u0442\u0435\u043b\u044c\u0441\u0442\u0432\u0430\u0445."
+    }
+  ],
+  "decision": null,
+  "decision_current": false,
+  "case_version": 2
+}

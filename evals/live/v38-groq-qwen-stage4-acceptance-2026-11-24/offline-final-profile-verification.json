@@ -1,0 +1,93 @@
+{
+  "wire_exact_v34": [
+    "V01",
+    "V02",
+    "V03",
+    "V04",
+    "V06"
+  ],
+  "checks": {
+    "V03": {
+      "v34_reference_pass_after_decoding": true,
+      "v34_application_validation_pass_after_decoding": true,
+      "missing_selected_citation_still_blocks": "refund_settlement_link_missing",
+      "predecessor_request_sha256": "f6da307741bd68095fcd676dd9f801a6c2abe3118e7581e29caac70f56db0b04",
+      "raw_predecessor_sha256": "1ab8ef21cecf550a8f82292e459bbc37004faf194fc22a2cc8c8165a97ffba58"
+    },
+    "V05": {
+      "v34_reference_pass_after_decoding": true,
+      "v34_application_validation_pass_after_decoding": true,
+      "missing_selected_citation_still_blocks": "required_timeline_event_missing",
+      "predecessor_request_sha256": "ce423e4219e64a196b0ea4aee49a690c96ad0de1af9e9fdc7a13d34f6058a717",
+      "raw_predecessor_sha256": "b7b4da1e773e7ee56edfcf4ca6bfebc5268651afac5707b5970cff661340db8e"
+    }
+  },
+  "reviewed_rules_by_case": {
+    "V03": {
+      "refund_trace": {
+        "fact_evidence": [
+          "qde1bfb4947412c32",
+          "q868425d93bf771ad"
+        ],
+        "event_evidence": [
+          "q002607b0f87fe500",
+          "q868425d93bf771ad",
+          "q8a9df0d0eb7d50c7"
+        ],
+        "posting_time": "2026-07-06T17:42:00+03:00",
+        "trace": "q8a9df0d0eb7d50c7"
+      }
+    },
+    "V05": {
+      "event_roles": [
+        {
+          "from_type": "customer_message_received",
+          "to_type": "customer_withdrawal",
+          "role": "received",
+          "time": "2026-10-04T09:30:00+03:00",
+          "evidence": [
+            "qaf445027f75a9736",
+            "q7ee132193445d75c"
+          ],
+          "from_fact": {
+            "key": "withdrawal_timing",
+            "value": "before_supplier_cancel",
+            "citation": "q7ee132193445d75c"
+          }
+        },
+        {
+          "from_type": "customer_withdrawal",
+          "to_type": "customer_replied",
+          "role": "sent",
+          "time": "2026-10-04T09:26:00+03:00",
+          "evidence": [
+            "q42bcfc7609b25b40",
+            "q7ee132193445d75c"
+          ]
+        }
+      ]
+    }
+  },
+  "new_model_calls": 0,
+  "v05_minimum_timeline_checks": {
+    "v36_empty_timeline": "rejected",
+    "one_event": "rejected",
+    "two_required_events": "accepted",
+    "v34_three_events": "accepted"
+  },
+  "v05_schema_sha256": "7a9b419eaeb3ce2b55df06b11090210f20f4d57bb76757f6e85c618fdd2a7c61",
+  "live_control_responses_rechecked_offline": {
+    "V03": {
+      "reference_pass": true,
+      "application_pass": true,
+      "raw_sha256": "cae8bc7eb7d1cff03aa174b8a24ed5ceeea378047fb90447e5b91ab3ea1ec8cf"
+    },
+    "V05": {
+      "reference_pass": true,
+      "application_pass": true,
+      "raw_sha256": "7bce9be4bb055dad9a3915c769a2436b0ce1519008aab1a4deaa946ff57be63d",
+      "missing_refusal_keeps_card_blocked": true
+    }
+  },
+  "v37_supported_card_after_decoding": true
+}

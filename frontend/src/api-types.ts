@@ -376,6 +376,11 @@ export interface components {
             live_profile: {
                 [key: string]: components["schemas"]["JsonValue"];
             };
+            /**
+             * Live Provider
+             * @enum {string}
+             */
+            live_provider: "openai" | "groq" | "deepseek" | "anthropic";
             /** Live Reason */
             live_reason: string | null;
             /** Replay Available */

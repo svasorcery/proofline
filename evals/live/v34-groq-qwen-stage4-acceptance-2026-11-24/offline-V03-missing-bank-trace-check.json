@@ -1,0 +1,12 @@
+{
+  "new_model_calls": 0,
+  "same_v29_request_sha256": true,
+  "frozen_reference_pass_after_reusing_only_the_supported_bank_trace_in_memory": true,
+  "missing_fact_anchor": "Трасса: 189a5d15e84a4adb",
+  "schema_preview": {
+    "with_only_v34_selected_proof_slots": "rejected",
+    "complete_shared_trace_slots": "accepted",
+    "complete_document_pointer_slots": "accepted"
+  },
+  "status": "Offline design preview; no change to app, no provider test"
+}

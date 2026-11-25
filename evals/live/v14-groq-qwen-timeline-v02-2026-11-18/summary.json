@@ -1,0 +1,30 @@
+{
+  "case_id": "V02",
+  "provider": "groq",
+  "approved_max_requests": 1,
+  "approved_budget_usd": 0,
+  "account_tier": "Free as confirmed by the author",
+  "application_monetary_cost": null,
+  "attempts_reserved": 1,
+  "provider_attempts": 1,
+  "retries": 0,
+  "technical_pass": false,
+  "targeted_pass": false,
+  "complete_quality_pass": false,
+  "operator_decisions": 0,
+  "provider_response": {
+    "sent_at": "2026-11-18T10:32:07.738740+00:00",
+    "request_sha256": "4ecb292da0cbb1ec341fe359f8996cfaa0e714b736deea1795723ace1b4fb348",
+    "http_status": 400,
+    "provider_request_id": "req_01m7q3dfzme81afttd7mt2ke6d",
+    "rate_limit_headers": {
+      "x-ratelimit-limit-requests": "1000",
+      "x-ratelimit-limit-tokens": "8000",
+      "x-ratelimit-remaining-requests": "999",
+      "x-ratelimit-remaining-tokens": "4572",
+      "x-ratelimit-reset-requests": "1m26.4s",
+      "x-ratelimit-reset-tokens": "25.71s"
+    }
+  },
+  "usage": null
+}

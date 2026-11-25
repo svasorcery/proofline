@@ -1,0 +1,82 @@
+{
+  "format_version": 1,
+  "max_requests": 10,
+  "approved_budget_usd": 0,
+  "stopped": true,
+  "attempts": [
+    {
+      "condition": "full-V02",
+      "case_id": "V02",
+      "started_at": "2026-11-16T17:51:39.500256+00:00",
+      "idempotency_key": "groq-live-m4-20261116-full-V02",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "finished_at": "2026-11-16T17:51:46.611298+00:00",
+      "http_status": 201,
+      "run_id": "808d6df9-0ffd-42a0-a46e-d88590e3f969"
+    },
+    {
+      "condition": "full-V04",
+      "case_id": "V04",
+      "started_at": "2026-11-16T17:53:20.841103+00:00",
+      "idempotency_key": "groq-live-m4-20261116-full-V04",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "finished_at": "2026-11-16T17:53:24.654526+00:00",
+      "http_status": 201,
+      "run_id": "33148378-1a39-402b-8b58-3c0438e1fc18"
+    },
+    {
+      "condition": "full-V01",
+      "case_id": "V01",
+      "started_at": "2026-11-16T17:54:46.004591+00:00",
+      "idempotency_key": "groq-live-m4-20261116-full-V01",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "finished_at": "2026-11-16T17:54:51.264738+00:00",
+      "http_status": 201,
+      "run_id": "e0dc39b2-78c2-4ccf-b3fa-e3f176061700"
+    },
+    {
+      "condition": "full-V03",
+      "case_id": "V03",
+      "started_at": "2026-11-16T17:56:33.242708+00:00",
+      "idempotency_key": "groq-live-m4-20261116-full-V03",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "finished_at": "2026-11-16T17:56:37.280226+00:00",
+      "http_status": 201,
+      "run_id": "495536db-4615-4c16-82f3-ae1ab4c98c84"
+    },
+    {
+      "condition": "full-V05",
+      "case_id": "V05",
+      "started_at": "2026-11-16T17:57:54.551673+00:00",
+      "idempotency_key": "groq-live-m4-20261116-full-V05",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "failed",
+      "finished_at": "2026-11-16T17:58:00.643773+00:00",
+      "http_status": 201,
+      "run_id": "da5eeebe-9b29-4a9d-b197-9f3a9638ba53"
+    }
+  ],
+  "stop_reason": {
+    "code": "PROVIDER_REQUEST_REJECTED",
+    "message": "Live analysis failed; no automatic retry was made."
+  }
+}

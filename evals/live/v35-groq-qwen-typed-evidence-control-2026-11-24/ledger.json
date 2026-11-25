@@ -1,0 +1,22 @@
+{
+  "max_requests": 2,
+  "approved_budget_usd": 0,
+  "attempts": [
+    {
+      "condition": "full-V03",
+      "case_id": "V03",
+      "started_at": "2026-11-24T15:10:58.386922+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "failed",
+      "idempotency_key": "groq-qwen-typed-evidence-control-20261124-full-V03",
+      "http_status": 201,
+      "finished_at": "2026-11-24T15:11:03.769105+00:00",
+      "run_id": "263d7c37-b751-4962-b0ae-9000ae3b0bc5"
+    }
+  ],
+  "stopped": true,
+  "stop_reason": "Stop on status 400 / failed after V03"
+}

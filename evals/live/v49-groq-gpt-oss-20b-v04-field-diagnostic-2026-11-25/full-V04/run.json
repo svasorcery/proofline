@@ -1,0 +1,122 @@
+{
+  "id": "dcf15cad-9963-4e7d-b862-57729b2a754b",
+  "case_id": "V04",
+  "mode": "live",
+  "status": "failed",
+  "content_revision": 1,
+  "base_case_version": 1,
+  "input_digest": "4efb4bf589c85f0469c0088d4346bdf816c30c6e8c0c9cc015b8376638d8b190",
+  "snapshot": {
+    "case_id": "V04",
+    "user_text": "\u0412 \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0435 \u043f\u043e\u044f\u0432\u0438\u043b\u0441\u044f \u0434\u0440\u0443\u0433\u043e\u0439 \u043a\u043e\u0440\u043f\u0443\u0441. \u0412\u044b\u044f\u0441\u043d\u0438\u0442\u0435, \u0447\u0442\u043e \u043f\u043e\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043d\u043e \u043f\u0435\u0440\u0435\u043f\u0438\u0441\u043a\u043e\u0439 \u0438 \u043a\u0430\u043a\u043e\u0435 \u043f\u043e\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043d\u0438\u0435 \u0435\u0449\u0451 \u0442\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044f.",
+    "requested_fact_keys": [
+      "alternative_acceptance"
+    ],
+    "money": {
+      "amount_minor": 18400,
+      "currency": "USD",
+      "scale": 2
+    },
+    "context": {},
+    "catalog": [
+      {
+        "case_id": "V04",
+        "source_id": "7c4b78e8ce5a4af4",
+        "kind": "document",
+        "locator": "f588eb3ec91c417e",
+        "title": "7c4b78e8ce5a4af4",
+        "trust": "primary",
+        "position": 0,
+        "included": true,
+        "version_id": "1d01fcba-4852-4e3d-8fcd-ffa07335ff06",
+        "text": "\u041f\u0438\u0441\u044c\u043c\u043e \u043e\u0442\u0435\u043b\u044f \u043a\u043b\u0438\u0435\u043d\u0442\u0443\n\u041e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u043e: 2026-10-08T12:10:00+03:00\n\u0412\u043c\u0435\u0441\u0442\u043e \u043f\u0435\u0440\u0432\u043e\u043d\u0430\u0447\u0430\u043b\u044c\u043d\u043e\u0433\u043e \u043d\u043e\u043c\u0435\u0440\u0430 \u043c\u043e\u0436\u0435\u043c \u043f\u0440\u0435\u0434\u043b\u043e\u0436\u0438\u0442\u044c \u043d\u043e\u043c\u0435\u0440 \u0442\u043e\u0439 \u0436\u0435 \u043a\u0430\u0442\u0435\u0433\u043e\u0440\u0438\u0438 \u0432 \u0441\u043e\u0441\u0435\u0434\u043d\u0435\u043c \u043a\u043e\u0440\u043f\u0443\u0441\u0435. \u041f\u043e\u0434\u043e\u0439\u0434\u0451\u0442 \u043b\u0438 \u0442\u0430\u043a\u043e\u0439 \u0432\u0430\u0440\u0438\u0430\u043d\u0442?\n\u041a\u0432\u0438\u0442\u0430\u043d\u0446\u0438\u044f \u043f\u0435\u0440\u0435\u043f\u0438\u0441\u043a\u0438: 1e91c08f81a44e7e.",
+        "text_sha256": "1826ba27e0cc1b2de76ee133297669839ac2db81d7baeee33f88b0983fc2c3fc"
+      },
+      {
+        "case_id": "V04",
+        "source_id": "f71822cddbf648f2",
+        "kind": "provider_log",
+        "locator": "1e91c08f81a44e7e",
+        "title": "\u0417\u0430\u043f\u0438\u0441\u044c \u043e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u044f",
+        "trust": "primary",
+        "position": 1,
+        "included": true,
+        "version_id": "9805abfa-1b0c-48a6-b105-1ed1aca0b415",
+        "text": "2026-10-08T12:27:00+03:00 | inbound-message | \u043a\u043b\u0438\u0435\u043d\u0442 \u2192 \u043e\u0442\u0435\u043b\u044c\n\u0417\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a \u0438\u0441\u0445\u043e\u0434\u043d\u043e\u0433\u043e \u043f\u0438\u0441\u044c\u043c\u0430 Date: 2026-10-08T12:25:00+03:00\n\u0422\u0435\u043a\u0441\u0442 \u043f\u0440\u0438\u043d\u044f\u0442\u043e\u0433\u043e \u0441\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u044f:\n\u00ab\u0415\u0441\u043b\u0438 \u0442\u0430\u043c \u0442\u0438\u0445\u0438\u0439 \u043d\u043e\u043c\u0435\u0440 \u0441 \u043e\u043a\u043d\u0430\u043c\u0438 \u0432\u043e \u0434\u0432\u043e\u0440, \u0441\u043e\u0433\u043b\u0430\u0441\u0435\u043d \u043d\u0430 \u0441\u043e\u0441\u0435\u0434\u043d\u0438\u0439 \u043a\u043e\u0440\u043f\u0443\u0441. \u0415\u0441\u043b\u0438 \u043e\u043a\u043d\u0430 \u043d\u0430 \u0443\u043b\u0438\u0446\u0443, \u044d\u0442\u043e\u0442 \u0432\u0430\u0440\u0438\u0430\u043d\u0442 \u043c\u043d\u0435 \u043d\u0435 \u043f\u043e\u0434\u0445\u043e\u0434\u0438\u0442. \u041f\u043e\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u0435, \u043f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430, \u043a\u0443\u0434\u0430 \u0432\u044b\u0445\u043e\u0434\u044f\u0442 \u043e\u043a\u043d\u0430.\u00bb\n\u0417\u0430\u043f\u0438\u0441\u0438 \u044d\u0442\u043e\u0439 \u043f\u0435\u0440\u0435\u043f\u0438\u0441\u043a\u0438 \u0437\u0430\u043a\u0430\u043d\u0447\u0438\u0432\u0430\u044e\u0442\u0441\u044f \u0432\u0445\u043e\u0434\u044f\u0449\u0438\u043c \u0441\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u0435\u043c \u043a\u043b\u0438\u0435\u043d\u0442\u0430; \u043e\u0442\u0432\u0435\u0442\u0430 \u043e\u0442\u0435\u043b\u044f \u043e\u0431 \u043e\u043a\u043d\u0430\u0445 \u0432 \u0441\u043e\u0445\u0440\u0430\u043d\u0451\u043d\u043d\u043e\u0439 \u043f\u0435\u0440\u0435\u043f\u0438\u0441\u043a\u0435 \u043d\u0435\u0442.",
+        "text_sha256": "5e336b6a7929f0833efb146f9c2aab434a870f01be9eeb22261199363b8c8e4a"
+      },
+      {
+        "case_id": "V04",
+        "source_id": "60605d18ce3c437c",
+        "kind": "document",
+        "locator": "6dcb1e87c8ca4081",
+        "title": "\u0421\u043f\u0440\u0430\u0432\u043e\u0447\u043d\u0430\u044f \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0430",
+        "trust": "context",
+        "position": 2,
+        "included": true,
+        "version_id": "1249448e-44be-4461-9fd8-a30076c81ff2",
+        "text": "\u0421\u043f\u0440\u0430\u0432\u043e\u0447\u043d\u0430\u044f \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0430 \u043a\u043e\u0440\u043f\u0443\u0441\u0430. \u0412 \u0437\u0434\u0430\u043d\u0438\u0438 \u0435\u0441\u0442\u044c \u043d\u043e\u043c\u0435\u0440\u0430 \u0441 \u043e\u043a\u043d\u0430\u043c\u0438 \u0432\u043e \u0434\u0432\u043e\u0440 \u0438 \u043d\u043e\u043c\u0435\u0440\u0430 \u0441 \u043e\u043a\u043d\u0430\u043c\u0438 \u043d\u0430 \u0443\u043b\u0438\u0446\u0443. \u041a\u0430\u0440\u0442\u043e\u0447\u043a\u0430 \u043d\u0435 \u0441\u043e\u0434\u0435\u0440\u0436\u0438\u0442 \u043d\u0430\u0437\u043d\u0430\u0447\u0435\u043d\u0438\u044f \u043d\u043e\u043c\u0435\u0440\u0430 \u043a\u043e\u043d\u043a\u0440\u0435\u0442\u043d\u043e\u043c\u0443 \u0433\u043e\u0441\u0442\u044e.",
+        "text_sha256": "5b8ba8dbfe565f6dddb5b05fe154e4b60f782af55acf3e4962073b91645964f3"
+      }
+    ]
+  },
+  "started_at": "2026-11-25T13:38:56.750672Z",
+  "finished_at": "2026-11-25T13:39:00.020717Z",
+  "generation_profile": {
+    "api": "chat_completions",
+    "mode": "live",
+    "model": "openai/gpt-oss-20b",
+    "pricing": null,
+    "endpoint": "https://api.groq.com/openai/v1/chat/completions",
+    "provider": "groq",
+    "http_status": 400,
+    "max_retries": 0,
+    "usage_origin": "provider",
+    "monetary_cost": null,
+    "policy_sha256": "2d9b47d44aa0172a8c75ef6a5283009045695c088a174256ae9f4408abb691d3",
+    "prompt_sha256": "70d2871a2d5ea83af291456a0a5648f151085d8bfaa878b14416a9e9e629e913",
+    "schema_sha256": "0373e1825a34c728958ddc6d131352b4f051a5d1834ef4b6e30706c5f34ee72b",
+    "new_model_call": true,
+    "policy_version": "proofline-policy-v3.3-candidate-1",
+    "prompt_version": "proofline-responses-prompt-v3-candidate-1-choices-v1-confirmations-example-v1-citation-ids-v1",
+    "request_sha256": "cb6d8d2b0c2c750671e0490538e2d7e2ac308b9bdc39bfbddcbece017edf970e",
+    "schema_version": "assembly-output-v1",
+    "latency_seconds": 2.836149,
+    "request_profile": "groq-chat_completions-v33-citation-ids-test-v1-case-evidence-v1",
+    "requested_model": "openai/gpt-oss-20b",
+    "timeout_seconds": 90,
+    "reasoning_effort": "low",
+    "max_output_tokens": 1000,
+    "provider_error_code": "json_validate_failed",
+    "provider_error_type": "invalid_request_error",
+    "provider_request_id": "req_01m89ewmnye30a5fawwdpdr33z",
+    "provider_error_param": null,
+    "provider_error_stage": "output_validation",
+    "provider_response_id": null,
+    "assembly_schema_sha256": "9d031d5c4bb85493f85fc50e97990dc7b0a34e6853154aac59636b9275b54eaa",
+    "provider_citation_count": 10,
+    "provider_reply_evidence": {
+      "source_id": "f71822cddbf648f2",
+      "text_sha256": "5e336b6a7929f0833efb146f9c2aab434a870f01be9eeb22261199363b8c8e4a",
+      "source_version_id": "9805abfa-1b0c-48a6-b105-1ed1aca0b415"
+    },
+    "provider_schema_version": "assembly-citation-ids-v1",
+    "canonical_timeline_order": "utc-v1",
+    "provider_lookup_source_ids": [],
+    "provider_covered_requirements": [
+      "original_acceptance_reply"
+    ],
+    "provider_output_field_diagnostics": {
+      "unexpected_field_count": 0,
+      "missing_required_fields": []
+    },
+    "provider_citation_catalogue_sha256": "d7e8b54d9489540dce458bdecae066b3ca9d84bce9b56ff160adb675373a59d5"
+  },
+  "raw_output": null,
+  "usage": null,
+  "error": {
+    "code": "INVALID_MODEL_OUTPUT",
+    "message": "Live analysis failed; no automatic retry was made."
+  },
+  "proposal_revision_id": null
+}

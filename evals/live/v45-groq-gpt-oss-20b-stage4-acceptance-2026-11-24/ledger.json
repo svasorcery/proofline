@@ -1,0 +1,50 @@
+{
+  "max_requests": 6,
+  "approved_budget_usd": 0,
+  "attempts": [
+    {
+      "condition": "ablation-V01",
+      "case_id": "V01",
+      "started_at": "2026-11-24T20:11:01.924224+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 2
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-gpt-oss-20b-v01-guidance-acceptance-20261124-ablation-V01",
+      "http_status": 201,
+      "finished_at": "2026-11-24T20:11:05.964623+00:00",
+      "run_id": "3a201b08-fbab-4933-a79c-e9f2390d93f4"
+    },
+    {
+      "condition": "full-V02",
+      "case_id": "V02",
+      "started_at": "2026-11-24T20:12:09.300187+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-gpt-oss-20b-v01-guidance-acceptance-20261124-full-V02",
+      "http_status": 201,
+      "finished_at": "2026-11-24T20:12:11.063928+00:00",
+      "run_id": "ade8af14-5f3b-403e-87a7-b0cb2f7274c0"
+    },
+    {
+      "condition": "full-V03",
+      "case_id": "V03",
+      "started_at": "2026-11-24T20:13:14.572258+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "failed",
+      "idempotency_key": "groq-gpt-oss-20b-v01-guidance-acceptance-20261124-full-V03",
+      "http_status": 201,
+      "finished_at": "2026-11-24T20:13:16.591423+00:00",
+      "run_id": "a7c83e26-41c7-47cc-9a79-4eb400a9f89f"
+    }
+  ],
+  "stopped": true,
+  "stop_reason": "Stop on status 400 / failed after V03"
+}

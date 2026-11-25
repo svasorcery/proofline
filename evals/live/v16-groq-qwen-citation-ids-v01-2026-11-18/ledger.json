@@ -1,0 +1,22 @@
+{
+  "max_requests": 1,
+  "approved_budget_usd": 0,
+  "attempts": [
+    {
+      "condition": "ablation-V01",
+      "case_id": "V01",
+      "started_at": "2026-11-18T10:44:24.114578+00:00",
+      "state": "failed",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 2
+      },
+      "idempotency_key": "groq-qwen-citation-ids-v16-20261118-ablation-V01",
+      "http_status": 201,
+      "finished_at": "2026-11-18T10:44:33.552135+00:00",
+      "run_id": "b04167f3-5ba5-4258-be34-20b8d3fd78ac"
+    }
+  ],
+  "stopped": true,
+  "stop_reason": "Single attempt reserved; no repeats"
+}

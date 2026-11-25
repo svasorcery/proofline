@@ -1,0 +1,3 @@
+# V02 sending and receiving guidance and V03 citation-format control
+
+The controlled comparison runs V02 then V03 once on an isolated stand. The six-case batch starts on a fresh stand only if both pass. Only their system instructions change from v45. V02 names the documented sending and receipt as separate events. V03 omits the one legacy example showing citation objects, keeping the same strict schema, IDs rule and three-event minimum. The legacy-format failure was reproduced locally as a hypothesis, and the exact offending field in v45 was not retained. GPT-OSS 20B low, 1,000 completion tokens, $0, zero retries. Any technical error stops the phase. The runner measures original model output and operator proposal separately.

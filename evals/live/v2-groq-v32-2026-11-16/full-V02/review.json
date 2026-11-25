@@ -1,0 +1,13 @@
+{
+  "reviewer": "assistant",
+  "independent_human_labels": false,
+  "condition": "full-V02",
+  "technical_pass": false,
+  "quality_assessed": false,
+  "overall_pass": null,
+  "http_status": 400,
+  "error_code": "INVALID_MODEL_OUTPUT",
+  "provider_error_code": "json_validate_failed",
+  "provider_error_stage": "output_validation",
+  "notes": "First v3.2 request was rejected by Groq JSON validation. Stopped immediately; no retry or remaining conditions. No canonical proposal exists, so semantic quality cannot be assessed."
+}

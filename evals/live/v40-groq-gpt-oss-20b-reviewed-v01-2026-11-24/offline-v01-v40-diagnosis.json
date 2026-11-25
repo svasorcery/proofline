@@ -1,0 +1,43 @@
+{
+  "scope": "Counterfactual changes on copies of the v40 raw response. The live result is unchanged.",
+  "model_calls": 0,
+  "offer_quote_selected_in_fact": "qd16d3f37917ed3eb",
+  "results": {
+    "add_route=False,add_offer_quote=False": {
+      "application_issues": [
+        "missing_followup"
+      ],
+      "missing_events": [
+        "alternative_offered"
+      ],
+      "unsupported_event_indices": [
+        0
+      ],
+      "rubric_pass": false
+    },
+    "add_route=True,add_offer_quote=False": {
+      "application_issues": [],
+      "missing_events": [
+        "alternative_offered"
+      ],
+      "unsupported_event_indices": [
+        0
+      ],
+      "rubric_pass": false
+    },
+    "add_route=False,add_offer_quote=True": {
+      "application_issues": [
+        "missing_followup"
+      ],
+      "missing_events": [],
+      "unsupported_event_indices": [],
+      "rubric_pass": false
+    },
+    "add_route=True,add_offer_quote=True": {
+      "application_issues": [],
+      "missing_events": [],
+      "unsupported_event_indices": [],
+      "rubric_pass": true
+    }
+  }
+}

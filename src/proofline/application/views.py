@@ -28,6 +28,7 @@ class Capabilities(_View):
     replay_available: bool
     live_available: bool
     live_reason: str | None
+    live_provider: Literal["openai", "groq", "deepseek", "anthropic"]
     live_model: str | None
     live_access_verified: Literal[False] = False
     live_profile: dict[str, JsonValue]

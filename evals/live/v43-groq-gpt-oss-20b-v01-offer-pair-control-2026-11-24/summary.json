@@ -1,0 +1,35 @@
+{
+  "plan": [
+    "V01"
+  ],
+  "requested_model": "openai/gpt-oss-20b",
+  "reasoning_effort": "low",
+  "provider_attempts": 1,
+  "retries": 0,
+  "approved_budget_usd": 0,
+  "account_tier": "Free as confirmed in GroqCloud Console",
+  "spacings_seconds": [],
+  "technical_passes": 0,
+  "quality_passes": 0,
+  "known_reported_tokens": 0,
+  "unknown_usage_conditions": [
+    "V01"
+  ],
+  "single_application_instance": true,
+  "series_pass": false,
+  "stop_reason": "Stop on status 400 / failed after V01",
+  "cases": [
+    {
+      "case_id": "V01",
+      "technical_pass": false,
+      "provider_http_status": 400,
+      "network_error_type": null,
+      "provider_error_code": "json_validate_failed",
+      "provider_error_stage": "output_validation",
+      "error_code": "INVALID_MODEL_OUTPUT",
+      "quality_pass": false,
+      "reference_human_validated": false,
+      "usage": null
+    }
+  ]
+}

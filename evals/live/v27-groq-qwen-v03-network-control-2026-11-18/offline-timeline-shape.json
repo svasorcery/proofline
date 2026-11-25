@@ -1,0 +1,23 @@
+{
+  "model_calls": 0,
+  "schema_change_preview": {
+    "path": [
+      "properties",
+      "timeline",
+      "minItems"
+    ],
+    "value": 3
+  },
+  "actual_schema_sha256": "840aee8e1902fd4d55dc6e29e605ee5095ba77bb120c1a27e05d2fdbe3d2494f",
+  "preview_schema_sha256": "187dd64d7f298f8588ac36a53dad2f671a6956357c985345c3345438ea8865c1",
+  "actual_schema": {
+    "v27_empty": "accepted"
+  },
+  "preview_schema": {
+    "v27_empty": "rejected",
+    "two_of_three": "rejected",
+    "v19_accepted_with_current_citation_ids": "accepted"
+  },
+  "activation_scope": "Proposed only when the reviewed V03 sources match",
+  "status": "Offline preview only"
+}

@@ -1,0 +1,40 @@
+{
+  "format_version": 1,
+  "max_requests": 2,
+  "approved_budget_usd": 0,
+  "stopped": true,
+  "attempts": [
+    {
+      "condition": "full-V02",
+      "case_id": "V02",
+      "started_at": "2026-11-17T20:20:41.313774+00:00",
+      "idempotency_key": "groq-qwen-choices-v8-20261117-full-V02",
+      "state": "succeeded",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "http_status": 201,
+      "run_id": "e343b18c-f248-4979-bbbe-45cc724c1b52",
+      "finished_at": "2026-11-17T20:20:47.206258+00:00"
+    },
+    {
+      "condition": "full-V04",
+      "case_id": "V04",
+      "started_at": "2026-11-17T20:22:07.345779+00:00",
+      "idempotency_key": "groq-qwen-choices-v8-20261117-full-V04",
+      "state": "failed",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "http_status": 201,
+      "run_id": "e2131f15-832b-4aa2-97e7-995aaf17b0f0",
+      "finished_at": "2026-11-17T20:22:07.947183+00:00"
+    }
+  ],
+  "stop_reason": {
+    "code": "PROVIDER_RATE_LIMITED",
+    "message": "Live analysis failed; no automatic retry was made."
+  }
+}

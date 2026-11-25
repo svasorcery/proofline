@@ -1,0 +1,29 @@
+{
+  "planned_maximum_attempts": 7,
+  "observed_output_tokens_per_minute": 1000,
+  "model": "qwen/qwen3.8-27b",
+  "configured_limits": {
+    "requests_per_minute": 30,
+    "tokens_per_minute": 8000,
+    "requests_per_day": 1000,
+    "tokens_per_day": 200000
+  },
+  "output_limit_source": "Groq console refusal archived in v24; identical limits and successful control in v27",
+  "plan": "Free",
+  "custom_project_limits": false,
+  "scope": "GroqCloud UTC organization chart for Qwen on-demand",
+  "daily_chart_utc": {
+    "data_delay_minutes": 15,
+    "conservative_token_upper_bound": 110000,
+    "approximate_tokens": 95128,
+    "approximate_requests": 21
+  },
+  "observed_at": "2026-11-18T17:40:34.6313753+00:00",
+  "sources": [
+    "https://console.groq.com/settings/organization/usage?tab=activity",
+    "https://console.groq.com/settings/billing",
+    "https://console.groq.com/settings/limits",
+    "https://console.groq.com/settings/project/limits"
+  ],
+  "project": "Default Project"
+}

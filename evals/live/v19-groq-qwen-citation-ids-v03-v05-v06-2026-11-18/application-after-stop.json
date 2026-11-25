@@ -1,0 +1,15 @@
+{
+  "project": "proofline-live-qwen-remaining-20261118",
+  "live_process_stopped": true,
+  "remaining_containers": [
+    "proofline-live-qwen-remaining-20261118-db-1"
+  ],
+  "database_counts": {
+    "analysis_runs": 3,
+    "proposal_revisions": 3,
+    "review_decisions": 0
+  },
+  "app_container_removed": true,
+  "runtime_key_injected_via_stdin_only": true,
+  "database_stopped": true
+}

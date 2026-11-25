@@ -1,0 +1,11 @@
+{
+  "offline_gate_pass": true,
+  "conflict_is_blocking": true,
+  "checks": [
+    "pytest with PostgreSQL",
+    "Ruff",
+    "mypy",
+    "canonical contract",
+    "frozen baseline"
+  ]
+}

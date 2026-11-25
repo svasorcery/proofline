@@ -1,0 +1,30 @@
+{
+  "configured_limits": {
+    "requests_per_day": 1000,
+    "tokens_per_minute": 8000,
+    "requests_per_minute": 30,
+    "tokens_per_day": 200000
+  },
+  "model": "qwen/qwen3.8-27b",
+  "plan": "Free",
+  "observed_at": "2026-11-24T15:10:08.1267255+00:00",
+  "project": "Default Project",
+  "output_limit_source": "Previously measured account limit retained as output cap.",
+  "evidence": "Signed-in Billing Free Current Plan, Organization Limits, and no custom limits for Default Project.",
+  "daily_chart_utc": {
+    "conservative_token_upper_bound": 130000,
+    "approximate_requests": 9,
+    "approximate_tokens": 36223,
+    "data_delay_minutes": 15
+  },
+  "sources": [
+    "https://console.groq.com/settings/billing/plans",
+    "https://console.groq.com/settings/limits",
+    "https://console.groq.com/settings/project/limits",
+    "https://console.groq.com/settings/organization/usage?tab=activity"
+  ],
+  "scope": "Today UTC shows 9 calls and approximately 36,223 tokens. The highest November daily bar is below 123,000 tokens. Admission uses a conservative upper bound of 130,000, leaving at least 70,000 of 200,000 daily tokens for up to eight calls.",
+  "planned_maximum_attempts": 8,
+  "observed_output_tokens_per_minute": 1000,
+  "custom_project_limits": false
+}

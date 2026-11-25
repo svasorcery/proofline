@@ -1,0 +1,80 @@
+{
+  "id": "V04",
+  "title": "\u041f\u0435\u0440\u0435\u043f\u0438\u0441\u043a\u0430 \u043e \u043a\u043e\u0440\u043f\u0443\u0441\u0435",
+  "version": 1,
+  "content_revision": 1,
+  "current_proposal_revision_id": null,
+  "status": "unanalysed",
+  "analysis_running": false,
+  "created_at": "2026-11-17T12:06:20.518468Z",
+  "updated_at": "2026-11-17T12:06:20.518468Z",
+  "user_text": "\u0412 \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0435 \u043f\u043e\u044f\u0432\u0438\u043b\u0441\u044f \u0434\u0440\u0443\u0433\u043e\u0439 \u043a\u043e\u0440\u043f\u0443\u0441. \u0412\u044b\u044f\u0441\u043d\u0438\u0442\u0435, \u0447\u0442\u043e \u043f\u043e\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043d\u043e \u043f\u0435\u0440\u0435\u043f\u0438\u0441\u043a\u043e\u0439 \u0438 \u043a\u0430\u043a\u043e\u0435 \u043f\u043e\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043d\u0438\u0435 \u0435\u0449\u0451 \u0442\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044f.",
+  "requested_fact_keys": [
+    "alternative_acceptance"
+  ],
+  "money": {
+    "amount_minor": 18400,
+    "currency": "USD",
+    "scale": 2
+  },
+  "context": {},
+  "sources": [
+    {
+      "case_id": "V04",
+      "source_id": "7c4b78e8ce5a4af4",
+      "kind": "document",
+      "locator": "f588eb3ec91c417e",
+      "title": "7c4b78e8ce5a4af4",
+      "trust": "primary",
+      "position": 0,
+      "included": true,
+      "current_version_id": "f398bbde-d9e2-4ffd-bdc0-1b7236f45910",
+      "versions": [
+        {
+          "id": "f398bbde-d9e2-4ffd-bdc0-1b7236f45910",
+          "sequence": 1,
+          "text_sha256": "1826ba27e0cc1b2de76ee133297669839ac2db81d7baeee33f88b0983fc2c3fc",
+          "created_at": "2026-11-17T12:06:20.518468Z"
+        }
+      ]
+    },
+    {
+      "case_id": "V04",
+      "source_id": "f71822cddbf648f2",
+      "kind": "provider_log",
+      "locator": "1e91c08f81a44e7e",
+      "title": "\u0417\u0430\u043f\u0438\u0441\u044c \u043e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u044f",
+      "trust": "primary",
+      "position": 1,
+      "included": true,
+      "current_version_id": "6850579d-2bdd-4470-816c-d713310529c7",
+      "versions": [
+        {
+          "id": "6850579d-2bdd-4470-816c-d713310529c7",
+          "sequence": 1,
+          "text_sha256": "5e336b6a7929f0833efb146f9c2aab434a870f01be9eeb22261199363b8c8e4a",
+          "created_at": "2026-11-17T12:06:20.518468Z"
+        }
+      ]
+    },
+    {
+      "case_id": "V04",
+      "source_id": "60605d18ce3c437c",
+      "kind": "document",
+      "locator": "6dcb1e87c8ca4081",
+      "title": "\u0421\u043f\u0440\u0430\u0432\u043e\u0447\u043d\u0430\u044f \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0430",
+      "trust": "context",
+      "position": 2,
+      "included": true,
+      "current_version_id": "3c45d0ee-c217-480c-9a8c-73823019d32e",
+      "versions": [
+        {
+          "id": "3c45d0ee-c217-480c-9a8c-73823019d32e",
+          "sequence": 1,
+          "text_sha256": "5b8ba8dbfe565f6dddb5b05fe154e4b60f782af55acf3e4962073b91645964f3",
+          "created_at": "2026-11-17T12:06:20.518468Z"
+        }
+      ]
+    }
+  ]
+}

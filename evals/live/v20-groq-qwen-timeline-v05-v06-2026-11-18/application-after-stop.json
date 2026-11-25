@@ -1,0 +1,15 @@
+{
+  "remaining_containers": [
+    "proofline-live-qwen-remaining-timeline-20261118-db-1"
+  ],
+  "app_container_removed": true,
+  "live_process_stopped": true,
+  "runtime_key_injected_via_stdin_only": true,
+  "database_stopped": true,
+  "project": "proofline-live-qwen-remaining-timeline-20261118",
+  "database_counts": {
+    "analysis_runs": 2,
+    "proposal_revisions": 1,
+    "review_decisions": 0
+  }
+}

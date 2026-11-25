@@ -1,0 +1,12 @@
+{
+  "case_id": "V03",
+  "technical_pass": false,
+  "provider_http_status": 400,
+  "network_error_type": null,
+  "provider_error_code": "json_validate_failed",
+  "provider_error_stage": "output_validation",
+  "error_code": "INVALID_MODEL_OUTPUT",
+  "quality_pass": false,
+  "reference_human_validated": false,
+  "usage": null
+}

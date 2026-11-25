@@ -1,0 +1,18 @@
+{
+  "case_id": "V06",
+  "new_model_calls": 0,
+  "archive_checks": {
+    "v22": {
+      "status": "blocked_for_approval",
+      "issues": [
+        "authorization_open_used_as_release"
+      ],
+      "response_unchanged": true
+    },
+    "v21": {
+      "status": "needs_operator_review",
+      "issues": [],
+      "response_unchanged": true
+    }
+  }
+}

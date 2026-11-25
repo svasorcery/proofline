@@ -1,0 +1,13 @@
+{
+  "request_id_suffix": "bk54",
+  "observed_time_moscow": "2026-11-24T18:26:56+03:00",
+  "model": "qwen/qwen3.8-27b",
+  "http_status": 400,
+  "error_code": "json_validate_failed",
+  "input_tokens": 3456,
+  "output_tokens": 3,
+  "provider_first_token_seconds": 0.332,
+  "provider_latency_seconds": 0.337,
+  "source": "Groq Console / Dashboard / Logs / Show Errors Only",
+  "invalid_output_and_schema_field_exposed": false
+}

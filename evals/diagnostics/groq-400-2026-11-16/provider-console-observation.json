@@ -1,0 +1,33 @@
+{
+  "format_version": 1,
+  "observed_date": "2026-11-16",
+  "source": "Groq Console, Dashboard > Logs, Show Errors Only; read-only browser inspection",
+  "source_url": "https://console.groq.com/dashboard/logs?cursor=&only_errors=true",
+  "new_inference_requests": 0,
+  "local_condition": "full-V05",
+  "local_run_id": "da5eeebe-9b29-4a9d-b197-9f3a9638ba53",
+  "local_provider_request_id": "req_01m7jr4a38e8xt58skwactap6m",
+  "displayed_request_id": "req_0...ap6m",
+  "match_basis": [
+    "Only error row in this project",
+    "Displayed request ID suffix matches ap6m",
+    "Request time 2026-11-16 20:57:54 Europe/Moscow matches local run 17:57:54 UTC",
+    "Model openai/gpt-oss-120b",
+    "API key label proofline-live-acceptance"
+  ],
+  "model": "openai/gpt-oss-120b",
+  "http_status": 400,
+  "provider_error_code": "json_validate_failed",
+  "input_tokens_reported_in_console": 2460,
+  "output_tokens_reported_in_console": 2383,
+  "ttft_seconds": 0.37107,
+  "provider_latency_seconds": 5.39517,
+  "interpretation": "Provider rejected generated output during JSON/schema validation; this was not an initial transport or authentication failure.",
+  "unknown": [
+    "Exact validation keyword, field path or invalid JSON fragment",
+    "The generated output rejected by the provider",
+    "Whether the Responses route enforced constrained decoding for every schema keyword",
+    "Monetary charge; account Free Plan was confirmed separately by the author"
+  ],
+  "historical_records_policy": "Supplement only. Original failed RunView usage=null and the initial acceptance manifest/summary remain unchanged."
+}

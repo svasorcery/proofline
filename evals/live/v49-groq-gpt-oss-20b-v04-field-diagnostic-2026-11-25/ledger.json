@@ -1,0 +1,22 @@
+{
+  "max_requests": 1,
+  "approved_budget_usd": 0,
+  "attempts": [
+    {
+      "condition": "full-V04",
+      "case_id": "V04",
+      "started_at": "2026-11-25T13:38:56.738564+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "failed",
+      "idempotency_key": "groq-gpt-oss-20b-v04-field-diagnostic-acceptance-20261125-full-V04",
+      "http_status": 201,
+      "finished_at": "2026-11-25T13:39:00.077716+00:00",
+      "run_id": "dcf15cad-9963-4e7d-b862-57729b2a754b"
+    }
+  ],
+  "stopped": true,
+  "stop_reason": "Stop on status 400 / failed after V04"
+}

@@ -1,0 +1,349 @@
+{
+  "plan": [
+    "V03",
+    "V05",
+    "V06"
+  ],
+  "requested_model": "qwen/qwen3.8-27b",
+  "reasoning_effort": "medium",
+  "provider_attempts": 3,
+  "retries": 0,
+  "approved_budget_usd": 0,
+  "account_tier": "Free as confirmed by the author",
+  "spacings_seconds": [
+    65.266912,
+    65.663192
+  ],
+  "technical_passes": 3,
+  "quality_passes": 1,
+  "known_reported_tokens": 14314,
+  "unknown_usage_conditions": [],
+  "stop_reason": "Batch ended",
+  "cases": [
+    {
+      "case_id": "V03",
+      "technical_pass": true,
+      "provider_http_status": 200,
+      "provider_error_code": null,
+      "provider_error_stage": null,
+      "error_code": null,
+      "quality_pass": true,
+      "reference_human_validated": false,
+      "usage": {
+        "queue_time": 0.129217572,
+        "total_time": 8.440897716,
+        "prompt_time": 0.383783976,
+        "total_tokens": 5136,
+        "prompt_tokens": 3639,
+        "completion_time": 8.05711374,
+        "completion_tokens": 1497,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1024
+        }
+      },
+      "reference_checks": {
+        "case_id": "V03",
+        "runtime_valid": true,
+        "runtime_issues": [],
+        "facts_exact": true,
+        "evidence_complete": true,
+        "timeline_complete": true,
+        "followup_complete": true,
+        "readiness_ok": true,
+        "pack_pass": true,
+        "facts": [
+          {
+            "key": "payment_outcome",
+            "value_ok": true,
+            "evidence_ok": true
+          }
+        ],
+        "missing_events": [],
+        "unsupported_event_indices": [],
+        "missing_requirements": [],
+        "extra_requirements": []
+      },
+      "card_status": "needs_operator_review",
+      "blocking_issues": [],
+      "quoted_fragments": {
+        "literal": 14,
+        "total": 14
+      },
+      "expected_facts": {
+        "payment_outcome": "refund_settled"
+      },
+      "actual_facts": {
+        "payment_outcome": "refund_settled"
+      },
+      "expected_timeline": [
+        {
+          "event_type": "payment_captured",
+          "value": "2026-07-03T14:02:00+03:00",
+          "role": "occurred"
+        },
+        {
+          "event_type": "refund_initiated",
+          "value": "2026-07-05T10:15:00+03:00",
+          "role": "occurred"
+        },
+        {
+          "event_type": "refund_settled",
+          "value": "2026-07-06T17:42:00+03:00",
+          "role": "occurred"
+        }
+      ],
+      "actual_timeline": [
+        {
+          "event_type": "payment_captured",
+          "time": {
+            "value": "2026-07-03T14:02:00+03:00",
+            "role": "occurred"
+          },
+          "evidence": [
+            {
+              "source_id": "a62eb31f18014f2e",
+              "fragments": [
+                "2026-07-03T14:02:00+03:00 | capture | ответ эквайера 00; списание принято"
+              ]
+            },
+            {
+              "source_id": "7fe04ac171704d90",
+              "fragments": [
+                "Средства списаны по бронированию. Платёжная запись: b79e31f2c3c74a46."
+              ]
+            }
+          ]
+        },
+        {
+          "event_type": "refund_initiated",
+          "time": {
+            "value": "2026-07-05T10:15:00+03:00",
+            "role": "occurred"
+          },
+          "evidence": [
+            {
+              "source_id": "a62eb31f18014f2e",
+              "fragments": [
+                "2026-07-05T10:15:00+03:00 | return.submit | запрос передан банку; трасса 189a5d15e84a4adb"
+              ]
+            }
+          ]
+        },
+        {
+          "event_type": "refund_settled",
+          "time": {
+            "value": "2026-07-06T17:42:00+03:00",
+            "role": "occurred"
+          },
+          "evidence": [
+            {
+              "source_id": "649b9972ad454b5e",
+              "fragments": [
+                "Кредитование карты получателя по указанной возвратной трассе завершено.",
+                "Дата проводки по карте получателя: 2026-07-06T17:42:00+03:00",
+                "Трасса: 189a5d15e84a4adb"
+              ]
+            },
+            {
+              "source_id": "a62eb31f18014f2e",
+              "fragments": [
+                "В этом журнале нет проводок по счёту получателя. Для сверки банк приложил документ 3088e5c39f854cf6; сопоставление выполняется по трассе."
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_follow_up": {
+        "action": "none",
+        "locator": null,
+        "requirements": []
+      },
+      "actual_follow_up": {
+        "action": "none",
+        "locator": null,
+        "requirements": []
+      },
+      "actual_readiness": "ready_for_rules"
+    },
+    {
+      "case_id": "V05",
+      "technical_pass": true,
+      "provider_http_status": 200,
+      "provider_error_code": null,
+      "provider_error_stage": null,
+      "error_code": null,
+      "quality_pass": false,
+      "reference_human_validated": false,
+      "usage": {
+        "queue_time": 0.216765437,
+        "total_time": 2.808096672,
+        "prompt_time": 0.262785434,
+        "total_tokens": 4864,
+        "prompt_tokens": 3670,
+        "completion_time": 2.545311238,
+        "completion_tokens": 1194,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1024
+        }
+      },
+      "reference_checks": {
+        "case_id": "V05",
+        "runtime_valid": true,
+        "runtime_issues": [],
+        "facts_exact": true,
+        "evidence_complete": true,
+        "timeline_complete": false,
+        "followup_complete": true,
+        "readiness_ok": true,
+        "pack_pass": false,
+        "facts": [
+          {
+            "key": "withdrawal_timing",
+            "value_ok": true,
+            "evidence_ok": true
+          },
+          {
+            "key": "cancellation_status",
+            "value_ok": true,
+            "evidence_ok": true
+          }
+        ],
+        "missing_events": [
+          "customer_withdrawal",
+          "supplier_cancelled"
+        ],
+        "unsupported_event_indices": [],
+        "missing_requirements": [],
+        "extra_requirements": []
+      },
+      "card_status": "needs_operator_review",
+      "blocking_issues": [],
+      "quoted_fragments": {
+        "literal": 5,
+        "total": 5
+      },
+      "expected_facts": {
+        "withdrawal_timing": "before_supplier_cancel",
+        "cancellation_status": "confirmed"
+      },
+      "actual_facts": {
+        "withdrawal_timing": "before_supplier_cancel",
+        "cancellation_status": "confirmed"
+      },
+      "expected_timeline": [
+        {
+          "event_type": "customer_withdrawal",
+          "value": "2026-10-04T09:30:00+03:00",
+          "role": "received"
+        },
+        {
+          "event_type": "supplier_cancelled",
+          "value": "2026-10-04T10:00:00+03:00",
+          "role": "occurred"
+        }
+      ],
+      "actual_timeline": [],
+      "expected_follow_up": {
+        "action": "none",
+        "locator": null,
+        "requirements": []
+      },
+      "actual_follow_up": {
+        "action": "none",
+        "locator": null,
+        "requirements": []
+      },
+      "actual_readiness": "ready_for_rules"
+    },
+    {
+      "case_id": "V06",
+      "technical_pass": true,
+      "provider_http_status": 200,
+      "provider_error_code": null,
+      "provider_error_stage": null,
+      "error_code": null,
+      "quality_pass": false,
+      "reference_human_validated": false,
+      "usage": {
+        "queue_time": 0.030784222,
+        "total_time": 2.851754829,
+        "prompt_time": 0.258727784,
+        "total_tokens": 4314,
+        "prompt_tokens": 3124,
+        "completion_time": 2.593027045,
+        "completion_tokens": 1190,
+        "completion_tokens_details": {
+          "reasoning_tokens": 1024
+        }
+      },
+      "reference_checks": {
+        "case_id": "V06",
+        "runtime_valid": true,
+        "runtime_issues": [],
+        "facts_exact": true,
+        "evidence_complete": true,
+        "timeline_complete": false,
+        "followup_complete": true,
+        "readiness_ok": true,
+        "pack_pass": false,
+        "facts": [
+          {
+            "key": "cancellation_status",
+            "value_ok": true,
+            "evidence_ok": true
+          },
+          {
+            "key": "payment_outcome",
+            "value_ok": true,
+            "evidence_ok": true
+          }
+        ],
+        "missing_events": [
+          "supplier_cancelled",
+          "authorization_released"
+        ],
+        "unsupported_event_indices": [],
+        "missing_requirements": [],
+        "extra_requirements": []
+      },
+      "card_status": "needs_operator_review",
+      "blocking_issues": [],
+      "quoted_fragments": {
+        "literal": 5,
+        "total": 5
+      },
+      "expected_facts": {
+        "cancellation_status": "confirmed",
+        "payment_outcome": "authorization_release"
+      },
+      "actual_facts": {
+        "payment_outcome": "authorization_release",
+        "cancellation_status": "confirmed"
+      },
+      "expected_timeline": [
+        {
+          "event_type": "supplier_cancelled",
+          "value": "2026-06-22T16:40:00+03:00",
+          "role": "occurred"
+        },
+        {
+          "event_type": "authorization_released",
+          "value": "2026-06-22T16:43:00+03:00",
+          "role": "occurred"
+        }
+      ],
+      "actual_timeline": [],
+      "expected_follow_up": {
+        "action": "none",
+        "locator": null,
+        "requirements": []
+      },
+      "actual_follow_up": {
+        "action": "none",
+        "locator": null,
+        "requirements": []
+      },
+      "actual_readiness": "ready_for_rules"
+    }
+  ]
+}

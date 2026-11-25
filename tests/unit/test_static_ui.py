@@ -84,3 +84,28 @@ def test_ui_directory_can_be_configured_from_environment(monkeypatch: pytest.Mon
     monkeypatch.setenv("PROOFLINE_UI_DIR", "/custom/ui")
     settings = Settings(database_url="postgresql+psycopg://unused/unused")
     assert settings.ui_dir == Path("/custom/ui")
+
+
+def test_capabilities_identifies_v33_in_the_isolated_profile(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv("GROQ_PROMPT_PROFILE", "v3.3-test")
+    app = create_app(
+        Settings(
+            _env_file=None,
+            database_url="postgresql+psycopg://unused/unused",
+            fixtures_dir=Path(__file__).resolve().parents[2] / "fixtures",
+            live_enabled=False,
+            llm_provider="groq",
+            llm_model="qwen/qwen3.8-27b",
+            groq_reasoning_effort="medium",
+        )
+    )
+    try:
+        caps = TestClient(app).get("/api/v1/capabilities").json()
+        assert caps["live_available"] is False and caps["default_mode"] == "replay"
+        assert caps["live_profile"]["policy_version"] == "proofline-policy-v3.3-candidate-1"
+        assert caps["live_profile"]["prompt_version"] == "proofline-responses-prompt-v3-candidate-1"
+        assert caps["live_profile"]["schema_version"] == "assembly-output-v1"
+    finally:
+        app.state.service.database.dispose()

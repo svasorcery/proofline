@@ -1,0 +1,34 @@
+{
+  "new_model_calls": 0,
+  "actual_messages": [
+    "wrong_time_role",
+    "required_timeline_event_missing"
+  ],
+  "changed_fields_in_copy": [
+    [
+      "timeline",
+      0,
+      "event_type"
+    ],
+    [
+      "timeline",
+      1,
+      "event_type"
+    ]
+  ],
+  "changes": [
+    {
+      "index": 0,
+      "old": "customer_withdrawal",
+      "new": "customer_replied"
+    },
+    {
+      "index": 1,
+      "old": "customer_message_received",
+      "new": "customer_withdrawal"
+    }
+  ],
+  "timestamp_and_evidence_preserved": true,
+  "copy_passes_application_validation_and_frozen_reference": true,
+  "original_artifacts_rewritten": false
+}

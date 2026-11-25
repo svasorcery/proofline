@@ -1,0 +1,61 @@
+{
+  "reviewer": "assistant",
+  "independent_human_labels": false,
+  "condition": "full-V04",
+  "technical_pass": true,
+  "provider_http_status": 200,
+  "provider_schema_accepted": true,
+  "fact_values": {
+    "pass": true,
+    "actual": {
+      "alternative_acceptance": "conditional"
+    }
+  },
+  "chronology": {
+    "pass": true,
+    "events": [
+      [
+        "alternative_offered",
+        "sent",
+        "2026-10-08T12:10:00+03:00"
+      ],
+      [
+        "customer_replied",
+        "sent",
+        "2026-10-08T12:25:00+03:00"
+      ],
+      [
+        "customer_message_received",
+        "received",
+        "2026-10-08T12:27:00+03:00"
+      ]
+    ]
+  },
+  "evidence_sufficiency": {
+    "pass": false,
+    "literal_fragments": "10/10",
+    "gap": "For sending the reply, the Date header proves the send time. The other fragment records receipt, and neither fragment contains the actual reply. The reply is quoted in the fact and receipt event."
+  },
+  "next_step": {
+    "pass": true,
+    "expected": {
+      "action": "ask_user",
+      "locator": null,
+      "requirements": [
+        "quiet_room",
+        "courtyard_windows"
+      ]
+    },
+    "actual": {
+      "action": "ask_user",
+      "locator": null,
+      "requirements": [
+        "quiet_room",
+        "courtyard_windows"
+      ]
+    }
+  },
+  "runtime_validation": "needs_operator_review",
+  "overall_pass": false,
+  "operator_decision_created": false
+}

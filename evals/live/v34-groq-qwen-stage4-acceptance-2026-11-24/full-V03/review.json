@@ -1,0 +1,167 @@
+{
+  "case_id": "V03",
+  "technical_pass": true,
+  "provider_http_status": 200,
+  "network_error_type": null,
+  "provider_error_code": null,
+  "provider_error_stage": null,
+  "error_code": null,
+  "quality_pass": false,
+  "reference_human_validated": false,
+  "usage": {
+    "queue_time": 0.10943768,
+    "total_time": 3.236577992,
+    "prompt_time": 0.368391346,
+    "total_tokens": 4167,
+    "prompt_tokens": 3744,
+    "completion_time": 2.868186646,
+    "completion_tokens": 423
+  },
+  "reference_checks": {
+    "case_id": "V03",
+    "runtime_valid": true,
+    "runtime_issues": [],
+    "facts_exact": true,
+    "evidence_complete": false,
+    "timeline_complete": true,
+    "followup_complete": true,
+    "readiness_ok": true,
+    "pack_pass": false,
+    "facts": [
+      {
+        "key": "payment_outcome",
+        "value_ok": true,
+        "evidence_ok": false
+      }
+    ],
+    "missing_events": [],
+    "unsupported_event_indices": [],
+    "missing_requirements": [],
+    "extra_requirements": []
+  },
+  "card_status": "blocked_for_approval",
+  "blocking_issues": [
+    {
+      "code": "refund_settlement_link_missing",
+      "path": [
+        "facts",
+        0,
+        "evidence"
+      ],
+      "message": "Свяжите запись о запуске возврата с выпиской и приведите подтверждение зачисления."
+    }
+  ],
+  "quoted_fragments": {
+    "literal": 11,
+    "total": 11
+  },
+  "expected_facts": {
+    "payment_outcome": "refund_settled"
+  },
+  "actual_facts": {
+    "payment_outcome": "refund_settled"
+  },
+  "expected_timeline": [
+    {
+      "event_type": "payment_captured",
+      "value": "2026-07-03T14:02:00+03:00",
+      "role": "occurred"
+    },
+    {
+      "event_type": "refund_initiated",
+      "value": "2026-07-05T10:15:00+03:00",
+      "role": "occurred"
+    },
+    {
+      "event_type": "refund_settled",
+      "value": "2026-07-06T17:42:00+03:00",
+      "role": "occurred"
+    }
+  ],
+  "raw_timeline_order": [
+    {
+      "role": "occurred",
+      "value": "2026-07-03T14:02:00+03:00"
+    },
+    {
+      "role": "occurred",
+      "value": "2026-07-05T10:15:00+03:00"
+    },
+    {
+      "role": "occurred",
+      "value": "2026-07-06T17:42:00+03:00"
+    }
+  ],
+  "actual_timeline": [
+    {
+      "event_type": "payment_captured",
+      "time": {
+        "value": "2026-07-03T14:02:00+03:00",
+        "role": "occurred"
+      },
+      "evidence": [
+        {
+          "source_id": "7fe04ac171704d90",
+          "fragments": [
+            "Средства списаны по бронированию. Платёжная запись: b79e31f2c3c74a46."
+          ]
+        },
+        {
+          "source_id": "a62eb31f18014f2e",
+          "fragments": [
+            "2026-07-03T14:02:00+03:00 | capture | ответ эквайера 00; списание принято"
+          ]
+        }
+      ]
+    },
+    {
+      "event_type": "refund_initiated",
+      "time": {
+        "value": "2026-07-05T10:15:00+03:00",
+        "role": "occurred"
+      },
+      "evidence": [
+        {
+          "source_id": "a62eb31f18014f2e",
+          "fragments": [
+            "2026-07-05T10:15:00+03:00 | return.submit | запрос передан банку; трасса 189a5d15e84a4adb"
+          ]
+        }
+      ]
+    },
+    {
+      "event_type": "refund_settled",
+      "time": {
+        "value": "2026-07-06T17:42:00+03:00",
+        "role": "occurred"
+      },
+      "evidence": [
+        {
+          "source_id": "a62eb31f18014f2e",
+          "fragments": [
+            "2026-07-05T10:15:00+03:00 | return.submit | запрос передан банку; трасса 189a5d15e84a4adb"
+          ]
+        },
+        {
+          "source_id": "649b9972ad454b5e",
+          "fragments": [
+            "Трасса: 189a5d15e84a4adb",
+            "Дата проводки по карте получателя: 2026-07-06T17:42:00+03:00",
+            "Кредитование карты получателя по указанной возвратной трассе завершено."
+          ]
+        }
+      ]
+    }
+  ],
+  "expected_follow_up": {
+    "action": "none",
+    "locator": null,
+    "requirements": []
+  },
+  "actual_follow_up": {
+    "action": "none",
+    "locator": null,
+    "requirements": []
+  },
+  "actual_readiness": "ready_for_rules"
+}

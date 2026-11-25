@@ -1,0 +1,22 @@
+{
+  "max_requests": 1,
+  "approved_budget_usd": 0,
+  "attempts": [
+    {
+      "condition": "ablation-V01",
+      "case_id": "V01",
+      "started_at": "2026-11-24T15:44:50.944049+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 2
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-gpt-oss-20b-control-20261124-ablation-V01",
+      "http_status": 201,
+      "finished_at": "2026-11-24T15:44:54.538304+00:00",
+      "run_id": "841856fa-f225-478d-8999-f05a89c0efc3"
+    }
+  ],
+  "stopped": true,
+  "stop_reason": "Batch completed"
+}

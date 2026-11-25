@@ -1,0 +1,100 @@
+{
+  "id": "V05",
+  "title": "\u0423\u0432\u0435\u0434\u043e\u043c\u043b\u0435\u043d\u0438\u0435 \u0438 \u0432\u0445\u043e\u0434\u044f\u0449\u0435\u0435 \u043f\u0438\u0441\u044c\u043c\u043e",
+  "version": 1,
+  "content_revision": 1,
+  "current_proposal_revision_id": null,
+  "status": "unanalysed",
+  "analysis_running": false,
+  "created_at": "2026-11-18T11:18:20.964742Z",
+  "updated_at": "2026-11-18T11:18:20.964742Z",
+  "user_text": "\u0412 \u043c\u0430\u0442\u0435\u0440\u0438\u0430\u043b\u0430\u0445 \u043d\u0435\u0441\u043a\u043e\u043b\u044c\u043a\u043e \u0440\u0430\u0437\u043d\u044b\u0445 \u0434\u0430\u0442. \u0423\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u0435 \u043f\u043e\u0440\u044f\u0434\u043e\u043a \u043e\u0442\u043a\u0430\u0437\u0430 \u043a\u043b\u0438\u0435\u043d\u0442\u0430 \u0438 \u043e\u0442\u043c\u0435\u043d\u044b \u043f\u043e\u0441\u0442\u0430\u0432\u0449\u0438\u043a\u043e\u043c, \u043e\u043f\u0438\u0440\u0430\u044f\u0441\u044c \u043d\u0430 \u0441\u0430\u043c\u0438 \u0441\u043e\u0431\u044b\u0442\u0438\u044f.",
+  "requested_fact_keys": [
+    "withdrawal_timing",
+    "cancellation_status"
+  ],
+  "money": {
+    "amount_minor": 13600,
+    "currency": "USD",
+    "scale": 2
+  },
+  "context": {},
+  "sources": [
+    {
+      "case_id": "V05",
+      "source_id": "8d8725ea313142f0",
+      "kind": "document",
+      "locator": "44b4d8ecc4b54360",
+      "title": "8d8725ea313142f0",
+      "trust": "primary",
+      "position": 0,
+      "included": true,
+      "current_version_id": "b92474be-295a-4fad-a8b8-38bcbd8c9969",
+      "versions": [
+        {
+          "id": "b92474be-295a-4fad-a8b8-38bcbd8c9969",
+          "sequence": 1,
+          "text_sha256": "8b05456de99fad58b4f1b4a4924c29f5af9665f654938a8bcfc047f5f8d4d2d0",
+          "created_at": "2026-11-18T11:18:20.964742Z"
+        }
+      ]
+    },
+    {
+      "case_id": "V05",
+      "source_id": "b493b77f4c5e4dde",
+      "kind": "document",
+      "locator": "2a7f66f5333640d3",
+      "title": "b493b77f4c5e4dde",
+      "trust": "primary",
+      "position": 1,
+      "included": true,
+      "current_version_id": "51eb1ecf-3a18-4221-be88-3fcdc9f5a2d4",
+      "versions": [
+        {
+          "id": "51eb1ecf-3a18-4221-be88-3fcdc9f5a2d4",
+          "sequence": 1,
+          "text_sha256": "7fbeeb9eb3388749f480da9b5ee9a3f863d2632619916cd4771b99df78f20629",
+          "created_at": "2026-11-18T11:18:20.964742Z"
+        }
+      ]
+    },
+    {
+      "case_id": "V05",
+      "source_id": "762012adef0f406d",
+      "kind": "document",
+      "locator": "bf8e99d63d8f4bc9",
+      "title": "\u0421\u043f\u0440\u0430\u0432\u043e\u0447\u043d\u0430\u044f \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0430",
+      "trust": "context",
+      "position": 2,
+      "included": true,
+      "current_version_id": "b7b2ff31-afa4-4df3-8d2c-0951e6a00094",
+      "versions": [
+        {
+          "id": "b7b2ff31-afa4-4df3-8d2c-0951e6a00094",
+          "sequence": 1,
+          "text_sha256": "66937e1a23912926718fd571bb495680eb3337c6061f0f0d8042c4e3aeca1e17",
+          "created_at": "2026-11-18T11:18:20.964742Z"
+        }
+      ]
+    },
+    {
+      "case_id": "V05",
+      "source_id": "abd412ba34ae4156",
+      "kind": "provider_log",
+      "locator": "7102933721474f60",
+      "title": "\u0417\u0430\u043f\u0438\u0441\u044c \u043e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u044f",
+      "trust": "primary",
+      "position": 3,
+      "included": true,
+      "current_version_id": "7b0d10df-7175-47db-815d-64122719d615",
+      "versions": [
+        {
+          "id": "7b0d10df-7175-47db-815d-64122719d615",
+          "sequence": 1,
+          "text_sha256": "0a378cc84cadeb94befc36c60edbfba4c23cf2eafb6e0eb8f501f2a6a1e7de87",
+          "created_at": "2026-11-18T11:18:20.964742Z"
+        }
+      ]
+    }
+  ]
+}

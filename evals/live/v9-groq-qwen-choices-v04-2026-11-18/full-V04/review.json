@@ -1,0 +1,35 @@
+{
+  "reviewer": "assistant",
+  "independent_human_labels": false,
+  "condition": "full-V04",
+  "technical_pass": true,
+  "provider_http_status": 200,
+  "provider_schema_accepted": true,
+  "fact_values": {
+    "pass": true,
+    "expected": {"alternative_acceptance": "conditional"},
+    "actual": {"alternative_acceptance": "conditional"}
+  },
+  "evidence_sufficiency": {
+    "pass": true,
+    "literal_fragments": "9/9",
+    "notes": "The sending event has both the Date header and the actual text of the customer reply. The receipt event has the inbound record and reply text. The offer cites its own time and text."
+  },
+  "chronology": {
+    "pass": true,
+    "correct": [
+      "alternative_offered sent 2026-10-08T12:10:00+03:00",
+      "customer_replied sent 2026-10-08T12:25:00+03:00",
+      "customer_message_received received 2026-10-08T12:27:00+03:00"
+    ]
+  },
+  "next_step": {
+    "pass": false,
+    "expected": {"action": "ask_user", "locator": null, "requirements": ["quiet_room", "courtyard_windows"]},
+    "actual": {"action": "ask_user", "locator": null, "requirements": ["original_acceptance_reply", "quiet_room", "courtyard_windows"]},
+    "notes": "The original reply is already included and cited. Only the room and windows confirmations are outstanding."
+  },
+  "runtime_validation": "needs_operator_review without blocking issues",
+  "overall_pass": false,
+  "operator_decision_created": false
+}

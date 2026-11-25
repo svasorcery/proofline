@@ -1,0 +1,33 @@
+{
+  "reviewer": "assistant",
+  "independent_human_labels": false,
+  "condition": "full-V01",
+  "technical_pass": true,
+  "fact_values": {
+    "pass": true,
+    "correct": 1,
+    "total": 1,
+    "expected": {
+      "alternative_acceptance": "confirmed"
+    },
+    "actual": {
+      "alternative_acceptance": "confirmed"
+    }
+  },
+  "evidence_sufficiency": {
+    "pass": false,
+    "notes": "Fact evidence quotes the unconditional consent correctly. The alternative_accepted event itself cites only the transport receipt, which explicitly excludes message content. It needs consent evidence as well as delivery evidence; fact citations are not automatically transferred to another field."
+  },
+  "chronology": {
+    "pass": true,
+    "notes": "Offer 09:10, reply sent 09:34, receipt/acceptance 09:36 are correct. Additional generic receipt event is consistent with the transport log."
+  },
+  "next_step": {
+    "pass": true,
+    "expected_readiness": "ready_for_rules",
+    "expected_action": "none"
+  },
+  "runtime_validation": "needs_operator_review without blocking issues",
+  "overall_pass": false,
+  "operator_decision_created": false
+}

@@ -1,0 +1,3 @@
+# V02 missing original proof and V03 citation IDs
+
+Two controls run once on an isolated stand. A full V01–V06 batch on a fresh stand starts only if V02 and V03 both pass. GPT-OSS 20B low, strict JSON schema, 1,000 completion tokens, $0, and zero retries. V02 explicitly keeps the earlier original message timing unconfirmed and asks for its original and delivery receipt when both are missing. V03 removes only the remaining legacy timeline example with citation objects. The base policy bytes, strict schema, model, inputs, profile bindings and remaining requests are unchanged. Any technical error stops the phase. Original outputs and operator-facing cards are scored independently.

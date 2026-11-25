@@ -35,7 +35,7 @@ from proofline.domain.inputs import (
 )
 from proofline.persistence.database import Database
 from proofline.persistence.models import AnalysisRun, ProposalRevision
-from proofline.providers.openai_responses import LiveProvider, PreparedLive
+from proofline.providers.live import LiveProvider, PreparedLive
 from proofline.providers.replay import (
     GenerationResult,
     PreparedReplay,
@@ -198,7 +198,12 @@ class RunService:
                     None,
                     {"code": "INVALID_MODEL_OUTPUT", "message": "No output was returned."},
                 )
-            body = AssemblyOutput.model_validate_json(result.raw_output)
+            decode = prepared.decode_output if isinstance(prepared, PreparedLive) else None
+            body = (
+                decode(result.raw_output)
+                if decode
+                else AssemblyOutput.model_validate_json(result.raw_output)
+            )
             validate_storage_json(body.model_dump(mode="json"))
             canonical_json(result.generation_profile).encode("utf-8")
             canonical_json(result.usage).encode("utf-8")
@@ -296,7 +301,7 @@ class RunService:
                 )
                 session.add(proposal)
                 session.flush()
-                record_validation(session, proposal, self.settings.validation_profile)
+                record_validation(session, proposal, self.settings)
                 if case.version == run.base_case_version:
                     case.current_proposal_revision_id = proposal.id
                     touch(case)

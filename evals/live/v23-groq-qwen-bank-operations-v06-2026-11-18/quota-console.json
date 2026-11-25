@@ -1,0 +1,26 @@
+{
+  "observed_at": "2026-11-18T11:58:43.6614793+00:00",
+  "plan": "Free",
+  "project": "Default Project",
+  "project_limits": "inherited, no custom overrides",
+  "model": "qwen/qwen3.8-27b",
+  "configured_limits": {
+    "requests_per_minute": 30,
+    "requests_per_day": 1000,
+    "tokens_per_minute": 8000,
+    "tokens_per_day": 200000
+  },
+  "daily_chart_utc": {
+    "day": "2026-11-18",
+    "approximate_requests": 12,
+    "approximate_tokens": 56488,
+    "maximum_report_delay_minutes": 15,
+    "basis": "visible chart and axes, not a real-time remaining counter"
+  },
+  "source_urls": [
+    "https://console.groq.com/settings/billing",
+    "https://console.groq.com/settings/limits",
+    "https://console.groq.com/settings/project/limits",
+    "https://console.groq.com/settings/organization/usage?tab=activity"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "status": "single_request_succeeded",
+  "case_id": "V01",
+  "condition": "ablation-V01",
+  "approved_max_requests": 1,
+  "approved_budget_usd": 0,
+  "requests_attempted": 1,
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b",
+  "reasoning_effort": "medium",
+  "provider_schema_accepted": true,
+  "selected_expected_source": true,
+  "selected_locator": "1618ae5e5b894145",
+  "usage": {
+    "queue_time": 0.109934327,
+    "total_time": 3.757789648,
+    "prompt_time": 0.217082116,
+    "total_tokens": 4311,
+    "prompt_tokens": 2665,
+    "completion_time": 3.540707532,
+    "completion_tokens": 1646,
+    "completion_tokens_details": {
+      "reasoning_tokens": 1024
+    }
+  },
+  "new_operator_decisions": 0,
+  "provider_request_id": "req_01m7nj19w6e1abw1axj3qtahcb",
+  "raw_and_canonical_preserved_separately": true,
+  "request_sha256": "18dff05d696e4142272c823b84f551a7a44002e58f743da444cdffce904e1af8",
+  "literal_fragments_valid": 11
+}

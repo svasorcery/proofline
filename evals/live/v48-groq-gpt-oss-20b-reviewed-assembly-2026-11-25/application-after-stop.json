@@ -1,0 +1,15 @@
+{
+  "live_process_stopped": true,
+  "database_counts": {
+    "analysis_runs": 4,
+    "proposal_revisions": 3,
+    "review_decisions": 0
+  },
+  "project": "proofline-live-stage4-gpt-oss-20b-reviewed-assembly-20261125",
+  "database_stopped": true,
+  "app_container_removed": true,
+  "runtime_key_injected_via_stdin_only": true,
+  "remaining_containers": [
+    "proofline-live-stage4-gpt-oss-20b-reviewed-assembly-20261125-db-1"
+  ]
+}

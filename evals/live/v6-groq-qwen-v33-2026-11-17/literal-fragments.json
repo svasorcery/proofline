@@ -1,0 +1,114 @@
+[
+  {
+    "condition": "full-V02",
+    "path": "facts[0].evidence[0].fragments[0]",
+    "source_id": "5c3fe2fc12a3430e",
+    "literal_and_unique": true,
+    "start": 140,
+    "end": 258
+  },
+  {
+    "condition": "full-V02",
+    "path": "facts[0].evidence[0].fragments[1]",
+    "source_id": "5c3fe2fc12a3430e",
+    "literal_and_unique": true,
+    "start": 259,
+    "end": 370
+  },
+  {
+    "condition": "full-V02",
+    "path": "facts[0].evidence[1].fragments[0]",
+    "source_id": "9edd7227853c42a4",
+    "literal_and_unique": true,
+    "start": 220,
+    "end": 340
+  },
+  {
+    "condition": "full-V02",
+    "path": "facts[0].evidence[2].fragments[0]",
+    "source_id": "fbb314d7c25a411f",
+    "literal_and_unique": true,
+    "start": 84,
+    "end": 149
+  },
+  {
+    "condition": "full-V02",
+    "path": "facts[1].evidence[0].fragments[0]",
+    "source_id": "9edd7227853c42a4",
+    "literal_and_unique": true,
+    "start": 0,
+    "end": 100
+  },
+  {
+    "condition": "full-V04",
+    "path": "facts[0].evidence[0].fragments[0]",
+    "source_id": "f71822cddbf648f2",
+    "literal_and_unique": true,
+    "start": 147,
+    "end": 310
+  },
+  {
+    "condition": "full-V04",
+    "path": "facts[0].evidence[0].fragments[1]",
+    "source_id": "f71822cddbf648f2",
+    "literal_and_unique": true,
+    "start": 311,
+    "end": 426
+  },
+  {
+    "condition": "full-V04",
+    "path": "facts[0].evidence[1].fragments[0]",
+    "source_id": "60605d18ce3c437c",
+    "literal_and_unique": true,
+    "start": 29,
+    "end": 152
+  },
+  {
+    "condition": "full-V04",
+    "path": "timeline[0].evidence[0].fragments[0]",
+    "source_id": "7c4b78e8ce5a4af4",
+    "literal_and_unique": true,
+    "start": 21,
+    "end": 58
+  },
+  {
+    "condition": "full-V04",
+    "path": "timeline[0].evidence[0].fragments[1]",
+    "source_id": "7c4b78e8ce5a4af4",
+    "literal_and_unique": true,
+    "start": 59,
+    "end": 175
+  },
+  {
+    "condition": "full-V04",
+    "path": "timeline[1].evidence[0].fragments[0]",
+    "source_id": "f71822cddbf648f2",
+    "literal_and_unique": true,
+    "start": 61,
+    "end": 119
+  },
+  {
+    "condition": "full-V04",
+    "path": "timeline[1].evidence[0].fragments[1]",
+    "source_id": "f71822cddbf648f2",
+    "literal_and_unique": true,
+    "start": 147,
+    "end": 310
+  },
+  {
+    "condition": "full-V04",
+    "path": "timeline[2].evidence[0].fragments[0]",
+    "source_id": "f71822cddbf648f2",
+    "literal_and_unique": true,
+    "start": 0,
+    "end": 60
+  },
+  {
+    "condition": "full-V04",
+    "path": "timeline[2].evidence[0].fragments[1]",
+    "source_id": "f71822cddbf648f2",
+    "literal_and_unique": true,
+    "start": 147,
+    "end": 310
+  }
+]

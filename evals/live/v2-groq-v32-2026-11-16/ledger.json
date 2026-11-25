@@ -1,0 +1,26 @@
+{
+  "format_version": 1,
+  "max_requests": 10,
+  "approved_budget_usd": 0,
+  "stopped": true,
+  "attempts": [
+    {
+      "condition": "full-V02",
+      "case_id": "V02",
+      "started_at": "2026-11-16T20:47:01.415325+00:00",
+      "idempotency_key": "groq-live-v32-20261116-full-V02",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "failed",
+      "finished_at": "2026-11-16T20:47:07.356776+00:00",
+      "http_status": 201,
+      "run_id": "22b50fa5-fdc0-4ecb-98da-4cfbf6587c70"
+    }
+  ],
+  "stop_reason": {
+    "code": "INVALID_MODEL_OUTPUT",
+    "message": "Live analysis failed; no automatic retry was made."
+  }
+}

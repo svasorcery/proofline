@@ -1,0 +1,18 @@
+{
+  "kind": "offline synthetic transport probe, not the original provider response",
+  "external_requests": 0,
+  "in_memory_http_requests": 1,
+  "supplied_upstream_code": "json_validate_failed",
+  "normalised_error": {
+    "code": "PROVIDER_REQUEST_REJECTED",
+    "message": "Live analysis failed; no automatic retry was made."
+  },
+  "finding": "SDK supplies structured error code, but the current adapter discards it and classifies every 400 as request rejection.",
+  "observed_diagnostic_fields": {
+    "provider_request_id": "req_offline_diagnostic",
+    "http_status": 400,
+    "provider_error_code": null,
+    "provider_error_type": null,
+    "provider_error_param": null
+  }
+}

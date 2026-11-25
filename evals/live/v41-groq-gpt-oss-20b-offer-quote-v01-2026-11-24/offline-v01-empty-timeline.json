@@ -1,0 +1,15 @@
+{
+  "scope": "Offline candidate only. The live request and current profile are unchanged.",
+  "model_calls": 0,
+  "candidate_change": "V01 timeline.minItems=1 with one source-matched reviewed offer letter",
+  "unchanged_schema": {
+    "v41_blank_timeline": "accepted",
+    "v34": "accepted"
+  },
+  "candidate_schema": {
+    "v41_blank_timeline": "rejected",
+    "v34": "accepted",
+    "v40": "accepted"
+  },
+  "semantic_limit": "A non-empty timeline can still omit the documented offer. The frozen rubric is still required."
+}

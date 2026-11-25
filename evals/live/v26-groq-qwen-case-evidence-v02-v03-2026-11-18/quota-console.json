@@ -1,0 +1,28 @@
+{
+  "model": "qwen/qwen3.8-27b",
+  "sources": [
+    "https://console.groq.com/settings/organization/usage?tab=activity",
+    "https://console.groq.com/settings/billing",
+    "https://console.groq.com/settings/limits",
+    "https://console.groq.com/settings/project/limits"
+  ],
+  "custom_project_limits": false,
+  "scope": "Organization Usage Activity UTC, all projects, stacked input and output tokens from the rendered Qwen chart",
+  "plan": "Free",
+  "configured_limits": {
+    "tokens_per_day": 200000,
+    "requests_per_minute": 30,
+    "tokens_per_minute": 8000,
+    "requests_per_day": 1000
+  },
+  "output_limit_source": "Groq dashboard V03 prior refusal recorded in v24 and v25 quota verification",
+  "project": "Default Project",
+  "daily_chart_utc": {
+    "approximate_requests": 19,
+    "approximate_tokens": 87416,
+    "conservative_token_upper_bound": 100000,
+    "data_delay_minutes": 15
+  },
+  "observed_output_tokens_per_minute": 1000,
+  "observed_at": "2026-11-18T16:20:44.3052106+00:00"
+}

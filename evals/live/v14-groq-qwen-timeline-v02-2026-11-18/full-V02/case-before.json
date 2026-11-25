@@ -1,0 +1,81 @@
+{
+  "id": "V02",
+  "title": "\u041e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u0435 \u043f\u043e\u0441\u043b\u0435 \u0441\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u044f \u043e \u0440\u0435\u0439\u0441\u0435",
+  "version": 1,
+  "content_revision": 1,
+  "current_proposal_revision_id": null,
+  "status": "unanalysed",
+  "analysis_running": false,
+  "created_at": "2026-11-18T10:29:28.589440Z",
+  "updated_at": "2026-11-18T10:29:28.589440Z",
+  "user_text": "\u0412\u043e\u0441\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u0435 \u043f\u043e\u0440\u044f\u0434\u043e\u043a \u043e\u0442\u043a\u0430\u0437\u0430 \u043a\u043b\u0438\u0435\u043d\u0442\u0430 \u0438 \u043e\u0442\u043c\u0435\u043d\u044b \u043f\u043e\u0441\u0442\u0430\u0432\u0449\u0438\u043a\u043e\u043c \u043f\u043e \u0438\u043c\u0435\u044e\u0449\u0438\u043c\u0441\u044f \u043c\u0430\u0442\u0435\u0440\u0438\u0430\u043b\u0430\u043c. \u0415\u0441\u043b\u0438 \u0432\u0440\u0435\u043c\u0435\u043d\u0438 \u043e\u0442\u043a\u0430\u0437\u0430 \u043d\u0435 \u0445\u0432\u0430\u0442\u0430\u0435\u0442, \u0443\u043a\u0430\u0436\u0438\u0442\u0435 \u043d\u0443\u0436\u043d\u043e\u0435 \u043f\u043e\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043d\u0438\u0435.",
+  "requested_fact_keys": [
+    "withdrawal_timing",
+    "cancellation_status"
+  ],
+  "money": {
+    "amount_minor": 9200,
+    "currency": "USD",
+    "scale": 2
+  },
+  "context": {},
+  "sources": [
+    {
+      "case_id": "V02",
+      "source_id": "5c3fe2fc12a3430e",
+      "kind": "document",
+      "locator": "8b61ea1c4d4f4b4d",
+      "title": "5c3fe2fc12a3430e",
+      "trust": "primary",
+      "position": 0,
+      "included": true,
+      "current_version_id": "6606aace-84f0-4dae-b5bc-f89e9fb5f1b5",
+      "versions": [
+        {
+          "id": "6606aace-84f0-4dae-b5bc-f89e9fb5f1b5",
+          "sequence": 1,
+          "text_sha256": "59c7bc6d334c6353e2d457d8e7d1e41967d8660eca39f2aeab596730f2b2abe3",
+          "created_at": "2026-11-18T10:29:28.589440Z"
+        }
+      ]
+    },
+    {
+      "case_id": "V02",
+      "source_id": "9edd7227853c42a4",
+      "kind": "provider_log",
+      "locator": "84934bcfab7e4745",
+      "title": "\u0417\u0430\u043f\u0438\u0441\u044c \u043e\u0431\u0440\u0430\u0449\u0435\u043d\u0438\u044f",
+      "trust": "primary",
+      "position": 1,
+      "included": true,
+      "current_version_id": "a14128ec-3aed-45a5-9b21-929ef8379dc8",
+      "versions": [
+        {
+          "id": "a14128ec-3aed-45a5-9b21-929ef8379dc8",
+          "sequence": 1,
+          "text_sha256": "44bbb126e530eaecd664d84ef80596cffeb9432ca72ea4cc8bff6a72e25aa5e7",
+          "created_at": "2026-11-18T10:29:28.589440Z"
+        }
+      ]
+    },
+    {
+      "case_id": "V02",
+      "source_id": "fbb314d7c25a411f",
+      "kind": "document",
+      "locator": "f23f59acf1ff4f3f",
+      "title": "\u0421\u043f\u0440\u0430\u0432\u043e\u0447\u043d\u0430\u044f \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0430",
+      "trust": "context",
+      "position": 2,
+      "included": true,
+      "current_version_id": "b19a8ff7-6371-40ba-9a10-4e09d3f1a0d4",
+      "versions": [
+        {
+          "id": "b19a8ff7-6371-40ba-9a10-4e09d3f1a0d4",
+          "sequence": 1,
+          "text_sha256": "9e8c231f13968b582efc7b54c2b7acd2a136159feae40ad8303c3d93fbada9b3",
+          "created_at": "2026-11-18T10:29:28.589440Z"
+        }
+      ]
+    }
+  ]
+}

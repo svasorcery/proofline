@@ -1,0 +1,22 @@
+{
+  "max_requests": 1,
+  "approved_budget_usd": 0,
+  "attempts": [
+    {
+      "condition": "full-V05",
+      "case_id": "V05",
+      "started_at": "2026-11-24T14:39:51.994852+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-qwen-cancellation-time-control-20261124-full-V05",
+      "http_status": 201,
+      "finished_at": "2026-11-24T14:39:54.826426+00:00",
+      "run_id": "e741a141-038f-4733-9300-ccca10df4f3c"
+    }
+  ],
+  "stopped": true,
+  "stop_reason": "Batch completed"
+}

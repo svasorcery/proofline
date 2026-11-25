@@ -1,0 +1,22 @@
+{
+  "max_requests": 1,
+  "approved_budget_usd": 0,
+  "attempts": [
+    {
+      "condition": "full-V05",
+      "case_id": "V05",
+      "started_at": "2026-11-24T14:25:51.573147+00:00",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "state": "succeeded",
+      "idempotency_key": "groq-qwen-fact-evidence-20261124-full-V05",
+      "http_status": 201,
+      "finished_at": "2026-11-24T14:25:59.082116+00:00",
+      "run_id": "eebc2a3e-bf81-4012-98b4-59e511c0187f"
+    }
+  ],
+  "stopped": true,
+  "stop_reason": "Batch completed"
+}

@@ -1,0 +1,3 @@
+# Groq Free GPT-OSS 20B with the V01 timeline minimum
+
+The V01 control runs once on a closed stand. Only a passing application and frozen-rubric result starts the six-case series on a fresh stand with the same profile. GPT-OSS 20B low, strict Chat Completions, 1,000 completion tokens, $0 and zero retries. The only new request field is timeline.minItems=1 for V01, when the linked offer letter is available and its sending time and quotation match the reviewed evidence. V02–V06 preserve the earlier candidate requests. Validation still checks the event and its citations. Raw responses and decoded cards are separate. No automatic operator decision is executed.

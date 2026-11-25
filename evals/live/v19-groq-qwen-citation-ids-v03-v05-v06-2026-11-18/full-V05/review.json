@@ -1,0 +1,90 @@
+{
+  "case_id": "V05",
+  "technical_pass": true,
+  "provider_http_status": 200,
+  "provider_error_code": null,
+  "provider_error_stage": null,
+  "error_code": null,
+  "quality_pass": false,
+  "reference_human_validated": false,
+  "usage": {
+    "queue_time": 0.216765437,
+    "total_time": 2.808096672,
+    "prompt_time": 0.262785434,
+    "total_tokens": 4864,
+    "prompt_tokens": 3670,
+    "completion_time": 2.545311238,
+    "completion_tokens": 1194,
+    "completion_tokens_details": {
+      "reasoning_tokens": 1024
+    }
+  },
+  "reference_checks": {
+    "case_id": "V05",
+    "runtime_valid": true,
+    "runtime_issues": [],
+    "facts_exact": true,
+    "evidence_complete": true,
+    "timeline_complete": false,
+    "followup_complete": true,
+    "readiness_ok": true,
+    "pack_pass": false,
+    "facts": [
+      {
+        "key": "withdrawal_timing",
+        "value_ok": true,
+        "evidence_ok": true
+      },
+      {
+        "key": "cancellation_status",
+        "value_ok": true,
+        "evidence_ok": true
+      }
+    ],
+    "missing_events": [
+      "customer_withdrawal",
+      "supplier_cancelled"
+    ],
+    "unsupported_event_indices": [],
+    "missing_requirements": [],
+    "extra_requirements": []
+  },
+  "card_status": "needs_operator_review",
+  "blocking_issues": [],
+  "quoted_fragments": {
+    "literal": 5,
+    "total": 5
+  },
+  "expected_facts": {
+    "withdrawal_timing": "before_supplier_cancel",
+    "cancellation_status": "confirmed"
+  },
+  "actual_facts": {
+    "withdrawal_timing": "before_supplier_cancel",
+    "cancellation_status": "confirmed"
+  },
+  "expected_timeline": [
+    {
+      "event_type": "customer_withdrawal",
+      "value": "2026-10-04T09:30:00+03:00",
+      "role": "received"
+    },
+    {
+      "event_type": "supplier_cancelled",
+      "value": "2026-10-04T10:00:00+03:00",
+      "role": "occurred"
+    }
+  ],
+  "actual_timeline": [],
+  "expected_follow_up": {
+    "action": "none",
+    "locator": null,
+    "requirements": []
+  },
+  "actual_follow_up": {
+    "action": "none",
+    "locator": null,
+    "requirements": []
+  },
+  "actual_readiness": "ready_for_rules"
+}

@@ -1,0 +1,29 @@
+{
+  "plan": "Free",
+  "project": "Default Project",
+  "model": "openai/gpt-oss-20b",
+  "custom_project_limits": false,
+  "observed_at": "2026-11-24T18:51:29.499859+00:00",
+  "configured_limits": {
+    "requests_per_minute": 30,
+    "requests_per_day": 1000,
+    "tokens_per_minute": 8000,
+    "tokens_per_day": 200000
+  },
+  "configured_maximum_completion_tokens": 1000,
+  "planned_maximum_attempts": 7,
+  "daily_chart_utc": {
+    "approximate_requests": 1,
+    "approximate_tokens": 4413,
+    "conservative_token_upper_bound": 45000,
+    "data_delay_minutes": 15,
+    "basis": "The chart for GPT-OSS 20B shows one request and approximately 4,413 tokens on November 24 UTC. The consolidated guard reserves 45,000 total for delayed activity."
+  },
+  "evidence": "Free Current Plan $0, Organization Limits for exact model, no custom limits in Default Project.",
+  "sources": [
+    "https://console.groq.com/settings/billing/plans",
+    "https://console.groq.com/settings/limits",
+    "https://console.groq.com/settings/project/limits",
+    "https://console.groq.com/settings/organization/usage?tab=activity"
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "case_id": "V01",
+  "technical_pass": true,
+  "provider_http_status": 200,
+  "network_error_type": null,
+  "provider_error_code": null,
+  "provider_error_stage": null,
+  "provider_output_field_diagnostics": null,
+  "error_code": null,
+  "quality_pass": true,
+  "reference_human_validated": false,
+  "usage": {
+    "queue_time": 0.016953121,
+    "total_time": 0.726394519,
+    "prompt_time": 0.220841484,
+    "total_tokens": 4790,
+    "prompt_tokens": 4333,
+    "completion_time": 0.505553035,
+    "completion_tokens": 457,
+    "completion_tokens_details": {
+      "reasoning_tokens": 273
+    }
+  },
+  "reviewed_evidence_rules_active": true,
+  "raw_offer_has_required_pair": true,
+  "app_owned_event_types": [],
+  "raw_timeline_respects_assembly": true,
+  "reference_checks": {
+    "case_id": "V01",
+    "runtime_valid": true,
+    "runtime_issues": [],
+    "facts_exact": true,
+    "evidence_complete": true,
+    "timeline_complete": true,
+    "followup_complete": true,
+    "readiness_ok": true,
+    "pack_pass": true,
+    "facts": [
+      {
+        "key": "alternative_acceptance",
+        "value_ok": true,
+        "evidence_ok": true
+      }
+    ],
+    "missing_events": [],
+    "unsupported_event_indices": [],
+    "missing_requirements": [],
+    "extra_requirements": []
+  },
+  "card_status": "needs_operator_review",
+  "blocking_issues": [],
+  "quoted_fragments": {
+    "literal": 4,
+    "total": 4
+  },
+  "expected_facts": {
+    "alternative_acceptance": "unconfirmed"
+  },
+  "actual_facts": {
+    "alternative_acceptance": "unconfirmed"
+  },
+  "expected_timeline": [
+    {
+      "event_type": "alternative_offered",
+      "value": "2026-08-14T09:10:00+03:00",
+      "role": "sent"
+    }
+  ],
+  "raw_timeline_order": [
+    {
+      "value": "2026-08-14T09:10:00+03:00",
+      "role": "sent"
+    },
+    {
+      "value": "2026-08-14T09:36:00+03:00",
+      "role": "received"
+    }
+  ],
+  "actual_timeline": [
+    {
+      "event_type": "alternative_offered",
+      "time": {
+        "value": "2026-08-14T09:10:00+03:00",
+        "role": "sent"
+      },
+      "evidence": [
+        {
+          "source_id": "5b910f89ca134035",
+          "fragments": [
+            "Отправлено: 2026-08-14T09:10:00+03:00",
+            "Можем предложить выезд в 18:20 вместо 16:00, с тем же местом посадки. Напишите, подходит ли вам этот вариант."
+          ]
+        }
+      ]
+    },
+    {
+      "event_type": "customer_message_received",
+      "time": {
+        "value": "2026-08-14T09:36:00+03:00",
+        "role": "received"
+      },
+      "evidence": [
+        {
+          "source_id": "b8821b7c6a2d432a",
+          "fragments": [
+            "2026-08-14T09:36:00+03:00 — почтовый шлюз принял ответ клиента в этой переписке.",
+            "From: адрес клиента из бронирования; In-Reply-To: исходное письмо поставщика."
+          ]
+        }
+      ]
+    }
+  ],
+  "expected_follow_up": {
+    "action": "read_source",
+    "locator": "1618ae5e5b894145",
+    "requirements": [
+      "original_acceptance_reply"
+    ]
+  },
+  "actual_follow_up": {
+    "action": "read_source",
+    "locator": "1618ae5e5b894145",
+    "requirements": [
+      "original_acceptance_reply"
+    ]
+  },
+  "actual_readiness": "request_evidence"
+}

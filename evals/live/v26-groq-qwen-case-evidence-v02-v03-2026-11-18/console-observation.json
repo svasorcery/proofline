@@ -1,0 +1,17 @@
+{
+  "observed_at_utc": "2026-11-18T16:26:59.2407857+00:00",
+  "source": "https://console.groq.com/dashboard/logs",
+  "model": "qwen/qwen3.8-27b",
+  "full_V03": {
+    "provider_outcome": "unconfirmed",
+    "local_send_reservation_utc": "2026-11-18T19:25:28.927596+03:00",
+    "matching_entry_visible_after_refresh": false
+  },
+  "full_V02": {
+    "input_tokens": 3395,
+    "observed": true,
+    "provider_request_id": "req_01m7qqjh1eet99z4spsnf48f7p",
+    "output_tokens": 402,
+    "http_status": 200
+  }
+}

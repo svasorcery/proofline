@@ -1,0 +1,16 @@
+{
+  "other_requests_exact_v29": [
+    "V01",
+    "V02",
+    "V03",
+    "V04",
+    "V06"
+  ],
+  "only_v05_cancellation_schema_changed": true,
+  "checks": {
+    "v32_false_second_cancellation": "rejected",
+    "v32_substituted_notice_time": "rejected",
+    "v32_corrected_copy": "accepted"
+  },
+  "new_model_calls": 0
+}

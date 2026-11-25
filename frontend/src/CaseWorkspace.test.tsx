@@ -80,7 +80,7 @@ describe('CaseWorkspace', () => {
         ...run('live-source', 'succeeded', '2026-01-01T00:00:00Z'),
         mode: 'live',
         proposal_revision_id: 'model-result',
-        generation_profile: { model: 'actual-live-model' },
+        generation_profile: { model: 'actual-live-model', provider: 'anthropic' },
       };
       const root: ProposalView = {
         id: 'model-result',
@@ -135,8 +135,8 @@ describe('CaseWorkspace', () => {
       render(<CaseWorkspace caseId="V01" />);
       const text =
         origin === 'operator'
-          ? /Основа правки: Live · новый вызов модели · actual-live-model/
-          : /Происхождение: Live · новый вызов модели · actual-live-model/;
+          ? /Основа правки: Live · новый вызов модели · Anthropic · actual-live-model/
+          : /Происхождение: Live · новый вызов модели · Anthropic · actual-live-model/;
       expect(await screen.findByText(text)).toBeVisible();
       expect(screen.getByRole('combobox', { name: 'Режим анализа' })).toHaveValue('replay');
       expect(command).not.toHaveBeenCalled();
@@ -145,7 +145,12 @@ describe('CaseWorkspace', () => {
 
   it('defaults to replay and requires an explicit selection before a single live request', async () => {
     const user = userEvent.setup();
-    const caps = { live_available: true, live_model: 'configured-test-model', live_reason: null };
+    const caps = {
+      live_available: true,
+      live_provider: 'groq',
+      live_model: 'configured-test-model',
+      live_reason: null,
+    };
     vi.mocked(api).mockImplementation(async (path) =>
       path === '/capabilities' ? caps : path === '/cases/V01' ? data : [],
     );
@@ -155,7 +160,8 @@ describe('CaseWorkspace', () => {
     expect(mode).toHaveValue('replay');
     expect(screen.getByRole('button', { name: 'Запустить Replay' })).toBeDisabled();
     await user.selectOptions(mode, 'live');
-    expect(screen.getByText('configured-test-model')).toBeVisible();
+    expect(screen.getByText('Groq · configured-test-model')).toBeVisible();
+    expect(screen.queryByText(/запрос к OpenAI/)).not.toBeInTheDocument();
     expect(screen.getByText(/Доступ и совместимость модели ещё не проверены/)).toBeVisible();
     await user.click(screen.getByRole('button', { name: 'Запустить Live' }));
     await waitFor(() => expect(command).toHaveBeenCalledTimes(1));

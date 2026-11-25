@@ -1,0 +1,16 @@
+{
+  "provider_response_count": 1,
+  "run_request_id": "req_01m7pnp2pse5qv96386dqng8d3",
+  "observation": {
+    "provider_http_status": 200,
+    "provider_request_id": "req_01m7pnp2pse5qv96386dqng8d3",
+    "headers": {
+      "x-ratelimit-limit-requests": "1000",
+      "x-ratelimit-limit-tokens": "8000",
+      "x-ratelimit-remaining-requests": "999",
+      "x-ratelimit-remaining-tokens": "5088",
+      "x-ratelimit-reset-requests": "1m26.4s",
+      "x-ratelimit-reset-tokens": "21.84s"
+    }
+  }
+}

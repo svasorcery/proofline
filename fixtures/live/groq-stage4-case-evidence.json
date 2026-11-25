@@ -1,0 +1,25 @@
+{
+  "V03": {
+    "ledger_source_id": "a62eb31f18014f2e",
+    "ledger_text_sha256": "cd209f9037d3de0715879b26bb1525b8d9ebd5ff3f74afca5170fb19b578a1bf",
+    "bank_source_id": "649b9972ad454b5e",
+    "bank_text_sha256": "13f4ae93c69e1fdfbdb95bd460911c8270f65a524c959333b90d6c5dd2a63428",
+    "bank_locator": "3088e5c39f854cf6",
+    "trace_id": "189a5d15e84a4adb",
+    "bank_trace_fragment": "Трасса: 189a5d15e84a4adb",
+    "credit_fragment": "Кредитование карты получателя по указанной возвратной трассе завершено.",
+    "document_pointer": "Для сверки банк приложил документ 3088e5c39f854cf6",
+    "capture": {
+      "at": "2026-07-03T14:02:00+03:00",
+      "fragment": "2026-07-03T14:02:00+03:00 | capture |"
+    },
+    "initiation": {
+      "at": "2026-07-05T10:15:00+03:00",
+      "fragment": "2026-07-05T10:15:00+03:00 | return.submit | запрос передан банку; трасса 189a5d15e84a4adb"
+    },
+    "settlement": {
+      "at": "2026-07-06T17:42:00+03:00",
+      "fragment": "Дата проводки по карте получателя: 2026-07-06T17:42:00+03:00"
+    }
+  }
+}

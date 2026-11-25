@@ -1,0 +1,47 @@
+{
+  "scope": "Counterfactuals on copies of a recorded response. No inferred acceptance or new model call.",
+  "same_request_sha256": "4f5238237962089d7c94f87f0c525bc72ec0fe97f3cf2ff1d717a4d9945bd41e",
+  "variants": {
+    "route=False,receipt=False": {
+      "app_issues": [
+        "required_timeline_event_missing"
+      ],
+      "frozen_rubric_pass": false,
+      "both_pass": false
+    },
+    "route=True,receipt=False": {
+      "app_issues": [
+        "required_timeline_event_missing"
+      ],
+      "frozen_rubric_pass": true,
+      "both_pass": false
+    },
+    "route=False,receipt=True": {
+      "app_issues": [],
+      "frozen_rubric_pass": false,
+      "both_pass": false
+    },
+    "route=True,receipt=True": {
+      "app_issues": [],
+      "frozen_rubric_pass": true,
+      "both_pass": true
+    }
+  },
+  "eligible_source": {
+    "source_id": "f9a88d5b726a4d4b",
+    "locator": "1618ae5e5b894145",
+    "included": false
+  },
+  "reviewed_receipt": {
+    "event_type": "customer_message_received",
+    "time": {
+      "value": "2026-08-14T09:36:00+03:00",
+      "role": "received"
+    },
+    "source_id": "b8821b7c6a2d432a",
+    "source_version_id": "951b5d73-cc1a-43fb-84ce-e84e5fbc2117",
+    "text_sha256": "42fc452f909ec003ff3b683bd732165dda66935b4cad292c48179451e608371f",
+    "fragment": "2026-08-14T09:36:00+03:00 — почтовый шлюз принял ответ клиента в этой переписке."
+  },
+  "model_calls": 0
+}

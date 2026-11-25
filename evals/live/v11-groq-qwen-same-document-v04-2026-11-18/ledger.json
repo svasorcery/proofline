@@ -1,0 +1,22 @@
+{
+  "max_requests": 1,
+  "approved_budget_usd": 0,
+  "attempts": [
+    {
+      "condition": "full-V04",
+      "case_id": "V04",
+      "started_at": "2026-11-18T08:54:25.930543+00:00",
+      "state": "succeeded",
+      "request": {
+        "mode": "live",
+        "expected_case_version": 1
+      },
+      "idempotency_key": "groq-qwen-same-document-v11-20261118-full-V04",
+      "http_status": 201,
+      "finished_at": "2026-11-18T08:54:38.927353+00:00",
+      "run_id": "750ee644-4868-4948-906b-f491ab80e75f"
+    }
+  ],
+  "stopped": true,
+  "stop_reason": "Single attempt reserved; no repeats"
+}

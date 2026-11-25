@@ -1,0 +1,12 @@
+{
+  "case_id": "V06",
+  "new_model_calls": 0,
+  "change": "chronological order only",
+  "original_issue_codes": [
+    "timeline_not_sorted"
+  ],
+  "sorted_copy_issue_codes": [],
+  "sorted_copy_passes_frozen_rubric": true,
+  "original_body_sha256": "4968874cbecc9cf121d1dd2711dc7bc914c617b7db6094ab5f816f871b80c6df",
+  "source_artifacts_unchanged": true
+}

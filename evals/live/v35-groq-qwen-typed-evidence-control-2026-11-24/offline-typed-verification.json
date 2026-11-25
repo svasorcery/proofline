@@ -1,0 +1,27 @@
+{
+  "schema_sha256": {
+    "V03": "54eccbddf0fc0255da1cfd8250a253af1cd52f26060ae4aa8ccaf23e7f002cf7",
+    "V05": "e58f9b90142dfd1c5ae4859ac6ec2bc3c5f068b6494244ee8f23c11cf636bdab"
+  },
+  "other_requests_exact_v34": [
+    "V01",
+    "V02",
+    "V04",
+    "V06"
+  ],
+  "checks": {
+    "V03": {
+      "v34_array_without_bank_trace": "rejected",
+      "SettlementViaTrace": "accepted",
+      "SettlementViaTrace_missing_required_quote": "rejected",
+      "SettlementViaDocument": "accepted",
+      "SettlementViaDocument_missing_required_quote": "rejected"
+    },
+    "V05": {
+      "v34_wrong_sent_and_received_labels": "rejected",
+      "only_sent_label_corrected": "rejected",
+      "all_three_event_roles_correct": "accepted"
+    }
+  },
+  "new_model_calls": 0
+}

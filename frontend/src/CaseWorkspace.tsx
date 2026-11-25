@@ -304,9 +304,15 @@ export function CaseWorkspace({ caseId }: { caseId: string }) {
         </label>
         <div className="run-mode">
           <span className="mode-tag">{mode === 'live' ? 'Live' : 'Replay'}</span>
-          <strong>{mode === 'live' ? capabilities.live_model : 'Сохранённая запись'}</strong>
+          <strong>
+            {mode === 'live'
+              ? `${capabilities.live_provider ? `${label(capabilities.live_provider)} · ` : ''}${capabilities.live_model ?? ''}`
+              : 'Сохранённая запись'}
+          </strong>
           <small>
-            {mode === 'live' ? 'Один новый запрос к OpenAI' : 'Новых вызовов модели нет'}
+            {mode === 'live'
+              ? 'Один новый запрос к выбранному провайдеру'
+              : 'Новых вызовов модели нет'}
           </small>
         </div>
         {mode === 'replay' ? (

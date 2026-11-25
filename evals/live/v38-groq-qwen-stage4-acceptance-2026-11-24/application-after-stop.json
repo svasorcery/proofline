@@ -1,0 +1,15 @@
+{
+  "remaining_containers": [
+    "proofline-live-stage4-v38-acceptance-20261124-db-1"
+  ],
+  "database_counts": {
+    "analysis_runs": 1,
+    "proposal_revisions": 0,
+    "review_decisions": 0
+  },
+  "runtime_key_injected_via_stdin_only": true,
+  "app_container_removed": true,
+  "project": "proofline-live-stage4-v38-acceptance-20261124",
+  "live_process_stopped": true,
+  "database_stopped": true
+}

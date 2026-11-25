@@ -1,0 +1,32 @@
+{
+  "provider": "groq",
+  "api": "chat_completions",
+  "model": "qwen/qwen3.8-27b",
+  "approved_max_requests": 2,
+  "approved_budget_usd": 0,
+  "requests_attempted": 2,
+  "technical_successes": 2,
+  "technical_failures": 0,
+  "technical_pass_scope": "Provider request and JSON/schema shape, separate from application fact/evidence validation",
+  "application_validation_passes": 1,
+  "application_blocked_proposals": 1,
+  "complete_quality_passes": 0,
+  "conditions": 2,
+  "fact_values_correct": 2,
+  "fact_values_total": 3,
+  "literal_fragments": 10,
+  "literal_fragments_valid": 9,
+  "usage": {
+    "prompt_tokens": 4190,
+    "completion_tokens": 877,
+    "total_tokens": 5067,
+    "reasoning_tokens": null,
+    "reasoning_tokens_source": "Not reported; do not treat missing details as zero reasoning"
+  },
+  "request_start_gap_seconds": 84.017929,
+  "monetary_cost": null,
+  "pricing": null,
+  "operator_decisions": 0,
+  "status": "approved_budget_completed",
+  "quality_conclusion": "V02 facts/follow-up improved versus GPT-OSS but sending event missing. V04 duplicated the wrong fact, altered a quote, omitted timeline, and requested an already included source. No candidate accepted; same fixed criteria, no general reliability estimate."
+}

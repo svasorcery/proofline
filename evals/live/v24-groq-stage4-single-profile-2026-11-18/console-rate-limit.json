@@ -1,0 +1,26 @@
+{
+  "source": "https://console.groq.com/dashboard/logs",
+  "observed_on_utc": "2026-11-18",
+  "model": "qwen/qwen3.8-27b",
+  "service_tier": "on_demand",
+  "current_attempt": {
+    "condition": "full-V03",
+    "provider_request_id": "req_01m7qg88v0ey58y68aw5wdtmeb",
+    "status": 429,
+    "code": "rate_limit_exceeded",
+    "limit_metric": "output_tokens_per_minute",
+    "limit": 1000,
+    "expected_output_tokens": 1377,
+    "logged_input_tokens": 0,
+    "logged_output_tokens": 0
+  },
+  "historical_observation": {
+    "archive": "evals/live/v21-groq-qwen-timeline-v06-2026-11-18",
+    "provider_request_id_suffix": "grpc",
+    "status": 429,
+    "code": "rate_limit_exceeded",
+    "limit_metric": "output_tokens_per_minute",
+    "limit": 1000,
+    "expected_output_tokens": 1469
+  }
+}

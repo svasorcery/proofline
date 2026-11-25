@@ -1,0 +1,41 @@
+{
+  "case_id": "V04",
+  "provider": "groq",
+  "approved_max_requests": 1,
+  "approved_budget_usd": 0,
+  "account_tier": "Free as confirmed by the author",
+  "application_monetary_cost": null,
+  "attempts_reserved": 1,
+  "provider_attempts": 1,
+  "retries": 0,
+  "technical_pass": true,
+  "targeted_pass": true,
+  "complete_quality_pass": false,
+  "operator_decisions": 0,
+  "provider_response": {
+    "sent_at": "2026-11-18T08:54:27.856957+00:00",
+    "request_sha256": "cea117d993733dc43d0c8524c55ec4189ee73df5763a3bc236cec39979dfd236",
+    "http_status": 200,
+    "provider_request_id": "req_01m7pxtntye3pvmrtsk7c6xxmd",
+    "rate_limit_headers": {
+      "x-ratelimit-limit-requests": "1000",
+      "x-ratelimit-limit-tokens": "8000",
+      "x-ratelimit-remaining-requests": "999",
+      "x-ratelimit-remaining-tokens": "4919",
+      "x-ratelimit-reset-requests": "1m26.4s",
+      "x-ratelimit-reset-tokens": "23.107s"
+    }
+  },
+  "usage": {
+    "queue_time": 0.496080871,
+    "total_time": 9.795576725,
+    "prompt_time": 0.31964626,
+    "total_tokens": 4757,
+    "prompt_tokens": 2974,
+    "completion_time": 9.475930465,
+    "completion_tokens": 1783,
+    "completion_tokens_details": {
+      "reasoning_tokens": 1024
+    }
+  }
+}

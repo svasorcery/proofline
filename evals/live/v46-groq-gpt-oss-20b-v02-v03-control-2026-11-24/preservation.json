@@ -1,0 +1,12 @@
+{
+  "protected_files_unchanged": true,
+  "protected_files_verified": 925,
+  "protected_container_states_unchanged": true,
+  "protected_containers_verified": 56,
+  "checked_volume_contents_unchanged": true,
+  "checked_volume_fingerprints": {
+    "proofline-db-1": "b7d71cef11495752317e7597f383b94143c12f82e75eec5a1f0e47a6572d31fb",
+    "proofline-live-stage4-v34-acceptance-20261124-db-1": "a38f534a3a5abf95220dfa4c113495c39c7eeda5d24482f13b4525640a17968c",
+    "proofline-live-stage4-v38-acceptance-20261124-db-1": "ecb087ba5ac24bb79076573d6df59680177b619bf01f231c5cdacf16d189ab08"
+  }
+}
