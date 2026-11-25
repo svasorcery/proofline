@@ -1,10 +1,8 @@
 """A single bounded Responses request using the official SDK, without retries."""
 
 import asyncio
-import hashlib
-from dataclasses import dataclass
 from time import perf_counter
-from typing import Protocol
+from typing import cast
 
 import httpx
 from openai import APIConnectionError, APIStatusError, APITimeoutError, AsyncOpenAI
@@ -13,52 +11,47 @@ from openai.types.responses.response_create_params import ResponseCreateParamsNo
 from pydantic import JsonValue
 
 from proofline.config import Settings
-from proofline.domain.inputs import AnalysisInput, canonical_json, json_digest
+from proofline.domain.inputs import AnalysisInput, canonical_json
+from proofline.providers.compatible_sdk import CompatibleAsyncOpenAI
 from proofline.providers.generation import GenerationResult
-from proofline.providers.live_profile import (
-    INSTRUCTIONS,
-    POLICY,
-    POLICY_VERSION,
-    PROMPT_VERSION,
-    SCHEMA_VERSION,
+from proofline.providers.live import (
+    PreparedLive,
+    prepare_live,
+    safe_error,
+    storage_safe_result,
 )
+from proofline.providers.live_profile import INSTRUCTIONS
+from proofline.providers.response_errors import classify_response_error
 from proofline.schema import generated_schema
 
-
-@dataclass(frozen=True, slots=True)
-class PreparedLive:
-    request: ResponseCreateParamsNonStreaming
-    generation_profile: dict[str, JsonValue]
-
-
-class LiveProvider(Protocol):
-    def prepare(self, input_data: AnalysisInput) -> PreparedLive: ...
-    def generate(self, prepared: PreparedLive) -> GenerationResult: ...
-
-
-def _sha(text: str) -> str:
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()
-
-
-def _error(code: str) -> dict[str, JsonValue]:
-    return {"code": code, "message": "Live analysis failed; no automatic retry was made."}
+ENDPOINTS = {
+    "openai": "https://api.openai.com/v1",
+    "deepseek": "https://api.deepseek.com",
+}
 
 
 class OpenAIResponsesProvider:
     def __init__(
         self, settings: Settings, *, transport: httpx.AsyncBaseTransport | None = None
     ) -> None:
-        if settings.live_unavailable_reason is not None or settings.openai_api_key is None:
+        key = settings.selected_api_key
+        if (
+            settings.llm_provider not in ENDPOINTS
+            or settings.live_unavailable_reason is not None
+            or key is None
+        ):
             raise ValueError("Explicit live configuration is required")
-        self._api_key = settings.openai_api_key
-        self.model = settings.openai_model
+        self._settings = settings
+        self._base_url = ENDPOINTS[settings.llm_provider]
+        self._api_key = key
+        self.model = settings.selected_model
         self.timeout_seconds: float = settings.model_timeout_seconds
         self.max_output_tokens = settings.model_max_output_tokens
         self._transport = transport
 
     def prepare(self, input_data: AnalysisInput) -> PreparedLive:
         schema = generated_schema()
-        request: ResponseCreateParamsNonStreaming = {
+        request: dict[str, JsonValue] = {
             "model": self.model,
             "instructions": INSTRUCTIONS,
             "input": canonical_json(input_data.model_dump(mode="json")),
@@ -73,34 +66,13 @@ class OpenAIResponsesProvider:
             "max_output_tokens": self.max_output_tokens,
             "tools": [],
             "tool_choice": "none",
-            "store": False,
-            "background": False,
-            "truncation": "disabled",
         }
-        profile: dict[str, JsonValue] = {
-            "mode": "live",
-            "provider": "openai",
-            "api": "responses",
-            "new_model_call": True,
-            "usage_origin": "provider",
-            "model": self.model,
-            "requested_model": self.model,
-            "prompt_version": PROMPT_VERSION,
-            "prompt_sha256": _sha(INSTRUCTIONS),
-            "policy_version": POLICY_VERSION,
-            "policy_sha256": _sha(POLICY),
-            "schema_version": SCHEMA_VERSION,
-            "schema_sha256": json_digest(schema),
-            "request_sha256": json_digest(request),
-            "max_output_tokens": self.max_output_tokens,
-            "timeout_seconds": self.timeout_seconds,
-            "max_retries": 0,
-            "provider_request_id": None,
-            "provider_response_id": None,
-            "monetary_cost": None,
-            "pricing": None,
-        }
-        return PreparedLive(request, profile)
+        # Explicit protocol profiles: unsupported flags are not sent to other APIs.
+        if self._settings.llm_provider == "openai":
+            request.update(store=False, background=False, truncation="disabled")
+        return prepare_live(
+            self._settings, request, schema, api="responses", endpoint=f"{self._base_url}/responses"
+        )
 
     def generate(self, prepared: PreparedLive) -> GenerationResult:
         # RunService is synchronous and is called in FastAPI's worker thread.
@@ -114,11 +86,12 @@ class OpenAIResponsesProvider:
         raw: str | None = None
         usage: dict[str, JsonValue] | None = None
         error = None
+        sdk = AsyncOpenAI if self._settings.llm_provider == "openai" else CompatibleAsyncOpenAI
         try:
             async with asyncio.timeout(self.timeout_seconds):
-                async with AsyncOpenAI(
+                async with sdk(
                     api_key=self._api_key.get_secret_value(),
-                    base_url="https://api.openai.com/v1",
+                    base_url=self._base_url,
                     max_retries=0,
                     timeout=self.timeout_seconds,
                     http_client=httpx.AsyncClient(
@@ -127,27 +100,40 @@ class OpenAIResponsesProvider:
                         timeout=self.timeout_seconds,
                     ),
                 ) as client:
-                    response = await client.responses.create(**prepared.request)
-            raw, usage, error = self._response(response, profile)
+                    received = await client.responses.with_raw_response.create(
+                        **cast(ResponseCreateParamsNonStreaming, prepared.request)
+                    )
+            # Keep transport diagnostics before permissive SDK parsing can fail.
+            raw = received.text
+            profile["provider_request_id"] = received.headers.get("x-request-id")
+            profile["raw_output_format"] = "response-envelope"
+            try:
+                response = received.parse()
+                if isinstance(response, Response):
+                    raw, usage, error = self._response(response, profile)
+                else:
+                    error = safe_error("INVALID_MODEL_OUTPUT")
+            except (ValueError, TypeError, AttributeError):
+                error = safe_error("INVALID_MODEL_OUTPUT")
         except (TimeoutError, APITimeoutError):
-            error = _error("MODEL_TIMEOUT")
+            error = safe_error("MODEL_TIMEOUT")
         except APIStatusError as exc:
             profile["provider_request_id"] = exc.request_id
             profile["http_status"] = exc.status_code
-            if exc.status_code in {401, 403}:
-                code = "PROVIDER_ACCESS_DENIED"
-            elif exc.status_code == 429:
-                code = "PROVIDER_RATE_LIMITED"
-            elif exc.status_code in {400, 404, 422}:
-                code = "PROVIDER_REQUEST_REJECTED"
-            else:
-                code = "PROVIDER_ERROR"
-            error = _error(code)
+            code, diagnostics = classify_response_error(
+                self._settings.llm_provider,
+                exc.status_code,
+                code=exc.code,
+                error_type=exc.type,
+                param=exc.param,
+            )
+            profile.update(diagnostics)
+            error = safe_error(code)
         except APIConnectionError:
-            error = _error("PROVIDER_ERROR")
+            error = safe_error("PROVIDER_ERROR")
         # Never retain exception strings: SDK errors may contain request data.
         profile["latency_seconds"] = round(perf_counter() - started, 6)
-        return GenerationResult(raw, profile, usage, error)
+        return storage_safe_result(raw, profile, usage, error)
 
     @staticmethod
     def _response(
@@ -176,23 +162,23 @@ class OpenAIResponsesProvider:
         diagnostic = canonical_json(envelope)
         status = envelope.get("status")
         if not isinstance(status, str):
-            return diagnostic, usage, _error("INVALID_MODEL_OUTPUT")
+            return diagnostic, usage, safe_error("INVALID_MODEL_OUTPUT")
         output = envelope.get("output")
         if not isinstance(output, list):
-            return diagnostic, usage, _error("INVALID_MODEL_OUTPUT")
+            return diagnostic, usage, safe_error("INVALID_MODEL_OUTPUT")
         texts: list[str] = []
         refused = False
         for item in output:
             if not isinstance(item, dict):
-                return diagnostic, usage, _error("INVALID_MODEL_OUTPUT")
+                return diagnostic, usage, safe_error("INVALID_MODEL_OUTPUT")
             if item.get("type") == "reasoning":
                 continue
             content = item.get("content")
             if item.get("type") != "message" or not isinstance(content, list):
-                return diagnostic, usage, _error("INVALID_MODEL_OUTPUT")
+                return diagnostic, usage, safe_error("INVALID_MODEL_OUTPUT")
             for part in content:
                 if not isinstance(part, dict):
-                    return diagnostic, usage, _error("INVALID_MODEL_OUTPUT")
+                    return diagnostic, usage, safe_error("INVALID_MODEL_OUTPUT")
                 if part.get("type") == "refusal" and isinstance(part.get("refusal"), str):
                     refused = True
                 elif part.get("type") == "output_text" and isinstance(part.get("text"), str):
@@ -200,15 +186,15 @@ class OpenAIResponsesProvider:
                     assert isinstance(text, str)
                     texts.append(text)
                 else:
-                    return diagnostic, usage, _error("INVALID_MODEL_OUTPUT")
+                    return diagnostic, usage, safe_error("INVALID_MODEL_OUTPUT")
         raw = "".join(texts) if texts else canonical_json(output)
         profile["raw_output_format"] = "output-text" if texts else "output-items"
         if refused:
-            return raw, usage, _error("MODEL_REFUSAL")
+            return raw, usage, safe_error("MODEL_REFUSAL")
         if status in {"incomplete", "in_progress", "queued"}:
-            return raw, usage, _error("MODEL_OUTPUT_INCOMPLETE")
+            return raw, usage, safe_error("MODEL_OUTPUT_INCOMPLETE")
         if status != "completed" or envelope.get("error") is not None:
-            return raw, usage, _error("PROVIDER_ERROR")
+            return raw, usage, safe_error("PROVIDER_ERROR")
         if not texts or not raw:
-            return raw, usage, _error("INVALID_MODEL_OUTPUT")
+            return raw, usage, safe_error("INVALID_MODEL_OUTPUT")
         return raw, usage, None

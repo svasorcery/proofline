@@ -14,8 +14,9 @@ from proofline.config import Settings
 from proofline.domain.assembly import EventType, FactKey, RequirementKey
 from proofline.persistence.database import Database
 from proofline.persistence.migrate import schema_is_current
-from proofline.providers.live_profile import POLICY_VERSION, PROMPT_VERSION, SCHEMA_VERSION
-from proofline.providers.openai_responses import LiveProvider, OpenAIResponsesProvider
+from proofline.providers.factory import create_live_provider
+from proofline.providers.live import LiveProvider, selected_live_prompt
+from proofline.providers.live_profile import SCHEMA_VERSION
 from proofline.providers.replay import ReplayProvider
 
 
@@ -35,7 +36,7 @@ class WorkflowService:
         self._recovery_complete = False
         self.cases = CaseService(database, settings)
         if live_provider is None and settings.live_unavailable_reason is None:
-            live_provider = OpenAIResponsesProvider(settings)
+            live_provider = create_live_provider(settings)
         self.runs = RunService(database, settings, provider, self.owner_instance_id, live_provider)
         self.proposals = ProposalService(database, settings)
 
@@ -59,21 +60,23 @@ class WorkflowService:
             return recovered
 
     def capabilities(self) -> Capabilities:
+        prompt = selected_live_prompt(self.settings)
         return Capabilities.model_validate(
             {
                 "replay_available": True,
                 "live_available": self.settings.live_unavailable_reason is None,
                 "live_reason": self.settings.live_unavailable_reason,
-                "live_model": self.settings.openai_model or None,
+                "live_provider": self.settings.llm_provider,
+                "live_model": self.settings.selected_model or None,
                 "live_access_verified": False,
                 "live_profile": {
-                    "prompt_version": PROMPT_VERSION,
+                    "prompt_version": prompt.prompt_version,
                     "schema_version": SCHEMA_VERSION,
-                    "policy_version": POLICY_VERSION,
+                    "policy_version": prompt.policy_version,
                     "quality_measured": False,
                 },
                 "default_mode": "replay",
-                "validation_profile": self.settings.validation_profile,
+                "validation_profile": self.settings.effective_validation_profile,
                 "fact_keys": list(get_args(FactKey.__value__)),
                 "event_types": list(get_args(EventType.__value__)),
                 "requirement_keys": list(get_args(RequirementKey.__value__)),

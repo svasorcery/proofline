@@ -14,7 +14,7 @@ from proofline.api.static import register_static_ui
 from proofline.application.service import WorkflowService
 from proofline.config import Settings
 from proofline.persistence.database import Database, open_database
-from proofline.providers.openai_responses import LiveProvider
+from proofline.providers.live import LiveProvider
 from proofline.providers.replay import ReplayCatalog, ReplayProvider
 
 

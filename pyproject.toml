@@ -54,7 +54,7 @@ markers = ["postgres: integration tests requiring a dedicated PostgreSQL test da
 target-version = "py312"
 line-length = 100
 src = ["src", "tests"]
-include = ["pyproject.toml", "src/**/*.py", "tests/**/*.py", "examples/**/*.py"]
+include = ["pyproject.toml", "src/**/*.py", "tests/**/*.py", "examples/**/*.py", "scripts/**/*.py"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]

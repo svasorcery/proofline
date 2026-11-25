@@ -1,7 +1,7 @@
 """Parse explicit-offset timestamps without repairing or truncating source values."""
 
 import re
-from collections.abc import Mapping, Sequence
+from collections.abc import Iterator, Mapping, Sequence
 from datetime import UTC, datetime
 
 from proofline.domain.sources import SourceSnapshot
@@ -21,21 +21,25 @@ def parse_instant(value: str) -> datetime:
     return datetime.fromisoformat(value).astimezone(UTC)
 
 
+def literal_timestamp_starts(value: str, span: ResolvedFragment, source_text: str) -> Iterator[int]:
+    if not value:
+        return
+    offset = span.fragment.find(value)
+    while offset >= 0:
+        start = span.start_cp + offset
+        end = start + len(value)
+        suffix = source_text[end:]
+        left_boundary = start == 0 or not source_text[start - 1].isalnum()
+        right_boundary = not (suffix[:1].isalnum() or _CONTINUATION.match(suffix))
+        if left_boundary and right_boundary:
+            yield start
+        offset = span.fragment.find(value, offset + 1)
+
+
 def has_literal_timestamp(
     value: str, fragments: Sequence[ResolvedFragment], sources: Mapping[str, SourceSnapshot]
 ) -> bool:
-    if not value:
-        return False
-    for span in fragments:
-        source_text = sources[span.source_id].text
-        offset = span.fragment.find(value)
-        while offset >= 0:
-            start = span.start_cp + offset
-            end = start + len(value)
-            suffix = source_text[end:]
-            left_boundary = start == 0 or not source_text[start - 1].isalnum()
-            right_boundary = not (suffix[:1].isalnum() or _CONTINUATION.match(suffix))
-            if left_boundary and right_boundary:
-                return True
-            offset = span.fragment.find(value, offset + 1)
-    return False
+    return bool(value) and any(
+        next(literal_timestamp_starts(value, span, sources[span.source_id].text), None) is not None
+        for span in fragments
+    )

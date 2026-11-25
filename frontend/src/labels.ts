@@ -77,10 +77,17 @@ const labels: Record<string, string> = {
   LIVE_DISABLED: 'Live выключен на сервере. Replay доступен без API-ключа.',
   LIVE_KEY_MISSING: 'На сервере не задан API-ключ для Live. Replay доступен без ключа.',
   LIVE_MODEL_MISSING: 'На сервере не выбрана API-модель для Live.',
-  PROVIDER_ACCESS_DENIED: 'OpenAI отклонил доступ. Проверьте API-ключ и доступ к выбранной модели.',
-  PROVIDER_RATE_LIMITED: 'Достигнут лимит запросов или квота OpenAI. Автоматического повтора нет.',
+  openai: 'OpenAI',
+  groq: 'Groq',
+  deepseek: 'DeepSeek',
+  anthropic: 'Anthropic',
+  PROVIDER_ACCESS_DENIED:
+    'Провайдер отклонил доступ. Проверьте API-ключ и доступ к выбранной модели.',
+  PROVIDER_PAYMENT_REQUIRED: 'Провайдер сообщил о недостаточном балансе или необходимости оплаты.',
+  PROVIDER_RATE_LIMITED:
+    'Достигнут лимит запросов или квота провайдера. Автоматического повтора нет.',
   PROVIDER_REQUEST_REJECTED:
-    'OpenAI отклонил параметры запроса. Проверьте модель и совместимость схемы.',
+    'Провайдер отклонил параметры запроса. Проверьте модель и совместимость схемы.',
   ANALYSIS_ALREADY_RUNNING: 'Анализ этого обращения уже выполняется. Проверьте историю запусков.',
   IDEMPOTENCY_CONFLICT:
     'Этот ключ уже относится к другому запросу. Проверьте сохранённый результат.',

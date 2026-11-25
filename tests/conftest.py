@@ -4,9 +4,24 @@ import json
 from pathlib import Path
 from typing import Any
 
+import httpx
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+@pytest.fixture(autouse=True)
+def forbid_real_http(monkeypatch):
+    """Keep actual HTTP off even if a test accidentally forgets its fake transport."""
+
+    def deny(*args, **kwargs):
+        raise AssertionError("Real HTTP disabled in tests; use an in-memory transport")
+
+    async def deny_async(*args, **kwargs):
+        deny()
+
+    monkeypatch.setattr(httpx.HTTPTransport, "handle_request", deny)
+    monkeypatch.setattr(httpx.AsyncHTTPTransport, "handle_async_request", deny_async)
 
 
 @pytest.fixture

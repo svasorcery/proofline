@@ -1,0 +1,168 @@
+{
+  "format_version": 1,
+  "provider": "groq",
+  "model": "qwen/qwen3.8-27b",
+  "profile": "v3.3-citation-ids-test",
+  "reasoning_effort": "medium",
+  "max_output_tokens": 3072,
+  "timeout_seconds": 90,
+  "cases": [
+    {
+      "case_id": "V01",
+      "condition": "ablation-V01",
+      "input_digest": "a294763e6ca68dbf4ffb48adf430843c1bbb7427f80fcef9e6b09e3a35f41fbd",
+      "expected_prompt_sha256": "8220a580fdb540a7e59ba410a15ae3fe1a2e6ffac85a8d0f409c496f5dd87528",
+      "excluded_sources": [
+        "f9a88d5b726a4d4b"
+      ],
+      "lookup_sources": [
+        "f9a88d5b726a4d4b"
+      ],
+      "reviewed_events": [
+        {
+          "event_type": "customer_message_received",
+          "time": {
+            "role": "received",
+            "value": "2026-08-14T09:36:00+03:00"
+          },
+          "source_id": "b8821b7c6a2d432a",
+          "text_sha256": "42fc452f909ec003ff3b683bd732165dda66935b4cad292c48179451e608371f",
+          "fragment": "2026-08-14T09:36:00+03:00 — почтовый шлюз принял ответ клиента в этой переписке."
+        }
+      ],
+      "reviewed_reply": null
+    },
+    {
+      "case_id": "V02",
+      "condition": "full-V02",
+      "input_digest": "1c9b1c8d94b2a5db05678f1bb6cf3425e43f1c959ca2fd0d3596283236720dc9",
+      "expected_prompt_sha256": "78ed0be5cca0ff6b08c75faef292ed552db5796a3d07c9d74e2eed777dfb2df5",
+      "excluded_sources": [],
+      "lookup_sources": [],
+      "reviewed_events": [
+        {
+          "event_type": "supplier_cancelled",
+          "time": {
+            "role": "occurred",
+            "value": "2026-09-18T10:20:00+03:00"
+          },
+          "source_id": "9edd7227853c42a4",
+          "text_sha256": "44bbb126e530eaecd664d84ef80596cffeb9432ca72ea4cc8bff6a72e25aa5e7",
+          "fragment": "2026-09-18T10:20:00+03:00 — операция поставщика: бронирование снято с исполнения из-за отмены рейса."
+        },
+        {
+          "event_type": "customer_replied",
+          "time": {
+            "role": "sent",
+            "value": "2026-09-18T12:09:55+03:00"
+          },
+          "source_id": "5c3fe2fc12a3430e",
+          "text_sha256": "59c7bc6d334c6353e2d457d8e7d1e41967d8660eca39f2aeab596730f2b2abe3",
+          "fragment": "Отправлено клиентом через форму: 2026-09-18T12:09:55+03:00"
+        },
+        {
+          "event_type": "customer_message_received",
+          "time": {
+            "role": "received",
+            "value": "2026-09-18T12:10:00+03:00"
+          },
+          "source_id": "5c3fe2fc12a3430e",
+          "text_sha256": "59c7bc6d334c6353e2d457d8e7d1e41967d8660eca39f2aeab596730f2b2abe3",
+          "fragment": "Получено службой поддержки: 2026-09-18T12:10:00+03:00"
+        }
+      ],
+      "reviewed_reply": null
+    },
+    {
+      "case_id": "V03",
+      "condition": "full-V03",
+      "input_digest": "44718f6aa97106e0e3da6ba2e728ea667a640f953b5306d993e24331eb9cba72",
+      "expected_prompt_sha256": "70d2871a2d5ea83af291456a0a5648f151085d8bfaa878b14416a9e9e629e913",
+      "excluded_sources": [],
+      "lookup_sources": [],
+      "reviewed_events": [],
+      "reviewed_reply": null
+    },
+    {
+      "case_id": "V04",
+      "condition": "full-V04",
+      "input_digest": "4efb4bf589c85f0469c0088d4346bdf816c30c6e8c0c9cc015b8376638d8b190",
+      "expected_prompt_sha256": "70d2871a2d5ea83af291456a0a5648f151085d8bfaa878b14416a9e9e629e913",
+      "excluded_sources": [],
+      "lookup_sources": [],
+      "reviewed_events": [],
+      "reviewed_reply": {
+        "source_id": "f71822cddbf648f2",
+        "text_sha256": "5e336b6a7929f0833efb146f9c2aab434a870f01be9eeb22261199363b8c8e4a",
+        "fragment": "Текст принятого сообщения:\n«Если там тихий номер с окнами во двор, согласен на соседний корпус. Если окна на улицу, этот вариант мне не подходит. Подтвердите, пожалуйста, куда выходят окна.»",
+        "event_evidence": {
+          "sent_header": "Заголовок исходного письма Date: 2026-10-08T12:25:00+03:00",
+          "reply_text": "Если там тихий номер с окнами во двор, согласен на соседний корпус.",
+          "receipt_record": "2026-10-08T12:27:00+03:00 | inbound-message | клиент → отель"
+        }
+      }
+    },
+    {
+      "case_id": "V05",
+      "condition": "full-V05",
+      "input_digest": "c2643ef37244305d3004f85c678633bfa55147d7afb4087180fda30dc0a242d2",
+      "expected_prompt_sha256": "78ed0be5cca0ff6b08c75faef292ed552db5796a3d07c9d74e2eed777dfb2df5",
+      "excluded_sources": [],
+      "lookup_sources": [],
+      "reviewed_events": [
+        {
+          "event_type": "customer_withdrawal",
+          "time": {
+            "value": "2026-10-04T09:30:00+03:00",
+            "role": "received"
+          },
+          "source_id": "b493b77f4c5e4dde",
+          "text_sha256": "7fbeeb9eb3388749f480da9b5ee9a3f863d2632619916cd4771b99df78f20629",
+          "fragment": "Received by supplier: 2026-10-04T09:30:00+03:00\nЯ отказываюсь от этого бронирования. Пожалуйста, отмените его; варианты переноса не рассматриваю."
+        },
+        {
+          "event_type": "supplier_cancelled",
+          "time": {
+            "value": "2026-10-04T10:00:00+03:00",
+            "role": "occurred"
+          },
+          "source_id": "abd412ba34ae4156",
+          "text_sha256": "0a378cc84cadeb94befc36c60edbfba4c23cf2eafb6e0eb8f501f2a6a1e7de87",
+          "fragment": "2026-10-04T10:00:00+03:00 | операция поставщика | бронирование снято с исполнения из-за отмены рейса"
+        }
+      ],
+      "reviewed_reply": null
+    },
+    {
+      "case_id": "V06",
+      "condition": "full-V06",
+      "input_digest": "ee8e22c5e98f04177c3051b3fffe0dcfa5fdb99fa8f144a7ad533852d202bc9e",
+      "expected_prompt_sha256": "52f6f6cd7bd11881b365e33fdb1ff826cffa644a4d24aec91d601c314a5160f1",
+      "excluded_sources": [],
+      "lookup_sources": [],
+      "reviewed_events": [
+        {
+          "event_type": "supplier_cancelled",
+          "time": {
+            "value": "2026-06-22T16:40:00+03:00",
+            "role": "occurred"
+          },
+          "source_id": "845cff973bd4435d",
+          "text_sha256": "3f56b9f4656bf6ed6581fc39a676cd1f474ab3a847da28e66de6de42c097ef35",
+          "fragment": "2026-06-22T16:40:00+03:00 — бронирование отменено поставщиком, исполнение прекращено."
+        },
+        {
+          "event_type": "authorization_released",
+          "time": {
+            "value": "2026-06-22T16:43:00+03:00",
+            "role": "occurred"
+          },
+          "source_id": "5f5576cbae5e40c6",
+          "text_sha256": "e607505ec1f0e14c5f7a25815ac58552efd880a7159a305062cf3b517726691c",
+          "fragment": "2026-06-22T16:43:00+03:00 | auth.reverse | банк снял резерв по исходной авторизации"
+        }
+      ],
+      "reviewed_reply": null
+    }
+  ]
+}

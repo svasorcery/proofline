@@ -28,6 +28,23 @@ type IssueCode = Literal[
     "premature_readiness",
     "missing_followup",
     "acceptance_fact_event_conflict",
+    "send_header_missing_from_send",
+    "reply_text_missing_from_send",
+    "receipt_record_missing_from_receipt",
+    "required_timeline_event_missing",
+    "receipt_time_used_as_sending",
+    "notification_time_used_as_cancellation",
+    "authorization_open_used_as_release",
+    "authorization_open_used_as_capture",
+    "withdrawal_timing_without_original",
+    "withdrawal_proof_request_incomplete",
+    "withdrawal_refusal_text_missing",
+    "follow_up_out_of_scope",
+    "follow_up_already_covered",
+    "reviewed_refund_sources_unavailable",
+    "refund_settlement_link_missing",
+    "refund_event_evidence_missing",
+    "refund_fact_event_conflict",
 ]
 
 _MESSAGES: dict[IssueCode, str] = {
@@ -61,6 +78,34 @@ _MESSAGES: dict[IssueCode, str] = {
     "missing_followup": "Для запроса доказательств нужен конкретный следующий шаг.",
     "acceptance_fact_event_conflict": (
         "Принятие альтернативы требует подтверждённого безусловного согласия."
+    ),
+    "send_header_missing_from_send": "Добавьте заголовок письма со временем отправки.",
+    "reply_text_missing_from_send": "Добавьте к событию отправки цитату из ответа клиента.",
+    "receipt_record_missing_from_receipt": "Приведите строку журнала о получении.",
+    "required_timeline_event_missing": "В хронологии пропущено подтверждённое событие.",
+    "receipt_time_used_as_sending": "Добавьте отдельную цитату со временем отправки.",
+    "notification_time_used_as_cancellation": (
+        "Время отправки уведомления не подтверждает время отмены. "
+        "Укажите время операции поставщика по журналу."
+    ),
+    "authorization_open_used_as_release": "Укажите время снятия резерва по записи auth.reverse.",
+    "authorization_open_used_as_capture": (
+        "Открытие резерва не подтверждает списание. Приведите отдельную запись о списании."
+    ),
+    "withdrawal_timing_without_original": (
+        "Для вывода о времени отказа нужны исходное письмо и отметка о его получении."
+    ),
+    "withdrawal_proof_request_incomplete": "Запросите исходное письмо и отметку о его получении.",
+    "withdrawal_refusal_text_missing": "Добавьте к факту текст отказа из исходного письма.",
+    "follow_up_out_of_scope": "Этот вопрос не относится к запрошенным фактам.",
+    "follow_up_already_covered": "Оригинал ответа уже есть в выбранных источниках.",
+    "reviewed_refund_sources_unavailable": "Сверьте подтверждение возврата с текущими источниками.",
+    "refund_settlement_link_missing": (
+        "Свяжите запись о запуске возврата с выпиской и приведите подтверждение зачисления."
+    ),
+    "refund_event_evidence_missing": "Добавьте цитату об этой банковской операции из источника.",
+    "refund_fact_event_conflict": (
+        "Выписка подтверждает зачисление возврата, а факт указывает другой исход платежа."
     ),
 }
 

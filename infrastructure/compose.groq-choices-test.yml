@@ -1,0 +1,18 @@
+name: proofline-groq-choices-test
+
+services:
+  app:
+    environment:
+      APP_ORIGIN: http://127.0.0.1:${PROOFLINE_CHOICES_TEST_PORT:-8012}
+      LIVE_ENABLED: ${PROOFLINE_CHOICES_LIVE_ENABLED:-false}
+      LLM_PROVIDER: groq
+      LLM_MODEL: qwen/qwen3.8-27b
+      LLM_API_KEY: ${PROOFLINE_CHOICES_GROQ_API_KEY:-}
+      OPENAI_API_KEY: ""
+      GROQ_REASONING_EFFORT: medium
+      GROQ_PROMPT_PROFILE: v3.3-choices-test
+      GROQ_TEST_LOOKUP_SOURCES: ${PROOFLINE_CHOICES_LOOKUP_SOURCES:-null}
+      MODEL_TIMEOUT_SECONDS: "90"
+      MODEL_MAX_OUTPUT_TOKENS: "4096"
+    ports: !override
+      - "127.0.0.1:${PROOFLINE_CHOICES_TEST_PORT:-8012}:8000"

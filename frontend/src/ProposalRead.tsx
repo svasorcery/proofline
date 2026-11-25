@@ -29,6 +29,9 @@ export function ProposalRead({
           {p.origin === 'operator' ? 'Основа правки: ' : 'Происхождение: '}
           {originRun.mode === 'live' ? 'Live · новый вызов модели' : 'Replay · сохранённая запись'}
           {' · '}
+          {originRun.mode === 'live' && originRun.generation_profile.provider
+            ? `${label(String(originRun.generation_profile.provider))} · `
+            : ''}
           {String(originRun.generation_profile.model ?? '')}
           {originRun.mode === 'replay' && originRun.generation_profile.recorded_on
             ? ` · ${String(originRun.generation_profile.recorded_on)}`
