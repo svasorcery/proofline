@@ -34,6 +34,13 @@ interface PendingWrite {
   key: string;
 }
 
+const guestLimits: Record<string, string | undefined> = {
+  busy: 'На стенде уже выполняется живой разбор.',
+  cooldown: 'После последней попытки нужна пауза.',
+  guest_day: 'Дневной лимит гостя исчерпан.',
+  shared_day: 'Дневной лимит стенда исчерпан.',
+};
+
 async function readWorkspace(base: string, signal: AbortSignal): Promise<Workspace> {
   const get = <T,>(path: string) => api<T>(path, { signal });
   const [data, options, proposals, runs, capabilities] = await Promise.all([
@@ -212,6 +219,14 @@ export function CaseWorkspace({ caseId }: { caseId: string }) {
   const chosenReplay = options.find((o) => o.replay_id === replayId) ?? options[0];
   const disabled = busy || pending !== null || uncertain;
   const latestRun = runs.at(-1);
+  const liveLimit =
+    error instanceof ApiError && error.code === 'GUEST_LIVE_RATE_LIMITED' ? error : null;
+  const limit = liveLimit?.details.limit;
+  const retrySeconds = liveLimit?.details.retry_after_seconds;
+  const providerLimited =
+    latestRun?.mode === 'live' &&
+    latestRun.generation_profile.guest_live === true &&
+    latestRun.error?.code === 'PROVIDER_RATE_LIMITED';
   let origin = proposal;
   const visited = new Set<string>();
   while (origin?.parent_revision_id && !origin.analysis_run_id && !visited.has(origin.id)) {
@@ -255,7 +270,29 @@ export function CaseWorkspace({ caseId }: { caseId: string }) {
           <span> Не является одобренной суммой возврата.</span>
         </p>
       ) : null}
-      {error ? <ErrorNotice error={error} /> : null}
+      {liveLimit ? (
+        <div className="notice warning" role="alert">
+          <strong>Гостевой Live временно недоступен</strong>
+          <p>{(typeof limit === 'string' && guestLimits[limit]) || 'Сработал лимит стенда.'}</p>
+          {typeof retrySeconds === 'number' && retrySeconds > 0 ? (
+            <p>Повторить попытку можно примерно через {Math.ceil(retrySeconds / 60)} мин.</p>
+          ) : null}
+        </div>
+      ) : error ? (
+        <ErrorNotice error={error} />
+      ) : null}
+      {mode === 'live' && chosenReplay && (liveLimit || providerLimited) ? (
+        <button
+          className="secondary"
+          disabled={disabled}
+          onClick={() => {
+            setMode('replay');
+            setError(null);
+          }}
+        >
+          Перейти к Replay
+        </button>
+      ) : null}
       {uncertain ? (
         <div className="notice warning">
           <strong>Проверьте историю перед новым действием</strong>

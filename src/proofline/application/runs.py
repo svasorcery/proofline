@@ -3,14 +3,14 @@
 import json
 import logging
 from dataclasses import replace
-from datetime import UTC, datetime
 from threading import Lock
 
 from pydantic import JsonValue, ValidationError
-from sqlalchemy import select, update
+from sqlalchemy import func, select, text, update
 
 from proofline.application.commands import RunCreate
 from proofline.application.errors import ApplicationError
+from proofline.application.guest_live import admit_guest_live
 from proofline.application.read_models import run_view
 from proofline.application.state import (
     case_or_404,
@@ -102,82 +102,114 @@ class RunService:
     ) -> tuple[RunView, int]:
         require_key(idempotency_key)
         request_hash = json_digest(command.model_dump(mode="json"))
-        with self.database.sessions.begin() as session:
-            case = case_or_404(session, case_id, lock=True, guest_id=guest_id)
-            previous = session.scalar(
-                select(AnalysisRun).where(
-                    AnalysisRun.case_id == case_id, AnalysisRun.idempotency_key == idempotency_key
-                )
-            )
-            if previous is not None:
-                if previous.request_hash != request_hash:
-                    raise ApplicationError(
-                        "IDEMPOTENCY_CONFLICT", "This key belongs to a different command."
-                    )
-                return run_view(session, previous), 202 if previous.status == "running" else 200
-            if command.mode == "live" and (
-                self.settings.live_unavailable_reason is not None or self.live_provider is None
-            ):
-                raise ApplicationError(
-                    "LIVE_NOT_CONFIGURED",
-                    "Live analysis is not configured; select replay explicitly.",
-                    status_code=503,
-                )
-            if session.scalar(
-                select(AnalysisRun.id).where(
-                    AnalysisRun.case_id == case_id, AnalysisRun.status == "running"
-                )
-            ):
-                raise ApplicationError(
-                    "ANALYSIS_ALREADY_RUNNING", "Another analysis is already running for this case."
-                )
-            require_version(case, command.expected_case_version)
-            snapshot = current_input(session, case)
-            check_limits(snapshot, self.settings)
-            prepared: PreparedReplay | PreparedLive
-            if command.mode == "live":
-                assert self.live_provider is not None
-                prepared = self.live_provider.prepare(snapshot)
-            else:
-                assert command.replay_id is not None
-                replay = self.provider.prepare(
-                    command.replay_id, recorded_input(snapshot, case.fixture_case_id)
-                )
-                if case.fixture_case_id is not None:
-                    replay = replace(
-                        replay,
-                        target_case_id=case_id,
-                        generation_profile={
-                            **replay.generation_profile,
-                            "recorded_case_id": replay.option.case_id,
-                            "recorded_input_digest": replay.option.input_digest,
-                        },
-                    )
-                prepared = replay
-            run = AnalysisRun(
-                case_id=case_id,
-                mode=command.mode,
-                idempotency_key=idempotency_key,
-                request_hash=request_hash,
-                snapshot=snapshot.model_dump(mode="json"),
-                input_digest=compatibility_digest(snapshot),
-                content_revision=case.content_revision,
-                base_case_version=case.version,
-                owner_instance_id=self.owner_instance_id,
-                status="running",
-                generation_profile=prepared.generation_profile,
-            )
-            session.add(run)
-            session.flush()
-            run_id = run.id
-        result, body, error = self._generate(prepared)
+        run_id: str | None = None
         try:
+            with self.database.sessions.begin() as session:
+                if guest_id is not None and command.mode == "live":
+                    # Admission must see the preceding transaction after waiting on its lock.
+                    session.execute(text("SET TRANSACTION ISOLATION LEVEL READ COMMITTED"))
+                case = case_or_404(session, case_id, lock=True, guest_id=guest_id)
+                previous = session.scalar(
+                    select(AnalysisRun).where(
+                        AnalysisRun.case_id == case_id,
+                        AnalysisRun.idempotency_key == idempotency_key,
+                    )
+                )
+                if previous is not None:
+                    if previous.request_hash != request_hash:
+                        raise ApplicationError(
+                            "IDEMPOTENCY_CONFLICT", "This key belongs to a different command."
+                        )
+                    return run_view(session, previous), 202 if previous.status == "running" else 200
+                if command.mode == "live" and (
+                    self.settings.live_unavailable_reason is not None or self.live_provider is None
+                ):
+                    raise ApplicationError(
+                        "LIVE_NOT_CONFIGURED",
+                        "Live analysis is not configured; select replay explicitly.",
+                        status_code=503,
+                    )
+                if session.scalar(
+                    select(AnalysisRun.id).where(
+                        AnalysisRun.case_id == case_id, AnalysisRun.status == "running"
+                    )
+                ):
+                    raise ApplicationError(
+                        "ANALYSIS_ALREADY_RUNNING",
+                        "Another analysis is already running for this case.",
+                    )
+                require_version(case, command.expected_case_version)
+                snapshot = current_input(session, case)
+                check_limits(snapshot, self.settings)
+                prepared: PreparedReplay | PreparedLive
+                guest_admitted_at = None
+                if command.mode == "live":
+                    assert self.live_provider is not None
+                    if self.settings.guest_mode:
+                        if guest_id is None:
+                            raise ApplicationError(
+                                "GUEST_SESSION_REQUIRED",
+                                "Open a guest workspace first.",
+                                status_code=401,
+                            )
+                        if case.fixture_case_id is None or not self.provider.options(
+                            recorded_input(snapshot, case.fixture_case_id)
+                        ):
+                            raise ApplicationError(
+                                "GUEST_LIVE_INPUT_NOT_SUPPORTED",
+                                "Guest Live accepts inputs from the demo recordings.",
+                                status_code=422,
+                            )
+                    prepared = self.live_provider.prepare(snapshot)
+                    if guest_id is not None:
+                        guest_admitted_at = admit_guest_live(session, guest_id)
+                        prepared = replace(
+                            prepared,
+                            generation_profile={**prepared.generation_profile, "guest_live": True},
+                        )
+                else:
+                    assert command.replay_id is not None
+                    replay = self.provider.prepare(
+                        command.replay_id, recorded_input(snapshot, case.fixture_case_id)
+                    )
+                    if case.fixture_case_id is not None:
+                        replay = replace(
+                            replay,
+                            target_case_id=case_id,
+                            generation_profile={
+                                **replay.generation_profile,
+                                "recorded_case_id": replay.option.case_id,
+                                "recorded_input_digest": replay.option.input_digest,
+                            },
+                        )
+                    prepared = replay
+                run = AnalysisRun(
+                    case_id=case_id,
+                    mode=command.mode,
+                    idempotency_key=idempotency_key,
+                    request_hash=request_hash,
+                    snapshot=snapshot.model_dump(mode="json"),
+                    input_digest=compatibility_digest(snapshot),
+                    content_revision=case.content_revision,
+                    base_case_version=case.version,
+                    owner_instance_id=self.owner_instance_id,
+                    status="running",
+                    generation_profile=prepared.generation_profile,
+                )
+                if guest_admitted_at is not None:
+                    run.started_at = guest_admitted_at
+                session.add(run)
+                session.flush()
+                run_id = run.id
+            assert run_id is not None
+            result, body, error = self._generate(prepared)
             return self._finish(case_id, run_id, result, body, error, guest_id=guest_id), 201
         except Exception:
-            # The commit may have reached PostgreSQL even when its acknowledgement was lost.
-            # Reconcile the stored outcome later; never generate the response again.
-            with self._completion_lock:
-                self._uncertain_completions.add(run_id)
+            # Admission or completion may have committed before its acknowledgement
+            # was lost. Repair an owned running row without another provider call.
+            if run_id is not None:
+                with self._completion_lock:
+                    self._uncertain_completions.add(run_id)
             raise
 
     def reconcile_completions(self) -> int:
@@ -195,7 +227,7 @@ class RunService:
                     )
                     .values(
                         status="failed",
-                        finished_at=datetime.now(UTC),
+                        finished_at=func.clock_timestamp(),
                         error={
                             "code": "RUN_INTERRUPTED",
                             "message": (
@@ -297,7 +329,7 @@ class RunService:
             case = case_or_404(session, case_id, lock=True, guest_id=guest_id)
             values: dict[str, object] = {
                 "status": "succeeded" if body is not None else "failed",
-                "finished_at": datetime.now(UTC),
+                "finished_at": func.clock_timestamp(),
                 "error": error,
                 "raw_output": result.raw_output if result else None,
                 "usage": result.usage if result else None,
@@ -352,7 +384,7 @@ class RunService:
                 )
                 .values(
                     status="failed",
-                    finished_at=datetime.now(UTC),
+                    finished_at=func.clock_timestamp(),
                     error={
                         "code": "PROCESS_INTERRUPTED",
                         "message": "The owning process stopped before completion.",
