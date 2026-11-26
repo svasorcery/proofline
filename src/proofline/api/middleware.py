@@ -30,4 +30,6 @@ def register_request_middleware(app: FastAPI, settings: Settings) -> None:
             )
         response = await call_next(request)
         response.headers["X-Request-ID"] = request.state.request_id
+        if settings.guest_mode and request.url.path.startswith("/api/v1/"):
+            response.headers["Cache-Control"] = "no-store"
         return response

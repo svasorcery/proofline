@@ -3,7 +3,45 @@ import { api, ApiError, command } from './api';
 
 afterEach(() => vi.unstubAllGlobals());
 
+function guestRequired(): Response {
+  return new Response(JSON.stringify({ code: 'GUEST_SESSION_REQUIRED' }), { status: 401 });
+}
+
 describe('API transport', () => {
+  it('opens one guest session for concurrent reads and retries those reads', async () => {
+    let opened = false;
+    const fetch = vi.fn(async (path: string, options: RequestInit) => {
+      if (path === '/api/v1/guest-session') {
+        expect(options.method).toBe('POST');
+        expect(options.credentials).toBe('same-origin');
+        opened = true;
+        return new Response(null, { status: 204 });
+      }
+      return opened ? new Response(JSON.stringify({ path })) : guestRequired();
+    });
+    vi.stubGlobal('fetch', fetch);
+    const lock = vi.fn(async (_name: string, open: () => Promise<void>) => open());
+    vi.stubGlobal('navigator', { locks: { request: lock } });
+
+    await expect(Promise.all([api('/cases'), api('/cases/demo/runs')])).resolves.toEqual([
+      { path: '/api/v1/cases' },
+      { path: '/api/v1/cases/demo/runs' },
+    ]);
+    expect(fetch.mock.calls.filter(([path]) => path.endsWith('/guest-session'))).toHaveLength(1);
+    expect(fetch).toHaveBeenCalledTimes(5);
+    expect(lock).toHaveBeenCalledOnce();
+  });
+
+  it('does not bootstrap and repeat a write when the guest session is missing', async () => {
+    const fetch = vi.fn().mockResolvedValue(guestRequired());
+    vi.stubGlobal('fetch', fetch);
+    await expect(command('/cases', 'POST', {})).rejects.toMatchObject({
+      code: 'GUEST_SESSION_REQUIRED',
+      outcomeUnknown: false,
+    });
+    expect(fetch).toHaveBeenCalledTimes(1);
+  });
+
   it('keeps the server error code, field details and request ID', async () => {
     const fetch = vi.fn().mockResolvedValue(
       new Response(

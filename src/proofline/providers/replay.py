@@ -103,6 +103,7 @@ class PreparedReplay:
     raw_output: str
     generation_profile: dict[str, JsonValue]
     usage: dict[str, JsonValue] | None
+    target_case_id: str | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -122,6 +123,21 @@ class ReplayProvider(Protocol):
     def options(self, input_data: AnalysisInput) -> list[ReplayOption]: ...
     def prepare(self, replay_id: str, input_data: AnalysisInput) -> PreparedReplay: ...
     def generate(self, prepared: PreparedReplay) -> GenerationResult: ...
+
+
+def recorded_input(input_data: AnalysisInput, fixture_case_id: str | None) -> AnalysisInput:
+    """Compare a guest copy with its recording using the original case identity."""
+    if fixture_case_id is None:
+        return input_data
+    return input_data.model_copy(
+        update={
+            "case_id": fixture_case_id,
+            "catalog": tuple(
+                source.model_copy(update={"case_id": fixture_case_id})
+                for source in input_data.catalog
+            ),
+        }
+    )
 
 
 def _snapshot(case: _Case, removed: str | None = None) -> AnalysisInput:

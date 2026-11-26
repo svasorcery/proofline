@@ -23,6 +23,7 @@ services:
       APP_ORIGIN: ${APP_ORIGIN:-http://127.0.0.1:8000}
       DEV_ORIGINS: ${DEV_ORIGINS:-[]}
       PROOFLINE_FIXTURES_DIR: /app/fixtures
+      GUEST_MODE: ${GUEST_MODE:-false}
       LIVE_ENABLED: ${LIVE_ENABLED:-false}
       LLM_PROVIDER: ${LLM_PROVIDER:-openai}
       LLM_MODEL: ${LLM_MODEL:-}
