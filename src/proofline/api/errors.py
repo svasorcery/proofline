@@ -34,7 +34,11 @@ def error_response(
 def register_error_handlers(app: FastAPI) -> None:
     @app.exception_handler(ApplicationError)
     async def application_error(request: Request, exc: ApplicationError) -> JSONResponse:
-        return error_response(request, exc.status_code, exc.code, exc.message, exc.details)
+        response = error_response(request, exc.status_code, exc.code, exc.message, exc.details)
+        retry_after = exc.details.get("retry_after_seconds")
+        if exc.code == "GUEST_LIVE_RATE_LIMITED" and type(retry_after) is int and retry_after > 0:
+            response.headers["Retry-After"] = str(retry_after)
+        return response
 
     @app.exception_handler(RequestValidationError)
     async def validation_error(request: Request, exc: RequestValidationError) -> JSONResponse:

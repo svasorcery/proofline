@@ -188,36 +188,84 @@ describe('CaseWorkspace', () => {
     expect(command).not.toHaveBeenCalled();
   });
 
-  it('keeps live selected after a provider failure without starting replay', async () => {
+  it('explains a guest limit and offers an explicit switch to Replay', async () => {
     const user = userEvent.setup();
-    let failed = false;
-    const failedRun = {
-      ...run('live-failure', 'failed', '2026-01-02T00:00:00Z'),
-      mode: 'live',
-      error: { code: 'PROVIDER_RATE_LIMITED' },
-      generation_profile: { model: 'actual-test-model' },
-    };
-    vi.mocked(api).mockImplementation(async (path) =>
-      path === '/capabilities'
-        ? { live_available: true, live_model: 'configured-test-model', live_reason: null }
-        : path === '/cases/V01'
-          ? data
-          : path.endsWith('/runs') && failed
-            ? [failedRun]
-            : [],
-    );
-    vi.mocked(command).mockImplementation(async () => {
-      failed = true;
+    vi.mocked(api).mockImplementation(async (path) => {
+      if (path === '/capabilities') return { live_available: true, live_model: 'gpt-oss-20b' };
+      if (path === '/cases/V01') return data;
+      if (path.endsWith('/replay-options')) {
+        return [
+          {
+            replay_id: 'recorded',
+            condition: 'full',
+            model: 'recorded-model',
+            recorded_on: '2026-01-01',
+          },
+        ];
+      }
+      return [];
     });
+    vi.mocked(command).mockRejectedValue(
+      new ApiError('GUEST_LIVE_RATE_LIMITED', 'Limited', {
+        status: 429,
+        details: { limit: 'guest_day', retry_after_seconds: 3600 },
+      }),
+    );
     render(<CaseWorkspace caseId="V01" />);
     const mode = await screen.findByRole('combobox', { name: 'Режим анализа' });
     await user.selectOptions(mode, 'live');
     await user.click(screen.getByRole('button', { name: 'Запустить Live' }));
-    await screen.findByRole('alert');
+    expect(await screen.findByText(/Дневной лимит гостя исчерпан/)).toBeVisible();
     expect(mode).toHaveValue('live');
+    await user.click(screen.getByRole('button', { name: 'Перейти к Replay' }));
+    expect(mode).toHaveValue('replay');
     expect(command).toHaveBeenCalledTimes(1);
-    expect(screen.getByRole('alert')).toHaveTextContent('лимит');
   });
+
+  it.each([false, true])(
+    'keeps live selected after a provider failure with guest=%s',
+    async (guest) => {
+      const user = userEvent.setup();
+      let failed = false;
+      const failedRun = {
+        ...run('live-failure', 'failed', '2026-01-02T00:00:00Z'),
+        mode: 'live',
+        error: { code: 'PROVIDER_RATE_LIMITED' },
+        generation_profile: { model: 'actual-test-model', guest_live: guest },
+      };
+      vi.mocked(api).mockImplementation(async (path) =>
+        path === '/capabilities'
+          ? { live_available: true, live_model: 'configured-test-model', live_reason: null }
+          : path === '/cases/V01'
+            ? data
+            : path.endsWith('/runs') && failed
+              ? [failedRun]
+              : path.endsWith('/replay-options')
+                ? [
+                    {
+                      replay_id: 'recorded',
+                      condition: 'full',
+                      model: 'recorded',
+                      recorded_on: '2026-01-01',
+                    },
+                  ]
+                : [],
+      );
+      vi.mocked(command).mockImplementation(async () => {
+        failed = true;
+      });
+      render(<CaseWorkspace caseId="V01" />);
+      const mode = await screen.findByRole('combobox', { name: 'Режим анализа' });
+      await user.selectOptions(mode, 'live');
+      await user.click(screen.getByRole('button', { name: 'Запустить Live' }));
+      await screen.findByRole('alert');
+      expect(mode).toHaveValue('live');
+      expect(command).toHaveBeenCalledTimes(1);
+      expect(screen.getByRole('alert')).toHaveTextContent('лимит');
+      if (guest) expect(screen.getByRole('button', { name: 'Перейти к Replay' })).toBeVisible();
+      else expect(screen.queryByRole('button', { name: 'Перейти к Replay' })).toBeNull();
+    },
+  );
 
   it('does not poll while a write or its post-save reload is busy', async () => {
     vi.useFakeTimers();

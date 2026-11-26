@@ -35,7 +35,7 @@ def settings(**options) -> Settings:
     )
 
 
-def test_guest_mode_keeps_live_disabled() -> None:
+def test_guest_mode_rejects_unbounded_live_configuration() -> None:
     with pytest.raises(ValidationError, match="GUEST_MODE"):
         settings(guest_mode=True, live_enabled=True)
 

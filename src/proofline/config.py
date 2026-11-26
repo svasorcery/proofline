@@ -13,6 +13,8 @@ from proofline.domain.required_events import RequiredEvent
 GROQ_CITATION_IDS_PROFILE = "v3.3-citation-ids-test"
 GROQ_CONFIRMATION_PROFILES = frozenset({"v3.3-confirmations-test", GROQ_CITATION_IDS_PROFILE})
 GROQ_CHOICES_PROFILES = GROQ_CONFIRMATION_PROFILES | {"v3.3-choices-test"}
+GUEST_GROQ_MODEL = "openai/gpt-oss-20b"
+GUEST_MAX_COMPLETION_TOKENS = 1_000
 
 
 class Settings(BaseSettings):
@@ -115,7 +117,7 @@ class Settings(BaseSettings):
 
     @property
     def live_unavailable_reason(self) -> str | None:
-        if self.guest_mode or not self.live_enabled:
+        if not self.live_enabled:
             return "LIVE_DISABLED"
         key = self.selected_api_key
         if key is None or not key.get_secret_value().strip():
@@ -138,8 +140,20 @@ class Settings(BaseSettings):
 
     @model_validator(mode="after")
     def validate_groq_test_profile(self) -> Self:
-        if self.guest_mode and self.live_enabled:
-            raise ValueError("GUEST_MODE requires LIVE_ENABLED=false")
+        if (
+            self.guest_mode
+            and self.live_enabled
+            and (
+                self.llm_provider != "groq"
+                or self.selected_model != GUEST_GROQ_MODEL
+                or self.groq_reasoning_effort != "low"
+                or self.model_max_output_tokens > GUEST_MAX_COMPLETION_TOKENS
+            )
+        ):
+            raise ValueError(
+                "GUEST_MODE Guest Live requires Groq GPT-OSS 20B, low reasoning, "
+                "and at most 1000 completion tokens"
+            )
         if (
             self.groq_test_assemble_reviewed_evidence
             and self.groq_prompt_profile != GROQ_CITATION_IDS_PROFILE
