@@ -33,19 +33,19 @@ class ProposalService:
         self.database = database
         self.settings = settings
 
-    def get(self, revision_id: str) -> ProposalView:
+    def get(self, revision_id: str, *, guest_id: str | None = None) -> ProposalView:
         with read_session(self.database) as session:
-            proposal = proposal_or_404(session, revision_id)
+            proposal = proposal_or_404(session, revision_id, guest_id=guest_id)
             return proposal_view(
                 session,
                 proposal,
-                case_or_404(session, proposal.case_id),
+                case_or_404(session, proposal.case_id, guest_id=guest_id),
                 self.settings.effective_validation_profile,
             )
 
-    def list(self, case_id: str) -> list[ProposalView]:
+    def list(self, case_id: str, *, guest_id: str | None = None) -> list[ProposalView]:
         with read_session(self.database) as session:
-            case = case_or_404(session, case_id)
+            case = case_or_404(session, case_id, guest_id=guest_id)
             proposals = session.scalars(
                 select(ProposalRevision)
                 .where(ProposalRevision.case_id == case_id)
@@ -56,10 +56,12 @@ class ProposalService:
                 for proposal in proposals
             ]
 
-    def revise(self, revision_id: str, command: RevisionCreate) -> ProposalView:
+    def revise(
+        self, revision_id: str, command: RevisionCreate, *, guest_id: str | None = None
+    ) -> ProposalView:
         with self.database.sessions.begin() as session:
-            parent = proposal_or_404(session, revision_id)
-            case = case_or_404(session, parent.case_id, lock=True)
+            parent = proposal_or_404(session, revision_id, guest_id=guest_id)
+            case = case_or_404(session, parent.case_id, lock=True, guest_id=guest_id)
             require_version(case, command.expected_case_version)
             require_current(session, case, parent)
             if command.body.case_id != case.id:
@@ -89,11 +91,13 @@ class ProposalService:
             session.flush()
             return proposal_view(session, child, case, self.settings.effective_validation_profile)
 
-    def activate(self, case_id: str, command: ActivateProposal) -> ProposalView:
+    def activate(
+        self, case_id: str, command: ActivateProposal, *, guest_id: str | None = None
+    ) -> ProposalView:
         with self.database.sessions.begin() as session:
-            case = case_or_404(session, case_id, lock=True)
+            case = case_or_404(session, case_id, lock=True, guest_id=guest_id)
             require_version(case, command.expected_case_version)
-            proposal = proposal_or_404(session, command.proposal_revision_id)
+            proposal = proposal_or_404(session, command.proposal_revision_id, guest_id=guest_id)
             if proposal.case_id != case_id:
                 raise ApplicationError(
                     "PROPOSAL_NOT_FOUND", "Proposal not found in this case.", status_code=404
@@ -106,10 +110,12 @@ class ProposalService:
                 session, proposal, case, self.settings.effective_validation_profile
             )
 
-    def validate(self, revision_id: str, command: VersionCommand) -> ProposalView:
+    def validate(
+        self, revision_id: str, command: VersionCommand, *, guest_id: str | None = None
+    ) -> ProposalView:
         with self.database.sessions.begin() as session:
-            proposal = proposal_or_404(session, revision_id)
-            case = case_or_404(session, proposal.case_id, lock=True)
+            proposal = proposal_or_404(session, revision_id, guest_id=guest_id)
+            case = case_or_404(session, proposal.case_id, lock=True, guest_id=guest_id)
             require_version(case, command.expected_case_version)
             require_current(session, case, proposal)
             record_validation(session, proposal, self.settings)
@@ -120,13 +126,18 @@ class ProposalService:
             )
 
     def decide(
-        self, revision_id: str, command: DecisionCreate, idempotency_key: str
+        self,
+        revision_id: str,
+        command: DecisionCreate,
+        idempotency_key: str,
+        *,
+        guest_id: str | None = None,
     ) -> tuple[DecisionView, int]:
         require_key(idempotency_key)
         request_hash = json_digest({"revision_id": revision_id, **command.model_dump(mode="json")})
         with self.database.sessions.begin() as session:
-            proposal = proposal_or_404(session, revision_id)
-            case = case_or_404(session, proposal.case_id, lock=True)
+            proposal = proposal_or_404(session, revision_id, guest_id=guest_id)
+            case = case_or_404(session, proposal.case_id, lock=True, guest_id=guest_id)
             previous = session.scalar(
                 select(ReviewDecision).where(
                     ReviewDecision.case_id == case.id,
@@ -172,7 +183,7 @@ class ProposalService:
                 proposal_revision_id=proposal.id,
                 validation_check_id=check.id,
                 kind=command.kind,
-                actor="demo_operator",
+                actor="demo_operator" if guest_id is None else "demo_guest",
                 reason=command.reason,
                 idempotency_key=idempotency_key,
                 request_hash=request_hash,

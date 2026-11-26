@@ -8,7 +8,7 @@ from alembic.migration import MigrationContext
 from sqlalchemy import Engine
 from sqlalchemy.exc import SQLAlchemyError
 
-SCHEMA_REVISION = "0001_case_workflow"
+SCHEMA_REVISION = "0002_guest_sessions"
 
 
 def upgrade_database(engine: Engine) -> None:

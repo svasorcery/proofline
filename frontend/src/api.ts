@@ -30,7 +30,30 @@ function record(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
-export async function api<T>(path: string, options: RequestInit = {}): Promise<T> {
+let openingGuestSession: Promise<void> | undefined;
+
+function openGuestSession(): Promise<void> {
+  if (!openingGuestSession) {
+    const open = () => request<void>('/guest-session', { method: 'POST' }, false);
+    const opening = navigator.locks
+      ? navigator.locks.request('proofline-guest-session', open).then(() => undefined)
+      : open();
+    openingGuestSession = opening.finally(() => {
+      openingGuestSession = undefined;
+    });
+  }
+  return openingGuestSession;
+}
+
+export function api<T>(path: string, options: RequestInit = {}): Promise<T> {
+  return request<T>(path, options, true);
+}
+
+async function request<T>(
+  path: string,
+  options: RequestInit,
+  allowGuestBootstrap: boolean,
+): Promise<T> {
   const method = (options.method ?? 'GET').toUpperCase();
   const unsafe = !['GET', 'HEAD', 'OPTIONS'].includes(method);
   const headers = new Headers(options.headers);
@@ -71,6 +94,16 @@ export async function api<T>(path: string, options: RequestInit = {}): Promise<T
   }
   if (!response.ok) {
     const envelope = record(body) ? body : {};
+    if (
+      allowGuestBootstrap &&
+      method === 'GET' &&
+      response.status === 401 &&
+      envelope.code === 'GUEST_SESSION_REQUIRED'
+    ) {
+      options.signal?.throwIfAborted();
+      await openGuestSession();
+      return request<T>(path, options, false);
+    }
     throw new ApiError(
       typeof envelope.code === 'string' ? envelope.code : `HTTP_${response.status}`,
       typeof envelope.message === 'string' ? envelope.message : 'Не удалось выполнить запрос.',

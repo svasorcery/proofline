@@ -77,6 +77,7 @@ These commands make no model calls and do not rewrite recorded results. The corr
 | [docs/api.md](docs/api.md) | HTTP workflow, versions, conflicts and local configuration |
 | [docs/live-provider.md](docs/live-provider.md) | Opt-in live configuration, failure handling and acceptance results |
 | [docs/operator-ui.md](docs/operator-ui.md) | Operator workflow, demonstration stories and version history |
+| [docs/guest-demo.md](docs/guest-demo.md) | Closed guest workspaces with separate case copies and Replay history |
 | [docs/validation.md](docs/validation.md) | Library usage, validation boundaries and supported timestamp format |
 | [docs/research.md](docs/research.md) | Research decisions, evidence and limitations |
 | [contracts](contracts/) | Exported output schema |

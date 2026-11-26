@@ -61,11 +61,20 @@ class CaseService:
         self.database = database
         self.settings = settings
 
-    def list(self, status: CaseStatus | None = None, limit: int = 50, offset: int = 0) -> CasePage:
+    def list(
+        self,
+        status: CaseStatus | None = None,
+        limit: int = 50,
+        offset: int = 0,
+        *,
+        guest_id: str | None = None,
+    ) -> CasePage:
         if not 1 <= limit <= 100 or offset < 0:
             raise ApplicationError("INVALID_REQUEST", "Invalid pagination.", status_code=422)
         with read_session(self.database) as session:
-            query = case_summary_query(self.settings.effective_validation_profile)
+            query = case_summary_query(self.settings.effective_validation_profile).where(
+                Case.guest_id == guest_id
+            )
             if status is not None:
                 query = query.where(query.selected_columns.display_status == status)
             total = session.scalar(select(func.count()).select_from(query.subquery())) or 0
@@ -79,13 +88,15 @@ class CaseService:
                 offset=offset,
             )
 
-    def get(self, case_id: str) -> CaseDetail:
+    def get(self, case_id: str, *, guest_id: str | None = None) -> CaseDetail:
         with read_session(self.database) as session:
             return case_detail(
-                session, case_or_404(session, case_id), self.settings.effective_validation_profile
+                session,
+                case_or_404(session, case_id, guest_id=guest_id),
+                self.settings.effective_validation_profile,
             )
 
-    def create(self, command: CaseCreate) -> CaseDetail:
+    def create(self, command: CaseCreate, *, guest_id: str | None = None) -> CaseDetail:
         case_id = new_id()
         check_limits(
             AnalysisInput(
@@ -101,6 +112,7 @@ class CaseService:
         with self.database.sessions.begin() as session:
             case = Case(
                 id=case_id,
+                guest_id=guest_id,
                 title=command.title,
                 user_text=command.user_text,
                 requested_fact_keys=list(command.requested_fact_keys),
@@ -113,9 +125,11 @@ class CaseService:
             session.flush()
             return case_detail(session, case, self.settings.effective_validation_profile)
 
-    def update(self, case_id: str, command: CasePatch) -> CaseDetail:
+    def update(
+        self, case_id: str, command: CasePatch, *, guest_id: str | None = None
+    ) -> CaseDetail:
         with self.database.sessions.begin() as session:
-            case = case_or_404(session, case_id, lock=True)
+            case = case_or_404(session, case_id, lock=True, guest_id=guest_id)
             require_version(case, command.expected_case_version)
             previous_input, previous_title = _input_digest(case), case.title
             if command.title is not None:
@@ -154,9 +168,11 @@ class CaseService:
             )
         return text, hashlib.sha256(text.encode("utf-8")).hexdigest()
 
-    def add_source(self, case_id: str, command: SourceCreate) -> CaseDetail:
+    def add_source(
+        self, case_id: str, command: SourceCreate, *, guest_id: str | None = None
+    ) -> CaseDetail:
         with self.database.sessions.begin() as session:
-            case = case_or_404(session, case_id, lock=True)
+            case = case_or_404(session, case_id, lock=True, guest_id=guest_id)
             require_version(case, command.expected_case_version)
             count = (
                 session.scalar(
@@ -217,10 +233,17 @@ class CaseService:
             session.flush()
             return case_detail(session, case, self.settings.effective_validation_profile)
 
-    def add_version(self, case_id: str, source_id: str, command: SourceVersionCreate) -> CaseDetail:
+    def add_version(
+        self,
+        case_id: str,
+        source_id: str,
+        command: SourceVersionCreate,
+        *,
+        guest_id: str | None = None,
+    ) -> CaseDetail:
         text, digest = self._text(command.text)
         with self.database.sessions.begin() as session:
-            case = case_or_404(session, case_id, lock=True)
+            case = case_or_404(session, case_id, lock=True, guest_id=guest_id)
             require_version(case, command.expected_case_version)
             source = session.get(Source, (case_id, source_id))
             if source is None:
@@ -248,9 +271,11 @@ class CaseService:
             session.flush()
             return case_detail(session, case, self.settings.effective_validation_profile)
 
-    def update_source(self, case_id: str, source_id: str, command: SourcePatch) -> CaseDetail:
+    def update_source(
+        self, case_id: str, source_id: str, command: SourcePatch, *, guest_id: str | None = None
+    ) -> CaseDetail:
         with self.database.sessions.begin() as session:
-            case = case_or_404(session, case_id, lock=True)
+            case = case_or_404(session, case_id, lock=True, guest_id=guest_id)
             require_version(case, command.expected_case_version)
             sources = list(
                 session.scalars(
@@ -313,13 +338,18 @@ class CaseService:
             session.flush()
             return case_detail(session, case, self.settings.effective_validation_profile)
 
-    def get_version(self, case_id: str, source_id: str, version_id: str) -> SourceVersionView:
+    def get_version(
+        self, case_id: str, source_id: str, version_id: str, *, guest_id: str | None = None
+    ) -> SourceVersionView:
         with read_session(self.database) as session:
             version = session.scalar(
-                select(SourceVersion).where(
+                select(SourceVersion)
+                .join(Case, Case.id == SourceVersion.case_id)
+                .where(
                     SourceVersion.id == version_id,
                     SourceVersion.case_id == case_id,
                     SourceVersion.source_id == source_id,
+                    Case.guest_id == guest_id,
                 )
             )
             if version is None:

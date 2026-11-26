@@ -48,8 +48,10 @@ def read_session(database: Database) -> Iterator[Session]:
         yield session
 
 
-def case_or_404(session: Session, case_id: str, *, lock: bool = False) -> Case:
-    query = select(Case).where(Case.id == case_id)
+def case_or_404(
+    session: Session, case_id: str, *, lock: bool = False, guest_id: str | None = None
+) -> Case:
+    query = select(Case).where(Case.id == case_id, Case.guest_id == guest_id)
     if lock:
         query = query.with_for_update()
     case = session.scalar(query)
@@ -58,8 +60,14 @@ def case_or_404(session: Session, case_id: str, *, lock: bool = False) -> Case:
     return case
 
 
-def proposal_or_404(session: Session, revision_id: str) -> ProposalRevision:
-    proposal = session.get(ProposalRevision, revision_id)
+def proposal_or_404(
+    session: Session, revision_id: str, *, guest_id: str | None = None
+) -> ProposalRevision:
+    proposal = session.scalar(
+        select(ProposalRevision)
+        .join(Case, Case.id == ProposalRevision.case_id)
+        .where(ProposalRevision.id == revision_id, Case.guest_id == guest_id)
+    )
     if proposal is None:
         raise ApplicationError("PROPOSAL_NOT_FOUND", "Proposal not found.", status_code=404)
     return proposal

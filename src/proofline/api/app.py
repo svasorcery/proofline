@@ -11,6 +11,7 @@ from proofline.api.errors import register_error_handlers
 from proofline.api.middleware import register_request_middleware
 from proofline.api.routes import register_routes
 from proofline.api.static import register_static_ui
+from proofline.application.guests import GuestSessions
 from proofline.application.service import WorkflowService
 from proofline.config import Settings
 from proofline.persistence.database import Database, open_database
@@ -43,6 +44,14 @@ def create_app(
 
     app = FastAPI(title="Proofline API", version="0.4.0", lifespan=lifespan)
     app.state.service = service
+    app.state.guest_sessions = None
+    if config.guest_mode:
+        catalog = (
+            active_provider
+            if isinstance(active_provider, ReplayCatalog)
+            else ReplayCatalog(config.fixtures_dir)
+        )
+        app.state.guest_sessions = GuestSessions(active_database, catalog)
     register_error_handlers(app)
     app.add_middleware(
         CORSMiddleware,

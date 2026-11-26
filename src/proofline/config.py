@@ -26,6 +26,7 @@ class Settings(BaseSettings):
     fixtures_dir: Path = Field(default=Path("fixtures"), validation_alias="PROOFLINE_FIXTURES_DIR")
     ui_dir: Path = Field(default=Path("frontend/dist"), validation_alias="PROOFLINE_UI_DIR")
     live_enabled: bool = False
+    guest_mode: bool = False
     llm_provider: Literal["openai", "groq", "deepseek", "anthropic"] = "openai"
     llm_api_key: SecretStr | None = Field(default=None, repr=False, exclude=True)
     llm_model: str = ""
@@ -114,7 +115,7 @@ class Settings(BaseSettings):
 
     @property
     def live_unavailable_reason(self) -> str | None:
-        if not self.live_enabled:
+        if self.guest_mode or not self.live_enabled:
             return "LIVE_DISABLED"
         key = self.selected_api_key
         if key is None or not key.get_secret_value().strip():
@@ -137,6 +138,8 @@ class Settings(BaseSettings):
 
     @model_validator(mode="after")
     def validate_groq_test_profile(self) -> Self:
+        if self.guest_mode and self.live_enabled:
+            raise ValueError("GUEST_MODE requires LIVE_ENABLED=false")
         if (
             self.groq_test_assemble_reviewed_evidence
             and self.groq_prompt_profile != GROQ_CITATION_IDS_PROFILE

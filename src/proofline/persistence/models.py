@@ -34,6 +34,15 @@ class Base(DeclarativeBase):
     metadata = MetaData(naming_convention={"pk": "pk_%(table_name)s"})
 
 
+class GuestSession(Base):
+    __tablename__ = "guest_sessions"
+    __table_args__ = (UniqueConstraint("token_digest", name="uq_guest_sessions_token_digest"),)
+
+    id: Mapped[str] = mapped_column(Text, primary_key=True, default=new_id)
+    token_digest: Mapped[str] = mapped_column(Text)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+
 class Case(Base):
     __tablename__ = "cases"
     __table_args__ = (
@@ -49,9 +58,18 @@ class Case(Base):
             use_alter=True,
         ),
         Index("ix_cases_created_at", "created_at", "id"),
+        Index("ix_cases_guest_updated_at", "guest_id", "updated_at", "id"),
+        UniqueConstraint("guest_id", "fixture_case_id", name="uq_cases_guest_fixture"),
+        CheckConstraint(
+            "fixture_case_id IS NULL OR guest_id IS NOT NULL", name="ck_cases_fixture_guest"
+        ),
     )
 
     id: Mapped[str] = mapped_column(Text, primary_key=True, default=new_id)
+    guest_id: Mapped[str | None] = mapped_column(
+        Text, ForeignKey("guest_sessions.id", name="fk_cases_guest")
+    )
+    fixture_case_id: Mapped[str | None] = mapped_column(Text)
     title: Mapped[str] = mapped_column(Text)
     user_text: Mapped[str] = mapped_column(Text)
     requested_fact_keys: Mapped[list[str]] = mapped_column(JSONB)

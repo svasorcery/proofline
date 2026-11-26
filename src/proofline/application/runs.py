@@ -34,13 +34,14 @@ from proofline.domain.inputs import (
     validate_storage_json,
 )
 from proofline.persistence.database import Database
-from proofline.persistence.models import AnalysisRun, ProposalRevision
+from proofline.persistence.models import AnalysisRun, Case, ProposalRevision
 from proofline.providers.live import LiveProvider, PreparedLive
 from proofline.providers.replay import (
     GenerationResult,
     PreparedReplay,
     ReplayOption,
     ReplayProvider,
+    recorded_input,
 )
 
 logger = logging.getLogger(__name__)
@@ -61,22 +62,34 @@ class RunService:
         self._completion_lock = Lock()
         self._uncertain_completions: set[str] = set()
 
-    def options(self, case_id: str) -> list[ReplayOption]:
+    def options(self, case_id: str, *, guest_id: str | None = None) -> list[ReplayOption]:
         with read_session(self.database) as session:
-            snapshot = current_input(session, case_or_404(session, case_id))
+            case = case_or_404(session, case_id, guest_id=guest_id)
+            snapshot = current_input(session, case)
             check_limits(snapshot, self.settings)
-            return self.provider.options(snapshot)
+            options = self.provider.options(recorded_input(snapshot, case.fixture_case_id))
+            if case.fixture_case_id is None:
+                return options
+            digest = compatibility_digest(snapshot)
+            return [
+                option.model_copy(update={"case_id": case_id, "input_digest": digest})
+                for option in options
+            ]
 
-    def get(self, run_id: str) -> RunView:
+    def get(self, run_id: str, *, guest_id: str | None = None) -> RunView:
         with read_session(self.database) as session:
-            run = session.get(AnalysisRun, run_id)
+            run = session.scalar(
+                select(AnalysisRun)
+                .join(Case, Case.id == AnalysisRun.case_id)
+                .where(AnalysisRun.id == run_id, Case.guest_id == guest_id)
+            )
             if run is None:
                 raise ApplicationError("RUN_NOT_FOUND", "Analysis run not found.", status_code=404)
             return run_view(session, run)
 
-    def list(self, case_id: str) -> list[RunView]:
+    def list(self, case_id: str, *, guest_id: str | None = None) -> list[RunView]:
         with read_session(self.database) as session:
-            case_or_404(session, case_id)
+            case_or_404(session, case_id, guest_id=guest_id)
             runs = session.scalars(
                 select(AnalysisRun)
                 .where(AnalysisRun.case_id == case_id)
@@ -84,11 +97,13 @@ class RunService:
             ).all()
             return [run_view(session, run) for run in runs]
 
-    def create(self, case_id: str, command: RunCreate, idempotency_key: str) -> tuple[RunView, int]:
+    def create(
+        self, case_id: str, command: RunCreate, idempotency_key: str, *, guest_id: str | None = None
+    ) -> tuple[RunView, int]:
         require_key(idempotency_key)
         request_hash = json_digest(command.model_dump(mode="json"))
         with self.database.sessions.begin() as session:
-            case = case_or_404(session, case_id, lock=True)
+            case = case_or_404(session, case_id, lock=True, guest_id=guest_id)
             previous = session.scalar(
                 select(AnalysisRun).where(
                     AnalysisRun.case_id == case_id, AnalysisRun.idempotency_key == idempotency_key
@@ -125,7 +140,20 @@ class RunService:
                 prepared = self.live_provider.prepare(snapshot)
             else:
                 assert command.replay_id is not None
-                prepared = self.provider.prepare(command.replay_id, snapshot)
+                replay = self.provider.prepare(
+                    command.replay_id, recorded_input(snapshot, case.fixture_case_id)
+                )
+                if case.fixture_case_id is not None:
+                    replay = replace(
+                        replay,
+                        target_case_id=case_id,
+                        generation_profile={
+                            **replay.generation_profile,
+                            "recorded_case_id": replay.option.case_id,
+                            "recorded_input_digest": replay.option.input_digest,
+                        },
+                    )
+                prepared = replay
             run = AnalysisRun(
                 case_id=case_id,
                 mode=command.mode,
@@ -144,7 +172,7 @@ class RunService:
             run_id = run.id
         result, body, error = self._generate(prepared)
         try:
-            return self._finish(case_id, run_id, result, body, error), 201
+            return self._finish(case_id, run_id, result, body, error, guest_id=guest_id), 201
         except Exception:
             # The commit may have reached PostgreSQL even when its acknowledgement was lost.
             # Reconcile the stored outcome later; never generate the response again.
@@ -204,6 +232,10 @@ class RunService:
                 if decode
                 else AssemblyOutput.model_validate_json(result.raw_output)
             )
+            if isinstance(prepared, PreparedReplay) and prepared.target_case_id is not None:
+                if body.case_id != prepared.option.case_id:
+                    raise ValueError("The recording belongs to a different fixture case")
+                body = body.model_copy(update={"case_id": prepared.target_case_id})
             validate_storage_json(body.model_dump(mode="json"))
             canonical_json(result.generation_profile).encode("utf-8")
             canonical_json(result.usage).encode("utf-8")
@@ -244,6 +276,8 @@ class RunService:
         result: GenerationResult | None,
         body: AssemblyOutput | None,
         error: dict[str, JsonValue] | None,
+        *,
+        guest_id: str | None = None,
     ) -> RunView:
         if result is not None and result.raw_output is not None:
             try:
@@ -260,7 +294,7 @@ class RunService:
                     },
                 )
         with self.database.sessions.begin() as session:
-            case = case_or_404(session, case_id, lock=True)
+            case = case_or_404(session, case_id, lock=True, guest_id=guest_id)
             values: dict[str, object] = {
                 "status": "succeeded" if body is not None else "failed",
                 "finished_at": datetime.now(UTC),
