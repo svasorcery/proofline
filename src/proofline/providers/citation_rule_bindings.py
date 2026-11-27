@@ -1,5 +1,6 @@
-"""Bind the closed-stand citation rules to the reviewed source versions."""
+"""Bind citation rules to reviewed source versions."""
 
+from proofline.domain.assembly import EventTime, EventType
 from proofline.domain.case_evidence import (
     ReviewedRefund,
     original_withdrawal_receipt,
@@ -9,6 +10,7 @@ from proofline.domain.inputs import AnalysisInput, compatibility_digest
 from proofline.domain.present_confirmations import IncludedAcceptanceReply
 from proofline.domain.required_events import RequiredEvent
 from proofline.providers.citation_ids import CitationCatalogue
+from proofline.providers.replay import recorded_input
 from proofline.providers.reviewed_citations import (
     AuthorizationReleaseRule,
     EventRule,
@@ -27,6 +29,43 @@ _SENT = "Отправлено: "
 # requires a fresh assessment, even if the original ledger entry is still included.
 _REVIEWED_V06_INPUT = "ee8e22c5e98f04177c3051b3fffe0dcfa5fdb99fa8f144a7ad533852d202bc9e"
 _NO_CHARGE = "запросов capture нет; строк в реестре списаний нет; запросов return.submit нет."
+_REVIEWED_V06_EVENTS: tuple[tuple[EventType, str, str], ...] = (
+    (
+        "supplier_cancelled",
+        "845cff973bd4435d",
+        "2026-06-22T16:40:00+03:00 — бронирование отменено поставщиком, исполнение прекращено.",
+    ),
+    (
+        "authorization_released",
+        "5f5576cbae5e40c6",
+        "2026-06-22T16:43:00+03:00 | auth.reverse | банк снял резерв по исходной авторизации",
+    ),
+)
+
+
+def guest_v06_binding(
+    snapshot: AnalysisInput,
+) -> tuple[AnalysisInput, tuple[RequiredEvent, ...]] | None:
+    # Use the fixture identity for the review only. Citations and the model request
+    # still belong to the guest snapshot and its own source versions.
+    reviewed = recorded_input(snapshot, "V06")
+    if compatibility_digest(reviewed) != _REVIEWED_V06_INPUT:
+        return None
+    sources = {source.source_id: source for source in snapshot.to_validation_context().sources}
+    marks = []
+    for event_type, source_id, fragment in _REVIEWED_V06_EVENTS:
+        source = sources[source_id]
+        marks.append(
+            RequiredEvent(
+                event_type=event_type,
+                time=EventTime(value=fragment.split(" ", 1)[0], role="occurred"),
+                source_id=source_id,
+                source_version_id=source.version_id,
+                text_sha256=source.text_sha256,
+                fragment=fragment,
+            )
+        )
+    return reviewed, tuple(marks)
 
 
 def _citation_id(citations: CitationCatalogue, source_id: str, fragment: str) -> str | None:

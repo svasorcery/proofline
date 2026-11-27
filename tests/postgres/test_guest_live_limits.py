@@ -1,5 +1,6 @@
 """Persisted admission and guest Live over an offline Groq transport."""
 
+import json
 from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 from contextlib import contextmanager
 from datetime import UTC, datetime, timedelta
@@ -18,13 +19,14 @@ from proofline.api.app import create_app
 from proofline.config import Settings
 from proofline.persistence.database import Database
 from proofline.persistence.migrate import upgrade_database
-from proofline.persistence.models import AnalysisRun
+from proofline.persistence.models import AnalysisRun, Case
 from proofline.providers.factory import create_live_provider
 from proofline.providers.replay import ReplayCatalog
 
 ORIGIN = "https://guests.example"
 API = "/api/v1"
 FIXTURES = Path(__file__).resolve().parents[2] / "fixtures"
+V55_V06 = FIXTURES.parent / "evals/live/v55-groq-gpt-oss-20b-stage4-acceptance-2026-11-25/full-V06"
 
 
 def config(**updates):
@@ -92,6 +94,110 @@ def rate_limited(response, reason: str):
 
 def fake_groq_rejection():
     return httpx.Response(429, json={"error": {"type": "rate_limit_error"}})
+
+
+@pytest.mark.postgres
+@pytest.mark.parametrize("variant", ["v55", "missing_release", "missing_release_quote"])
+def test_guest_v06_assembles_the_card_with_its_own_sources(postgres_engine, variant):
+    recorded_request = json.loads((V55_V06 / "request.json").read_text(encoding="utf-8"))
+    recorded_run = json.loads((V55_V06 / "run.json").read_text(encoding="utf-8"))
+    expected_body = json.loads((V55_V06 / "proposal.json").read_text(encoding="utf-8"))["body"]
+    recorded_sources = json.loads(recorded_request["messages"][1]["content"])["catalog"]
+    calls = []
+
+    def citation_ids(sources):
+        return {
+            (source["source_id"], row["text"]): row["citation_id"]
+            for source in sources
+            for row in source["citation_lines"]
+            if row["citation_id"] is not None
+        }
+
+    def handle(request):
+        sent = json.loads(request.content)
+        calls.append(sent)
+        if sent["response_format"]["json_schema"]["name"] != "assembly_citation_ids":
+            return httpx.Response(400, json={"error": {"code": "json_validate_failed"}})
+        guest_input = json.loads(sent["messages"][1]["content"])
+        old_ids = citation_ids(recorded_sources)
+        new_ids = citation_ids(guest_input["catalog"])
+        rebind = {old_id: new_ids[line] for line, old_id in old_ids.items()}
+        raw = json.loads(recorded_run["raw_output"])
+        if variant != "v55":
+            # Reproduce v57's answer shape using the tracked v55 recording.
+            raw["timeline"] = [
+                event
+                for event in raw["timeline"]
+                if event["event_type"] != "authorization_released"
+            ]
+            raw["readiness"] = "ready_for_rules"
+            raw["follow_up"] = {"action": "none", "locator": None, "requirements": []}
+        if variant == "missing_release_quote":
+            (opening,) = (qid for (_, line), qid in old_ids.items() if "auth.open" in line)
+            raw["facts"]["payment_outcome"]["evidence"] = [opening]
+        raw["case_id"] = guest_input["case_id"]
+        for item in [*raw["facts"].values(), *raw["timeline"]]:
+            item["evidence"] = [rebind[quote_id] for quote_id in item["evidence"]]
+        return httpx.Response(
+            200,
+            json={
+                "id": "offline-v55",
+                "object": "chat.completion",
+                "created": 0,
+                "model": sent["model"],
+                "choices": [
+                    {
+                        "index": 0,
+                        "finish_reason": "stop",
+                        "message": {"role": "assistant", "content": json.dumps(raw)},
+                    }
+                ],
+            },
+        )
+
+    database, app = guest_app(postgres_engine, handle)
+    with TestClient(app, base_url=ORIGIN) as client:
+        cases = {case["id"]: case for case in create_workspace(client)}
+        with database.sessions() as session:
+            case_id = session.scalar(select(Case.id).where(Case.fixture_case_id == "V06"))
+        assert case_id is not None and case_id != "V06"
+        response = start(client, cases[case_id], "v55-guest")
+        assert response.status_code == 201, response.text
+        (sent,) = calls
+        assert sent["response_format"]["json_schema"]["name"] == "assembly_citation_ids"
+        assert sent["response_format"]["json_schema"]["strict"] is True
+        assert sent["messages"][0] == recorded_request["messages"][0]
+        run = response.json()
+        assert run["status"] == "succeeded", run["error"]
+        assert run["generation_profile"]["guest_live"] is True
+        raw = json.loads(run["raw_output"])
+        assert raw["case_id"] == case_id
+        proposal = client.get(f"{API}/proposals/{run['proposal_revision_id']}").json()
+        if variant == "v55":
+            assert raw["follow_up"]["requirements"] == ["bank_settlement_document"]
+        else:
+            assert [event["event_type"] for event in raw["timeline"]] == ["supplier_cancelled"]
+        if variant == "missing_release_quote":
+            assert [event["event_type"] for event in proposal["body"]["timeline"]] == [
+                "supplier_cancelled"
+            ]
+        else:
+            assert proposal["body"] == {**expected_body, "case_id": case_id}
+        if variant == "missing_release":
+            rules = run["generation_profile"]["reviewed_citation_rules_v1"]
+            assert (
+                rules["authorization_release"]["release"]["evidence"]
+                == raw["facts"]["payment_outcome"]["evidence"]
+            )
+        assert proposal["latest_validation"]["result"] == "needs_operator_review"
+        assert proposal["latest_validation"]["issues"] == []
+        assert proposal["decision"] is None
+        ledger = next(
+            source for source in run["snapshot"]["catalog"] if source["kind"] == "payment_ledger"
+        )
+        for span in proposal["latest_validation"]["resolved_spans"]:
+            if span["source_id"] == ledger["source_id"]:
+                assert span["source_version_id"] == ledger["version_id"]
 
 
 @pytest.mark.postgres

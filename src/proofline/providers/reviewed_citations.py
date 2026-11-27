@@ -57,6 +57,7 @@ class AuthorizationReleaseRule(TypedDict):
     cancellation: ReviewedSourceEvent
     no_charge_citation: str
     false_capture: NotRequired[ReviewedSourceEvent]
+    fill_missing_release: NotRequired[bool]
 
 
 class WithdrawalFactRule(TypedDict):
@@ -154,16 +155,22 @@ def _apply_authorization_release(body: dict[str, Any], rule: AuthorizationReleas
     ):
         return
     timeline = [entry for entry in body["timeline"] if entry != rule.get("false_capture")]
-    if len(timeline) != 2 or not all(
+    fill_release = rule.get("fill_missing_release", False) and len(timeline) == 1
+    reviewed_events = (
+        (rule["cancellation"],) if fill_release else (rule["release"], rule["cancellation"])
+    )
+    if len(timeline) != len(reviewed_events) or not all(
         any(
             entry["event_type"] == reviewed["event_type"]
             and entry["time"] == reviewed["time"]
             and set(reviewed["evidence"]).issubset(entry["evidence"])
             for entry in timeline
         )
-        for reviewed in (rule["release"], rule["cancellation"])
+        for reviewed in reviewed_events
     ):
         return
+    if fill_release:
+        _assemble_source_events(timeline, [rule["release"]])
     body["timeline"] = timeline
     if rule["no_charge_citation"] not in payment["evidence"]:
         payment["evidence"].append(rule["no_charge_citation"])

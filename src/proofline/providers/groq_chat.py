@@ -23,8 +23,10 @@ from proofline.domain.case_evidence import (
     scoped_requirements,
 )
 from proofline.domain.inputs import AnalysisInput, canonical_json, json_digest
+from proofline.domain.required_events import RequiredEvent
 from proofline.providers import citation_ids, live_prompt_v33
 from proofline.providers.citation_rule_bindings import (
+    guest_v06_binding,
     reviewed_authorization_release,
     reviewed_citation_rules,
     reviewed_source_events,
@@ -71,13 +73,23 @@ class GroqChatCompletionsProvider:
         self.timeout_seconds = settings.model_timeout_seconds
 
     def prepare(self, input_data: AnalysisInput) -> PreparedLive:
+        settings = self._settings
+        reviewed_input = input_data
+        guest_required: tuple[RequiredEvent, ...] = ()
+        if settings.guest_mode and settings.groq_prompt_profile == "v3.2":
+            guest_binding = guest_v06_binding(input_data)
+            if guest_binding is not None:
+                reviewed_input, guest_required = guest_binding
+                settings = settings.model_copy(
+                    update={"groq_prompt_profile": GROQ_CITATION_IDS_PROFILE}
+                )
         assembly_schema = generated_schema()
         choices = None
         reply = None
-        prompt_profile = self._settings.groq_prompt_profile
+        prompt_profile = settings.groq_prompt_profile
         use_citation_ids = prompt_profile == GROQ_CITATION_IDS_PROFILE
-        restrict_requirements = self._settings.groq_test_case_evidence is not None
-        required = self._settings.required_events(input_data)
+        restrict_requirements = bool(guest_required) or settings.groq_test_case_evidence is not None
+        required = guest_required or settings.required_events(input_data)
         reviewed_cancellation_times = (
             tuple(
                 dict.fromkeys(
@@ -89,12 +101,12 @@ class GroqChatCompletionsProvider:
             if input_data.case_id == "V05" and restrict_requirements
             else ()
         )
-        refund = (self._settings.groq_test_case_evidence or {}).get(input_data.case_id)
+        refund = (settings.groq_test_case_evidence or {}).get(input_data.case_id)
         schema_name = "assembly_output"
         if prompt_profile in GROQ_CHOICES_PROFILES:
-            approved = (self._settings.groq_test_lookup_sources or {}).get(input_data.case_id, ())
+            approved = (settings.groq_test_lookup_sources or {}).get(input_data.case_id, ())
             if prompt_profile in GROQ_CONFIRMATION_PROFILES:
-                reply = (self._settings.groq_test_acceptance_replies or {}).get(input_data.case_id)
+                reply = (settings.groq_test_acceptance_replies or {}).get(input_data.case_id)
             reply_already_included = reply is not None and reply.matches(input_data)
             choices = model_choices(
                 input_data,
@@ -129,7 +141,7 @@ class GroqChatCompletionsProvider:
         offer_quote = None
         compact = False
         source_event_types: tuple[str, ...] = ()
-        assemble_evidence = self._settings.groq_test_assemble_reviewed_evidence
+        assemble_evidence = bool(guest_required) or settings.groq_test_assemble_reviewed_evidence
         if (
             choices is not None
             and choices.citations is not None
@@ -143,8 +155,12 @@ class GroqChatCompletionsProvider:
                 else ReviewedCitationRules()
             )
             if assemble_evidence:
-                release = reviewed_authorization_release(input_data, choices.citations, required)
+                release = reviewed_authorization_release(
+                    reviewed_input, choices.citations, required
+                )
                 if release is not None:
+                    if guest_required:
+                        release["fill_missing_release"] = True
                     rules["authorization_release"] = release
                 if reviewed_withdrawal_proof_missing(input_data):
                     rules["withdrawal_requirements"] = list(WITHDRAWAL_PROOF_REQUIREMENTS)
@@ -188,7 +204,7 @@ class GroqChatCompletionsProvider:
                     choices.schema["properties"]["timeline"]["minItems"] = 2
                 choices = replace(choices, reviewed_citations=rules)
         prompt = selected_live_prompt(
-            self._settings,
+            settings,
             has_lookup=bool(choices and choices.lookup_source_ids),
             required_events=required,
             has_reviewed_refund=has_reviewed_refund,
@@ -261,7 +277,7 @@ class GroqChatCompletionsProvider:
             choices.input_json if choices else canonical_json(input_data.model_dump(mode="json"))
         )
         request: dict[str, JsonValue] = {
-            "model": self._settings.selected_model,
+            "model": settings.selected_model,
             "messages": [
                 {"role": "system", "content": prompt.instructions},
                 {"role": "user", "content": user_input},
@@ -274,17 +290,17 @@ class GroqChatCompletionsProvider:
                     "schema": schema,
                 },
             },
-            "max_completion_tokens": self._settings.model_max_output_tokens,
+            "max_completion_tokens": settings.model_max_output_tokens,
             "n": 1,
             "stream": False,
             "tools": [],
             "tool_choice": "none",
         }
-        effort = self._settings.groq_reasoning_effort
+        effort = settings.groq_reasoning_effort
         if effort is not None:
             request["reasoning_effort"] = effort
         prepared = prepare_live(
-            self._settings,
+            settings,
             request,
             schema,
             api="chat_completions",
@@ -333,7 +349,7 @@ class GroqChatCompletionsProvider:
                         JsonValue, choices.reviewed_citations
                     )
             return replace(prepared, decode_output=choices.decode)
-        if self._settings.groq_prompt_profile == "v3.3-test":
+        if prompt_profile == "v3.3-test":
             prepared.generation_profile["request_profile"] = "groq-chat_completions-v33-test-v1"
         elif effort is not None:
             prepared.generation_profile["request_profile"] = "groq-chat_completions-effort-v1"
