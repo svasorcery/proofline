@@ -77,7 +77,8 @@ const labels: Record<string, string> = {
   LIVE_DISABLED: 'Live выключен на сервере. Replay доступен без API-ключа.',
   LIVE_KEY_MISSING: 'На сервере не задан API-ключ для Live. Replay доступен без ключа.',
   LIVE_MODEL_MISSING: 'На сервере не выбрана API-модель для Live.',
-  GUEST_LIVE_INPUT_NOT_SUPPORTED: 'Для гостевого Live выберите исходный синтетический кейс.',
+  GUEST_LIVE_INPUT_NOT_SUPPORTED:
+    'Гостевой Live доступен только для полного V06 с исходными данными.',
   openai: 'OpenAI',
   groq: 'Groq',
   deepseek: 'DeepSeek',

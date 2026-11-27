@@ -35,6 +35,7 @@ from proofline.domain.inputs import (
 )
 from proofline.persistence.database import Database
 from proofline.persistence.models import AnalysisRun, Case, ProposalRevision
+from proofline.providers.citation_rule_bindings import is_reviewed_v06
 from proofline.providers.live import LiveProvider, PreparedLive
 from proofline.providers.replay import (
     GenerationResult,
@@ -45,6 +46,7 @@ from proofline.providers.replay import (
 )
 
 logger = logging.getLogger(__name__)
+GUEST_LIVE_INPUT_NOT_SUPPORTED = "GUEST_LIVE_INPUT_NOT_SUPPORTED"
 
 
 class RunService:
@@ -61,6 +63,24 @@ class RunService:
         self.live_provider = live_provider
         self._completion_lock = Lock()
         self._uncertain_completions: set[str] = set()
+
+    def _guest_live_input_supported(self, case: Case, snapshot: AnalysisInput) -> bool:
+        if case.fixture_case_id != "V06":
+            return False
+        checked_input = recorded_input(snapshot, case.fixture_case_id)
+        return is_reviewed_v06(checked_input) and bool(self.provider.options(checked_input))
+
+    def live_unavailable_reason(self, case_id: str, *, guest_id: str | None = None) -> str | None:
+        with read_session(self.database) as session:
+            case = case_or_404(session, case_id, guest_id=guest_id)
+            reason = self.settings.live_unavailable_reason
+            if (
+                reason is None
+                and self.settings.guest_mode
+                and not self._guest_live_input_supported(case, current_input(session, case))
+            ):
+                return GUEST_LIVE_INPUT_NOT_SUPPORTED
+            return reason
 
     def options(self, case_id: str, *, guest_id: str | None = None) -> list[ReplayOption]:
         with read_session(self.database) as session:
@@ -152,12 +172,10 @@ class RunService:
                                 "Open a guest workspace first.",
                                 status_code=401,
                             )
-                        if case.fixture_case_id is None or not self.provider.options(
-                            recorded_input(snapshot, case.fixture_case_id)
-                        ):
+                        if not self._guest_live_input_supported(case, snapshot):
                             raise ApplicationError(
-                                "GUEST_LIVE_INPUT_NOT_SUPPORTED",
-                                "Guest Live accepts inputs from the demo recordings.",
+                                GUEST_LIVE_INPUT_NOT_SUPPORTED,
+                                "Guest Live is available for the original full V06 fixture.",
                                 status_code=422,
                             )
                     prepared = self.live_provider.prepare(snapshot)

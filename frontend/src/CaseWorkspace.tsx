@@ -48,7 +48,7 @@ async function readWorkspace(base: string, signal: AbortSignal): Promise<Workspa
     get<ReplayOption[]>(`${base}/replay-options`),
     get<ProposalView[]>(`${base}/proposals`),
     get<RunView[]>(`${base}/runs`),
-    get<Capabilities>('/capabilities'),
+    get<Capabilities>(`${base}/capabilities`),
   ]);
   return { data, options, proposals, runs, capabilities };
 }
@@ -83,6 +83,7 @@ export function CaseWorkspace({ caseId }: { caseId: string }) {
       .then((loaded) => {
         if (!ac.signal.aborted) {
           setWorkspace(loaded);
+          if (!loaded.capabilities.live_available) setMode('replay');
           if (refreshAcknowledged.current) {
             setUncertain(false);
             refreshAcknowledged.current = false;
@@ -117,7 +118,10 @@ export function CaseWorkspace({ caseId }: { caseId: string }) {
       workspaceRequest.current = ac;
       try {
         const loaded = await readWorkspace(base, ac.signal);
-        if (!ac.signal.aborted) setWorkspace(loaded);
+        if (!ac.signal.aborted) {
+          setWorkspace(loaded);
+          if (!loaded.capabilities.live_available) setMode('replay');
+        }
       } catch (e) {
         setUncertain(true);
         refreshAcknowledged.current = false;

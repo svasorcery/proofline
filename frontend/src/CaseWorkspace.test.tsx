@@ -122,7 +122,7 @@ describe('CaseWorkspace', () => {
       };
       const current = origin === 'operator' ? child : root;
       vi.mocked(api).mockImplementation(async (path) =>
-        path === '/capabilities'
+        path === '/cases/V01/capabilities'
           ? { live_available: false, live_reason: 'LIVE_DISABLED', live_model: null }
           : path === '/cases/V01'
             ? { ...data, current_proposal_revision_id: current.id }
@@ -152,7 +152,7 @@ describe('CaseWorkspace', () => {
       live_reason: null,
     };
     vi.mocked(api).mockImplementation(async (path) =>
-      path === '/capabilities' ? caps : path === '/cases/V01' ? data : [],
+      path === '/cases/V01/capabilities' ? caps : path === '/cases/V01' ? data : [],
     );
     vi.mocked(command).mockResolvedValue(undefined);
     render(<CaseWorkspace caseId="V01" />);
@@ -175,7 +175,7 @@ describe('CaseWorkspace', () => {
 
   it('explains missing live access and never enables the mode', async () => {
     vi.mocked(api).mockImplementation(async (path) =>
-      path === '/capabilities'
+      path === '/cases/V01/capabilities'
         ? { live_available: false, live_model: null, live_reason: 'LIVE_KEY_MISSING' }
         : path === '/cases/V01'
           ? data
@@ -188,10 +188,42 @@ describe('CaseWorkspace', () => {
     expect(command).not.toHaveBeenCalled();
   });
 
+  it('resets Live to Replay when the current guest input becomes ineligible', async () => {
+    const user = userEvent.setup();
+    let eligible = true;
+    vi.mocked(api).mockImplementation(async (path) => {
+      if (path === '/cases/guest-v06') return { ...data, id: 'guest-v06' };
+      if (path === '/cases/guest-v06/capabilities')
+        return {
+          live_available: eligible,
+          live_reason: eligible ? null : 'GUEST_LIVE_INPUT_NOT_SUPPORTED',
+        };
+      return [];
+    });
+    render(<CaseWorkspace caseId="guest-v06" />);
+    const mode = await screen.findByRole('combobox', { name: 'Режим анализа' });
+    const live = screen.getByRole('option', { name: 'Live — новый вызов' });
+    expect(live).toBeEnabled();
+    await user.selectOptions(mode, 'live');
+    expect(mode).toHaveValue('live');
+
+    eligible = false;
+    await user.click(screen.getByRole('button', { name: 'Обновить данные' }));
+    await waitFor(() => expect(live).toBeDisabled());
+    expect(mode).toHaveValue('replay');
+
+    eligible = true;
+    await user.click(screen.getByRole('button', { name: 'Обновить данные' }));
+    await waitFor(() => expect(live).toBeEnabled());
+    expect(mode).toHaveValue('replay');
+    expect(command).not.toHaveBeenCalled();
+  });
+
   it('explains a guest limit and offers an explicit switch to Replay', async () => {
     const user = userEvent.setup();
     vi.mocked(api).mockImplementation(async (path) => {
-      if (path === '/capabilities') return { live_available: true, live_model: 'gpt-oss-20b' };
+      if (path === '/cases/V01/capabilities')
+        return { live_available: true, live_model: 'gpt-oss-20b' };
       if (path === '/cases/V01') return data;
       if (path.endsWith('/replay-options')) {
         return [
@@ -234,7 +266,7 @@ describe('CaseWorkspace', () => {
         generation_profile: { model: 'actual-test-model', guest_live: guest },
       };
       vi.mocked(api).mockImplementation(async (path) =>
-        path === '/capabilities'
+        path === '/cases/V01/capabilities'
           ? { live_available: true, live_model: 'configured-test-model', live_reason: null }
           : path === '/cases/V01'
             ? data
