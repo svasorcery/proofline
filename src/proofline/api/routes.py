@@ -103,6 +103,10 @@ def register_routes(app: FastAPI, service: WorkflowService) -> None:
     def get_case(case_id: str, guest_id: GuestOwner) -> CaseDetail:
         return service.cases.get(case_id, guest_id=guest_id)
 
+    @router.get("/cases/{case_id}/capabilities", response_model=Capabilities)
+    def case_capabilities(case_id: str, guest_id: GuestOwner) -> Capabilities:
+        return service.capabilities(case_id, guest_id=guest_id)
+
     @router.patch("/cases/{case_id}", response_model=CaseDetail)
     def update_case(case_id: str, command: CasePatch, guest_id: GuestOwner) -> CaseDetail:
         return service.cases.update(case_id, command, guest_id=guest_id)

@@ -43,13 +43,17 @@ _REVIEWED_V06_EVENTS: tuple[tuple[EventType, str, str], ...] = (
 )
 
 
+def is_reviewed_v06(snapshot: AnalysisInput) -> bool:
+    return snapshot.case_id == "V06" and compatibility_digest(snapshot) == _REVIEWED_V06_INPUT
+
+
 def guest_v06_binding(
     snapshot: AnalysisInput,
 ) -> tuple[AnalysisInput, tuple[RequiredEvent, ...]] | None:
     # Use the fixture identity for the review only. Citations and the model request
     # still belong to the guest snapshot and its own source versions.
     reviewed = recorded_input(snapshot, "V06")
-    if compatibility_digest(reviewed) != _REVIEWED_V06_INPUT:
+    if not is_reviewed_v06(reviewed):
         return None
     sources = {source.source_id: source for source in snapshot.to_validation_context().sources}
     marks = []
@@ -80,7 +84,7 @@ def _citation_id(citations: CitationCatalogue, source_id: str, fragment: str) ->
 def reviewed_authorization_release(
     snapshot: AnalysisInput, citations: CitationCatalogue, required: tuple[RequiredEvent, ...]
 ) -> AuthorizationReleaseRule | None:
-    if snapshot.case_id != "V06" or compatibility_digest(snapshot) != _REVIEWED_V06_INPUT:
+    if not is_reviewed_v06(snapshot):
         return None
     events: dict[str, ReviewedSourceEvent] = {}
     no_charge = None

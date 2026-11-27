@@ -70,9 +70,14 @@ def guest_app(engine: Engine, handle):
     )
 
 
-def create_workspace(client: TestClient) -> list[dict]:
+def create_workspace(client: TestClient, database: Database) -> dict[str, dict]:
     assert client.post(f"{API}/guest-session", headers={"Origin": ORIGIN}).status_code == 204
-    return client.get(f"{API}/cases").json()["items"]
+    items = {item["id"]: item for item in client.get(f"{API}/cases").json()["items"]}
+    with database.sessions() as session:
+        fixtures = session.execute(
+            select(Case.id, Case.fixture_case_id).where(Case.id.in_(items))
+        ).all()
+    return {fixture: items[case_id] for case_id, fixture in fixtures if fixture is not None}
 
 
 def start(client: TestClient, case: dict, key: str):
@@ -94,6 +99,64 @@ def rate_limited(response, reason: str):
 
 def fake_groq_rejection():
     return httpx.Response(429, json={"error": {"type": "rate_limit_error"}})
+
+
+@pytest.mark.postgres
+def test_guest_live_is_only_available_for_full_v06(postgres_engine):
+    calls = []
+
+    def handle(request):
+        calls.append(request)
+        return fake_groq_rejection()
+
+    database, app = guest_app(postgres_engine, handle)
+    with TestClient(app, base_url=ORIGIN) as first, TestClient(app, base_url=ORIGIN) as second:
+        cases = create_workspace(first, database)
+        create_workspace(second, database)
+        assert set(cases) == {"V01", "V02", "V03", "V04", "V05", "V06"}
+        v06 = cases["V06"]
+        path = f"{API}/cases/{v06['id']}"
+        assert second.get(f"{path}/capabilities").status_code == 404
+        assert first.get(f"{path}/capabilities").json()["live_available"] is True
+
+        for fixture in ("V01", "V02", "V03", "V04", "V05"):
+            case = cases[fixture]
+            other_path = f"{API}/cases/{case['id']}"
+            caps = first.get(f"{other_path}/capabilities").json()
+            assert caps["live_available"] is False and caps["replay_available"] is True
+            assert caps["live_reason"] == "GUEST_LIVE_INPUT_NOT_SUPPORTED"
+            denied = start(first, case, f"live-{fixture}")
+            assert denied.status_code == 422
+            assert denied.json()["code"] == caps["live_reason"]
+            assert first.get(f"{other_path}/runs").json() == []
+            option = first.get(f"{other_path}/replay-options").json()[0]
+            replay = first.post(
+                f"{other_path}/runs",
+                json={
+                    "mode": "replay",
+                    "replay_id": option["replay_id"],
+                    "expected_case_version": case["version"],
+                },
+                headers={"Idempotency-Key": f"replay-{fixture}"},
+            )
+            assert replay.status_code == 201 and replay.json()["status"] == "succeeded"
+
+        detail = first.get(path).json()
+        ledger = next(source for source in detail["sources"] if source["kind"] == "payment_ledger")
+        source_path = f"{path}/sources/{ledger['source_id']}"
+        edited = first.patch(
+            source_path, json={"included": False, "expected_case_version": detail["version"]}
+        ).json()
+        assert first.get(f"{path}/capabilities").json()["live_available"] is False
+        assert start(first, edited, "reduced-v06").status_code == 422
+        assert calls == []
+        restored = first.patch(
+            source_path, json={"included": True, "expected_case_version": edited["version"]}
+        ).json()
+        assert first.get(f"{path}/capabilities").json()["live_available"] is True
+        accepted = start(first, restored, "full-v06")
+        assert accepted.status_code == 201, accepted.text
+        assert len(calls) == 1
 
 
 @pytest.mark.postgres
@@ -174,11 +237,10 @@ def test_guest_v06_assembles_the_card_with_its_own_sources(postgres_engine, vari
 
     database, app = guest_app(postgres_engine, handle)
     with TestClient(app, base_url=ORIGIN) as client:
-        cases = {case["id"]: case for case in create_workspace(client)}
-        with database.sessions() as session:
-            case_id = session.scalar(select(Case.id).where(Case.fixture_case_id == "V06"))
-        assert case_id is not None and case_id != "V06"
-        response = start(client, cases[case_id], "v55-guest")
+        case = create_workspace(client, database)["V06"]
+        case_id = case["id"]
+        assert case_id != "V06"
+        response = start(client, case, "v55-guest")
         assert response.status_code == 201, response.text
         (sent,) = calls
         assert sent["response_format"]["json_schema"]["name"] == "assembly_citation_ids"
@@ -226,24 +288,24 @@ def test_guest_cooldown_counts_provider_failures_and_preserves_replay(postgres_e
 
     database, app = guest_app(postgres_engine, handle)
     with TestClient(app, base_url=ORIGIN) as first, TestClient(app, base_url=ORIGIN) as second:
-        initial, other = create_workspace(first), create_workspace(second)
+        initial, other = create_workspace(first, database), create_workspace(second, database)
         assert first.get(f"{API}/capabilities").json()["live_available"] is True
-        accepted = start(first, initial[0], "first")
+        accepted = start(first, initial["V06"], "first")
         assert accepted.status_code == 201, accepted.text
         assert accepted.json()["error"]["code"] == "PROVIDER_RATE_LIMITED"
         assert accepted.json()["generation_profile"]["guest_live"] is True
-        repeated = start(first, initial[0], "first")
+        repeated = start(first, initial["V06"], "first")
         assert repeated.status_code == 200 and repeated.json()["id"] == accepted.json()["id"]
-        rate_limited(start(second, other[0], "cooldown"), "cooldown")
+        rate_limited(start(second, other["V06"], "cooldown"), "cooldown")
 
-        path = f"{API}/cases/{other[0]['id']}"
+        path = f"{API}/cases/{other['V01']['id']}"
         option = second.get(f"{path}/replay-options").json()[0]
         replay = second.post(
             f"{path}/runs",
             json={
                 "mode": "replay",
                 "replay_id": option["replay_id"],
-                "expected_case_version": other[0]["version"],
+                "expected_case_version": other["V01"]["version"],
             },
             headers={"Idempotency-Key": "replay"},
         )
@@ -257,16 +319,17 @@ def test_guest_cooldown_counts_provider_failures_and_preserves_replay(postgres_e
                 .where(AnalysisRun.mode == "live")
                 .values(started_at=older, finished_at=older)
             )
-        edited = first.patch(
-            f"{API}/cases/{initial[1]['id']}",
-            json={"user_text": "Edited text", "expected_case_version": initial[1]["version"]},
+        edited = second.patch(
+            f"{API}/cases/{other['V06']['id']}",
+            json={"user_text": "Edited text", "expected_case_version": other["V06"]["version"]},
         ).json()
-        denied = start(first, edited, "edited")
+        denied = start(second, edited, "edited")
         assert (
             denied.status_code == 422 and denied.json()["code"] == "GUEST_LIVE_INPUT_NOT_SUPPORTED"
         )
         assert len(calls) == 1
-        assert start(first, initial[2], "after-cooldown").status_code == 201
+        current = first.get(f"{API}/cases/{initial['V06']['id']}").json()
+        assert start(first, current, "after-cooldown").status_code == 201
         assert len(calls) == 2
 
 
@@ -280,7 +343,7 @@ def test_guest_and_shared_rolling_budgets_survive_a_restart(postgres_engine):
 
     database, app = guest_app(postgres_engine, handle)
     with TestClient(app, base_url=ORIGIN) as first, TestClient(app, base_url=ORIGIN) as second:
-        initial, other = create_workspace(first), create_workspace(second)
+        initial, other = create_workspace(first, database), create_workspace(second, database)
         first_cookie = first.cookies["proofline_guest"]
         second_cookie = second.cookies["proofline_guest"]
     now = datetime.now(UTC)
@@ -306,7 +369,7 @@ def test_guest_and_shared_rolling_budgets_survive_a_restart(postgres_engine):
         ]
 
     with database.sessions.begin() as session:
-        session.add_all(historical_runs(initial[0]["id"], 3, 0))
+        session.add_all(historical_runs(initial["V01"]["id"], 3, 0))
     fresh = create_app(
         config(),
         database=database,
@@ -317,15 +380,15 @@ def test_guest_and_shared_rolling_budgets_survive_a_restart(postgres_engine):
         TestClient(fresh, base_url=ORIGIN, cookies={"proofline_guest": first_cookie}) as first,
         TestClient(fresh, base_url=ORIGIN, cookies={"proofline_guest": second_cookie}) as second,
     ):
-        rate_limited(start(first, initial[1], "guest-cap"), "guest_day")
+        rate_limited(start(first, initial["V06"], "guest-cap"), "guest_day")
         with database.sessions.begin() as session:
-            session.add_all(historical_runs(initial[0]["id"], 17, 3))
-        rate_limited(start(second, other[0], "shared-cap"), "shared_day")
+            session.add_all(historical_runs(initial["V01"]["id"], 17, 3))
+        rate_limited(start(second, other["V06"], "shared-cap"), "shared_day")
         assert calls == []
         with database.sessions.begin() as session:
             expired = now - timedelta(hours=25)
             session.execute(update(AnalysisRun).values(started_at=expired, finished_at=expired))
-        assert start(second, other[0], "new-window").status_code == 201
+        assert start(second, other["V06"], "new-window").status_code == 201
         assert len(calls) == 1
 
 
@@ -344,7 +407,8 @@ def test_parallel_guests_share_one_live_slot(postgres_engine, isolation_level):
         postgres_engine.execution_options(isolation_level=isolation_level), handle
     )
     with TestClient(app, base_url=ORIGIN) as first, TestClient(app, base_url=ORIGIN) as second:
-        one, two = create_workspace(first)[0], create_workspace(second)[0]
+        one = create_workspace(first, database)["V06"]
+        two = create_workspace(second, database)["V06"]
 
         def simultaneous(client, case):
             barrier.wait(timeout=10)
@@ -379,7 +443,8 @@ def test_an_uncertain_admission_keeps_the_budget_without_holding_the_slot(
 
     database, app = guest_app(postgres_engine, handle)
     with TestClient(app, base_url=ORIGIN) as first, TestClient(app, base_url=ORIGIN) as second:
-        one, two = create_workspace(first)[0], create_workspace(second)[0]
+        one = create_workspace(first, database)["V06"]
+        two = create_workspace(second, database)["V06"]
         begin = database.sessions.begin
         lose_ack = True
 

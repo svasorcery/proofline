@@ -59,13 +59,20 @@ class WorkflowService:
             self._recovery_complete = True
             return recovered
 
-    def capabilities(self) -> Capabilities:
+    def capabilities(
+        self, case_id: str | None = None, *, guest_id: str | None = None
+    ) -> Capabilities:
         prompt = selected_live_prompt(self.settings)
+        live_reason = (
+            self.settings.live_unavailable_reason
+            if case_id is None
+            else self.runs.live_unavailable_reason(case_id, guest_id=guest_id)
+        )
         return Capabilities.model_validate(
             {
                 "replay_available": True,
-                "live_available": self.settings.live_unavailable_reason is None,
-                "live_reason": self.settings.live_unavailable_reason,
+                "live_available": live_reason is None,
+                "live_reason": live_reason,
                 "live_provider": self.settings.llm_provider,
                 "live_model": self.settings.selected_model or None,
                 "live_access_verified": False,
