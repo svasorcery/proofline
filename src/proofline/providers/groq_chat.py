@@ -160,7 +160,7 @@ class GroqChatCompletionsProvider:
                 )
                 if release is not None:
                     if guest_required:
-                        release["fill_missing_release"] = True
+                        release["assemble_payment"] = True
                     rules["authorization_release"] = release
                 if reviewed_withdrawal_proof_missing(input_data):
                     rules["withdrawal_requirements"] = list(WITHDRAWAL_PROOF_REQUIREMENTS)

@@ -97,13 +97,14 @@ def fake_groq_rejection():
 
 
 @pytest.mark.postgres
-@pytest.mark.parametrize("variant", ["v55", "missing_release", "missing_release_quote"])
+@pytest.mark.parametrize("variant", ["v55", "v57", "v58", "wrong_release_quote"])
 def test_guest_v06_assembles_the_card_with_its_own_sources(postgres_engine, variant):
     recorded_request = json.loads((V55_V06 / "request.json").read_text(encoding="utf-8"))
     recorded_run = json.loads((V55_V06 / "run.json").read_text(encoding="utf-8"))
     expected_body = json.loads((V55_V06 / "proposal.json").read_text(encoding="utf-8"))["body"]
     recorded_sources = json.loads(recorded_request["messages"][1]["content"])["catalog"]
     calls = []
+    raw_responses = []
 
     def citation_ids(sources):
         return {
@@ -123,21 +124,37 @@ def test_guest_v06_assembles_the_card_with_its_own_sources(postgres_engine, vari
         new_ids = citation_ids(guest_input["catalog"])
         rebind = {old_id: new_ids[line] for line, old_id in old_ids.items()}
         raw = json.loads(recorded_run["raw_output"])
-        if variant != "v55":
-            # Reproduce v57's answer shape using the tracked v55 recording.
+        # Reproduce v57 and v58 from the tracked v55 recording.
+        if variant in {"v57", "wrong_release_quote"}:
             raw["timeline"] = [
                 event
                 for event in raw["timeline"]
                 if event["event_type"] != "authorization_released"
             ]
+        if variant != "v55":
             raw["readiness"] = "ready_for_rules"
             raw["follow_up"] = {"action": "none", "locator": None, "requirements": []}
-        if variant == "missing_release_quote":
-            (opening,) = (qid for (_, line), qid in old_ids.items() if "auth.open" in line)
-            raw["facts"]["payment_outcome"]["evidence"] = [opening]
+        if variant in {"v58", "wrong_release_quote"}:
+            ((opening_line, opening_id),) = (
+                (line, qid) for (_, line), qid in old_ids.items() if "auth.open" in line
+            )
+            if variant == "v58":
+                raw["facts"]["payment_outcome"]["value"] = "unconfirmed"
+                raw["timeline"].insert(
+                    1,
+                    {
+                        "event_type": "payment_captured",
+                        "time": {"role": "occurred", "value": opening_line.split(" ", 1)[0]},
+                        "evidence": [opening_id],
+                    },
+                )
+            else:
+                raw["facts"]["payment_outcome"]["evidence"] = [opening_id]
         raw["case_id"] = guest_input["case_id"]
         for item in [*raw["facts"].values(), *raw["timeline"]]:
             item["evidence"] = [rebind[quote_id] for quote_id in item["evidence"]]
+        raw_response = json.dumps(raw)
+        raw_responses.append(raw_response)
         return httpx.Response(
             200,
             json={
@@ -149,7 +166,7 @@ def test_guest_v06_assembles_the_card_with_its_own_sources(postgres_engine, vari
                     {
                         "index": 0,
                         "finish_reason": "stop",
-                        "message": {"role": "assistant", "content": json.dumps(raw)},
+                        "message": {"role": "assistant", "content": raw_response},
                     }
                 ],
             },
@@ -170,20 +187,19 @@ def test_guest_v06_assembles_the_card_with_its_own_sources(postgres_engine, vari
         run = response.json()
         assert run["status"] == "succeeded", run["error"]
         assert run["generation_profile"]["guest_live"] is True
+        assert raw_responses == [run["raw_output"]]
         raw = json.loads(run["raw_output"])
         assert raw["case_id"] == case_id
         proposal = client.get(f"{API}/proposals/{run['proposal_revision_id']}").json()
         if variant == "v55":
             assert raw["follow_up"]["requirements"] == ["bank_settlement_document"]
+        elif variant == "v58":
+            assert raw["facts"]["payment_outcome"]["value"] == "unconfirmed"
+            assert any(event["event_type"] == "payment_captured" for event in raw["timeline"])
         else:
             assert [event["event_type"] for event in raw["timeline"]] == ["supplier_cancelled"]
-        if variant == "missing_release_quote":
-            assert [event["event_type"] for event in proposal["body"]["timeline"]] == [
-                "supplier_cancelled"
-            ]
-        else:
-            assert proposal["body"] == {**expected_body, "case_id": case_id}
-        if variant == "missing_release":
+        assert proposal["body"] == {**expected_body, "case_id": case_id}
+        if variant == "v57":
             rules = run["generation_profile"]["reviewed_citation_rules_v1"]
             assert (
                 rules["authorization_release"]["release"]["evidence"]
